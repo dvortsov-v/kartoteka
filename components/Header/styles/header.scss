@@ -1,0 +1,15 @@
+.header {
+  background-color: var(--black-90);
+  color: var(--white);
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  &__wrapper {
+    display: flex;
+  }
+
+  &__navigation,
+  &__information {
+    width: 50%;
+  }
+}

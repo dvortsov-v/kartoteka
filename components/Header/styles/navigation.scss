@@ -1,0 +1,16 @@
+.navigation {
+  &__list {
+    display: flex;
+    align-items: center;
+  }
+
+  &__item {
+    &:nth-child(n + 2) {
+      margin-left: 24px;
+    }
+  }
+
+  &__link {
+    font-size: 12px;
+  }
+}

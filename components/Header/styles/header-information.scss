@@ -1,0 +1,42 @@
+
+.header-information {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+
+  &__phone {
+    margin-left: 10px;
+  }
+}
+
+.header-information-description {
+  display: inline-flex;
+
+  &__text,
+  &__link {
+    font-size: 12px;
+  }
+
+  &__link {
+    margin-left: 24px;
+  }
+}
+
+.header-information-phone {
+  display: flex;
+  align-items: center;
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+    fill: var(--white);
+  }
+
+  &__numbers {
+    margin-left: 8px;
+    color: var(--white);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+}
