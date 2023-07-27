@@ -4,6 +4,11 @@ body {
   line-height: 1.33;
   font-family: 'GolosText', sans-serif;
   background-color: var(--white);
+  box-sizing: border-box;
+
+  * {
+    box-sizing: border-box;
+  }
 }
 
 #__nuxt,
