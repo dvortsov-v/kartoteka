@@ -15,4 +15,9 @@
     background-color: var(--primary-transparent);
     color: var(--primary-base);
   }
+
+  &--gray {
+    background-color: var(--black-10);
+    color: var(--black-100);
+  }
 }

@@ -1,5 +1,6 @@
 .main-page {
   padding-top: 24px;
+  padding-bottom: 93px;
 
   &__news {
     margin-top: 32px;
@@ -11,4 +12,9 @@
   &__advantages {
     margin-top: 24px;
   }
+
+  &__recommendations {
+    margin-top: 64px;
+  }
 }
+
