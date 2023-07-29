@@ -1,4 +1,33 @@
 .main-page-banners {
-  display: grid;
-  grid-gap: 16px;
+  position: relative;
+
+  &__slide {
+    height: 366px;
+  }
+
+  &__picture,
+  &__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: var(--black-10);
+  }
+
+  &__img {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__pagination {
+    --swiper-pagination-bottom: 18px;
+    --swiper-pagination-bullet-size: 12px;
+    --swiper-pagination-bullet-horizontal-gap: 8px;
+    --swiper-pagination-bullet-inactive-color: var(--white);
+    --swiper-pagination-color: var(--white);
+    --swiper-pagination-bullet-inactive-opacity: 0.5;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+  }
 }
