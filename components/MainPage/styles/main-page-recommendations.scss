@@ -1,0 +1,34 @@
+.main-page-recommendations {
+  display: flex;
+
+  &__wrap {
+    flex: auto;
+  }
+
+  &__advertising {
+    flex: none;
+    margin-left: 16px;
+  }
+
+  &__title {
+    font-size: 44px;
+    font-weight: 500;
+    line-height: 1.1;
+    color: var(--black-100)
+  }
+
+  &__list {
+    margin-top: 48px;
+  }
+
+  &__item {
+    &:nth-child(n + 2) {
+      margin-top: 16px;
+    }
+  }
+
+  &__more {
+    width: 100%;
+    margin-top: 32px;
+  }
+}

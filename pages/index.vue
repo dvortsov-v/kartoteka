@@ -5,6 +5,7 @@
             <Newsline class="main-page__news" />
             <MainPageBanners class="main-page__banners" />
             <MainPageAdvantages class="main-page__advantages" />
+            <MainPageRecommendations class="main-page__recommendations" />
         </UiContainer>
     </div>
 </template>
