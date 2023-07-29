@@ -1,4 +1,9 @@
-.header {
+.header{
+  &__main {
+    margin-top: 24px;
+  }
+}
+.header-top {
   background-color: var(--black-90);
   color: var(--white);
   padding-top: 20px;
@@ -11,5 +16,75 @@
   &__navigation,
   &__information {
     width: 50%;
+  }
+}
+
+.header-main {
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__search {
+    flex: auto;
+    display: flex;
+    margin-left: 40px;
+  }
+
+  &__logo {
+    width: 164px;
+    height: 41px;
+  }
+
+  &__field {
+    margin-left: 8px;
+    flex: auto;
+  }
+
+  &__menu {
+    flex: none;
+  }
+
+  &__buttons {
+    display: flex;
+    margin-left: 40px;
+  }
+
+  &__auth {
+    margin-left: 8px;
+  }
+}
+
+.header-main-menu {
+  &__icon {
+    fill: var(--white);
+    width: 24px;
+    height: 24px;
+  }
+
+  &__text {
+    margin-left: 12px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+
+.header-main-adding,
+.header-main-auth {
+  &__icon {
+    fill: var(--primary-base);
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.header-main-auth {
+  padding-right: 20px;
+
+  &__text {
+    margin-left: 12px;
+    line-height: 1.5;
   }
 }

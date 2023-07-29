@@ -1,5 +1,5 @@
 <template>
-    <div class=" header-information">
+    <div class="header-information">
         <div class="header-information__description header-information-description">
             <span class="header-information-description__text">Вестник государственной регистрации</span>
             <NuxtLink to="/" class="header-information-description__link">kartoteka.ru</NuxtLink>

@@ -1,0 +1,24 @@
+.main-page-categories {
+  display: grid;
+  grid-gap: 16px;
+
+
+}
+
+.main-page-category {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--black-10);
+  padding: 16px 20px;
+
+  &__name {
+    color: var(--black-100);
+    line-height: 1.5;
+  }
+
+  &__count {
+    color: var(--black-50);
+    line-height: 1.5;
+    margin-left: 8px;
+  }
+}

@@ -5,7 +5,7 @@
                 v-for="menuItem in topMenu"
                 :key="`top-menu-item-${menuItem.id}`"
                 class="navigation__item">
-                <NuxtLink to="" class="navigation__link">{{ menuItem.name }}</NuxtLink>
+                <NuxtLink to="/" class="navigation__link">{{ menuItem.name }}</NuxtLink>
             </li>
         </ul>
     </nav>
