@@ -14,8 +14,18 @@ body {
 
 #__nuxt,
 .app,
-.layout {
+.default-layout {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+}
+
+.default-layout {
+  &__wrapper {
+    flex: 1 0 auto;
+  }
+
+  &__footer {
+    flex: 0 0 auto;
+  }
 }
