@@ -1,0 +1,15 @@
+.footer-navigation {
+  text-align: right;
+
+  &__item {
+    &:nth-child(n + 2) {
+      margin-top: 8px;
+    }
+  }
+
+  &__link {
+    text-align: right;
+    color: var(--black-100);
+    line-height: 1.5;
+  }
+}

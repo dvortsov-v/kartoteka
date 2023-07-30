@@ -1,0 +1,22 @@
+.footer-socials {
+  display: flex;
+
+  &__item {
+    &:nth-child(n + 2) {
+      margin-left: 8px;
+    }
+  }
+
+  &__social {
+    display: block;
+    padding: 12px;
+    border: 1px solid var(--black-30);
+    border-radius: 16px;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    fill: var(--black-100);
+  }
+}
