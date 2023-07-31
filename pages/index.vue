@@ -1,8 +1,6 @@
 <template>
     <div class="main-page">
         <UiContainer class="main-page__wrapper">
-            <UiBreadcrumbs />
-
             <MainPageCategories class="main-page__categories" />
             <Newsline class="main-page__news" />
             <MainPageBanners class="main-page__banners" />

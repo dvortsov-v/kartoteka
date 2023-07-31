@@ -1,4 +1,4 @@
-.product {
+.card-product {
   padding: 16px;
   border-radius: 20px;
   border: 1px solid var(--black-30);
@@ -8,7 +8,7 @@
   }
 }
 
-.product-information {
+.card-product-information {
   display: flex;
 
   &__picture {
@@ -69,7 +69,7 @@
   }
 }
 
-.product-status {
+.card-product-status {
   padding: 6px 8px;
   border-radius: 8px;
   font-size: 10px;
@@ -81,7 +81,7 @@
   }
 
   &--green {
-    background-color: hsla(145, 78%, 47%, 0.2);
+    background-color: var(--green-transparent);
     color: var(--green-dark);
   }
 
@@ -91,7 +91,7 @@
   }
 }
 
-.product-incorporate {
+.card-product-incorporate {
   display: inline-flex;
   flex-direction: column;
   color: var(--black-50);
@@ -111,7 +111,7 @@
   }
 }
 
-.product-actions {
+.card-product-actions {
   display: flex;
   justify-content: space-between;
 
@@ -140,7 +140,7 @@
   }
 }
 
-.product-actions-addition {
+.card-product-actions-addition {
   display: inline-flex;
 
   &__number,
@@ -168,7 +168,7 @@
   }
 }
 
-.product-actions-button {
+.card-product-actions-button {
   padding-left: 20px;
   padding-right: 20px;
 

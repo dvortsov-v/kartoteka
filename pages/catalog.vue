@@ -2,18 +2,27 @@
     <div class="catalog-page">
         <UiContainer class="catalog-page__wrapper">
             <UiBreadcrumbs />
-            <MainPageRecommendations class="catalog-page__recommendations" />
+            <h1 class="catalog-page__title">{{$route.name}}</h1>
+            <span class="catalog-page__count"></span>
+            <template v-if="isMainPageCatalog">
+
+            </template>
+            <NuxtPage v-else />
         </UiContainer>
     </div>
 </template>
 <script setup lang="ts">
-useHead({
-    title: "Каталог",
-});
+const route = useRoute();
 
+const isMainPageCatalog = route.path === 'catalog';
+
+useHead({
+    title: 'Каталог',
+});
 definePageMeta({
     name: 'Каталог',
 });
+
 </script>
 
 <style scoped lang="scss">

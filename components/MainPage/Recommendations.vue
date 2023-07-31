@@ -6,25 +6,25 @@
             </h3>
             <ul class="main-page-recommendations__list">
                 <li class="main-page-recommendations__item">
-                    <CommonProduct />
+                    <CommonCardProduct />
                 </li>
                 <li class="main-page-recommendations__item">
-                    <CommonProduct />
+                    <CommonCardProduct />
                 </li>
                 <li class="main-page-recommendations__item">
-                    <CommonProduct />
+                    <CommonCardProduct />
                 </li>
                 <li class="main-page-recommendations__item">
-                    <CommonProduct />
+                    <CommonCardProduct />
                 </li>
                 <li class="main-page-recommendations__item">
-                    <CommonProduct />
+                    <CommonCardProduct />
                 </li>
                 <li class="main-page-recommendations__item">
-                    <CommonProduct />
+                    <CommonCardProduct />
                 </li>
                 <li class="main-page-recommendations__item">
-                    <CommonProduct />
+                    <CommonCardProduct />
                 </li>
             </ul>
             <UiButton theme="gray" class="main-page-recommendations__more">

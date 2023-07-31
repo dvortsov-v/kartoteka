@@ -1,49 +1,37 @@
 <template>
     <nav class="ui-breadcrumbs">
-<!--        {{pathArray}}-->
-        <pre>{{ $route }}</pre>
-<!--        <ul class="ui-breadcrumbs__list">-->
-<!--            <li class="ui-breadcrumbs__item">-->
-<!--                <nuxt-link-->
-<!--                    to="/"-->
-<!--                    class="ui-breadcrumbs__link"-->
-<!--                >-->
-<!--&lt;!&ndash;                    {{ item.title }}&ndash;&gt;-->
-<!--                </nuxt-link>-->
-<!--            </li>-->
-<!--            <li-->
-<!--                v-for="(item, i) in breadcrumbs"-->
-<!--                :key="i"-->
-<!--                class="ui-breadcrumbs__item"-->
-<!--            >-->
-<!--                <nuxt-link-->
-<!--                    :to="item.to"-->
-<!--                    class="ui-breadcrumbs__link"-->
-<!--                >-->
-<!--                    {{ item.title }}-->
-<!--                </nuxt-link>-->
-<!--            </li>-->
-<!--        </ul>-->
+        <ul class="ui-breadcrumbs__list">
+            <li class="ui-breadcrumbs__item">
+                <nuxt-link
+                    to="/"
+                    class="ui-breadcrumbs__link"
+                >
+                    <svg-icon name="home" class="ui-breadcrumbs__icon" />
+                </nuxt-link>
+            </li>
+            <li
+                v-for="item in breadcrumbs"
+                :key="`ui-breadcrumbs-${item.name}`"
+                class="ui-breadcrumbs__item"
+            >
+                <svg-icon name="chevron-right" class="ui-breadcrumbs__chevron" />
+                <nuxt-link
+                    :to="{name: item.name}"
+                    exactActiveClass="ui-breadcrumbs__link--active"
+                    class="ui-breadcrumbs__link"
+                >
+                    {{ item.name }}
+                </nuxt-link>
+            </li>
+        </ul>
     </nav>
 </template>
 <script setup lang="ts">
-const route = useRoute()
+const route = useRoute();
 
-const pathArray = route.path;
-
-console.log(route)
-
-// const breadcrumbs = computed(() => {
-//    pathArray;
-//
-//     return pathArray.map((path, indexPath, array) => ({
-//             to: indexPath === (array.length - 1) ? `/${path}` : `/${path}/`,
-//             title: path.toString().replace('-', ' '),
-//         }))
-//     }
-// )
+const breadcrumbs = route.matched
 </script>
 
 <style scoped lang="scss">
-@import "@/components/Ui/styles/container.scss";
+@import "@/components/Ui/styles/ui-breadcrumbs.scss";
 </style>

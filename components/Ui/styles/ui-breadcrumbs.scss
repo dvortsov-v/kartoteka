@@ -1,0 +1,35 @@
+.ui-breadcrumbs {
+  &__list {
+    display: flex;
+    align-items: center;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+
+    &:nth-child(n + 2) {
+      margin-left: 8px;
+    }
+  }
+
+  &__link {
+    font-size: 12px;
+    color: var(--black-50);
+
+    &--active {
+      color: var(--black-100)
+    }
+  }
+
+  &__icon,
+  &__chevron {
+    width: 16px;
+    height: 16px;
+    fill: var(--black-40);
+  }
+
+  &__chevron {
+    margin-right: 8px;
+  }
+}
