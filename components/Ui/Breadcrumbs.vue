@@ -27,9 +27,22 @@
     </nav>
 </template>
 <script setup lang="ts">
+import {RouteLocationMatched} from "vue-router";
+
 const route = useRoute();
 
-const breadcrumbs = route.matched
+const breadcrumbs:RouteLocationMatched[] = route.matched.reduce((acc: RouteLocationMatched[], current: RouteLocationMatched) => {
+    console.log(current.name)
+
+    if(Array.isArray(current.name)) {
+        current.name.forEach(item => {
+            acc.push(item)
+        })
+    } else {
+        acc.push(current)
+    }
+    return acc;
+}, []);
 </script>
 
 <style scoped lang="scss">

@@ -1,0 +1,8 @@
+.ui-input {
+  color: var(--black-100);
+
+   &::placeholder {
+      color: var(--black-50);
+      line-height: 1.5;
+  }
+}

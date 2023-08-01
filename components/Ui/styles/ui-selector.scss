@@ -1,0 +1,50 @@
+.ui-selector {
+  $self: &;
+  position: relative;
+  width: fit-content;
+
+  cursor: pointer;
+
+  display: flex;
+
+  &__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  &__pseudo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 8px;
+    border: 1px solid var(--black-30);
+  }
+
+  &__icon {
+    flex: none;
+    width: 16px;
+    height: 16px;
+    fill: var(--white);
+    opacity: 0;
+  }
+
+  &--disabled {
+    cursor: auto;
+    pointer-events: none;
+  }
+
+  &--checked {
+    #{$self}__pseudo {
+      background-color: var(--blue-base);
+    }
+
+    #{$self}__icon {
+      opacity: 1;
+    }
+  }
+}
