@@ -3,10 +3,7 @@
         <UiContainer class="catalog-page__wrapper">
             <UiBreadcrumbs class="catalog-page__breadcrumbs"/>
             <template v-if="isMainPageCatalog">
-                <div class="catalog-page__head">
-                    <h1 class="catalog-page__title">Каталог</h1>
-                    <span class="catalog-page__count">10000 товаров</span>
-                </div>
+                <CatalogHead class="catalog-page__head" />
                 <main class="catalog-page__main catalog-page-main">
                     <aside class="catalog-page-main__aside">
                         <ul class="catalog-page-main__categories catalog-page-categories">

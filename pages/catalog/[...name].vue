@@ -1,8 +1,11 @@
 <template>
     <div class="catalog-page">
-<!--        <UiContainer class="catalog-page__wrapper">-->
-<!--&lt;!&ndash;            <MainPageRecommendations class="catalog-page__recommendations" />&ndash;&gt;-->
-<!--        </UiContainer>-->
+        <div class="catalog-page__head">
+            <h1 class="catalog-page__title">
+                {{getNamePage}}
+            </h1>
+            <span class="catalog-page__count">10000 товаров</span>
+        </div>
     </div>
 </template>
 <script setup lang="ts">
@@ -19,5 +22,5 @@ definePageMeta({
 </script>
 
 <style scoped lang="scss">
-//@import "@/pages/Catalog/styles/catalog-page.scss";
+@import "@/pages/Catalog/styles/catalog-page.scss";
 </style>
