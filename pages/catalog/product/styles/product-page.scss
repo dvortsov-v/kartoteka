@@ -1,0 +1,11 @@
+.product-page {
+  &__wrap {
+    display: flex;
+  }
+
+  &__advertising {
+    flex: none;
+    margin-left: 16px;
+    min-width: 256px;
+  }
+}

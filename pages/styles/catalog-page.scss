@@ -5,7 +5,6 @@
   border-top: 1px solid var(--black-30);
 
   &__head {
-
     margin-top: 32px;
   }
 
@@ -47,134 +46,13 @@
     margin-top: 24px;
   }
 
-  &__item {
-    &:nth-child(n + 2) {
-      margin-top: 16px;
-    }
-  }
-
   &__settings {
     display: flex;
     justify-content: space-between;
   }
 
-  &__views {
-    display: flex;
-  }
-
   &__navigation {
     margin-top: 24px;
-  }
-}
-
-.catalog-page-categories {
-  padding-bottom: 24px;
-  border-bottom: 1px solid var(--black-30);
-
-  &__item {
-    &:nth-child(n + 2) {
-      margin-top: 16px;
-    }
-  }
-}
-
-.catalog-page-category {
-  $self: &;
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-
-  &__name {
-    color: var(--black-100);
-    line-height: 1.5;
-  }
-
-  &__count {
-    margin-left: 8px;
-    color: var(--black-50);
-    font-size: 12px;
-  }
-
-  &:hover {
-    #{$self}__name {
-      color: var(--blue-base);
-    }
-  }
-}
-
-.catalog-page-filters {
-  padding-top: 24px;
-  display: flex;
-  flex-direction: column;
-
-  &__section {
-    &:nth-child(n + 2) {
-      margin-top: 32px;
-    }
-  }
-
-  &__fields,
-  &__list,
-  &__more {
-    margin-top: 16px;
-  }
-}
-
-.catalog-page-filters-title {
-  color: var(--black-100);
-  font-weight: 600;
-  line-height: 1.5;
-}
-
-.catalog-page-filters-fields {
-  padding-left: 12px;
-  padding-right: 12px;
-  border: 1px solid var(--black-30);
-  border-radius: 8px;
-
-  &__field {
-    padding-top: 12px;
-    padding-bottom: 12px;
-
-    &:nth-child(n + 2) {
-      border-top: 1px solid var(--black-30);
-    }
-  }
-
-  &__input {
-    font-size: 12px;
-  }
-}
-
-.catalog-page-filters-list {
-  &__item {
-    &:nth-child(n + 2) {
-      margin-top: 16px;
-    }
-  }
-}
-
-.catalog-page-filters-checkbox {
-  display: flex;
-  align-items: flex-start;
-
-  &__text {
-    margin-left: 8px;
-    color: var(--black-100);
-    line-height: 1.5;
-  }
-}
-
-.catalog-page-filters-more {
-  &__icon {
-    width: 24px;
-    height: 24px;
-    fill: var(--blue-base)
-  }
-  &__text {
-    margin-left: 8px;
-    color: var(--blue-base);
-    line-height: 1.5;
   }
 }
 

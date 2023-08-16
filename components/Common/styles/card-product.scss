@@ -1,10 +1,21 @@
+$base: '.card-product';
+
 .card-product {
+  $self: &;
   padding: 16px;
   border-radius: 20px;
   border: 1px solid var(--black-30);
 
   &__actions {
     margin-top: 16px;
+  }
+
+  &--is-compacted-view {
+    padding: 0;
+
+    #{$self}__actions {
+      margin-top: 20px;
+    }
   }
 }
 
@@ -66,6 +77,45 @@
 
   &__incorporate {
     margin-top: 12px;
+  }
+
+  #{$base}--is-compacted-view & {
+    flex-direction: column;
+
+    &__picture {
+      width: 100%;
+      height: auto;
+    }
+
+    &__description {
+      margin-left: 0;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    &__title {
+      max-width: initial;
+      font-size: 14px;
+      font-weight: 400;
+      margin-top: 12px;
+      display: -webkit-box;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+
+    &__addition {
+      margin-left: 0;
+      align-items: stretch;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    &__price {
+      text-align: left;
+      margin-top: 8px;
+    }
   }
 }
 
@@ -138,6 +188,31 @@
   &__buy {
     margin-left: 8px;
   }
+
+  #{$base}--is-compacted-view & {
+    flex-direction: column;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 16px;
+
+    &__addition {
+      margin-left: 0;
+    }
+
+    &__buttons {
+      margin-left: 0;
+      margin-top: 16px;
+    }
+
+    &__buy {
+      flex: auto;
+    }
+
+    &__icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
 }
 
 .card-product-actions-addition {
@@ -166,6 +241,20 @@
       border-radius: 50%;
     }
   }
+
+  #{$base}--is-compacted-view & {
+    width: 100%;
+    flex-wrap: wrap;
+
+    &__city {
+      flex: 1;
+      margin-left: 0;
+
+      &::before {
+        content: none;
+      }
+    }
+  }
 }
 
 .card-product-actions-button {
@@ -175,5 +264,13 @@
   &__text {
     font-size: 16px;
     line-height: 1.33;
+  }
+
+  #{$base}--is-compacted-view & {
+    padding: 8px;
+
+    &__text {
+      font-size: 14px;
+    }
   }
 }

@@ -5,25 +5,7 @@
                 Рекомендуем
             </h3>
             <ul class="main-page-recommendations__list">
-                <li class="main-page-recommendations__item">
-                    <CommonCardProduct />
-                </li>
-                <li class="main-page-recommendations__item">
-                    <CommonCardProduct />
-                </li>
-                <li class="main-page-recommendations__item">
-                    <CommonCardProduct />
-                </li>
-                <li class="main-page-recommendations__item">
-                    <CommonCardProduct />
-                </li>
-                <li class="main-page-recommendations__item">
-                    <CommonCardProduct />
-                </li>
-                <li class="main-page-recommendations__item">
-                    <CommonCardProduct />
-                </li>
-                <li class="main-page-recommendations__item">
+                <li v-for="item in 7" class="main-page-recommendations__item">
                     <CommonCardProduct />
                 </li>
             </ul>

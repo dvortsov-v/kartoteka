@@ -1,0 +1,34 @@
+.catalog-categories {
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--black-30);
+
+  &__item {
+    &:nth-child(n + 2) {
+      margin-top: 16px;
+    }
+  }
+}
+
+.catalog-category {
+  $self: &;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+
+  &__name {
+    color: var(--black-100);
+    line-height: 1.5;
+  }
+
+  &__count {
+    margin-left: 8px;
+    color: var(--black-50);
+    font-size: 12px;
+  }
+
+  &:hover {
+    #{$self}__name {
+      color: var(--blue-base);
+    }
+  }
+}

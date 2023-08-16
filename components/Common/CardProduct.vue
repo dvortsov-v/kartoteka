@@ -1,5 +1,8 @@
 <template>
-    <div class="card-product">
+    <div
+        :class="classesCardProduct"
+        class="card-product"
+    >
         <div class="card-product__information card-product-information">
             <picture class="card-product-information__picture">
                 <source
@@ -16,16 +19,25 @@
                 <h3 class="card-product-information__title">
                     Доля участия ООО «Агрофирма Дрожжановская» в размере 33% от уставного капитала ООО «Дружба»
                 </h3>
-                <p class="card-product-information__text">
+                <p
+                    v-if="!isCompactedView"
+                    class="card-product-information__text"
+                >
                     Описание с характеристиками товара, которые заполняются при добавлении карточки. Максимальное описание в 2 строки.
                 </p>
             </div>
             <div class="card-product-information__addition">
                 <h3 class="card-product-information__price">10 568 206 ₽</h3>
-                <div class="card-product-information__status card-product-status card-product-status--orange">
+                <div
+                    v-if="!isCompactedView"
+                    class="card-product-information__status card-product-status card-product-status--orange"
+                >
                     Стоимость ниже оценочной на 20%
                 </div>
-                <div class="card-product-information__incorporate card-product-incorporate">
+                <div
+                    v-if="!isCompactedView"
+                    class="card-product-information__incorporate card-product-incorporate"
+                >
                     <span class="card-product-incorporate__text">
                         В составе
                         <span class="card-product-incorporate__text--bold">лота №3</span>
@@ -39,6 +51,7 @@
         <div class="card-product-actions card-product__actions">
             <div class="card-product-actions__box">
                 <UiButton
+                    v-if="!isCompactedView"
                     theme="gray"
                     class="card-product-actions__favorites"
                 >
@@ -52,6 +65,14 @@
             </div>
             <div class="card-product-actions__buttons">
                 <UiButton
+                    v-if="isCompactedView"
+                    theme="gray"
+                    class="card-product-actions__favorites"
+                >
+                    <svg-icon name="star-line" class="card-product-actions__icon" />
+                </UiButton>
+                <UiButton
+                    v-if="!isCompactedView"
                     theme="gray"
                     class="card-product-actions__consultation card-product-actions-button"
                 >
@@ -69,7 +90,17 @@
         </div>
     </div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const props = defineProps({
+    isCompactedView: {
+        type: Boolean,
+        default: false,
+    },
+})
+const classesCardProduct = computed(() => ({
+    'card-product--is-compacted-view': props.isCompactedView,
+}))
+</script>
 
 <style scoped lang="scss">
 @import "@/components/Common/styles/card-product.scss";

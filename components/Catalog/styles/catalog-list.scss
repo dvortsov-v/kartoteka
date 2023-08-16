@@ -1,0 +1,21 @@
+.catalog-list {
+  $self: &;
+  &__item {
+    &:nth-child(n + 2) {
+      margin-top: 16px;
+    }
+  }
+
+  &--is-compacted-view {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(256px, 1fr));
+    grid-gap: 16px;
+
+    #{$self}__item {
+      &:nth-child(n + 2) {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
