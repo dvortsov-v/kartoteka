@@ -17,7 +17,7 @@ export const topMenu = [
     {
         id: 4,
         name: 'Новости',
-        link: '',
+        link: '/news',
     },
     {
         id: 5,

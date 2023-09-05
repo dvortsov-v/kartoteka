@@ -8,7 +8,7 @@
             <span class="footer-information__text">117997, Москва Нахимовский проспект, д. 32. ИКСА РАН </span>
             <span class="footer-information__schedule">Пн — Пт, с 9:00 до 18:00 (Мск)</span>
         </div>
-        <FooterSocial class="footer-information__socials" />
+        <CommonSocial class="footer-information__socials" />
         <p class="footer-additional__certificate">Свидетельство о регистрации СМИ Эл ФС77-45357</p>
     </div>
 </template>
