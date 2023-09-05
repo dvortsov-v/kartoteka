@@ -42,7 +42,7 @@
                                     </template>
                                 </UiChoices>
                             </div>
-                            <UiViewsSetting @change="changeViews" />
+                            <CommonViewsSetting @change="changeViews" />
                         </div>
                         <CatalogList :isCompactedView="isCompactedView" class="catalog-page-main__list" />
                         <div class="catalog-page-main__navigation catalog-page-main-navigation">
