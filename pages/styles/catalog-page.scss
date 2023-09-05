@@ -1,8 +1,11 @@
 .catalog-page {
   margin-top: 24px;
-  padding-top: 24px;
   padding-bottom: 64px;
-  border-top: 1px solid var(--black-30);
+
+  &__wrapper {
+    border-top: 1px solid var(--black-30);
+    padding-top: 24px;
+  }
 
   &__head {
     margin-top: 32px;
