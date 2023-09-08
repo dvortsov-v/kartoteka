@@ -1,0 +1,36 @@
+.ui-datepicker {
+  --dp-font-family: 'GolosText', sans-serif;
+  --dp-border-color: tranparent;
+
+  color: var(--black-100);
+
+  &__wrap {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__input {
+    color: var(--black-100);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+
+    &::placeholder {
+      color: var(--black-50);
+      line-height: 1.5;
+    }
+  }
+
+  &__icon {
+    fill: var(--black-40);
+    width: 16px;
+    height: 16px;
+  }
+
+  ::v-deep {
+    .dp__input_icon {
+      right: 0;
+      left: auto;
+    }
+  }
+}

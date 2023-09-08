@@ -1,3 +1,161 @@
 .catalog-page {
+  padding-bottom: 64px;
+
+  &__wrapper {
+    padding-top: 24px;
+  }
+
+  &__head {
+    margin-top: 32px;
+  }
+
+  &__title {
+    color: var(--black-100);
+    font-size: 64px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.64px;
+  }
+
+  &__count {
+    margin-left: 12px;
+    color: var(--black-50);
+    font-feature-settings: 'dlig' on;
+    font-size: 21px;
+  }
+
+  &__main {
+    margin-top: 24px;
+    padding-top: 24px;
+  }
 }
 
+.catalog-page-main {
+  display: flex;
+
+  &__aside {
+    flex: none;
+    max-width: 240px;
+  }
+
+  &__section {
+    flex: auto;
+    margin-left: 32px;
+  }
+
+  &__list {
+    margin-top: 24px;
+  }
+
+  &__settings {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__navigation {
+    margin-top: 24px;
+  }
+}
+
+.catalog-page-main-sort {
+  $self: &;
+  display: flex;
+
+  &__tab {
+    &:nth-child(n + 2) {
+      margin-left: 24px;
+    }
+  }
+
+  &__wrap {
+    --color-sort: var(--black-50);
+    display: flex;
+    align-items: center;
+
+    &--active {
+      --color-sort: var(--blue-base);
+    }
+
+    &--desc {
+      #{$self}__icon {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  &__text {
+    line-height: 1.5;
+    text-align: center;
+    color: var(--color-sort);
+  }
+
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
+    fill: var(--color-sort);
+  }
+}
+
+.catalog-page-main-views {
+  --color-view-icon: var(--black-100);
+  --bg-color-view-icon: transparent;
+
+  &__wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    min-width: 48px;
+    height: 48px;
+    background-color: var(--bg-color-view-icon);
+
+    &--active {
+      --color-view-icon: var(--white);
+      --bg-color-view-icon: var(--blue-base);
+    }
+  }
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+    fill: var(--color-view-icon);
+  }
+}
+
+.catalog-page-main-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__more {
+    border-radius: 24px;
+    border: 1px solid var(--black-30);
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    fill: var(--black-100);
+  }
+
+  &__text {
+    margin-left: 12px;
+    color: var(--black-100);
+    line-height: 1.5;
+  }
+}
+
+.catalog-page-main-navigation-show {
+  &__text {
+    line-height: 1.5;
+    color: var(--black-50);
+  }
+
+  &__count {
+    line-height: 1.5;
+    color: var(--black-100);
+    margin-left: 4px;
+  }
+}

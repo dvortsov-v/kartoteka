@@ -6,7 +6,7 @@
                 :key="`top-menu-item-${menuItem.id}`"
                 class="footer-navigation__item"
             >
-                <NuxtLink to="/" class="footer-navigation__link">{{ menuItem.name }}</NuxtLink>
+                <NuxtLink :to="menuItem.link" class="footer-navigation__link">{{ menuItem.name }}</NuxtLink>
             </li>
         </ul>
     </div>

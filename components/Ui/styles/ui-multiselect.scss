@@ -1,0 +1,108 @@
+.ui-multiselect {
+  display: flex;
+  align-items: center;
+  position: relative;
+  border: 1px solid var(--black-30);
+  border-radius: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+
+  &__icon {
+    order: 10;
+    width: 16px;
+    height: 16px;
+    fill: var(--black-30);
+    flex: none;
+    margin-left: 5px;
+  }
+
+  &__empty {
+    padding-left: 12px;
+    padding-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+  }
+
+  &::v-deep {
+    .multiselect {
+      &__tags,
+      &__placeholder,
+      &__single {
+        width: 100%;
+        min-width: 0;
+
+        display: flex;
+
+        > * {
+          flex: auto;
+          min-width: 0;
+        }
+      }
+
+      &__tags-wrap {
+        overflow: auto;
+      }
+
+      &__content-wrapper {
+        position: absolute;
+        top: 100%;
+        right: -1px;
+        left: -1px;
+        z-index: 100;
+        width: auto;
+        background-color: var(--white);
+      }
+
+      &__content {
+        position: relative;
+        flex: auto;
+        width: 100%;
+        min-height: 0;
+
+        display: block !important;
+
+        overflow: auto;
+        scrollbar-width: thin;
+
+        border: 1px solid var(--black-30);
+        border-radius: 8px;
+      }
+
+      &__input,
+      &__single {
+        color: var(--black-100);
+        line-height: 1.5;
+      }
+
+      &__element {
+        display: flex;
+        align-items: center;
+        min-height: 48px;
+        padding-left: 12px;
+        padding-right: 12px;
+
+        &:nth-child(n + 2) {
+          border-top: 1px solid var(--black-30);
+        }
+      }
+
+      &__tag {
+        &:nth-child(n + 2) {
+          margin-left: 8px;
+        }
+      }
+
+      &__input {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        padding-left: 12px;
+        padding-right: 12px;
+        background-color: var(--white);
+      }
+    }
+  }
+}

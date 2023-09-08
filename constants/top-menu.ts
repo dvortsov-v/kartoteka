@@ -2,17 +2,17 @@ export const topMenu = [
     {
         id: 1,
         name: 'О проекте',
-        link: '',
+        link: '/about',
     },
     {
         id: 2,
         name: 'Помощь',
-        link: '',
+        link: '/faq',
     },
     {
         id: 3,
         name: 'Реклама',
-        link: '',
+        link: '/advertisement',
     },
     {
         id: 4,
@@ -22,6 +22,6 @@ export const topMenu = [
     {
         id: 5,
         name: 'Контакты',
-        link: '',
+        link: '/contacts',
     },
 ]

@@ -27,12 +27,12 @@
                                         :class="classesSort(isChecked)"
                                         class="catalog-page-main-sort__wrap"
                                     >
-                                                    <span
-                                                        @click="toogleSortDescending"
-                                                        class="catalog-page-main-sort__text"
-                                                    >
-                                                        {{ sortItem.text }}
-                                                    </span>
+                                            <span
+                                                @click="toogleSortDescending"
+                                                class="catalog-page-main-sort__text"
+                                            >
+                                                {{ sortItem.text }}
+                                            </span>
                                         <svg-icon
                                             v-if="isChecked"
                                             name="select-down" class="catalog-page-main-sort__icon"
@@ -52,13 +52,13 @@
                                 class="catalog-page-main-navigation__icon"
                             />
                             <span class="catalog-page-main-navigation__text">
-                                            Показать ещё
-                                        </span>
+                                    Показать ещё
+                                </span>
                         </UiButton>
                         <span class="catalog-page-main-navigation__show catalog-page-main-navigation-show">
-                                        <span class="catalog-page-main-navigation-show__text">Показано:</span>
-                                        <span class="catalog-page-main-navigation-show__count">50 из 120</span>
-                                    </span>
+                                <span class="catalog-page-main-navigation-show__text">Показано:</span>
+                                <span class="catalog-page-main-navigation-show__count">50 из 120</span>
+                            </span>
                     </div>
                 </section>
             </main>
@@ -66,11 +66,16 @@
     </div>
 </template>
 <script setup lang="ts">
-import {ComputedRef} from "vue/dist/vue";
+import {ComputedRef} from "vue";
 
 const views: Ref<string> = ref('rows');
 
-
+useHead({
+    title: 'Каталог',
+});
+definePageMeta({
+    name: 'Каталог',
+});
 const typeSorting: Ref<string> = ref('price');
 const sortDescending: Ref<boolean> = ref(false);
 const sortList = [
