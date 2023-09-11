@@ -10,8 +10,12 @@
             <UiContainer class="header-main__wrapper">
                 <HeaderLogo  class="header-main__logo" />
                 <div class="header-main__search">
-                    <UiButton class="header-main__menu header-main-menu">
-                        <svg-icon name="menu" class="header-main-menu__icon" />
+                    <UiButton @click="toogleIsShowCatalogMenu" class="header-main__menu header-main-menu">
+                        <svg-icon
+                            :name="iconCatalogButton"
+                            :class="classesIconCatalogButton"
+                            class="header-main-menu__icon"
+                        />
                         <span class="header-main-menu__text">Каталог</span>
                     </UiButton>
                     <HeaderSearchField class="header-main__field" />
@@ -33,9 +37,25 @@
                 </div>
             </UiContainer>
         </div>
+        <ModalsCatalogMenu v-if="isShowCatalogMenu" />
     </header>
-
 </template>
+<script setup lang="ts">
+const isShowCatalogMenu = ref(false);
+const toogleIsShowCatalogMenu = () => {
+    const bodyElem = document.querySelector('body');
+    isShowCatalogMenu.value = !isShowCatalogMenu.value;
+
+    if(unref(isShowCatalogMenu) && bodyElem) {
+        bodyElem.style.overflow = 'hidden';
+    } else if (unref(isShowCatalogMenu) && bodyElem) {
+        bodyElem.style.overflow = 'visible';
+    }
+}
+
+const iconCatalogButton = computed(() => unref(isShowCatalogMenu) ? 'cross' : 'menu');
+const classesIconCatalogButton = computed(() =>  ({'header-main-menu__icon--cross': unref(isShowCatalogMenu)}));
+</script>
 <style scoped lang="scss">
 @import "@/components/Header/styles/header.scss";
 </style>

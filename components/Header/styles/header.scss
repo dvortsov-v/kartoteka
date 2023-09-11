@@ -1,4 +1,6 @@
 .header{
+  position: relative;
+
   &__main {
     margin-top: 24px;
   }
@@ -62,6 +64,11 @@
     fill: var(--white);
     width: 24px;
     height: 24px;
+
+    &--cross {
+      width: 16px;
+      height: 16px;
+    }
   }
 
   &__text {
