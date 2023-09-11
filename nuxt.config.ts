@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
     devtools: { enabled: true },
     css: [
+        'vue-final-modal/style.css',
         '~/assets/styles/fonts.scss',
         '~/assets/styles/app.scss',
         '~/assets/styles/reset.scss',
@@ -10,5 +11,8 @@ export default defineNuxtConfig({
     modules: [
         '@nuxtjs/svg-sprite',
         'nuxt-swiper',
+    ],
+    plugins: [
+        '~/plugins/vue-final-modal.ts'
     ],
 })

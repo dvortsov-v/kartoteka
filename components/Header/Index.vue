@@ -57,5 +57,5 @@ const iconCatalogButton = computed(() => unref(isShowCatalogMenu) ? 'cross' : 'm
 const classesIconCatalogButton = computed(() =>  ({'header-main-menu__icon--cross': unref(isShowCatalogMenu)}));
 </script>
 <style scoped lang="scss">
-@import "@/components/Header/styles/header.scss";
+@import '@/components/Header/styles/header.scss';
 </style>
