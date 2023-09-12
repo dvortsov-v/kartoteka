@@ -93,7 +93,7 @@
 </template>
 
 <script setup lang="ts">
-import {validAdditionalPhone, validPhone} from "~/pages/contacts/feature/validPhone";
+import {validAdditionalPhone, validPhone} from "~/composable/validPhone";
 import {contacts} from "~/constants/contacts";
 
 useHead({
