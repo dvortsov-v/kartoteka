@@ -6,11 +6,11 @@
         <div class="card-product__information card-product-information">
             <picture class="card-product-information__picture">
                 <source
-                    srcset="/assets/images/product.webp"
+                    srcset="/images/product.webp"
                     type="image/webp"
                 >
                 <img
-                    src="/assets/images/product.jpg"
+                    src="/images/product.jpg"
                     alt="card-product"
                     class="card-product-information__img"
                 >

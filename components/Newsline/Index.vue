@@ -1,6 +1,6 @@
 <template>
     <div class="newsline">
-        <button  type="button" class="newsline__link newsline__link--prev">
+        <button  type="button" class="newsline__button newsline__button--prev">
             <svg-icon name="arrow-right" class="newsline__icon"/>
         </button>
         <Swiper
@@ -17,11 +17,11 @@
                 <button type="button" class="newsline__elem news">
                     <picture class="news__picture">
                         <source
-                            :srcset="`assets/images/${newsItem.img}.webp`"
+                            :srcset="`/images/${newsItem.img}.webp`"
                             type="image/webp"
                         >
                         <img
-                            :src="`assets/images/${newsItem.img}.jpg`"
+                            :src="`/images/${newsItem.img}.jpg`"
                             :alt="newsItem.name"
                             class="news__img"
                         >
@@ -30,7 +30,7 @@
                 </button>
             </SwiperSlide>
         </Swiper>
-        <NuxtLink class="newsline__link newsline__link--next">
+        <NuxtLink class="newsline__button newsline__button--next">
             <svg-icon name="arrow-right" class="newsline__icon"/>
         </NuxtLink>
     </div>
@@ -38,18 +38,14 @@
 <script setup lang="ts">
 import {news} from '@/constants/news';
 const sliderOption = {
-    loop: true,
-    autoplay: {
-        delay: 5000,
-        disableOnInteraction: true,
-    },
     observer: true,
     observeParents: true,
     slidesPerView: 9,
     spaceBetween: 8,
+    watchOverflow: true,
     navigation: {
-        nextEl: '.newsline__link--next',
-        // prevEl: '.swiper-button-prev',
+        nextEl: '.newsline__button--next',
+        prevEl: '.newsline__button--prev',
     },
 }
 const sliderModules = [SwiperNavigation];

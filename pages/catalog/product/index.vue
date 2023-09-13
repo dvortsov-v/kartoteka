@@ -13,11 +13,11 @@
                     </div>
                     <picture class="product-page-information__picture">
                         <source
-                            srcset="/assets/images/car-main.webp"
+                            srcset="/images/car-main.webp"
                             type="image/webp"
                         >
                         <img
-                            src="/assets/images/car-main.jpg"
+                            src="/images/car-main.jpg"
                             alt="Mercedes-Benz GLC Coupé"
                             class="product-page-information__img"
                         >

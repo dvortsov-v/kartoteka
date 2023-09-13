@@ -2,11 +2,11 @@
     <div class="news-list-page__box news-item">
         <picture class="news-item__picture">
             <source
-                srcset="/assets/images/news-item.webp"
+                srcset="/images/news-item.webp"
                 type="image/webp"
             >
             <img
-                src="/assets/images/news-item.jpg"
+                src="/images/news-item.jpg"
                 alt="News Picture"
                 class="news-item__img"
             >

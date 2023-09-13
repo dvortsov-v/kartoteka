@@ -7,11 +7,11 @@
                 <p class="news-page__date">20.03.2022, 12:32</p>
                 <picture class="news-page__picture">
                     <source
-                        srcset="/assets/images/news.webp"
+                        srcset="/images/news.webp"
                         type="image/webp"
                     >
                     <img
-                        src="/assets/images/news.jpg"
+                        src="/images/news.jpg"
                         alt="News Picture"
                         class="news-page__img"
                     >

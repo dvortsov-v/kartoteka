@@ -16,11 +16,11 @@
         >
             <picture class="main-page-banners__picture">
                 <source
-                    :srcset="`assets/images/${banner.img}.webp`"
+                    :srcset="`/images/${banner.img}.webp`"
                     type="image/webp"
                 >
                 <img
-                    :src="`assets/images/${banner.img}.jpg`"
+                    :src="`/images/${banner.img}.jpg`"
                     :alt="banner.id"
                     class="main-page-banners__img"
                 >
