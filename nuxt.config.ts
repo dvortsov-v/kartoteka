@@ -15,4 +15,9 @@ export default defineNuxtConfig({
     plugins: [
         '~/plugins/vue-final-modal.ts'
     ],
+    runtimeConfig: {
+        public: {
+            baseURL: 'https://petr.burov.fvds.ru/api'
+        }
+    }
 })

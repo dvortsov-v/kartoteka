@@ -4,8 +4,8 @@
             <UiBreadcrumbs class="news-list-page__breadcrumbs"/>
             <h1 class="news-list-page__title">Новости</h1>
             <ul class="news-list-page__list">
-                <li v-for="item in 10" class="news-list-page__item">
-                    <NewsItem class="news-list-page__box" />
+                <li v-for="newsItem in news" class="news-list-page__item">
+                    <NewsItem class="news-list-page__box" :news="newsItem" />
                 </li>
             </ul>
             <div class="news-list-page__navigation news-list-page-navigation">
@@ -29,12 +29,16 @@
 </template>
 
 <script setup lang="ts">
+import {getNews} from "~/api/NewsApi";
+
 useHead({
     title: 'Новости',
 });
 definePageMeta({
     name: 'Новости',
 });
+
+const news = await getNews()
 
 </script>
 
