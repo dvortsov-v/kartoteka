@@ -1,7 +1,7 @@
 import {useCustomFetch} from "~/composable/useCustomFetch";
 
-export const getNewsList = async () => {
-    const { data } = await useCustomFetch(() => '/news');
+export const getProducts = async () => {
+    const { data } = await useCustomFetch(() => '/products');
 
     if(unref(data) && unref(data)?.data) {
         return unref(data)?.data;
@@ -9,8 +9,8 @@ export const getNewsList = async () => {
 
     return [];
 }
-export const getNews = async (id: number) => {
-    const { data } = await useCustomFetch(() => `/news/${id}`);
+export const getProduct = async (id: number) => {
+    const { data } = await useCustomFetch(() => `/products/${id}`);
 
     if(data?.value?.data) {
         return data.value.data;

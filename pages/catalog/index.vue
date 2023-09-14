@@ -67,6 +67,9 @@
 </template>
 <script setup lang="ts">
 import {ComputedRef} from "vue";
+import {getCategories} from "~/api/CategoriesApi";
+
+const categories = await getCategories()
 
 const views: Ref<string> = ref('rows');
 

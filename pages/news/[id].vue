@@ -41,7 +41,9 @@
     </div>
 </template>
 <script setup lang="ts">
-
+// import {getNews} from "~/api/NewsApi";
+const route = useRoute()
+// const news = await getNews(route.params.id)
 </script>
 
 <style scoped lang="scss">
