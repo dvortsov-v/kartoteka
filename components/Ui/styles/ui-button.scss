@@ -7,13 +7,18 @@
   border-radius: 8px;
 
   &--primary {
-    background-color: var(--primary-base);
+    background-color: var(--blue-base);
     color: var(--white);
   }
 
   &--primary-transparent {
-    background-color: var(--primary-transparent);
-    color: var(--primary-base);
+    background-color: var(--blue-transparent);
+    color: var(--blue-base);
+  }
+
+  &--primary-dark {
+    background-color: var(--blue-dark);
+    color: var(--white);
   }
 
   &--gray {

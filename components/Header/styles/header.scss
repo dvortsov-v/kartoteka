@@ -1,4 +1,4 @@
-.header{
+.header {
   position: relative;
 
   &__main {
@@ -11,13 +11,27 @@
   padding-top: 20px;
   padding-bottom: 20px;
 
+  @media (max-width: 768px) {
+    background-color: transparent;
+  }
+
   &__wrapper {
     display: flex;
+
+    @media (max-width: 768px) {
+      justify-content: space-between;
+    }
   }
 
   &__navigation,
   &__information {
     width: 50%;
+  }
+
+  &__navigation {
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 }
 
@@ -27,17 +41,38 @@
     justify-content: space-between;
     padding-bottom: 24px;
     border-bottom: 1px solid var(--black-30);
+
+    @media (max-width: 768px) {
+      border-bottom: none;
+    }
   }
 
   &__search {
     flex: auto;
     display: flex;
     margin-left: 40px;
+
+    @media (max-width: 768px) {
+      margin-left: 0;
+    }
   }
 
   &__logo {
     width: 164px;
     height: 41px;
+
+    &--mobile {
+      display: none;
+
+      @media (max-width: 768px) {
+        display: block;
+      }
+    }
+    &--desktop {
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
   }
 
   &__field {
@@ -52,6 +87,10 @@
   &__buttons {
     display: flex;
     margin-left: 40px;
+
+    @media (max-width: 768px) {
+      margin-left: 8px;
+    }
   }
 
   &__auth {
@@ -64,6 +103,11 @@
     fill: var(--white);
     width: 24px;
     height: 24px;
+
+    @media (max-width: 768px) {
+      width: 16px;
+      height: 16px;
+    }
 
     &--cross {
       width: 16px;
@@ -83,7 +127,7 @@
 .header-main-adding,
 .header-main-auth {
   &__icon {
-    fill: var(--primary-base);
+    fill: var(--blue-base);
     width: 24px;
     height: 24px;
   }
@@ -95,5 +139,13 @@
   &__text {
     margin-left: 12px;
     line-height: 1.5;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding-right: 12px;
   }
 }

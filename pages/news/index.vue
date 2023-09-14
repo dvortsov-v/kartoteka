@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 import {getNews} from "~/api/NewsApi";
-
+import {news} from '~/constants/news'
 useHead({
     title: 'Новости',
 });
@@ -38,7 +38,7 @@ definePageMeta({
     name: 'Новости',
 });
 
-const news = await getNews()
+// const news = await getNews()
 
 </script>
 

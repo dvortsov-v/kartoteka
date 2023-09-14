@@ -1,12 +1,18 @@
-
 .header-information {
   display: flex;
   align-items: center;
   justify-content: space-between;
 
+  @media (max-width: 768px) {
+    justify-content: flex-end;
+  }
 
   &__phone {
     margin-left: 10px;
+  }
+
+  &__menu {
+    margin-left: 16px;
   }
 }
 
@@ -16,10 +22,32 @@
   &__text,
   &__link {
     font-size: 12px;
+
+    @media (max-width: 768px) {
+      font-size: 16px;
+      line-height: 1.5;
+    }
   }
 
   &__link {
     margin-left: 24px;
+
+    @media (max-width: 768px) {
+      margin-left: 0;
+      margin-top: 8px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    border-top: 1px solid var(--black-20);
+    padding: 8px 20px 16px;
+  }
+
+  &--desktop {
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 }
 
@@ -38,5 +66,28 @@
     color: var(--black-100);
     font-weight: 500;
     line-height: 1.5;
+  }
+}
+
+.header-information-menu {
+  position: relative;
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  &__wrapper {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    border-radius: 24px;
+    border: 1px solid var(--black-20);
+    background: var(--white);
+    box-shadow: 0 8px 16px 0 hsla(220, 43%, 11%, 0.1);
+    min-width: 180px;
   }
 }

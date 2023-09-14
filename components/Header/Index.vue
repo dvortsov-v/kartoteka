@@ -2,13 +2,14 @@
     <header class="header">
         <div class="header__top header-top">
             <UiContainer class="header-top__wrapper">
+                <HeaderLogo class="header-main__logo  header-main__logo--mobile" />
                 <HeaderNavigation class="header-top__navigation"/>
                 <HeaderInformation class="header-top__information"/>
             </UiContainer>
         </div>
         <div class="header-main header__main">
             <UiContainer class="header-main__wrapper">
-                <HeaderLogo  class="header-main__logo" />
+                <HeaderLogo  class="header-main__logo header-main__logo--desktop" />
                 <div class="header-main__search">
                     <UiButton @click="toogleIsShowCatalogMenu" class="header-main__menu header-main-menu">
                         <svg-icon
@@ -32,7 +33,7 @@
                         class="header-main__auth header-main-auth"
                     >
                         <svg-icon name="lock" class="header-main-auth__icon" />
-                        <span class="header-main-auth_text">Вход</span>
+                        <span class="header-main-auth__text">Вход</span>
                     </UiButton>
                 </div>
             </UiContainer>
