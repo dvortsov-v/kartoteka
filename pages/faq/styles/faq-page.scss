@@ -25,15 +25,30 @@
     margin-right: auto;
     max-width: 800px;
     margin-top: 48px;
+
+    @media (max-width: 768px) {
+      margin-top: 24px;
+      max-width: initial;
+    }
   }
 }
 
 .faq-tabs {
   display: flex;
 
+  @media (max-width: 768px) {
+    overflow-x: auto;
+    width: calc(100% + 32px);
+    padding-right: 32px;
+  }
+
   &__item {
     &:nth-child(n + 2) {
       margin-left: 8px;
+    }
+
+    @media (max-width: 768px) {
+      flex-shrink: 0;
     }
   }
 }
