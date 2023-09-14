@@ -16,7 +16,16 @@
     margin-top: 24px;
     border-radius: 24px;
     border: 1px solid var(--black-30);
-    padding: 32px
+    padding: 32px;
+
+    @media (max-width: 768px) {
+      border: none;
+      border-bottom: 1px solid var(--black-30);
+      max-width: initial;
+      padding-left: 0;
+      border-radius: 0;
+      padding-right: 0;
+    }
   }
 
   &__additional {
@@ -30,7 +39,7 @@
     color: var(--black-100);
     font-size: 44px;
     font-weight: 500;
-    line-height: 1.09
+    line-height: 1.09;
   }
 
   &__date {
@@ -87,7 +96,6 @@
 }
 
 .news-other {
-
   &__title {
     color: var(--black-100);
     font-size: 28px;
@@ -99,7 +107,11 @@
     margin-top: 40px;
     display: grid;
     grid-template-columns: repeat(5, minmax(190px, 1fr));
-    grid-gap: 16px
+    grid-gap: 16px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 }
 
