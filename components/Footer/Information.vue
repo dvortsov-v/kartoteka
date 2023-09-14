@@ -9,7 +9,7 @@
             <span class="footer-information__schedule">Пн — Пт, с 9:00 до 18:00 (Мск)</span>
         </div>
         <CommonSocial class="footer-information__socials" />
-        <p class="footer-additional__certificate">Свидетельство о регистрации СМИ Эл ФС77-45357</p>
+        <p class="footer-information__certificate">Свидетельство о регистрации СМИ Эл ФС77-45357</p>
     </div>
 </template>
 

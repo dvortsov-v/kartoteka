@@ -20,11 +20,19 @@
     border-top: 1px solid var(--black-30);
     display: grid;
     grid-template-columns: repeat(5, minmax(190px, 1fr));
-    grid-gap: 16px
+    grid-gap: 16px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
   &__box {
     min-height: 384px;
+
+    @media (max-width: 768px) {
+      min-height: 368px;
+    }
   }
 
   &__navigation {
@@ -52,6 +60,12 @@
     margin-left: 12px;
     color: var(--black-100);
     line-height: 1.5;
+  }
+
+  &__show {
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 }
 

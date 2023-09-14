@@ -16,11 +16,19 @@
 
   &__information {
     height: 100%;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 
   &__navigation {
     margin-left: 16px;
     min-width: 256px;
+
+    @media (max-width: 768px) {
+      min-width: 208px;
+    }
   }
 
   &__right {

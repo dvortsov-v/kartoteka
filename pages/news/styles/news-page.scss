@@ -3,6 +3,10 @@
 
   &__wrapper {
     padding-top: 24px;
+
+    @media (max-width: 768px) {
+      padding-top: 0;
+    }
   }
 
   &__main {

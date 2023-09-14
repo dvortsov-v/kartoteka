@@ -14,6 +14,7 @@
                 </button>
             </div>
         </div>
+        <FooterInformation class="footer-additional__information" />
         <ul class="footer-additional__documents footer-documents">
             <li class="footer-documents__item">
                 <NuxtLink class="footer-documents__link">Информация о деятельности в области информационных технологий</NuxtLink>
@@ -29,6 +30,7 @@
             </li>
         </ul>
         <p class="footer-additional__copyright">© ООО «Коммерсантъ Картотека», 1995—{{ currentYear }}</p>
+        <p class="footer-additional__certificate">Свидетельство о регистрации СМИ Эл ФС77-45357</p>
     </div>
 </template>
 <script setup lang="ts">
