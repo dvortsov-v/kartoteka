@@ -36,7 +36,11 @@
     margin-top: 48px;
     display: grid;
     grid-template-columns: repeat(4, minmax(324px, 1fr));
-    grid-gap: 16px
+    grid-gap: 16px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 }
 
@@ -50,6 +54,10 @@
 
   &__title {
     max-width: 528px;
+
+    @media (max-width: 768px) {
+      max-width: 344px;
+    }
   }
 
   &__description {
@@ -58,6 +66,9 @@
     line-height: 1.5;
     color: var(--black-100);
     width: 50%;
+    @media (max-width: 768px) {
+      max-width: 344px;
+    }
   }
 
   &__text {
