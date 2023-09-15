@@ -1,18 +1,34 @@
 import {useCustomFetch} from "~/composable/useCustomFetch";
 
-export const getNewsList = async () => {
-    const { data } = await useCustomFetch(() => '/news');
+export interface News {
+    id: number,
+    title: string,
+    html: string,
+    image: string,
+}
 
-    if(unref(data) && unref(data)?.data) {
-        return unref(data)?.data;
+interface ResultRequestNewsList {
+    data: News[]
+}
+interface ResultRequestNews {
+    data: News
+}
+
+
+
+export const getNewsList = async (): Promise<News[]> => {
+    const { data }: {data: Ref<ResultRequestNewsList>} = await useCustomFetch('/news');
+
+    if(unref(data)?.data) {
+        return unref(data).data;
     }
 
     return [];
 }
-export const getNews = async (id: number) => {
-    const { data } = await useCustomFetch(() => `/news/${id}`);
+export const getNews = async (id: string | string[]): Promise<News | object> => {
+    const { data }: {data: Ref<ResultRequestNews>} = await useCustomFetch(() => `/news/${id}`);
 
-    if(data?.value?.data) {
+    if(unref(data)?.data) {
         return data.value.data;
     }
 

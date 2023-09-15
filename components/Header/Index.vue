@@ -2,7 +2,7 @@
     <header class="header">
         <div class="header__top header-top">
             <UiContainer class="header-top__wrapper">
-                <HeaderLogo class="header-main__logo  header-main__logo--mobile" />
+                <HeaderLogo class="header-main__logo header-main__logo--mobile" />
                 <HeaderNavigation class="header-top__navigation"/>
                 <HeaderInformation class="header-top__information"/>
             </UiContainer>
