@@ -1,25 +1,23 @@
 <template>
     <div class="news-page">
+        <pre>{{}}</pre>
         <UiContainer class="news-page__wrapper">
             <UiBreadcrumbs class="news-page__breadcrumbs" />
             <main class="news-page__main">
-                <h1 class="news-page__title">Регистрация и ликвидация компаний на российском рынке с 2020 по 2022 гг.</h1>
+                <h1 v-if="news.title" class="news-page__title">{{ news.title }}</h1>
                 <p class="news-page__date">20.03.2022, 12:32</p>
-                <picture class="news-page__picture">
-                    <source
-                        srcset="/images/news.webp"
-                        type="image/webp"
-                    >
+                <picture v-if="news.image" class="news-page__picture">
                     <img
-                        src="/images/news.jpg"
+                        :src="news.image"
                         alt="News Picture"
                         class="news-page__img"
                     >
                 </picture>
-                <div class="news-page__text">
-                    <p>Представляем сравнительный анализ по количеству зарегистрированных и ликвидированных юридических лиц (ЮЛ) и индивидуальных предпринимателей (ИП) за последние 3 года. Наблюдается рост числа созданных ЮЛ и ИП по сравнению с 2020 годом - за 2021 года на 20,9% и за 2022 год на 20,4%. Отмечается положительная динамика за 2022 год – компаний открывается больше, чем закрывается. Количество регистрируемых ИП продолжает превышать количество ЮЛ. Ликвидация компаний в последние годы сопровождается перетоком работников ЮЛ в категории индивидуальных предпринимателей и самозанятых — бизнес предпочитает переходить в альтернативные режимы, адаптируясь под ковидные ограничения и санкции.</p>
-                    <p>За последние 3 года наблюдается оживление предпринимательской активности в России. С 2020 г. выросло число созданных индивидуальных предпринимателей до 825 781 против 806 802 в 2021 г. и 653 384 в 2020 г. При этом число ликвидированных индивидуальных предпринимателей сократилось — до 655 721 против 801 064 за 2021 г. и 955 187 за 2020г. Такая динамика может свидетельствовать о возможной смене тренда и сокращении темпов убыли компаний.</p>
-                    <p>Статистика была собрана с помощью нашего сервиса «Выборка», попробовать его можете, перейдя по ссылке.</p>
+                <div
+                    v-if="news.html"
+                    class="news-page__text"
+                    v-html="news.html"
+                >
                 </div>
             </main>
             <div class="news-page__additional news-page-additional">
@@ -41,9 +39,9 @@
     </div>
 </template>
 <script setup lang="ts">
-// import {getNews} from "~/api/NewsApi";
-const route = useRoute()
-// const news = await getNews(route.params.id)
+import {getNews, News} from "~/api/NewsApi";
+const route = useRoute();
+const news: News | object = await getNews(route.params.id);
 </script>
 
 <style scoped lang="scss">
