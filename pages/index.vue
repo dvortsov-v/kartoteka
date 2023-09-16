@@ -13,6 +13,7 @@
 useHead({
     title: "Kartoteka.ru",
 });
+
 </script>
 
 <style scoped lang="scss">

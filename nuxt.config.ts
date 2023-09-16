@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     modules: [
         '@nuxtjs/svg-sprite',
         'nuxt-swiper',
+        '@pinia/nuxt',
     ],
     plugins: [
         '~/plugins/vue-final-modal.ts'

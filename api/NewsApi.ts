@@ -1,20 +1,5 @@
 import {useCustomFetch} from "~/composable/useCustomFetch";
-
-export interface News {
-    id: number,
-    title: string,
-    html: string,
-    image: string,
-}
-
-interface ResultRequestNewsList {
-    data: News[]
-}
-interface ResultRequestNews {
-    data: News
-}
-
-
+import {ResultRequestNews, ResultRequestNewsList, News} from "~/definitions/interfaces/News";
 
 export const getNewsList = async (): Promise<News[]> => {
     const { data }: {data: Ref<ResultRequestNewsList>} = await useCustomFetch('/news');

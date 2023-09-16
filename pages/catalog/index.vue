@@ -1,5 +1,6 @@
 <template>
     <div class="catalog-page">
+        <pre>{{categories}}</pre>
         <UiContainer class="catalog-page__wrapper">
             <UiBreadcrumbs class="catalog-page__breadcrumbs"/>
             <CatalogHead class="catalog-page__head" />
@@ -67,9 +68,6 @@
 </template>
 <script setup lang="ts">
 import {ComputedRef} from "vue";
-import {getCategories} from "~/api/CategoriesApi";
-
-const categories = await getCategories()
 
 const views: Ref<string> = ref('rows');
 

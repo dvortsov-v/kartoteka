@@ -39,7 +39,9 @@
     </div>
 </template>
 <script setup lang="ts">
-import {getNews, News} from "~/api/NewsApi";
+import {getNews} from "~/api/NewsApi";
+import {News} from "~/definitions/interfaces/News";
+
 const route = useRoute();
 const news: News | object = await getNews(route.params.id);
 </script>

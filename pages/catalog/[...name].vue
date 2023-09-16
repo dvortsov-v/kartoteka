@@ -2,7 +2,7 @@
     <div class="catalog-page">
         <UiContainer class="catalog-page__wrapper">
             <UiBreadcrumbs class="catalog-page__breadcrumbs"/>
-            <CatalogHead class="catalog-page__head" />
+            <CatalogHead :namePage="category.name" :count="category.count" class="catalog-page__head" />
             <main class="catalog-page__main catalog-page-main">
                 <aside class="catalog-page-main__aside">
                     <CatalogCategories class="catalog-page-main__categories" />
@@ -56,9 +56,9 @@
                                         </span>
                         </UiButton>
                         <span class="catalog-page-main-navigation__show catalog-page-main-navigation-show">
-                                        <span class="catalog-page-main-navigation-show__text">Показано:</span>
-                                        <span class="catalog-page-main-navigation-show__count">50 из 120</span>
-                                    </span>
+                            <span class="catalog-page-main-navigation-show__text">Показано:</span>
+                            <span class="catalog-page-main-navigation-show__count">50 из 120</span>
+                        </span>
                     </div>
                 </section>
             </main>
@@ -66,10 +66,11 @@
     </div>
 </template>
 <script setup lang="ts">
-import {ComputedRef} from "vue/dist/vue";
+import {getCategory} from "~/api/CategoriesApi";
+import {Category} from "~/definitions/interfaces/Categories";
+const category: Category  = await getCategory(1)
 
 const views: Ref<string> = ref('rows');
-
 
 const typeSorting: Ref<string> = ref('price');
 const sortDescending: Ref<boolean> = ref(false);
@@ -106,6 +107,7 @@ const toogleSortDescending = () => {
 const changeViews = (value: string) => {
     views.value = value
 }
+
 </script>
 
 <style scoped lang="scss">

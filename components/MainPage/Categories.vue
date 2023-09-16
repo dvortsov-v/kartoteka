@@ -6,16 +6,18 @@
                 :key="`main-page-category-${category.id}`"
                 class="main-page-categories__item"
             >
-                <NuxtLink class="main-page-categories__category main-page-category">
+                <NuxtLink :to="`/catalog/${category.name}`" class="main-page-categories__category main-page-category">
                     <span class="main-page-category__name">{{category.name}}</span>
-                    <span class="main-page-category__count">{{category.count}}</span>
+                    <span v-if="category.count" class="main-page-category__count">{{category.count}}</span>
                 </NuxtLink>
             </li>
         </ul>
     </div>
 </template>
 <script setup lang="ts">
-import {categories} from '@/constants/categories'
+import {getCategories} from "~/api/CategoriesApi";
+
+const categories = await getCategories()
 </script>
 
 <style scoped lang="scss">

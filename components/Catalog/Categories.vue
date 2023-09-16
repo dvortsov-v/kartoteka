@@ -5,15 +5,17 @@
             :key="`catalog-category-${category.id}`"
             class="catalog-categories__item"
         >
-            <NuxtLink class="catalog-category">
+            <NuxtLink :to="`/catalog/${category.name}`" class="catalog-category">
                 <span class="catalog-category__name">{{category.name}}</span>
-                <span class="catalog-category__count">{{category.count}}</span>
+                <span v-if="category.count" class="catalog-category__count">{{category.count}}</span>
             </NuxtLink>
         </li>
     </ul>
 </template>
 <script setup lang="ts">
-import {categories} from '@/constants/categories'
+import {getCategories} from "~/api/CategoriesApi";
+
+const categories = await getCategories()
 </script>
 
 <style scoped lang="scss">

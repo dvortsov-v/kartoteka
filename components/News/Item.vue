@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import {PropType} from "@vue/runtime-core";
-import {News} from "~/api/NewsApi";
+import {News} from "~/definitions/interfaces/News";
 
 defineProps({
     news: {
@@ -34,7 +34,6 @@ defineProps({
     }
 })
 
-const getUrlNews = (id: number) => ({name: 'news', params: {id}});
 </script>
 
 <style scoped lang="scss">
