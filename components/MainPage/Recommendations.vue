@@ -9,7 +9,7 @@
                     <CommonCardProduct />
                 </li>
             </ul>
-            <UiButton theme="gray" class="main-page-recommendations__more">
+            <UiButton @click="navigateTo('/catalog')" theme="gray" class="main-page-recommendations__more">
                 Все предложения
             </UiButton>
         </div>

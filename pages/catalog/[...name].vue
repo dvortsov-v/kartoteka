@@ -5,7 +5,7 @@
             <CatalogHead :namePage="category.name" :count="category.count" class="catalog-page__head" />
             <main class="catalog-page__main catalog-page-main">
                 <aside class="catalog-page-main__aside">
-                    <CatalogCategories class="catalog-page-main__categories" />
+                    <CatalogCategories :categories="category.sub_categories || category" isCatalogCategory class="catalog-page-main__categories" />
                     <CatalogFilters class="catalog-page-main__filters" />
                 </aside>
                 <section class="catalog-page-main__section">
@@ -68,7 +68,7 @@
 <script setup lang="ts">
 import {getCategory} from "~/api/CategoriesApi";
 import {Category} from "~/definitions/interfaces/Categories";
-const category: Category  = await getCategory(1)
+const category: Category | object  = await getCategory(1)
 
 const views: Ref<string> = ref('rows');
 

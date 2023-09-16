@@ -1,24 +1,20 @@
 <template>
-    <div class="product-page">
+    <div v-if="product" class="product-page">
         <UiContainer class="product-page__wrapper">
             <UiBreadcrumbs class="product-page__breadcrumbs"/>
             <div class="product-page__block">
                 <div class="product-page__information product-page-information">
                     <h1 class="product-page-information__title">
-                        Mercedes-Benz GLC Coupé
+                        {{ product.name }}
                     </h1>
                     <div class="product-page-information__additional">
                         <span class="product-page-information__number">№ 124115</span>
                         <span class="product-page-information__date">20.03.2022, 12:32</span>
                     </div>
                     <picture class="product-page-information__picture">
-                        <source
-                            srcset="/images/car-main.webp"
-                            type="image/webp"
-                        >
                         <img
-                            src="/images/car-main.jpg"
-                            alt="Mercedes-Benz GLC Coupé"
+                            :src="product.image"
+                            :alt="product.name"
                             class="product-page-information__img"
                         >
                     </picture>
@@ -35,11 +31,11 @@
                         >
                             <picture class="product-page-slider__picture">
                                 <source
-                                    :srcset="`/assets/images/${image.img}.webp`"
+                                    :srcset="`/images/${image.img}.webp`"
                                     type="image/webp"
                                 >
                                 <img
-                                    :src="`/assets/images/${image.img}.jpg`"
+                                    :src="`/images/${image.img}.jpg`"
                                     :alt="image.img"
                                     class="product-page-slider__img"
                                 >
@@ -119,7 +115,7 @@
                 </div>
                 <div class="product-page__base product-page-base">
                     <div class="product-page-base__info">
-                        <span class="product-page-base__price">20 000 156 ₽</span>
+                        <span class="product-page-base__price">{{ parcePrice(product?.price || '') }} ₽</span>
                         <ul class="product-page-base__statuses">
                             <li class="product-page-base__item">
                                 <div class="product-page-base__status product-page-status product-page-status--orange">
@@ -195,6 +191,10 @@
 <script lang="ts" setup>
 import {carImage} from "~/constants/carImage";
 import {productCharacteristic} from "~/constants/productCharacteristic";
+import {getProduct} from "~/api/ProductsApi";
+import {parcePrice} from "~/composable/parcePrice";
+import {Product} from "~/definitions/interfaces/Products";
+
 const sliderOption = {
     loop: true,
     autoplay: {
@@ -218,6 +218,8 @@ const handleChoice = (value: number) => {
     activeTab.value = value;
 }
 
+const product: Product | object =  await getProduct(1);
+
 // import {getNamePage} from "~/composable/getNamePage";
 //
 // useHead({
@@ -228,7 +230,6 @@ const handleChoice = (value: number) => {
 //     key: route => route.fullPath,
 //     name: getNamePage,
 // })
-
 
 </script>
 

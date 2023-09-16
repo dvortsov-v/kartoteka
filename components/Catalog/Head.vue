@@ -6,7 +6,10 @@
 </template>
 <script setup lang="ts">
 defineProps({
-    count: Number,
+    count: {
+        type: Number,
+        default: 0,
+    },
     namePage: String,
 })
 </script>

@@ -1,5 +1,11 @@
 <template>
     <ul class="catalog-categories">
+        <li v-if="isCatalogCategory" class="catalog-categories__item">
+            <NuxtLink to="/catalog" class="catalog-category">
+                <svg-icon name="arrow-left" class="catalog-category__icon" />
+                <span class="catalog-category__name catalog-category__name--all">Все категории</span>
+            </NuxtLink>
+        </li>
         <li
             v-for="category in categories"
             :key="`catalog-category-${category.id}`"
@@ -13,9 +19,16 @@
     </ul>
 </template>
 <script setup lang="ts">
-import {getCategories} from "~/api/CategoriesApi";
+import {PropType} from "@vue/runtime-core";
+import {Category} from "~/definitions/interfaces/Categories";
 
-const categories = await getCategories()
+defineProps({
+    isCatalogCategory: Boolean,
+    categories: {
+        type: Array as PropType<Category[]>,
+        default: () => [],
+    },
+})
 </script>
 
 <style scoped lang="scss">

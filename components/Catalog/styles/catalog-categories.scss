@@ -15,9 +15,21 @@
   align-items: center;
   cursor: pointer;
 
+  &__icon {
+    fill: var(--blue-base);
+    width: 16px;
+    height: 16px;
+    margin-left: 4px;
+    margin-right: 8px;
+  }
+
   &__name {
     color: var(--black-100);
     line-height: 1.5;
+
+    &--all {
+      color: var(--blue-base);
+    }
   }
 
   &__count {
