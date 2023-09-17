@@ -9,16 +9,21 @@
     </ul>
 </template>
 <script setup lang="ts">
-import {getProducts} from "~/api/ProductsApi";
+
+import {PropType} from "@vue/runtime-core";
+import {Product} from "~/definitions/interfaces/Products";
 
 const props = defineProps({
     isCompactedView: {
         type: Boolean,
         default: false,
     },
+    listProducts: {
+        type: Array as PropType<Product[]>,
+        default: () => [],
+    }
 })
 
-const listProducts = await getProducts();
 
 const classesList = computed(() => ({
     'catalog-list--is-compacted-view': props.isCompactedView,

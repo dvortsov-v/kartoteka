@@ -43,7 +43,7 @@
                         </div>
                         <CommonViewsSetting @change="changeViews" />
                     </div>
-                    <CatalogList :isCompactedView="isCompactedView" class="catalog-page-main__list" />
+                    <CatalogList :listProducts="listProducts" :isCompactedView="isCompactedView" class="catalog-page-main__list" />
                     <div class="catalog-page-main__navigation catalog-page-main-navigation">
                         <UiPagination countPage="5" class="catalog-page-main-navigation__pagination" />
                         <UiButton theme="transparent" class="catalog-page-main-navigation__more">
@@ -68,10 +68,10 @@
 <script setup lang="ts">
 import {ComputedRef} from "vue";
 import {getCategories} from "~/api/CategoriesApi";
-
+import {getProducts} from "~/api/ProductsApi";
 const categories = await getCategories();
 const views: Ref<string> = ref('rows');
-
+const listProducts = await getProducts();
 useHead({
     title: 'Каталог',
 });

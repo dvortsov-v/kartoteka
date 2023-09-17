@@ -6,14 +6,7 @@
     display: flex;
     flex: auto;
     overflow: hidden;
-  }
-
-  &__item {
-    //flex: 1 1 120px;
-
-    //&:nth-child(n + 2) {
-    //  margin-left: 16px;
-    //}
+    padding-right: 32px;
   }
 
   &__button {
@@ -41,12 +34,20 @@
     &[disabled] {
       display: none;
     }
+
+    @media (max-width: 1024px) {
+      display: none;
+    }
   }
 
   &__icon {
     width: 24px;
     height: 24px;
     fill: var(--black-100);
+  }
+
+  &__elem {
+    width: 100%;
   }
 }
 

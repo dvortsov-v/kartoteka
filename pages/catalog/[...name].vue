@@ -43,7 +43,7 @@
                         </div>
                         <CommonViewsSetting @change="changeViews" />
                     </div>
-                    <CatalogList :isCompactedView="isCompactedView" class="catalog-page-main__list" />
+                    <CatalogList :listProducts="listProducts" :isCompactedView="isCompactedView" class="catalog-page-main__list" />
                     <div class="catalog-page-main__navigation catalog-page-main-navigation">
                         <UiPagination countPage="5" class="catalog-page-main-navigation__pagination" />
                         <UiButton theme="transparent" class="catalog-page-main-navigation__more">
@@ -52,8 +52,8 @@
                                 class="catalog-page-main-navigation__icon"
                             />
                             <span class="catalog-page-main-navigation__text">
-                                            Показать ещё
-                                        </span>
+                                Показать ещё
+                            </span>
                         </UiButton>
                         <span class="catalog-page-main-navigation__show catalog-page-main-navigation-show">
                             <span class="catalog-page-main-navigation-show__text">Показано:</span>
@@ -67,8 +67,11 @@
 </template>
 <script setup lang="ts">
 import {getCategory} from "~/api/CategoriesApi";
+import {getProducts} from "~/api/ProductsApi";
+
 import {Category} from "~/definitions/interfaces/Categories";
 const category: Category | object  = await getCategory(1)
+const listProducts = await getProducts();
 
 const views: Ref<string> = ref('rows');
 

@@ -4,13 +4,26 @@
 
   &__news {
     margin-top: 32px;
+
+    @media (max-width: 1024px) {
+      margin-right: -32px;
+    }
   }
   &__banners {
     margin-top: 48px;
+
+    @media (max-width: 1024px) {
+      margin-left: -32px;
+      margin-right: -32px;
+    }
   }
 
   &__advantages {
     margin-top: 24px;
+
+    @media (max-width: 1024px) {
+      display: none;
+    }
   }
 
   &__recommendations {

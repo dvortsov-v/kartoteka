@@ -14,7 +14,7 @@
     line-height: 1.1;
     font-weight: 500;
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       font-size: 28px;
     }
   }
@@ -39,7 +39,7 @@
   &__schedule {
     margin-top: 16px;
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       margin-top: 0;
     }
   }
@@ -47,14 +47,14 @@
   &__socials {
     margin-top: 56px;
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       margin-top: 32px;
     }
   }
 
 
   &__certificate {
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       display: none;
     }
   }

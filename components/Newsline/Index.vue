@@ -47,6 +47,16 @@ const sliderOption = {
         nextEl: '.newsline__button--next',
         prevEl: '.newsline__button--prev',
     },
+    breakpoints: {
+        1025: {
+            slidesPerView: 9,
+            spaceBetween: 8,
+        },
+        320: {
+            slidesPerView: 5.5,
+            spaceBetween: 16,
+        }
+    },
 }
 const sliderModules = [SwiperNavigation];
 

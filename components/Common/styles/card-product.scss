@@ -25,6 +25,7 @@ $base: '.card-product';
   &__picture {
     width: 192px;
     height: 144px;
+    flex: none;
   }
 
   &__img {
@@ -44,6 +45,14 @@ $base: '.card-product';
     font-size: 21px;
     font-weight: 500;
     color: var(--black-100);
+
+    @media (max-width: 1024px) {
+      display: -webkit-box;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical
+    }
   }
 
   &__text {
@@ -62,6 +71,11 @@ $base: '.card-product';
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    flex: none;
+
+    @media (max-width: 1024px) {
+      margin-left: 28px;
+    }
   }
 
   &__price {
@@ -73,6 +87,10 @@ $base: '.card-product';
 
   &__status {
     margin-top: 12px;
+
+    @media (max-width: 1024px) {
+      max-width: 155px;
+    }
   }
 
   &__incorporate {
@@ -174,6 +192,12 @@ $base: '.card-product';
     width: 24px;
     height: 24px;
     fill: var(--black-100);
+
+
+    @media (max-width: 1024px) {
+      width: 16px;
+      height: 16px;
+    }
   }
 
   &__addition {
@@ -218,6 +242,10 @@ $base: '.card-product';
 .card-product-actions-addition {
   display: inline-flex;
 
+  @media (max-width: 1024px) {
+    flex-wrap: wrap;
+  }
+
   &__number,
   &__date,
   &__city {
@@ -242,6 +270,18 @@ $base: '.card-product';
     }
   }
 
+  &__city {
+    @media (max-width: 1024px) {
+      margin-left: 0;
+      flex-basis: 100%;
+    }
+    &::before {
+      @media (max-width: 1024px) {
+        content: none;
+      }
+    }
+  }
+
   #{$base}--is-compacted-view & {
     width: 100%;
     flex-wrap: wrap;
@@ -260,6 +300,11 @@ $base: '.card-product';
 .card-product-actions-button {
   padding-left: 20px;
   padding-right: 20px;
+
+  @media (max-width: 1024px) {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
 
   &__text {
     font-size: 16px;

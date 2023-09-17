@@ -6,10 +6,10 @@
             </h3>
             <ul class="main-page-recommendations__list">
                 <li v-for="item in 7" class="main-page-recommendations__item">
-                    <CommonCardProduct />
+                    <CommonCardProduct :item="item" />
                 </li>
             </ul>
-            <UiButton @click="navigateTo('/catalog')" theme="gray" class="main-page-recommendations__more">
+            <UiButton @click="navigateTo('/catalog')" theme="transparent" class="main-page-recommendations__more">
                 Все предложения
             </UiButton>
         </div>

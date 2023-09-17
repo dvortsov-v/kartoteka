@@ -38,7 +38,7 @@
     grid-template-columns: repeat(4, minmax(324px, 1fr));
     grid-gap: 16px;
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       grid-template-columns: repeat(2, 1fr);
     }
   }
@@ -55,7 +55,7 @@
   &__title {
     max-width: 528px;
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       max-width: 344px;
     }
   }
@@ -67,7 +67,7 @@
     color: var(--black-100);
     width: 50%;
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       max-width: 344px;
     }
   }

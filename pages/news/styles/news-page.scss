@@ -4,7 +4,7 @@
   &__wrapper {
     padding-top: 24px;
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       padding-top: 0;
     }
   }
@@ -18,7 +18,7 @@
     border: 1px solid var(--black-30);
     padding: 32px;
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       border: none;
       border-bottom: 1px solid var(--black-30);
       max-width: initial;
@@ -109,7 +109,7 @@
     grid-template-columns: repeat(5, minmax(190px, 1fr));
     grid-gap: 16px;
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       grid-template-columns: repeat(3, 1fr);
     }
   }

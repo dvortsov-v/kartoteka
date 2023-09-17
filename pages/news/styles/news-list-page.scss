@@ -22,7 +22,7 @@
     grid-template-columns: repeat(5, minmax(190px, 1fr));
     grid-gap: 16px;
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       grid-template-columns: repeat(3, 1fr);
     }
   }
@@ -30,7 +30,7 @@
   &__box {
     min-height: 384px;
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       min-height: 368px;
     }
   }
@@ -63,7 +63,7 @@
   }
 
   &__show {
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       display: none;
     }
   }

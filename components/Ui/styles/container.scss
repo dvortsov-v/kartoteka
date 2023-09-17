@@ -3,9 +3,14 @@
   margin-left: auto;
   margin-right: auto;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1344px) {
     max-width: initial;
     padding-left: 32px;
     padding-right: 32px;
   }
+  //@media (max-width: 1024px) {
+  //  max-width: initial;
+  //  padding-left: 32px;
+  //  padding-right: 32px;
+  //}
 }
