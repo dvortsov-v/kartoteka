@@ -18,6 +18,10 @@
   &__input {
     flex: auto;
 
+    @media (max-width: 670px) {
+      width: 10px;
+    }
+
     &::placeholder {
       color: var(--black-50);
       line-height: 1.5;
