@@ -14,11 +14,20 @@
     font-size: 44px;
     font-weight: 500;
     line-height: 1.1;
-    color: var(--black-100)
+    color: var(--black-100);
+
+    @media (max-width: 670px) {
+      font-size: 26px;
+      line-height: 1.23;
+    }
   }
 
   &__list {
     margin-top: 48px;
+
+    @media (max-width: 670px) {
+      margin-top: 24px;
+    }
   }
 
   &__item {
@@ -35,5 +44,9 @@
     padding: 16px;
     line-height: 1.5;
     font-weight: 500;
+
+    @media (max-width: 670px) {
+      margin-top: 16px;
+    }
   }
 }

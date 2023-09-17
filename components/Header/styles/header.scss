@@ -50,6 +50,11 @@
     justify-content: space-between;
     padding-bottom: 24px;
     border-bottom: 1px solid var(--black-30);
+
+    @media (max-width: 670px) {
+      border-bottom: none;
+      padding-bottom: 16px;
+    }
   }
 
   &__search {

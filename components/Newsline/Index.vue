@@ -52,8 +52,11 @@ const sliderOption = {
             slidesPerView: 9,
             spaceBetween: 8,
         },
-        320: {
+        414: {
             slidesPerView: 5.5,
+        },
+        320: {
+            slidesPerView: 2.5,
             spaceBetween: 16,
         }
     },

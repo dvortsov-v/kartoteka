@@ -2,11 +2,19 @@
   padding-top: 24px;
   padding-bottom: 93px;
 
+  @media (max-width: 670px) {
+    padding-top: 0;
+  }
+
   &__news {
     margin-top: 32px;
 
     @media (max-width: 1024px) {
       margin-right: -32px;
+    }
+    @media (max-width: 670px) {
+      margin-right: -16px;
+      margin-top: 24px;
     }
   }
   &__banners {
@@ -15,6 +23,11 @@
     @media (max-width: 1024px) {
       margin-left: -32px;
       margin-right: -32px;
+    }
+    @media (max-width: 670px) {
+      margin-left: 0;
+      margin-right: 0;
+      margin-top: 24px;
     }
   }
 
@@ -28,6 +41,10 @@
 
   &__recommendations {
     margin-top: 64px;
+
+    @media (max-width: 670px) {
+      margin-top: 24px;
+    }
   }
 }
 

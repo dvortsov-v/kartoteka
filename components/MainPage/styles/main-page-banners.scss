@@ -29,5 +29,15 @@
     display: flex;
     justify-content: center;
     z-index: 1;
+
+    @media (max-width: 670px) {
+      position: static;
+      margin-top: 8px;
+
+      --swiper-pagination-bullet-inactive-color: var(--black-100);
+      --swiper-pagination-color: var(--black-100);
+      --swiper-pagination-bullet-inactive-opacity: 0.2;
+      --swiper-pagination-bullet-horizontal-gap: 4px;
+    }
   }
 }

@@ -6,6 +6,13 @@ $base: '.card-product';
   border-radius: 20px;
   border: 1px solid var(--black-30);
 
+  @media (max-width: 670px) {
+    padding-top: 0;
+    padding-right: 0;
+    padding-left: 0;
+    border-radius: 24px;
+  }
+
   &__actions {
     margin-top: 16px;
   }
@@ -22,10 +29,23 @@ $base: '.card-product';
 .card-product-information {
   display: flex;
 
+  @media (max-width: 670px) {
+    flex-direction: column;
+  }
+
   &__picture {
     width: 192px;
     height: 144px;
     flex: none;
+    border-radius: 8px;
+    overflow: hidden;
+
+    @media (max-width: 670px) {
+      width: 100%;
+      height: auto;
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+    }
   }
 
   &__img {
@@ -38,6 +58,13 @@ $base: '.card-product';
 
   &__description {
     margin-left: 24px;
+
+    @media (max-width: 670px) {
+      margin-left: 0;
+      margin-top: 16px;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
   }
 
   &__title {
@@ -53,6 +80,10 @@ $base: '.card-product';
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical
     }
+    @media (max-width: 670px) {
+      font-size: 14px;
+      font-weight: 400;
+    }
   }
 
   &__text {
@@ -64,6 +95,10 @@ $base: '.card-product';
     max-width: 568px;
     color: var(--black-70);
     margin-top: 12px;
+
+    @media (max-width: 670px) {
+      display: none;
+    }
   }
 
   &__addition {
@@ -76,6 +111,13 @@ $base: '.card-product';
     @media (max-width: 1024px) {
       margin-left: 28px;
     }
+    @media (max-width: 670px) {
+      margin-left: 0;
+      margin-top: 8px;
+      align-items: flex-start;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
   }
 
   &__price {
@@ -83,6 +125,10 @@ $base: '.card-product';
     color: var(--black-100);
     font-size: 21px;
     font-weight: 600;
+
+    @media (max-width: 670px) {
+      text-align: left;
+    }
   }
 
   &__status {
@@ -90,6 +136,9 @@ $base: '.card-product';
 
     @media (max-width: 1024px) {
       max-width: 155px;
+    }
+    @media (max-width: 670px) {
+      display: none;
     }
   }
 
@@ -164,6 +213,10 @@ $base: '.card-product';
   flex-direction: column;
   color: var(--black-50);
 
+  @media (max-width: 670px) {
+    display: none;
+  }
+
   &__text {
     text-align: right;
     font-size: 12px;
@@ -182,6 +235,12 @@ $base: '.card-product';
 .card-product-actions {
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 670px) {
+    flex-direction: column;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 
   &__box {
     display: flex;
@@ -202,15 +261,31 @@ $base: '.card-product';
 
   &__addition {
     margin-left: 16px;
+    @media (max-width: 670px) {
+      margin-left: 0;
+    }
   }
 
   &__buttons {
     display: flex;
     margin-left: 10px;
+    @media (max-width: 670px) {
+      margin-left: 0;
+      margin-top: 16px;
+    }
   }
 
   &__buy {
     margin-left: 8px;
+    @media (max-width: 670px) {
+      flex: auto;
+    }
+  }
+
+  &__consultation {
+    @media (max-width: 670px) {
+      display: none;
+    }
   }
 
   #{$base}--is-compacted-view & {
@@ -305,10 +380,18 @@ $base: '.card-product';
     padding-left: 12px;
     padding-right: 12px;
   }
+  @media (max-width: 670px) {
+    padding: 8px;
+  }
 
   &__text {
     font-size: 16px;
     line-height: 1.33;
+
+    @media (max-width: 670px) {
+      font-size: 14px;
+      line-height: 1.42;
+    }
   }
 
   #{$base}--is-compacted-view & {
