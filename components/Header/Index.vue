@@ -49,7 +49,7 @@ const toogleIsShowCatalogMenu = () => {
 
     if(unref(isShowCatalogMenu) && bodyElem) {
         bodyElem.style.overflow = 'hidden';
-    } else if (unref(isShowCatalogMenu) && bodyElem) {
+    } else if (!unref(isShowCatalogMenu) && bodyElem) {
         bodyElem.style.overflow = 'visible';
     }
 }
