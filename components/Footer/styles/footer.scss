@@ -8,10 +8,19 @@
     padding-bottom: 48px;
     border-top: 1px solid var(--black-30);
     height: 100%;
+
+    @media (max-width: 670px) {
+      padding-top: 32px;
+      padding-bottom: 24px;
+    }
   }
 
   &__additional {
     max-width: 488px;
+
+    @media (max-width: 670px) {
+      max-width: initial;
+    }
   }
 
   &__information {
@@ -34,5 +43,8 @@
   &__right {
     display: flex;
     margin-left: 16px;
+    @media (max-width: 670px) {
+      display: none;
+    }
   }
 }
