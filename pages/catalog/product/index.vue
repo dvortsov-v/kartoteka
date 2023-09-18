@@ -115,7 +115,7 @@
                 </div>
                 <div class="product-page__base product-page-base">
                     <div class="product-page-base__info">
-                        <span class="product-page-base__price">{{ parcePrice(product?.price || '') }} ₽</span>
+                        <span class="product-page-base__price">10000000 ₽</span>
                         <ul class="product-page-base__statuses">
                             <li class="product-page-base__item">
                                 <div class="product-page-base__status product-page-status product-page-status--orange">
