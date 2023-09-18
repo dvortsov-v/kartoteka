@@ -1,0 +1,17 @@
+.header-logo {
+  &--desktop {
+    display: block;
+
+    @media (max-width: 670px) {
+      display: none;
+    }
+  }
+
+  &--mobile {
+    display: none;
+
+    @media (max-width: 670px) {
+      display: block;
+    }
+  }
+}

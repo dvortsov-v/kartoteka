@@ -15,9 +15,9 @@
     </div>
 </template>
 <script setup lang="ts">
-import {getCategories} from "~/api/CategoriesApi";
+import {getCategoriesRequest} from "~/api/CategoriesApi";
 
-const categories = await getCategories()
+const categories = await getCategoriesRequest()
 </script>
 
 <style scoped lang="scss">

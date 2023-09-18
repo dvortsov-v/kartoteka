@@ -8,9 +8,21 @@
   z-index: 100;
   min-height: 100vh;
 
+  @media (max-width: 670px) {
+    background-color: hsl(0, 0%, 100%);
+    //bottom: 0;
+    //min-height: auto;
+  }
+
   &__wrap {
     padding: 16px 128px;
     display: flex;
+
+    @media (max-width: 670px) {
+      padding: 0 16px;
+      flex-direction: column;
+      overflow: auto;
+    }
   }
 
   &__list {
@@ -20,6 +32,21 @@
     width: 392px;
     overflow: auto;
     max-height: 464px;
+
+    @media (max-width: 670px) {
+      width: 100%;
+      border-radius: 24px;
+      border: 1px solid var(--black-30);
+    }
+
+    &--top {
+      display: none;
+
+      @media (max-width: 670px) {
+        display: block;
+        margin-top: 16px;
+      }
+    }
   }
 
   &__category {
@@ -57,6 +84,10 @@
     width: 16px;
     height: 16px;
     fill: var(--black-100);
+
+    @media (max-width: 670px) {
+      display: none;
+    }
   }
 
   &:hover {
@@ -81,6 +112,12 @@
       }
     }
   }
+
+  &--top {
+    #{$self}__name {
+      font-weight: 400;
+    }
+  }
 }
 
 .modal-catalog-menu-subcategory {
@@ -90,6 +127,11 @@
   max-height: 464px;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 670px) {
+    display: none;
+  }
+
   &__item {
     width: 50%;
   }

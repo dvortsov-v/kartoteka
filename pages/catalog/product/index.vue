@@ -191,7 +191,7 @@
 <script lang="ts" setup>
 import {carImage} from "~/constants/carImage";
 import {productCharacteristic} from "~/constants/productCharacteristic";
-import {getProduct} from "~/api/ProductsApi";
+import {getProductRequest, getProductsRequest} from "~/api/ProductsApi";
 import {parcePrice} from "~/composable/parcePrice";
 import {Product} from "~/definitions/interfaces/Products";
 
@@ -218,7 +218,7 @@ const handleChoice = (value: number) => {
     activeTab.value = value;
 }
 
-const product: Product | object =  await getProduct(1);
+const product: Product | object =  await getProductRequest(1);
 
 // import {getNamePage} from "~/composable/getNamePage";
 //

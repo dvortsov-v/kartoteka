@@ -66,12 +66,12 @@
     </div>
 </template>
 <script setup lang="ts">
-import {getCategory} from "~/api/CategoriesApi";
-import {getProducts} from "~/api/ProductsApi";
+import {getCategoryRequest} from "~/api/CategoriesApi";
+import {getProductsRequest} from "~/api/ProductsApi";
 
 import {Category} from "~/definitions/interfaces/Categories";
-const category: Category | object  = await getCategory(1)
-const listProducts = await getProducts();
+const category: Category | object  = await getCategoryRequest(1)
+const listProducts = await getProductsRequest();
 
 const views: Ref<string> = ref('rows');
 

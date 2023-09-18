@@ -1,7 +1,7 @@
 import {useCustomFetch} from "~/composable/useCustomFetch";
 import {ResultRequesCategories, ResultRequestCategory, Category} from "~/definitions/interfaces/Categories";
 
-export const getCategories = async (): Promise<Category[]> => {
+export const getCategoriesRequest = async (): Promise<Category[]> => {
     const { data }: {data: Ref<ResultRequesCategories>} = await useCustomFetch(() => '/categories');
 
     if(unref(data)?.data) {
@@ -10,7 +10,7 @@ export const getCategories = async (): Promise<Category[]> => {
 
     return [];
 }
-export const getCategory = async (id: number): Promise<Category | object> => {
+export const getCategoryRequest = async (id: number): Promise<Category | object> => {
     const { data }: {data: Ref<ResultRequestCategory>} = await useCustomFetch(() => `/categories/${id}`);
 
     if(data?.value?.data) {

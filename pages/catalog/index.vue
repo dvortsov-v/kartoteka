@@ -67,11 +67,11 @@
 </template>
 <script setup lang="ts">
 import {ComputedRef} from "vue";
-import {getCategories} from "~/api/CategoriesApi";
-import {getProducts} from "~/api/ProductsApi";
-const categories = await getCategories();
+import {getCategoriesRequest} from "~/api/CategoriesApi";
+import {getProductsRequest} from "~/api/ProductsApi";
+const categories = await getCategoriesRequest();
 const views: Ref<string> = ref('rows');
-const listProducts = await getProducts();
+const listProducts = await getProductsRequest();
 useHead({
     title: 'Каталог',
 });

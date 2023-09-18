@@ -39,11 +39,11 @@
     </div>
 </template>
 <script setup lang="ts">
-import {getNews} from "~/api/NewsApi";
+import {getNewsRequest} from "~/api/NewsApi";
 import {News} from "~/definitions/interfaces/News";
 
 const route = useRoute();
-const news: News | object = await getNews(route.params.id);
+const news: News | object = await getNewsRequest(route.params.id);
 </script>
 
 <style scoped lang="scss">

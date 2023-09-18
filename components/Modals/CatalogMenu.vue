@@ -7,7 +7,7 @@
                     :key="`catalog-menu-category-${category.id}`"
                     class="modal-catalog-menu__item"
                 >
-                    <NuxtLink @mouseover="handleHoverCategory(category)" class="modal-catalog-menu__category modal-catalog-menu-category">
+                    <NuxtLink :to="`catalog/${category.name}`" @mouseover="handleHoverCategory(category)" class="modal-catalog-menu__category modal-catalog-menu-category">
                         <div class="modal-catalog-menu-category__wrap">
                             <span class="modal-catalog-menu-category__name">{{category.name}}</span>
                             <span class="modal-catalog-menu-category__count">{{category.count}}</span>
@@ -36,25 +36,40 @@
                     </li>
                 </ul>
             </div>
+            <ul class="modal-catalog-menu__list modal-catalog-menu__list--top">
+                <li
+                    v-for="menuItem in topMenu"
+                    :key="`catalog-menu-category-${menuItem.id}`"
+                    class="modal-catalog-menu__item"
+                >
+                    <NuxtLink :to="menuItem.link" class="modal-catalog-menu__category modal-catalog-menu-category modal-catalog-menu-category--top">
+                        <div class="modal-catalog-menu-category__wrap">
+                            <span class="modal-catalog-menu-category__name">{{menuItem.name}}</span>
+                        </div>
+                        <svg-icon name="chevron-right" class="modal-catalog-menu-category__arrow" />
+                    </NuxtLink>
+                </li>
+            </ul>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import {categories, Category} from "@/constants/categories";
+import {topMenu} from '@/constants/top-menu'
 
-const currentCategory: Ref<Category | never | undefined> = ref();
+const currentCategory: Ref<Category | null> = ref(null);
 const handleHoverCategory = (category: Category) => {
     if(category?.subcategories && category?.subcategories.length > 0) {
         currentCategory.value = category;
         return;
     }
 
-    currentCategory.value = undefined;
+    currentCategory.value = null;
 }
 
 onUnmounted(() => {
-    currentCategory.value = undefined;
+    currentCategory.value = null;
 })
 </script>
 
