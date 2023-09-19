@@ -12,6 +12,11 @@
     font-weight: 500;
     line-height: 1;
     letter-spacing: -0.64px;
+
+    @media (max-width: 600px) {
+      margin-top: 16px;
+      font-size: 36px;
+    }
   }
 
   &__list {
@@ -22,8 +27,19 @@
     grid-template-columns: repeat(5, minmax(190px, 1fr));
     grid-gap: 16px;
 
+    @media (max-width: 1200px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
     @media (max-width: 1024px) {
       grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 600px) {
+      margin-top: 16px;
+      padding-top: 16px;
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 360px) {
+      grid-template-columns: auto;
     }
   }
 
@@ -32,6 +48,14 @@
 
     @media (max-width: 1024px) {
       min-height: 368px;
+    }
+
+    @media (max-width: 670px) {
+      min-height: 272px;
+    }
+
+    @media (max-width: 360px) {
+      min-height: initial;
     }
   }
 
