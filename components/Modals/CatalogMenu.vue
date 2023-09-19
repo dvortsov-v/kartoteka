@@ -50,6 +50,11 @@
                     </NuxtLink>
                 </li>
             </ul>
+            <div class="modal-catalog-menu__footer">
+                <CommonPhone class="modal-catalog-menu__phone" />
+                <CommonAddress class="modal-catalog-menu__address" />
+                <CommonSocial class="modal-catalog-menu__socials" />
+            </div>
         </div>
     </div>
 </template>
@@ -59,6 +64,10 @@ import {categories, Category} from "@/constants/categories";
 import {topMenu} from '@/constants/top-menu'
 
 const currentCategory: Ref<Category | null> = ref(null);
+
+onUnmounted(() => {
+    currentCategory.value = null;
+})
 const handleHoverCategory = (category: Category) => {
     if(category?.subcategories && category?.subcategories.length > 0) {
         currentCategory.value = category;
@@ -67,10 +76,6 @@ const handleHoverCategory = (category: Category) => {
 
     currentCategory.value = null;
 }
-
-onUnmounted(() => {
-    currentCategory.value = null;
-})
 </script>
 
 <style scoped lang="scss">

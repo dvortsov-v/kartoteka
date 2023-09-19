@@ -3,7 +3,7 @@
         :class="classesList"
         class="catalog-list"
     >
-        <li v-for="product in listProducts" class="catalog-list__item">
+        <li v-for="product in 18" class="catalog-list__item">
             <CommonCardProduct :isCompactedView="isCompactedView" :product="product"/>
         </li>
     </ul>

@@ -1,0 +1,18 @@
+.address-info {
+    display: flex;
+    flex-direction: column;
+
+  &__text,
+  &__schedule {
+    color: var(--black-100);
+    line-height: 1.5;
+  }
+
+  &__schedule {
+    margin-top: 16px;
+
+    @media (max-width: 1024px) {
+      margin-top: 0;
+    }
+  }
+}

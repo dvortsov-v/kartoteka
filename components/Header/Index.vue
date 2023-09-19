@@ -1,5 +1,5 @@
 <template>
-    <header class="header">
+    <header ref="header" class="header">
         <div class="header__top header-top">
             <UiContainer class="header-top__wrapper">
                 <HeaderLogo class="header-main__logo header-main__logo--mobile" />
@@ -43,6 +43,7 @@
 </template>
 <script setup lang="ts">
 const isShowCatalogMenu = ref(false);
+const header = ref();
 const toogleIsShowCatalogMenu = () => {
     const bodyElem = document.querySelector('body');
     isShowCatalogMenu.value = !isShowCatalogMenu.value;
@@ -53,6 +54,20 @@ const toogleIsShowCatalogMenu = () => {
         bodyElem.style.overflow = 'visible';
     }
 }
+
+const setHeaderHeight = () => {
+    document.documentElement.style.setProperty('--header-height', `${unref(header).offsetHeight}px`);
+}
+
+onMounted(() => {
+    setHeaderHeight();
+
+    window.addEventListener('resize', setHeaderHeight);
+})
+
+onUnmounted(() => {
+    window.removeEventListener('resize', setHeaderHeight);
+})
 
 const iconCatalogButton = computed(() => unref(isShowCatalogMenu) ? 'cross' : 'menu');
 const classesIconCatalogButton = computed(() =>  ({'header-main-menu__icon--cross': unref(isShowCatalogMenu)}));

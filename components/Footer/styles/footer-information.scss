@@ -3,48 +3,8 @@
   flex-direction: column;
   justify-content: space-between;
 
-  &__phone {
-    display: flex;
-    flex-direction: column;
-  }
-
-  &__number {
-    color: var(--black-100);
-    font-size: 30px;
-    line-height: 1.1;
-    font-weight: 500;
-
-    @media (max-width: 1024px) {
-      font-size: 28px;
-    }
-    @media (max-width: 1024px) {
-      font-size: 24px;
-    }
-  }
-
-  &__note {
-    color: var(--black-60);
-    font-size: 12px;
-  }
-
   &__address {
-    display: flex;
-    flex-direction: column;
     margin-top: 32px;
-  }
-
-  &__text,
-  &__schedule {
-    color: var(--black-100);
-    line-height: 1.5;
-  }
-
-  &__schedule {
-    margin-top: 16px;
-
-    @media (max-width: 1024px) {
-      margin-top: 0;
-    }
   }
 
   &__socials {

@@ -1,5 +1,6 @@
 <template>
     <div class="news-page">
+        <pre>{{}}</pre>
         <UiContainer class="news-page__wrapper">
             <UiBreadcrumbs class="news-page__breadcrumbs" />
             <main class="news-page__main">
