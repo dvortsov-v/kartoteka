@@ -1,30 +1,33 @@
 <template>
     <div
-        v-if="product"
         :class="classesCardProduct"
         class="card-product"
     >
         <div class="card-product__information card-product-information">
             <picture class="card-product-information__picture">
+                <source
+                    srcset="/images/product.webp"
+                    type="image/webp"
+                >
                 <img
-                    :src="product.image"
-                    :alt="product.name"
+                    src="/images/product.jpg"
+                    alt="card-product"
                     class="card-product-information__img"
                 >
             </picture>
             <div class="card-product-information__description">
                 <h3 class="card-product-information__title">
-                    {{ product.name }}
+                    Доля участия ООО «Агрофирма Дрожжановская» в размере 33% от уставного капитала ООО «Дружба»
                 </h3>
                 <p
                     v-if="!isCompactedView"
                     class="card-product-information__text"
                 >
-                    {{ product.description }}
+                    Описание с характеристиками товара, которые заполняются при добавлении карточки. Максимальное описание в 2 строки.
                 </p>
             </div>
             <div class="card-product-information__addition">
-                <h3 class="card-product-information__price">{{ parcePrice(product.price) }} ₽</h3>
+                <h3 class="card-product-information__price">10 568 206 ₽</h3>
                 <div
                     v-if="!isCompactedView"
                     class="card-product-information__status card-product-status card-product-status--orange"
@@ -88,24 +91,15 @@
     </div>
 </template>
 <script setup lang="ts">
-import {PropType} from "@vue/runtime-core";
-import {Product} from "~/definitions/interfaces/Products";
-import {parcePrice} from "~/composable/parcePrice";
-
 const props = defineProps({
     isCompactedView: {
         type: Boolean,
         default: false,
     },
-    product: {
-        type: Object as PropType<Product>,
-        default: () => {},
-    }
 })
 const classesCardProduct = computed(() => ({
     'card-product--is-compacted-view': props.isCompactedView,
 }))
-
 </script>
 
 <style scoped lang="scss">

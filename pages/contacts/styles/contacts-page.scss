@@ -1,8 +1,17 @@
 .contacts-page {
   padding-bottom: 64px;
 
+
+  @media (max-width: 670px) {
+    padding-bottom: 32px;
+  }
+
   &__wrapper {
     padding-top: 24px;
+
+    @media (max-width: 670px) {
+      padding-top: 16px;
+    }
   }
 
   &__title {
@@ -12,12 +21,23 @@
     font-weight: 500;
     line-height: 1;
     letter-spacing: -0.64px;
+
+    @media (max-width: 670px) {
+      font-size: 36px;
+      letter-spacing: -0.36px;
+      margin-top: 16px;
+    }
   }
 
   &__main {
     margin-top: 24px;
     border-top: 1px solid var(--black-30);
     padding-top: 24px;
+
+    @media (max-width: 670px) {
+      margin-top: 16px;
+      padding-top: 16px;
+    }
   }
 
   &__section {
@@ -33,6 +53,10 @@
   &__head {
     display: flex;
     justify-content: space-between;
+
+    @media (max-width: 670px) {
+      flex-direction: column;
+    }
   }
 
   &__schedule {
@@ -44,6 +68,12 @@
     @media (max-width: 1024px) {
       max-width: 344px;
     }
+
+    @media (max-width: 670px) {
+      margin-left: 0;
+      margin-top: 24px;
+      max-width: initial;
+    }
   }
 
   &__departments {
@@ -54,6 +84,11 @@
 
     @media (max-width: 1024px) {
       grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 670px) {
+      margin-top: 24px;
+      grid-template-columns: auto;
     }
   }
 }
@@ -67,6 +102,11 @@
   @media (max-width: 1024px) {
     max-width: 344px;
   }
+  @media (max-width: 670px) {
+    font-size: 24px;
+    line-height: 1.16;
+    max-width: initial;
+  }
 }
 
 .contacts-page-information-department {
@@ -77,6 +117,11 @@
   justify-content: space-between;
   border-radius: 24px;
   border: 1px solid var(--black-30);
+
+  @media (max-width: 670px) {
+    padding: 20px;
+    min-height: 200px;
+  }
 
   &__title {
     color: var(--black-100);
@@ -115,6 +160,10 @@
       margin-top: 40px;
       width: 100%;
     }
+
+    @media (max-width: 670px) {
+      margin-top: 24px;
+    }
   }
 }
 
@@ -128,6 +177,13 @@
       @media (max-width: 1024px) {
         margin-top: 24px;
       }
+      @media (max-width: 670px) {
+        margin-top: 16px;
+      }
+    }
+
+    @media (max-width: 670px) {
+      flex-direction: column;
     }
   }
 
@@ -136,6 +192,15 @@
 
     &:nth-child(n + 2) {
       margin-left: 16px;
+
+      @media (max-width: 670px) {
+        margin-left: 0;
+        margin-top: 16px;
+      }
+    }
+
+    @media (max-width: 670px) {
+      width: auto;
     }
 
     &--textarea {
@@ -194,6 +259,10 @@
     &::placeholder {
       color: var(--black-50);
       line-height: 1.5;
+    }
+
+    @media (max-width: 670px) {
+      min-height: 152px;
     }
   }
 }
