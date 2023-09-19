@@ -1,8 +1,15 @@
 .faq-page {
   padding-bottom: 64px;
 
+  @media (max-width: 670px) {
+    padding-bottom: 32px;
+  }
   &__wrapper {
     padding-top: 24px;
+
+    @media (max-width: 670px) {
+      padding-top: 16px;
+    }
   }
 
   &__title {
@@ -12,12 +19,23 @@
     font-weight: 500;
     line-height: 1;
     letter-spacing: -0.64px;
+
+    @media (max-width: 670px) {
+      font-size: 36px;
+      letter-spacing: -0.36px;
+      margin-top: 16px;
+    }
   }
 
   &__main {
     margin-top: 24px;
     border-top: 1px solid var(--black-30);
     padding-top: 24px;
+
+    @media (max-width: 670px) {
+      margin-top: 16px;
+      padding-top: 16px;
+    }
   }
 
   &__articles {
@@ -29,6 +47,10 @@
     @media (max-width: 1024px) {
       margin-top: 24px;
       max-width: initial;
+    }
+
+    @media (max-width: 670px) {
+      margin-top: 16px;
     }
   }
 }
@@ -54,6 +76,7 @@
 }
 
 .faq-category {
+  $self: &;
   &__wrap {
     padding: 12px 16px;
     background-color: var(--black-10);
@@ -62,7 +85,7 @@
     &--active {
       background-color: var(--blue-base);
 
-      .faq-category__text {
+      #{$self}__text {
         color: var(--white);
       }
     }

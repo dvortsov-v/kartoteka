@@ -11,6 +11,7 @@
                 <section class="catalog-page-main__section">
                     <div class="catalog-page-main__maps"></div>
                     <div class="catalog-page-main__settings">
+                        <button @click="open">Открыть/Закрыть модалку</button>
                         <div class="catalog-page-main__sort catalog-page-main-sort">
                             <UiChoices
                                 v-for="sortItem in sortList"
@@ -69,6 +70,9 @@
 import {ComputedRef} from "vue";
 import {getCategoriesRequest} from "~/api/CategoriesApi";
 import {getProductsRequest} from "~/api/ProductsApi";
+import { useModal } from 'vue-final-modal'
+import {ModalsCatalogFilters} from "#components";
+
 const categories = await getCategoriesRequest();
 const views: Ref<string> = ref('rows');
 const listProducts = await getProductsRequest();
@@ -94,13 +98,14 @@ const sortList = [
         text: 'по дате добавления',
     },
 ]
-
+const {open} = useModal({
+    component: ModalsCatalogFilters,
+})
 const isCompactedView: ComputedRef<boolean> = computed(() => unref(views) === 'tiles');
 const classesSort = (isChecked: boolean) => ({
     'catalog-page-main-sort__wrap--active': isChecked,
     'catalog-page-main-sort__wrap--desc' : unref(sortDescending)
 })
-
 
 const resetSortDescending = (newValue: string) => {
     sortDescending.value = false;
