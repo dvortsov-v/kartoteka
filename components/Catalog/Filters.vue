@@ -74,8 +74,10 @@
             <h6 class="catalog-filters__title catalog-filters-title">Регион имущества</h6>
             <UiMultiSelect v-model="selectRegions" :options="options" multiple placeholder="Все" class="catalog-filters__selector"></UiMultiSelect>
         </div>
-        <UiButton type="submit" class="catalog-filters__more">Показать 1 453 товаров</UiButton>
-        <UiButtonLink type="reset" class="catalog-filters__more">Сбросить</UiButtonLink>
+        <div class="catalog-filters__bottom">
+            <UiButton type="submit" class="catalog-filters__more">Показать 1 453 товаров</UiButton>
+            <UiButtonLink type="reset" class="catalog-filters__more">Сбросить</UiButtonLink>
+        </div>
     </div>
 
 </template>

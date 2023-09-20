@@ -14,5 +14,9 @@
     color: var(--black-50);
     font-size: 21px;
     margin-left: 12px;
+
+    @media (max-width: 670px) {
+      display: none;
+    }
   }
 }

@@ -1,5 +1,9 @@
 .views-setting {
   display: flex;
+
+  @media (max-width: 670px) {
+    display: none;
+  }
 }
 
 .views-setting-views {

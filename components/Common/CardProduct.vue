@@ -78,6 +78,15 @@
                         Консультация
                     </span>
                 </UiButton>
+                
+                <UiButton
+                    v-if="!isCompactedView"
+                    theme="gray"
+                    class="card-product-actions__favorites card-product-actions__favorites--mob"
+                >
+                    <svg-icon name="star-line" class="card-product-actions__icon" />
+                </UiButton>
+
                 <UiButton @click="navigateTo('/catalog/product?')" class="card-product-actions__buy card-product-actions-button">
                     <span class="card-product-actions-button__text">
                         Хочу купить

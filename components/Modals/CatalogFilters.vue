@@ -15,5 +15,5 @@ const categoriesStore =  useCategoriesStore()
 </script>
 
 <style scoped lang="scss">
-//@import '@/components/Modals/styles/modal-catalog-menu.scss';
+@import '@/components/Modals/styles/modal-catalog-menu.scss';
 </style>
