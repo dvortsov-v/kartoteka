@@ -78,7 +78,7 @@
                         Консультация
                     </span>
                 </UiButton>
-                <UiButton @click="navigateTo('/catalog/product?')" class="card-product-actions__buy card-product-actions-button">
+                <UiButton @click="navigateTo('/catalog/product')" class="card-product-actions__buy card-product-actions-button">
                     <span class="card-product-actions-button__text">
                         Хочу купить
                     </span>

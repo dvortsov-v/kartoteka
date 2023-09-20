@@ -4,8 +4,8 @@
   &__wrapper {
     padding-top: 24px;
 
-    @media (max-width: 1024px) {
-      padding-top: 0;
+    @media (max-width: 670px) {
+      padding-top: 16px;
     }
   }
 
@@ -19,12 +19,15 @@
     padding: 32px;
 
     @media (max-width: 1024px) {
-      border: none;
-      border-bottom: 1px solid var(--black-30);
+      border-right: none;
+      border-left: none;
       max-width: initial;
       padding-left: 0;
       border-radius: 0;
       padding-right: 0;
+    }
+    @media (max-width: 670px) {
+      margin-top: 16px;
     }
   }
 
@@ -33,6 +36,10 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 16px;
+
+    @media (max-width: 670px) {
+      max-width: initial;
+    }
   }
 
   &__title {
@@ -40,6 +47,10 @@
     font-size: 44px;
     font-weight: 500;
     line-height: 1.09;
+
+    @media (max-width: 670px) {
+      font-size: 24px;
+    }
   }
 
   &__date {
@@ -55,6 +66,10 @@
     border-radius: 8px;
     overflow: hidden;
     margin-top: 32px;
+
+    @media (max-width: 670px) {
+      margin-top: 24px;
+    }
   }
 
   &__img {
@@ -67,10 +82,19 @@
     color: var(--black-100);
     font-size: 21px;
     margin-top: 32px;
+
+    @media (max-width: 670px) {
+      font-size: 18px;
+      margin-top: 24px;
+    }
   }
 
   &__other {
     margin-top: 64px;
+
+    @media (max-width: 670px) {
+      margin-top: 40px;
+    }
   }
 }
 
@@ -79,19 +103,37 @@
   align-items: center;
   justify-content: space-between;
 
+  @media (max-width: 670px) {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
   &__wrap {
     display: flex;
     align-items: center;
     margin-left: 16px;
+
+    @media (max-width: 670px) {
+      margin-left: 0;
+      margin-top: 24px;
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
 
   &__all {
     color: var(--blue-base);
-    line-height: 24px; /* 150% */
+    line-height: 1.5;
   }
 
   &__socials {
     margin-left: 8px;
+
+    @media (max-width: 670px) {
+      margin-left: 0;
+      margin-top: 8px;
+    }
   }
 }
 
@@ -101,6 +143,10 @@
     font-size: 28px;
     font-weight: 500;
     line-height: 1.14;
+
+    @media (max-width: 670px) {
+      font-size: 24px;
+    }
   }
 
   &__list {
@@ -111,6 +157,13 @@
 
     @media (max-width: 1024px) {
       grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 670px) {
+      margin-top: 16px;
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 414px) {
+      grid-template-columns: initial;
     }
   }
 }
