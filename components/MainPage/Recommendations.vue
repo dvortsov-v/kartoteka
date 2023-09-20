@@ -5,8 +5,8 @@
                 Рекомендуем
             </h3>
             <ul class="main-page-recommendations__list">
-                <li v-for="item in 7" class="main-page-recommendations__item">
-                    <CommonCardProduct :item="item" />
+                <li v-for="product in productsStore.products" class="main-page-recommendations__item">
+                    <CommonCardProduct :product="product" />
                 </li>
             </ul>
             <UiButton @click="navigateTo('/catalog')" theme="transparent" class="main-page-recommendations__more">
@@ -19,7 +19,12 @@
         ></div>
     </div>
 </template>
+<script lang="ts" setup>
+import {useProductsStore} from "~/store/useProductsStore";
 
+const productsStore = useProductsStore()
+productsStore.getProducts();
+</script>
 <style scoped lang="scss">
 @import "@/components/MainPage/styles/main-page-recommendations.scss";
 </style>

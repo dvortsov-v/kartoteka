@@ -24,7 +24,7 @@
                 </p>
             </div>
             <div class="card-product-information__addition">
-                <h3 class="card-product-information__price">{{ parcePrice(product.price) }} ₽</h3>
+                <h3 class="card-product-information__price">{{ parcePrice(product.price || '') }} ₽</h3>
                 <div
                     v-if="!isCompactedView"
                     class="card-product-information__status card-product-status card-product-status--orange"
@@ -78,7 +78,7 @@
                         Консультация
                     </span>
                 </UiButton>
-                <UiButton class="card-product-actions__buy card-product-actions-button">
+                <UiButton @click="navigateTo('/catalog/product?')" class="card-product-actions__buy card-product-actions-button">
                     <span class="card-product-actions-button__text">
                         Хочу купить
                     </span>

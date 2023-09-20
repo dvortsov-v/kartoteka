@@ -19,7 +19,6 @@
     </ul>
 </template>
 <script setup lang="ts">
-import {PropType} from "@vue/runtime-core";
 import {Category} from "~/definitions/interfaces/Categories";
 
 defineProps({

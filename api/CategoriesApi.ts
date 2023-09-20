@@ -1,17 +1,18 @@
-import {useCustomFetch} from "~/composable/useCustomFetch";
 import {ResultRequesCategories, ResultRequestCategory, Category} from "~/definitions/interfaces/Categories";
 
 export const getCategoriesRequest = async (): Promise<Category[]> => {
-    const { data }: {data: Ref<ResultRequesCategories>} = await useCustomFetch(() => '/categories');
+    const config = useRuntimeConfig()
+    const { data }: {data: Ref<ResultRequesCategories>} = await useFetch(`${config.public.baseURL}/categories`);
 
-    if(unref(data)?.data) {
-        return unref(data)?.data;
+    if(unref(data).data) {
+        return unref(data).data;
     }
 
     return [];
 }
 export const getCategoryRequest = async (id: number): Promise<Category | object> => {
-    const { data }: {data: Ref<ResultRequestCategory>} = await useCustomFetch(() => `/categories/${id}`);
+    const config = useRuntimeConfig()
+    const { data }: {data: Ref<ResultRequestCategory>} = await useFetch(() => `${config.public.baseURL}/categories/${id}`);
 
     if(data?.value?.data) {
         return data.value.data;

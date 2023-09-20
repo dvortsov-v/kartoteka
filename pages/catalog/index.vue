@@ -5,7 +5,7 @@
             <CatalogHead namePage="Каталог"  class="catalog-page__head" />
             <main class="catalog-page__main catalog-page-main">
                 <aside class="catalog-page-main__aside">
-                    <CatalogCategories :categories="categories" class="catalog-page-main__categories" />
+                    <CatalogCategories :categories="categoriesStore.categories" class="catalog-page-main__categories" />
                     <CatalogFilters class="catalog-page-main__filters" />
                 </aside>
                 <section class="catalog-page-main__section">
@@ -44,7 +44,7 @@
                         </div>
                         <CommonViewsSetting @change="changeViews" />
                     </div>
-                    <CatalogList :listProducts="listProducts" :isCompactedView="isCompactedView" class="catalog-page-main__list" />
+                    <CatalogList :listProducts="productsStore.products" :isCompactedView="isCompactedView" class="catalog-page-main__list" />
                     <div class="catalog-page-main__navigation catalog-page-main-navigation">
                         <UiPagination countPage="5" class="catalog-page-main-navigation__pagination" />
                         <UiButton theme="transparent" class="catalog-page-main-navigation__more">
@@ -68,14 +68,18 @@
 </template>
 <script setup lang="ts">
 import {ComputedRef} from "vue";
-import {getCategoriesRequest} from "~/api/CategoriesApi";
-import {getProductsRequest} from "~/api/ProductsApi";
 import { useModal } from 'vue-final-modal'
 import {ModalsCatalogFilters} from "#components";
+import {useCategoriesStore} from "~/store/useCategoriesStore";
+import {useProductsStore} from "~/store/useProductsStore";
 
-const categories = await getCategoriesRequest();
+const categoriesStore =  useCategoriesStore()
+const productsStore = useProductsStore();
+
+categoriesStore.getCategories();
+productsStore.getProducts();
+
 const views: Ref<string> = ref('rows');
-const listProducts = await getProductsRequest();
 useHead({
     title: 'Каталог',
 });

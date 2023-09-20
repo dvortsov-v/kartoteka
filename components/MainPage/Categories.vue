@@ -2,7 +2,7 @@
     <div class="main-page-categories">
         <ul class="main-page-categories__list">
             <li
-                v-for="category in categories"
+                v-for="category in categoriesStore.categories"
                 :key="`main-page-category-${category.id}`"
                 class="main-page-categories__item"
             >
@@ -15,9 +15,15 @@
     </div>
 </template>
 <script setup lang="ts">
-import {getCategoriesRequest} from "~/api/CategoriesApi";
+import {useCategoriesStore} from '~/store/useCategoriesStore';
+import {useProductsStore} from "~/store/useProductsStore";
 
-const categories = await getCategoriesRequest()
+const categoriesStore =  useCategoriesStore()
+
+categoriesStore.getCategories();
+
+const productsStore = useProductsStore()
+productsStore.getProducts();
 </script>
 
 <style scoped lang="scss">

@@ -1,8 +1,9 @@
-import {useCustomFetch} from "~/composable/useCustomFetch";
 import {Product, ResultRequesProducts, ResultRequestProduct} from "~/definitions/interfaces/Products";
 
 export const getProductsRequest = async (): Promise<Product[]> => {
-    const { data }: {data: Ref<ResultRequesProducts>} = await useCustomFetch(() => '/products');
+    const config = useRuntimeConfig()
+
+    const { data }: {data: Ref<ResultRequesProducts>} = await useFetch(`${config.public.baseURL}/products`);
 
     if(unref(data)?.data) {
         return unref(data)?.data;
@@ -11,7 +12,9 @@ export const getProductsRequest = async (): Promise<Product[]> => {
     return [];
 }
 export const getProductRequest = async (id: number): Promise<Product | object> => {
-    const { data }: {data: Ref<ResultRequestProduct>} = await useCustomFetch(() => `/products/${id}`);
+    const config = useRuntimeConfig()
+
+    const { data }: {data: Ref<ResultRequestProduct>} = await useFetch(`${config.public.baseURL}/products/${id}`);
 
     if(data?.value?.data) {
         return data.value.data;

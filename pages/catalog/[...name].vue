@@ -43,7 +43,7 @@
                         </div>
                         <CommonViewsSetting @change="changeViews" />
                     </div>
-                    <CatalogList :listProducts="listProducts" :isCompactedView="isCompactedView" class="catalog-page-main__list" />
+                    <CatalogList :listProducts="productsStore.products" :isCompactedView="isCompactedView" class="catalog-page-main__list" />
                     <div class="catalog-page-main__navigation catalog-page-main-navigation">
                         <UiPagination countPage="5" class="catalog-page-main-navigation__pagination" />
                         <UiButton theme="transparent" class="catalog-page-main-navigation__more">
@@ -67,11 +67,11 @@
 </template>
 <script setup lang="ts">
 import {getCategoryRequest} from "~/api/CategoriesApi";
-import {getProductsRequest} from "~/api/ProductsApi";
-
 import {Category} from "~/definitions/interfaces/Categories";
+import {useProductsStore} from "~/store/useProductsStore";
 const category: Category | object  = await getCategoryRequest(1)
-const listProducts = await getProductsRequest();
+const productsStore = useProductsStore()
+productsStore.getProducts();
 
 const views: Ref<string> = ref('rows');
 
@@ -97,7 +97,6 @@ const classesSort = (isChecked: boolean) => ({
     'catalog-page-main-sort__wrap--active': isChecked,
     'catalog-page-main-sort__wrap--desc' : unref(sortDescending)
 })
-
 
 const resetSortDescending = (newValue: string) => {
     sortDescending.value = false;

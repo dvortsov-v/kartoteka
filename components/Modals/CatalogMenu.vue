@@ -3,11 +3,11 @@
         <div class="modal-catalog-menu__wrap">
             <ul class="modal-catalog-menu__list">
                 <li
-                    v-for="category in categories"
+                    v-for="category in categoriesStore.categories"
                     :key="`catalog-menu-category-${category.id}`"
                     class="modal-catalog-menu__item"
                 >
-                    <NuxtLink :to="`catalog/${category.name}`" @mouseover="handleHoverCategory(category)" class="modal-catalog-menu__category modal-catalog-menu-category">
+                    <NuxtLink :to="`/catalog/${category.name}`" @mouseover="handleHoverCategory(category)" class="modal-catalog-menu__category modal-catalog-menu-category">
                         <div class="modal-catalog-menu-category__wrap">
                             <span class="modal-catalog-menu-category__name">{{category.name}}</span>
                             <span class="modal-catalog-menu-category__count">{{category.count}}</span>
@@ -16,17 +16,17 @@
                     </NuxtLink>
                 </li>
             </ul>
-            <div v-if="currentCategory?.subcategories.length > 0" class="modal-catalog-menu__subcategory modal-catalog-menu-subcategory">
+            <div v-if="currentCategory?.sub_categories.length > 0" class="modal-catalog-menu__subcategory modal-catalog-menu-subcategory">
                 <div class="modal-catalog-menu-subcategory__head">
                     <h4 class="modal-catalog-menu-subcategory__title">{{ currentCategory.name }}</h4>
                 </div>
                 <ul class="modal-catalog-menu-subcategory__list">
                     <li
-                        v-for="subcategories in currentCategory?.subcategories"
+                        v-for="subcategories in currentCategory?.sub_categories"
                         :key="`catalog-menu-subcategory-${subcategories.id}`"
                         class="modal-catalog-menu-subcategory__item"
                     >
-                        <NuxtLink class="modal-catalog-menu-subcategory__category modal-catalog-menu-category modal-catalog-menu-category--sub">
+                        <NuxtLink :to="`/catalog/${subcategories.name}`" class="modal-catalog-menu-subcategory__category modal-catalog-menu-category modal-catalog-menu-category--sub">
                             <div class="modal-catalog-menu-category__wrap">
                                 <span class="modal-catalog-menu-category__name">{{subcategories.name}}</span>
                                 <span class="modal-catalog-menu-category__count">{{subcategories.count}}</span>
@@ -60,8 +60,12 @@
 </template>
 
 <script setup lang="ts">
-import {categories, Category} from "@/constants/categories";
+import {Category} from "~/definitions/interfaces/Categories";
 import {topMenu} from '@/constants/top-menu'
+import {useCategoriesStore} from "~/store/useCategoriesStore";
+const categoriesStore =  useCategoriesStore()
+
+categoriesStore.getCategories()
 
 const currentCategory: Ref<Category | null> = ref(null);
 
@@ -69,7 +73,7 @@ onUnmounted(() => {
     currentCategory.value = null;
 })
 const handleHoverCategory = (category: Category) => {
-    if(category?.subcategories && category?.subcategories.length > 0) {
+    if(category?.sub_categories && category?.sub_categories.length > 0) {
         currentCategory.value = category;
         return;
     }

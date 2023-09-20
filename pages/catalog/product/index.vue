@@ -115,7 +115,7 @@
                 </div>
                 <div class="product-page__base product-page-base">
                     <div class="product-page-base__info">
-                        <span class="product-page-base__price">10000000 ₽</span>
+                        <span class="product-page-base__price">{{ parcePrice(product?.price || '') }} ₽</span>
                         <ul class="product-page-base__statuses">
                             <li class="product-page-base__item">
                                 <div class="product-page-base__status product-page-status product-page-status--orange">
@@ -180,7 +180,7 @@
             <div class="product-page__aside">
                 <h3 class="product-page__title">Похожие предложения</h3>
                 <div class="product-page__wrap">
-                    <CatalogList class="catalog-page-main__list" />
+                    <CatalogList :listProducts="productsStore.products"  class="catalog-page-main__list" />
                     <div class="product-page__advertising"></div>
                 </div>
             </div>
@@ -191,9 +191,10 @@
 <script lang="ts" setup>
 import {carImage} from "~/constants/carImage";
 import {productCharacteristic} from "~/constants/productCharacteristic";
-import {getProductRequest, getProductsRequest} from "~/api/ProductsApi";
+import {getProductRequest} from "~/api/ProductsApi";
 import {parcePrice} from "~/composable/parcePrice";
 import {Product} from "~/definitions/interfaces/Products";
+import {useProductsStore} from "~/store/useProductsStore";
 
 const sliderOption = {
     loop: true,
@@ -207,7 +208,8 @@ const sliderOption = {
     spaceBetween: 8,
 }
 const sliderModules = [];
-
+const productsStore = useProductsStore();
+productsStore.getProducts();
 
 const activeTab: Ref<number> = ref(1);
 
@@ -219,17 +221,6 @@ const handleChoice = (value: number) => {
 }
 
 const product: Product | object =  await getProductRequest(1);
-
-// import {getNamePage} from "~/composable/getNamePage";
-//
-// useHead({
-//     title: getNamePage,
-// });
-//
-// definePageMeta({
-//     key: route => route.fullPath,
-//     name: getNamePage,
-// })
 
 </script>
 

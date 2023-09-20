@@ -1,15 +1,17 @@
 <template>
     <VueFinalModal>
         <div class="modal-catalog-menu">
-            <CatalogCategories :categories="categories" class="catalog-page-main__categories" />
+            <CatalogCategories :categories="categoriesStore.categories" class="catalog-page-main__categories" />
             <CatalogFilters class="catalog-page-main__filters" />
         </div>
     </VueFinalModal>
 </template>
 
 <script setup lang="ts">
-import {categories} from "@/constants/categories";
 import { VueFinalModal } from 'vue-final-modal'
+import {useCategoriesStore} from "~/store/useCategoriesStore";
+const categoriesStore =  useCategoriesStore()
+
 </script>
 
 <style scoped lang="scss">
