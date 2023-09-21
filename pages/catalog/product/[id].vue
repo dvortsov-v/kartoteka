@@ -30,13 +30,9 @@
                             class="product-page-slider__slide"
                         >
                             <picture class="product-page-slider__picture">
-                                <source
-                                    :srcset="`/images/${image.img}.webp`"
-                                    type="image/webp"
-                                >
                                 <img
-                                    :src="`/images/${image.img}.jpg`"
-                                    :alt="image.img"
+                                    :src="product.image"
+                                    :alt="product.name"
                                     class="product-page-slider__img"
                                 >
                             </picture>
@@ -219,9 +215,9 @@ const classesTabs = (isChecked: boolean) => ({
 const handleChoice = (value: number) => {
     activeTab.value = value;
 }
+const route = useRoute();
 
-const product: Product | object =  await getProductRequest(1);
-
+const product: Product | object =  await getProductRequest(route.params.id);
 </script>
 
 <style scoped lang="scss">

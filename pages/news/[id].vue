@@ -29,8 +29,8 @@
             <div class="news-page__other news-other">
                 <h3 class="news-other__title">Другие новости</h3>
                 <ul class="news-other__list">
-                    <li v-for="item in 5" class="news-other__item">
-                        <NewsItem class="news-other__box" />
+                    <li v-for="newsItem in filteredNews" class="news-other__item">
+                        <NewsItem class="news-other__box" :news="newsItem"/>
                     </li>
                 </ul>
             </div>
@@ -38,11 +38,12 @@
     </div>
 </template>
 <script setup lang="ts">
-import {getNewsRequest} from "~/api/NewsApi";
+import {getNewsListFilterRequest, getNewsRequest} from "~/api/NewsApi";
 import {News} from "~/definitions/interfaces/News";
 
 const route = useRoute();
 const news: News | object = await getNewsRequest(route.params.id);
+const filteredNews: News | object = await getNewsListFilterRequest(2);
 </script>
 
 <style scoped lang="scss">
