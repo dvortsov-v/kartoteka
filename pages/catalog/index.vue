@@ -50,6 +50,16 @@
                                     </div>
                                 </template>
                             </UiChoices>
+                            <UiButton
+                                theme="transparent"
+                                @click="openSort"
+                                class="catalog-page-main-sort__open"
+                            >
+                                <svg-icon name="filter" class="catalog-page-main__filter-svg"/>
+                                <span class="ui-pagination__text">
+                                    Фильтр
+                                </span>
+                            </UiButton>    
                         </div>
                         <CommonViewsSetting @change="changeViews" />
                     </div>
@@ -78,7 +88,7 @@
 <script setup lang="ts">
 import {ComputedRef} from "vue";
 import { useModal } from 'vue-final-modal'
-import {ModalsCatalogFilters} from "#components";
+import {ModalsCatalogFilters, ModalsCatalogSort} from "#components";
 import {useCategoriesStore} from "~/store/useCategoriesStore";
 import {useProductsStore} from "~/store/useProductsStore";
 
@@ -111,8 +121,21 @@ const sortList = [
         text: 'по дате добавления',
     },
 ]
-const {open} = useModal({
+const {open, close} = useModal({
     component: ModalsCatalogFilters,
+    attrs: {
+        onClose() {
+            close()
+        },
+    },
+})
+const {open:openSort, close:closeSort} = useModal({
+    component: ModalsCatalogSort,
+    attrs: {
+        onClose() {
+            closeSort()
+        },
+    },
 })
 const isCompactedView: ComputedRef<boolean> = computed(() => unref(views) === 'tiles');
 const classesSort = (isChecked: boolean) => ({

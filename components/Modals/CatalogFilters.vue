@@ -1,7 +1,7 @@
 <template>
     <VueFinalModal>
         <div class="modal-catalog-menu">
-            
+            <button @click="emit('close')">x</button>
             <CatalogCategories :categories="categoriesStore.categories" class="catalog-page-main__categories" />
             <CatalogFilters class="catalog-page-main__filters" />
         </div>
@@ -13,6 +13,9 @@ import { VueFinalModal } from 'vue-final-modal'
 import {useCategoriesStore} from "~/store/useCategoriesStore";
 const categoriesStore =  useCategoriesStore()
 
+const emit = defineEmits<{
+    (e: 'close'): void
+}>();
 </script>
 
 <style scoped lang="scss">
