@@ -29,7 +29,6 @@ export const getNewsListFilterRequest = async (numberTitle: number): Promise<New
 }
 export const getNewsRequest = async (id: string | string[]): Promise<News | object> => {
     const config = useRuntimeConfig()
-    console.log(123)
 
     const { data }: {data: Ref<ResultRequestNews>} = await useFetch(`${config.public.baseURL}/news/${id}`);
 

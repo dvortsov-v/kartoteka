@@ -9,7 +9,7 @@
                 </li>
             </ul>
             <div class="news-list-page__navigation news-list-page-navigation">
-                <UiPagination countPage="5" class="news-list-page-navigation__pagination" />
+                <UiPagination :currentPage="currentPage" :countPage="totalPages" class="news-list-page-navigation__pagination" />
                 <UiButton theme="transparent" class="news-list-page-navigation__more">
                     <svg-icon
                         name="adding"
@@ -37,7 +37,9 @@ definePageMeta({
     name: 'Новости',
 });
 
-const newsList = await getNewsListRequest()
+const newsList = await getNewsListRequest();
+const currentPage = ref(1);
+const totalPages = ref(10);
 
 </script>
 

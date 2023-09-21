@@ -1,4 +1,5 @@
 .ui-pagination {
+  $self: &;
   display: flex;
   align-items: center;
 
@@ -21,6 +22,14 @@
       height: auto;
       min-width: auto;
       border-radius: 50%;
+    }
+
+    &--active {
+      background-color: var(--blue-base);
+
+      #{$self}__text {
+        color: var(--white);
+      }
     }
   }
 
