@@ -105,8 +105,13 @@ const sortList = [
         text: 'по дате добавления',
     },
 ]
-const {open} = useModal({
+const {open, close} = useModal({
     component: ModalsCatalogFilters,
+    attrs: {
+        onClose() {
+            close()
+        },
+    },
 })
 const isCompactedView: ComputedRef<boolean> = computed(() => unref(views) === 'tiles');
 const classesSort = (isChecked: boolean) => ({
