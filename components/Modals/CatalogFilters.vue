@@ -1,6 +1,7 @@
 <template>
     <VueFinalModal>
         <div class="modal-catalog-menu">
+            
             <CatalogCategories :categories="categoriesStore.categories" class="catalog-page-main__categories" />
             <CatalogFilters class="catalog-page-main__filters" />
         </div>

@@ -11,10 +11,16 @@
                 <section class="catalog-page-main__section">
                     <div class="catalog-page-main__maps"></div>
                     <div class="catalog-page-main__settings">
-                        <button @click="open" class="catalog-page-main__filter-open">
+                        <UiButton
+                            theme="transparent"
+                            @click="open"
+                            class="catalog-page-main__filter-open"
+                        >
                             <svg-icon name="filter" class="catalog-page-main__filter-svg"/>
-                            Фильтр
-                        </button>
+                            <span class="ui-pagination__text">
+                                Фильтр
+                            </span>
+                        </UiButton>
                         <div class="catalog-page-main__sort catalog-page-main-sort">
                             <UiChoices
                                 v-for="sortItem in sortList"
