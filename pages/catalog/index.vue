@@ -72,7 +72,7 @@
 <script setup lang="ts">
 import {ComputedRef} from "vue";
 import { useModal } from 'vue-final-modal'
-import {ModalsCatalogFilters} from "#components";
+import {ModalsCatalogFilters, ModalsCatalogSort} from "#components";
 import {useCategoriesStore} from "~/store/useCategoriesStore";
 import {useProductsStore} from "~/store/useProductsStore";
 
@@ -110,6 +110,14 @@ const {open, close} = useModal({
     attrs: {
         onClose() {
             close()
+        },
+    },
+})
+const {open: openSortModal, close: closeSortModal} = useModal({
+    component: ModalsCatalogSort,
+    attrs: {
+        onClose() {
+            closeSortModal()
         },
     },
 })
