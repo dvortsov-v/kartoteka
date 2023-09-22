@@ -191,3 +191,30 @@
     width: 100%;
   }
 }
+
+.catalog-page-main__filters {
+  &-name {
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 24px;
+  }
+  &-top {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0 32px;
+  }
+  &-close {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.catalog-filters-fields {
+  display: flex;
+
+  &__field:last-child {
+    border-top: none;
+    border-left: 1px solid var(--black-30);
+    padding-left: 8px;
+  }
+}

@@ -57,16 +57,35 @@
   border: 1px solid var(--black-30);
   border-radius: 8px;
 
+  @media (max-width: 1024px) {
+    display: flex;
+  }
+
   &__field {
+    flex-shrink: 0;
     padding-top: 12px;
     padding-bottom: 12px;
 
     &:nth-child(n + 2) {
       border-top: 1px solid var(--black-30);
     }
+    
+    @media (max-width: 1024px) {
+      max-width: 50%;
+      width: 50%;
+      padding-left: 6px;
+      padding-right: 6px;
+
+      &:last-child {
+        border-top: none;
+        border-left: 1px solid var(--black-30);
+      }
+    }
   }
 
   &__input {
+    max-width: 100%;
+    width: 100%;
     font-size: 12px;
   }
 }

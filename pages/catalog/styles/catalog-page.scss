@@ -99,7 +99,7 @@
     width: 24px;
     height: 24px;
   }
-}
+} 
 
 .catalog-page-main-sort {
   $self: &;
@@ -112,11 +112,6 @@
 
     @media (max-width: 1024px) {
       display: none;
-
-      &.ui-choices--checked {
-        display: flex;
-        margin-left: 0;
-      }
     }
 
   }
@@ -142,7 +137,6 @@
     text-align: center;
     color: var(--color-sort);
   }
-
 
   &__icon {
     width: 16px;

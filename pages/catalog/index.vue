@@ -52,12 +52,11 @@
                             </UiChoices>
                             <UiButton
                                 theme="transparent"
-                                @click="openSort"
+                                @click="openSortModal"
                                 class="catalog-page-main-sort__open"
                             >
-                                <svg-icon name="filter" class="catalog-page-main__filter-svg"/>
                                 <span class="ui-pagination__text">
-                                    Фильтр
+                                    по цене
                                 </span>
                             </UiButton>    
                         </div>
@@ -129,11 +128,14 @@ const {open, close} = useModal({
         },
     },
 })
-const {open:openSort, close:closeSort} = useModal({
+const {open: openSortModal, close: closeSortModal} = useModal({
     component: ModalsCatalogSort,
     attrs: {
         onClose() {
-            closeSort()
+            closeSortModal()
+        },
+        updateSort(value) {
+            typeSorting.value = value;
         },
     },
 })

@@ -1,7 +1,12 @@
 <template>
     <VueFinalModal>
         <div class="modal-catalog-menu">
-            <button @click="emit('close')">x</button>
+            <div class="catalog-page-main__filters-top">
+                <span class="catalog-page-main__filters-name">Фильтр</span>
+                <button @click="emit('close')" class="catalog-page-main__filters-close">
+                    <svg-icon name="close"/>
+                </button>
+            </div>
             <CatalogCategories :categories="categoriesStore.categories" class="catalog-page-main__categories" />
             <CatalogFilters class="catalog-page-main__filters" />
         </div>
@@ -12,10 +17,7 @@
 import { VueFinalModal } from 'vue-final-modal'
 import {useCategoriesStore} from "~/store/useCategoriesStore";
 const categoriesStore =  useCategoriesStore()
-
-const emit = defineEmits<{
-    (e: 'close'): void
-}>();
+const emit = defineEmits(['close'])
 </script>
 
 <style scoped lang="scss">
