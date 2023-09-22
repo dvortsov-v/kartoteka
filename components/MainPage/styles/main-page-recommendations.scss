@@ -11,15 +11,7 @@
   }
 
   &__title {
-    font-size: 44px;
-    font-weight: 500;
-    line-height: 1.1;
     color: var(--black-100);
-
-    @media (max-width: 670px) {
-      font-size: 26px;
-      line-height: 1.23;
-    }
   }
 
   &__list {

@@ -2,7 +2,7 @@
     <div class="contacts-page">
         <UiContainer class="contacts-page__wrapper">
             <UiBreadcrumbs class="contacts-page__breadcrumbs"/>
-            <h1 class="contacts-page__title">Контакты</h1>
+            <h1 class="contacts-page__title h1">Контакты</h1>
             <main class="contacts-page__main">
                 <section class="contacts-page__section contacts-page-information">
                     <div class="contacts-page-information__head">

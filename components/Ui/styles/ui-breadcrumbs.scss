@@ -1,4 +1,11 @@
 .ui-breadcrumbs {
+  border-top: 1px solid var(--black-30);
+  padding-top: 24px;
+
+  @media (max-width: 670px) {
+    padding-top: 16px;
+  }
+
   &__list {
     display: flex;
     align-items: center;

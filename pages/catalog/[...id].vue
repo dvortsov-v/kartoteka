@@ -69,7 +69,8 @@
 import {getCategoryRequest} from "~/api/CategoriesApi";
 import {Category} from "~/definitions/interfaces/Categories";
 import {useProductsStore} from "~/store/useProductsStore";
-const category: Category | object  = await getCategoryRequest(1)
+const route = useRoute();
+const category: Category | object  = await getCategoryRequest(route.params.id);
 const productsStore = useProductsStore()
 productsStore.getProducts();
 

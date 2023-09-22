@@ -3,7 +3,7 @@
         <UiContainer class="news-page__wrapper">
             <UiBreadcrumbs class="news-page__breadcrumbs" />
             <main class="news-page__main">
-                <h1 v-if="news.title" class="news-page__title">{{ news.title }}</h1>
+                <h1 v-if="news.title" class="news-page__title h3">{{ news.title }}</h1>
                 <p class="news-page__date">20.03.2022, 12:32</p>
                 <picture v-if="news.image" class="news-page__picture">
                     <img
