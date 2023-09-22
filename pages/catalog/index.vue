@@ -56,9 +56,9 @@
                                 class="catalog-page-main-sort__open"
                             >
                                 <span class="ui-pagination__text">
-                                    по цене
+                                    {{ findSelectTypeSorting }}
                                 </span>
-                            </UiButton>    
+                            </UiButton>
                         </div>
                         <CommonViewsSetting @change="changeViews" />
                     </div>
@@ -90,6 +90,7 @@ import { useModal } from 'vue-final-modal'
 import {ModalsCatalogFilters, ModalsCatalogSort} from "#components";
 import {useCategoriesStore} from "~/store/useCategoriesStore";
 import {useProductsStore} from "~/store/useProductsStore";
+import {typesSortInModal} from "~/constants/typesSortInModal";
 
 const categoriesStore = useCategoriesStore();
 const productsStore = useProductsStore();
@@ -106,6 +107,7 @@ definePageMeta({
 });
 const typeSorting: Ref<string> = ref('price');
 const sortDescending: Ref<boolean> = ref(false);
+const textSortType = ref(typesSortInModal[0].value);
 const sortList = [
     {
         value: 'popular',
@@ -120,6 +122,7 @@ const sortList = [
         text: 'по дате добавления',
     },
 ]
+
 const {open, close} = useModal({
     component: ModalsCatalogFilters,
     attrs: {
@@ -134,9 +137,10 @@ const {open: openSortModal, close: closeSortModal} = useModal({
         onClose() {
             closeSortModal()
         },
-        updateSort(value) {
-            typeSorting.value = value;
+        onUpdateSort(value: string) {
+            toogleTextSortType(value);
         },
+
     },
 })
 const isCompactedView: ComputedRef<boolean> = computed(() => unref(views) === 'tiles');
@@ -151,9 +155,18 @@ const resetSortDescending = (newValue: string) => {
 const toogleSortDescending = () => {
     sortDescending.value = !sortDescending.value;
 }
+const toogleTextSortType = (newValue: string) => {
+    console.log(123);
+    textSortType.value = newValue;
+}
 const changeViews = (value: string) => {
     views.value = value
 }
+
+const findSelectTypeSorting = computed(() => {
+    console.log(textSortType.value)
+    return typesSortInModal.find(itemSort => itemSort.value === unref(textSortType))?.text
+});
 
 </script>
 

@@ -8,7 +8,7 @@
                 </button>
             </div>
             <UiChoices
-                v-for="sortItem in sortList"
+                v-for="sortItem in typesSortInModal"
                 :key="`catalog-page-sort-${sortItem.value}`"
                 v-model:checked="typeSorting"
                 @update:checked="resetSortDescending"
@@ -22,10 +22,7 @@
                         :class="classesSort(isChecked)"
                         class="catalog-page-main-sort__filters-wrap"
                     >
-                    <span
-                        @click="toogleSortDescending"
-                        class="catalog-page-main-sort__filters-text"
-                    >
+                    <span class="catalog-page-main-sort__filters-text">
                         {{ sortItem.text }}
                     </span>
                     </div>
@@ -38,52 +35,28 @@
 <script setup lang="ts">
 import { VueFinalModal } from 'vue-final-modal'
 import {useCategoriesStore} from "~/store/useCategoriesStore";
+import {typesSortInModal} from "~/constants/typesSortInModal";
 const categoriesStore =  useCategoriesStore()
+const props = defineProps({
+    typeSorting: {
+        type: String,
+        default: 'price',
+    }
+})
+const emit = defineEmits(['updateSort', 'close']);
 
-const emit = defineEmits<{
-    (e: 'close'): void
-}>();
-
-const typeSorting: Ref<string> = ref('price');
-const sortDescending: Ref<boolean> = ref(false);
-const sortList = [
-    {
-        value: 'min-popular',
-        text: 'по популярности (мин)',
-    },
-    {
-        value: 'max-popular',
-        text: 'по популярности (макс)',
-    },
-    {
-        value: 'min-price',
-        text: 'по цене (мин)',
-    },
-    {
-        value: 'max-price',
-        text: 'по цене (макс)',
-    },
-    {
-        value: 'min-date',
-        text: 'по дате добавления (мин)',
-    },
-    {
-        value: 'max-date',
-        text: 'по дате добавления (макс)',
-    },
-]
+const typeSorting: Ref<string> = ref('');
 
 const classesSort = (isChecked: boolean) => ({
     'catalog-page-main-sort__wrap--active': isChecked,
-    'catalog-page-main-sort__wrap--desc' : unref(sortDescending)
 })
-const toogleSortDescending = () => {
-    sortDescending.value = !sortDescending.value;
-}
 const resetSortDescending = (newValue: string) => {
-    sortDescending.value = false;
     typeSorting.value = newValue
 }
+
+watch(typeSorting, (val: string) => {
+    emit('updateSort', val);
+})
 </script>
 
 <style scoped lang="scss">
