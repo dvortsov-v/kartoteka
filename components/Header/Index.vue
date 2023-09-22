@@ -29,6 +29,7 @@
                         <svg-icon name="adding" class="header-main-adding__icon" />
                     </UiButton>
                     <UiButton
+                        @click="openModalsAuthorization"
                         theme="primary-transparent"
                         class="header-main__auth header-main-auth"
                     >
@@ -42,6 +43,9 @@
     </header>
 </template>
 <script setup lang="ts">
+import {useModal} from "vue-final-modal";
+import {ModalsAuthorization} from "#components";
+
 const isShowCatalogMenu = ref(false);
 const header = ref();
 const toogleIsShowCatalogMenu = () => {
@@ -54,6 +58,16 @@ const toogleIsShowCatalogMenu = () => {
         bodyElem.style.overflow = 'visible';
     }
 }
+
+
+const {open: openModalsAuthorization, close: closeModalsAuthorization} = useModal({
+    component: ModalsAuthorization,
+    attrs: {
+        onClose() {
+            closeModalsAuthorization()
+        },
+    },
+})
 
 const setHeaderHeight = () => {
     document.documentElement.style.setProperty('--header-height', `${unref(header).offsetHeight}px`);
