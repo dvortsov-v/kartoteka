@@ -2,7 +2,7 @@
     <div class="catalog-page">
         <UiContainer class="catalog-page__wrapper">
             <UiBreadcrumbs class="catalog-page__breadcrumbs"/>
-            <CatalogHead namePage="Каталог"  class="catalog-page__head" />
+            <CatalogHead namePage="Каталог" class="catalog-page__head" />
             <main class="catalog-page__main catalog-page-main">
                 <aside class="catalog-page-main__aside">
                     <CatalogCategories :categories="categoriesStore.categories" class="catalog-page-main__categories" />
@@ -91,7 +91,7 @@ import {ModalsCatalogFilters, ModalsCatalogSort} from "#components";
 import {useCategoriesStore} from "~/store/useCategoriesStore";
 import {useProductsStore} from "~/store/useProductsStore";
 
-const categoriesStore =  useCategoriesStore()
+const categoriesStore = useCategoriesStore();
 const productsStore = useProductsStore();
 
 categoriesStore.getCategories();
@@ -144,7 +144,6 @@ const classesSort = (isChecked: boolean) => ({
     'catalog-page-main-sort__wrap--active': isChecked,
     'catalog-page-main-sort__wrap--desc' : unref(sortDescending)
 })
-
 const resetSortDescending = (newValue: string) => {
     sortDescending.value = false;
     typeSorting.value = newValue
@@ -152,10 +151,10 @@ const resetSortDescending = (newValue: string) => {
 const toogleSortDescending = () => {
     sortDescending.value = !sortDescending.value;
 }
-
 const changeViews = (value: string) => {
     views.value = value
 }
+
 </script>
 
 <style scoped lang="scss">

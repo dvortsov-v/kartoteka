@@ -151,7 +151,7 @@ $base: '.card-product';
 
   &__incorporate {
     margin-top: 12px;
-    
+
     @media (max-width: 1024px) {
       display: none;
     }
@@ -259,14 +259,9 @@ $base: '.card-product';
   }
 
   &__icon {
-    width: 24px;
-    height: 24px;
+    width: 16px;
+    height: 16px;
     fill: var(--black-100);
-
-    @media (max-width: 1024px) {
-      width: 16px;
-      height: 16px;
-    }
   }
 
   &__favorites {
@@ -328,11 +323,6 @@ $base: '.card-product';
 
     &__buy {
       flex: auto;
-    }
-
-    &__icon {
-      width: 16px;
-      height: 16px;
     }
   }
 }

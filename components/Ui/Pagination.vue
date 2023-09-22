@@ -3,6 +3,7 @@
         <li v-for="item in maxVisibleCount" class="ui-pagination__item">
             <UiButton
                 theme="transparent"
+                :class="classesItem(item)"
                 class="ui-pagination__button ui-pagination__button--border"
             >
                 <span class="ui-pagination__text">
@@ -32,10 +33,13 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
+const props = defineProps({
     countPage: {type: Number, default: 0},
+    currentPage: {type: Number, default: 1},
 });
 const maxVisibleCount = 4;
+
+const classesItem = (number: number) => ({'ui-pagination__button--active': number === props.currentPage})
 </script>
 
 <style scoped lang="scss">

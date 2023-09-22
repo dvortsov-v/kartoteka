@@ -13,7 +13,7 @@
                 >
             </picture>
             <div class="card-product-information__description">
-                <h3 class="card-product-information__title">
+                <h3 @click="navigateTo(`/catalog/product/${product.id}`)" class="card-product-information__title">
                     {{ product.name }}
                 </h3>
                 <p
@@ -78,7 +78,7 @@
                         Консультация
                     </span>
                 </UiButton>
-                
+
                 <UiButton
                     v-if="!isCompactedView"
                     theme="gray"
@@ -87,7 +87,7 @@
                     <svg-icon name="star-line" class="card-product-actions__icon" />
                 </UiButton>
 
-                <UiButton @click="navigateTo('/catalog/product?')" class="card-product-actions__buy card-product-actions-button">
+                <UiButton class="card-product-actions__buy card-product-actions-button">
                     <span class="card-product-actions-button__text">
                         Хочу купить
                     </span>

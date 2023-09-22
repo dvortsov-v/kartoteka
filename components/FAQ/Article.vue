@@ -1,7 +1,7 @@
 <template>
     <details class="faq-article">
         <summary @click="handleToogle" class="faq-article__head">
-            <span class="faq-article__title">{{ title }}</span>
+            <h5 class="faq-article__title h5">{{ title }}</h5>
             <svg-icon class="faq-article__icon" :name="iconAccordion" />
         </summary>
         <div class="faq-article__body">

@@ -6,7 +6,7 @@
                 :key="`main-page-category-${category.id}`"
                 class="main-page-categories__item"
             >
-                <NuxtLink :to="`/catalog/${category.name}`" class="main-page-categories__category main-page-category">
+                <NuxtLink :to="`/catalog/${category.id}`" class="main-page-categories__category main-page-category">
                     <span class="main-page-category__name">{{category.name}}</span>
                     <span v-if="category.count" class="main-page-category__count">{{category.count}}</span>
                 </NuxtLink>

@@ -2,7 +2,7 @@
     <div class="advertisement-page">
         <UiContainer class="advertisement-page__wrapper">
             <UiBreadcrumbs class="advertisement-page__breadcrumbs"/>
-            <h1 class="advertisement-page__title">Реклама</h1>
+            <h1 class="advertisement-page__title h1">Реклама</h1>
             <main class="advertisement-page__main">
                 <section class="advertisement-page__section advertisement-page-description">
                     <div class="advertisement-page-description__head">
@@ -30,7 +30,7 @@
                                     <svg-icon :name="`statistic/${itemCase.icon}`" class="advertisement-page-statistic-case__svg" />
                                 </div>
                                 <div class="advertisement-page-statistic-case__info">
-                                    <span class="advertisement-page-statistic-case__number">{{ itemCase.number }}</span>
+                                    <span class="advertisement-page-statistic-case__number h3">{{ itemCase.number }}</span>
                                     <span class="advertisement-page-statistic-case__name">{{ itemCase.name }}</span>
                                 </div>
                             </div>

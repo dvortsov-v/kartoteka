@@ -4,7 +4,7 @@
             <UiBreadcrumbs class="product-page__breadcrumbs"/>
             <div class="product-page__block">
                 <div class="product-page__information product-page-information">
-                    <h1 class="product-page-information__title">
+                    <h1 class="product-page-information__title h4">
                         {{ product.name }}
                     </h1>
                     <div class="product-page-information__additional">
@@ -30,13 +30,9 @@
                             class="product-page-slider__slide"
                         >
                             <picture class="product-page-slider__picture">
-                                <source
-                                    :srcset="`/images/${image.img}.webp`"
-                                    type="image/webp"
-                                >
                                 <img
-                                    :src="`/images/${image.img}.jpg`"
-                                    :alt="image.img"
+                                    :src="product.image"
+                                    :alt="product.name"
                                     class="product-page-slider__img"
                                 >
                             </picture>
@@ -55,7 +51,7 @@
                         </p>
                     </div>
                     <div class="product-page-information__location product-page-information-location">
-                        <h4 class="product-page-information-location__title">Адрес</h4>
+                        <h4 class="product-page-information-location__title h4">Адрес</h4>
                         <p class="product-page-information-location__text">
                             423819, республика Татарстан, Набережные Челны, проспект Московский, зд 109а, помещение 1006
                         </p>
@@ -80,7 +76,7 @@
                         </ul>
                         <div class="product-page-information-characteristics__section">
                             <div class="product-page-information-characteristics__head">
-                                <h4 class="product-page-information-characteristics__title">Анализ цены</h4>
+                                <h4 class="product-page-information-characteristics__title h4">Анализ цены</h4>
                                 <UiButtonLink class="product-page-information-more">
                                     <span class="product-page-information-more__text">
                                         Подробнее
@@ -219,9 +215,9 @@ const classesTabs = (isChecked: boolean) => ({
 const handleChoice = (value: number) => {
     activeTab.value = value;
 }
+const route = useRoute();
 
-const product: Product | object =  await getProductRequest(1);
-
+const product: Product | object =  await getProductRequest(route.params.id);
 </script>
 
 <style scoped lang="scss">

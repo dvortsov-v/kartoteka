@@ -1,25 +1,11 @@
 .advertisement-page {
   padding-bottom: 64px;
 
-  &__wrapper {
-    padding-top: 24px;
-
-    @media (max-width: 670px) {
-      padding-top: 16px;
-    }
-  }
-
   &__title {
     margin-top: 32px;
     color: var(--black-100);
-    font-size: 64px;
-    font-weight: 500;
-    line-height: 1;
-    letter-spacing: -0.64px;
 
     @media (max-width: 670px) {
-      font-size: 36px;
-      letter-spacing: -0.36px;
       margin-top: 16px;
     }
 
@@ -180,12 +166,8 @@
 
   &__number {
     color: var(--black-100);
-    font-size: 44px;
-    font-weight: 500;
-    line-height: 1.09;
 
     @media (max-width: 670px) {
-      font-size: 26px;
       line-height: 1.23;
     }
   }

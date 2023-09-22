@@ -2,7 +2,7 @@
     <div class="about-page">
         <UiContainer class="about-page__wrapper">
             <UiBreadcrumbs class="about-page__breadcrumbs"/>
-            <h1 class="about-page__title">О проекте</h1>
+            <h1 class="about-page__title h1">О проекте</h1>
             <main class="about-page__main">
                 <section class="about-page__section about-page-description">
                     <div class="about-page-description__head">
@@ -30,7 +30,7 @@
                                     <svg-icon :name="`statistic/${itemCase.icon}`" class="about-page-statistic-case__svg" />
                                 </div>
                                 <div class="about-page-statistic-case__info">
-                                    <span class="about-page-statistic-case__number">{{ itemCase.number }}</span>
+                                    <span class="about-page-statistic-case__number h3">{{ itemCase.number }}</span>
                                     <span class="about-page-statistic-case__name">{{ itemCase.name }}</span>
                                 </div>
                             </div>

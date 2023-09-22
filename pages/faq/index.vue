@@ -2,7 +2,7 @@
     <div class="faq-page">
         <UiContainer class="faq-page__wrapper">
             <UiBreadcrumbs class="faq-page__breadcrumbs"/>
-            <h1 class="faq-page__title">Помощь</h1>
+            <h1 class="faq-page__title h1">Помощь</h1>
             <main class="faq-page__main">
                 <ul class="faq-page__tabs faq-tabs">
                     <li v-for="tab in tabsFaq" :key="`faq-tab-${tab.id}`" class="faq-tabs__item">

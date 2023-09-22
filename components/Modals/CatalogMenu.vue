@@ -7,7 +7,7 @@
                     :key="`catalog-menu-category-${category.id}`"
                     class="modal-catalog-menu__item"
                 >
-                    <NuxtLink :to="`/catalog/${category.name}`" @mouseover="handleHoverCategory(category)" class="modal-catalog-menu__category modal-catalog-menu-category">
+                    <NuxtLink :to="`/catalog/${category.id}`" @mouseover="handleHoverCategory(category)" class="modal-catalog-menu__category modal-catalog-menu-category">
                         <div class="modal-catalog-menu-category__wrap">
                             <span class="modal-catalog-menu-category__name">{{category.name}}</span>
                             <span class="modal-catalog-menu-category__count">{{category.count}}</span>
@@ -26,7 +26,7 @@
                         :key="`catalog-menu-subcategory-${subcategories.id}`"
                         class="modal-catalog-menu-subcategory__item"
                     >
-                        <NuxtLink :to="`/catalog/${subcategories.name}`" class="modal-catalog-menu-subcategory__category modal-catalog-menu-category modal-catalog-menu-category--sub">
+                        <NuxtLink :to="`/catalog/${subcategories.id}`" class="modal-catalog-menu-subcategory__category modal-catalog-menu-category modal-catalog-menu-category--sub">
                             <div class="modal-catalog-menu-category__wrap">
                                 <span class="modal-catalog-menu-category__name">{{subcategories.name}}</span>
                                 <span class="modal-catalog-menu-category__count">{{subcategories.count}}</span>

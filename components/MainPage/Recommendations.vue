@@ -1,7 +1,7 @@
 <template>
     <div class="main-page-recommendations">
         <div class="main-page-recommendations__wrap">
-            <h3 class="main-page-recommendations__title">
+            <h3 class="main-page-recommendations__title h3">
                 Рекомендуем
             </h3>
             <ul class="main-page-recommendations__list">
