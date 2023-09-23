@@ -1,5 +1,12 @@
 .main-page-recommendations {
-  display: flex;
+  &__products {
+    display: flex;
+    margin-top: 48px;
+
+    @media (max-width: 670px) {
+      margin-top: 24px;
+    }
+  }
 
   &__wrap {
     flex: auto;
@@ -12,14 +19,6 @@
 
   &__title {
     color: var(--black-100);
-  }
-
-  &__list {
-    margin-top: 48px;
-
-    @media (max-width: 670px) {
-      margin-top: 24px;
-    }
   }
 
   &__item {
@@ -40,5 +39,17 @@
     @media (max-width: 670px) {
       margin-top: 16px;
     }
+  }
+}
+
+.main-page-recommendations-advertising {
+  &__item {
+    &:nth-child(n + 2) {
+      margin-top: 16px;
+    }
+  }
+
+  &__picture {
+    width: 256px;
   }
 }

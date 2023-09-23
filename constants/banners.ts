@@ -20,3 +20,21 @@ export const banners = [
         img: 'slider-1',
     },
 ]
+export const bannersProduct = [
+    {
+        id: 2,
+        img: 'alpha.jpg',
+    },
+    {
+        id: 1,
+        img: 'sbermarket.jpg',
+    },
+    {
+        id: 0,
+        img: 'tinkoff.jpg',
+    },
+]
+
+
+
+
