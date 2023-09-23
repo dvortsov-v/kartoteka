@@ -3,14 +3,16 @@
         <UiContainer class="product-page__wrapper">
             <UiBreadcrumbs class="product-page__breadcrumbs"/>
             <div class="product-page__block">
-                <div class="product-page__information product-page-information">
-                    <h1 class="product-page-information__title h4">
+                <div class="product-page__head product-page-head">
+                    <h1 class="product-page-head__title h4">
                         {{ product.name }}
                     </h1>
-                    <div class="product-page-information__additional">
-                        <span class="product-page-information__number">№ 124115</span>
-                        <span class="product-page-information__date">20.03.2022, 12:32</span>
+                    <div class="product-page-head__additional">
+                        <span class="product-page-head__number">№ 124115</span>
+                        <span class="product-page-head__date">20.03.2022, 12:32</span>
                     </div>
+                </div>
+                <div class="product-page__information product-page-information">
                     <picture class="product-page-information__picture">
                         <img
                             :src="product.image"
@@ -55,7 +57,9 @@
                         <p class="product-page-information-location__text">
                             423819, республика Татарстан, Набережные Челны, проспект Московский, зд 109а, помещение 1006
                         </p>
-                        <div class="product-page-information-location__maps"></div>
+                        <div class="product-page-information-location__maps">
+                            <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Ac48980baba79783d543298607a4295cf9a39fdce85ab80f82f513a53d1209b82&amp;source=constructor" width="100%" height="100%" frameborder="0"></iframe>
+                        </div>
                     </div>
                     <div class="product-page-information__characteristics product-page-information-characteristics">
                         <ul class="product-page-information-characteristics__tabs">
@@ -148,20 +152,24 @@
                         </UiButton>
                     </div>
                     <div class="product-page-base__salesman product-page-salesman">
-                        <span class="product-page-salesman__title">Продавец</span>
-                        <span class="product-page-salesman__name">Назаренко Юрий Павлович</span>
-                        <span class="product-page-salesman__registration">На сайте с июня 2023</span>
-                        <UiButton theme="transparent" class="product-page-salesman__phone product-page-salesman-phone">
-                            <svg-icon name="phone" class="product-page-salesman-phone__icon"/>
-                            <span class="product-page-salesman-phone__text">+7 <span class="product-page-salesman-phone__text--blue">показать телефон</span></span>
-                        </UiButton>
-                        <div class="product-page-salesman__contacts">
-                            <NuxtLink class="product-page-salesman__contact">
-                                <svg-icon :name="`socials/tg`" class="product-page-salesman__icon"/>
-                            </NuxtLink>
-                            <NuxtLink class="product-page-salesman__contact">
-                                <svg-icon :name="`socials/whatsapp`" class="product-page-salesman__icon"/>
-                            </NuxtLink>
+                        <div class="product-page-salesman__person">
+                            <span class="product-page-salesman__title">Продавец</span>
+                            <span class="product-page-salesman__name">Назаренко Юрий Павлович</span>
+                            <span class="product-page-salesman__registration">На сайте с июня 2023</span>
+                        </div>
+                        <div class="product-page-salesman__connect">
+                            <UiButton theme="transparent" class="product-page-salesman__phone product-page-salesman-phone">
+                                <svg-icon name="phone" class="product-page-salesman-phone__icon"/>
+                                <span class="product-page-salesman-phone__text">+7 <span class="product-page-salesman-phone__text--blue">показать <span class="product-page-salesman-phone__text--desc">телефон</span></span></span>
+                            </UiButton>
+                            <div class="product-page-salesman__contacts">
+                                <NuxtLink class="product-page-salesman__contact">
+                                    <svg-icon :name="`socials/tg`" class="product-page-salesman__icon"/>
+                                </NuxtLink>
+                                <NuxtLink class="product-page-salesman__contact">
+                                    <svg-icon :name="`socials/whatsapp`" class="product-page-salesman__icon"/>
+                                </NuxtLink>
+                            </div>
                         </div>
                     </div>
                 </div>

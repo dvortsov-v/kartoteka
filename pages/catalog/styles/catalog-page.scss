@@ -109,7 +109,6 @@
     @media (max-width: 1024px) {
       display: none;
     }
-
   }
 
   &__wrap {
@@ -139,6 +138,14 @@
     height: 16px;
     margin-left: 8px;
     fill: var(--color-sort);
+  }
+
+  &__open {
+    display: none;
+
+    @media (max-width: 1023px) {
+      display: block;
+    }
   }
 }
 
