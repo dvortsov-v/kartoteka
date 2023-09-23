@@ -139,6 +139,7 @@ const {open: openSortModal, close: closeSortModal} = useModal({
         },
         onUpdateSort(value: string) {
             toogleTextSortType(value);
+            closeSortModal();
         },
 
     },

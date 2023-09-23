@@ -11,6 +11,16 @@
                 <section class="catalog-page-main__section">
                     <div class="catalog-page-main__maps"></div>
                     <div class="catalog-page-main__settings">
+                        <UiButton
+                            theme="transparent"
+                            @click="open"
+                            class="catalog-page-main__filter-open"
+                        >
+                            <svg-icon name="filter" class="catalog-page-main__filter-svg"/>
+                            <span class="ui-pagination__text">
+                                Фильтр
+                            </span>
+                        </UiButton>
                         <div class="catalog-page-main__sort catalog-page-main-sort">
                             <UiChoices
                                 v-for="sortItem in sortList"
@@ -40,6 +50,15 @@
                                     </div>
                                 </template>
                             </UiChoices>
+                            <UiButton
+                                theme="transparent"
+                                @click="openSortModal"
+                                class="catalog-page-main-sort__open"
+                            >
+                                <span class="ui-pagination__text">
+                                    {{ findSelectTypeSorting }}
+                                </span>
+                            </UiButton>
                         </div>
                         <CommonViewsSetting @change="changeViews" />
                     </div>
@@ -66,9 +85,12 @@
     </div>
 </template>
 <script setup lang="ts">
+import { useModal } from 'vue-final-modal'
 import {getCategoryRequest} from "~/api/CategoriesApi";
 import {Category} from "~/definitions/interfaces/Categories";
+import {ModalsCatalogFilters, ModalsCatalogSort} from "#components";
 import {useProductsStore} from "~/store/useProductsStore";
+import {typesSortInModal} from "~/constants/typesSortInModal";
 const route = useRoute();
 const category: Category | object  = await getCategoryRequest(route.params.id);
 const productsStore = useProductsStore()
@@ -78,6 +100,7 @@ const views: Ref<string> = ref('rows');
 
 const typeSorting: Ref<string> = ref('price');
 const sortDescending: Ref<boolean> = ref(false);
+const textSortType = ref(typesSortInModal[0].value);
 const sortList = [
     {
         value: 'popular',
@@ -110,6 +133,36 @@ const toogleSortDescending = () => {
 const changeViews = (value: string) => {
     views.value = value
 }
+
+const {open, close} = useModal({
+    component: ModalsCatalogFilters,
+    attrs: {
+        onClose() {
+            close()
+        },
+    },
+});
+const {open: openSortModal, close: closeSortModal} = useModal({
+    component: ModalsCatalogSort,
+    attrs: {
+        onClose() {
+            closeSortModal()
+        },
+        onUpdateSort(value: string) {
+            toogleTextSortType(value);
+            closeSortModal();
+        },
+
+    },
+});
+const toogleTextSortType = (newValue: string) => {
+    console.log(123);
+    textSortType.value = newValue;
+}
+const findSelectTypeSorting = computed(() => {
+    console.log(textSortType.value)
+    return typesSortInModal.find(itemSort => itemSort.value === unref(textSortType))?.text
+});
 
 </script>
 
