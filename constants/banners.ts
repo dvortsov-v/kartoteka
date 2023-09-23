@@ -34,7 +34,3 @@ export const bannersProduct = [
         img: 'tinkoff.jpg',
     },
 ]
-
-
-
-

@@ -62,7 +62,7 @@
                         </div>
                         <CommonViewsSetting @change="changeViews" />
                     </div>
-                    <CatalogList :listProducts="productsStore.products" :isCompactedView="isCompactedView" class="catalog-page-main__list" />
+                    <CatalogList :listProducts="productsCategory" :isCompactedView="isCompactedView" class="catalog-page-main__list" />
                     <div class="catalog-page-main__navigation catalog-page-main-navigation">
                         <UiPagination countPage="5" class="catalog-page-main-navigation__pagination" />
                         <UiButton theme="transparent" class="catalog-page-main-navigation__more">
@@ -91,8 +91,10 @@ import {Category} from "~/definitions/interfaces/Categories";
 import {ModalsCatalogFilters, ModalsCatalogSort} from "#components";
 import {useProductsStore} from "~/store/useProductsStore";
 import {typesSortInModal} from "~/constants/typesSortInModal";
+import {getProductsRequest} from "~/api/ProductsApi";
 const route = useRoute();
 const category: Category | object  = await getCategoryRequest(route.params.id);
+const productsCategory = await getProductsRequest({category_ids: route.params.id})
 const productsStore = useProductsStore()
 productsStore.getProducts();
 
