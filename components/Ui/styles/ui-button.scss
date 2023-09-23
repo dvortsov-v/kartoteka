@@ -30,4 +30,8 @@
     background-color: transparent;
     color: var(--black-100);
   }
+  &--white {
+    background-color: var(--white);
+    color: var(--black-100);
+  }
 }

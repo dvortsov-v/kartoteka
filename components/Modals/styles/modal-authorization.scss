@@ -1,23 +1,21 @@
 .modal-authorization {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 448px;
-  width: 100%;
+  &__content {
+    position: relative;
+    max-width: 448px;
+    width: 100%;
 
-  @media (max-width: 670px) {
-    border-radius: 0;
-    max-width: 100%;
-    top: 0;
-    height: 100vh;
-    padding: 32px 32px 200px;
+    @media (max-width: 670px) {
+      border-radius: 0;
+      max-width: 100%;
+      top: 0;
+      height: 100vh;
+      padding: 32px 32px 200px;
+    }
   }
 
   &__wrap {
     background-color: hsl(0, 0%, 100%);
     border-radius: 24px;
-    max-width: 384px;
     width: 100%;
     padding: 32px;
   }
@@ -37,8 +35,23 @@
     height: 24px;
     fill: var(--black-100);
   }
-}
 
+  &__alternative {
+    display: flex;
+    margin-top: 16px;
+  }
+
+  &__socials {
+    margin-left: 8px;
+  }
+
+  &__text {
+    background-color: var(--white);
+    color: var(--black-100);
+    padding: 16px;
+    border-radius: 24px;
+  }
+}
 
 .modal-authorization-form {
   &__row {
@@ -69,6 +82,22 @@
     padding: 16px;
     width: 100%;
   }
+
+  &__buttons {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 32px;
+  }
+
+  &__registration {
+    margin-top: 16px;
+  }
+
+  &__password {
+    margin-top: 8px;
+  }
 }
 
 .modal-authorization-field {
@@ -98,6 +127,7 @@
     border-radius: 8px;
     min-height: 48px;
     padding: 12px;
+    flex: auto;
   }
 
   &__textarea {
@@ -122,5 +152,78 @@
   &__text {
     font-weight: 500;
     line-height: 1.5;
+  }
+}
+
+.modal-authorization-link {
+  &__text {
+    line-height: 1.5;
+    color: var(--blue-base);
+  }
+}
+
+.modal-authorization-socials {
+  display: flex;
+
+  &__item {
+    &:nth-child(n + 2) {
+      margin-left: 8px;
+    }
+  }
+
+  &__social {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 24px;
+  }
+
+  &__icon {
+    fill: currentColor;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.modal-authorization-password {
+  display: flex;
+  flex-direction: column;
+
+  &__wrap {
+    display: flex;
+    border: 1px solid var(--black-30);
+    border-radius: 8px;
+    min-height: 48px;
+    padding: 12px;
+    margin-top: 8px;
+  }
+
+  &__placeholder {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &__input {
+    flex: auto;
+  }
+
+  &__show {
+    padding-right: 8px;
+    padding-left: 8px;
+    margin-left: 4px;
+  }
+
+  &__icon {
+    fill: var(--black-100);
+    width: 16px;
+    height: 16px;
+  }
+
+  &__warning {
+    margin-top: 8px;
+    color: var(--black-50);
+    font-size: 12px;
   }
 }
