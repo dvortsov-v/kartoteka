@@ -1,5 +1,5 @@
 <template>
-    <VueFinalModal contentClass="modal-authorization">
+    <VueFinalModal displayDirective="visible" contentClass="modal-authorization">
         <div class="modal-authorization__content">
             <div class="modal-authorization__wrap">
                 <div class="modal-authorization__head">
@@ -21,14 +21,14 @@
                         <div class="modal-authorization-form__row">
                             <CommonPassword v-model="formAuth.password" class="modal-authorization-form__field"/>
                         </div>
-                        <UiButtonLink theme="primary" type="submit" class="modal-authorization-form__password modal-authorization-link">
+                        <UiButtonLink @click="modalForgotPassword.open()" theme="primary" class="modal-authorization-form__password modal-authorization-link">
                             <span class="modal-authorization-link__text">Забыли пароль?</span>
                         </UiButtonLink>
                         <div class="modal-authorization-form__buttons">
                             <UiButton theme="primary" type="submit" class="modal-authorization-form__submit modal-authorization-submit">
                                 <span class="modal-authorization-submit__text">Войти</span>
                             </UiButton>
-                            <UiButtonLink theme="primary" type="submit" class="modal-authorization-form__registration modal-authorization-link">
+                            <UiButtonLink @click="modalRegistration.open()" theme="primary" class="modal-authorization-form__registration modal-authorization-link">
                                 <span class="modal-authorization-link__text">Регистрация</span>
                             </UiButtonLink>
                         </div>
@@ -55,6 +55,8 @@
 
 <script setup lang="ts">
 import { VueFinalModal } from 'vue-final-modal'
+import {useModalList} from "~/composable/useModalList";
+
 const emit = defineEmits(['close'])
 const formAuth = ref({
     mail: '',
@@ -75,6 +77,9 @@ const socialsAuth = [
         icon: 'ok',
     },
 ]
+const {modalForgotPassword, modalRegistration} = useModalList();
+
+
 </script>
 
 <style scoped lang="scss">

@@ -1,7 +1,7 @@
 <template>
     <label class="field-password">
         <span class="field-password__placeholder">
-            <span class="field-password__text">Пароль</span>
+            <span class="field-password__text">{{ placeholder }}</span>
         </span>
         <span class="field-password__wrap">
             <UiInput v-model="modelValue" :type="typeFieldPassword" class="field-password__input" />
@@ -21,6 +21,10 @@ const props = defineProps({
     modelValue: {
         type: String,
         default: '',
+    },
+    placeholder: {
+        type: String,
+        default: 'Пароль',
     },
 })
 const emit = defineEmits(['update:modelValue']);

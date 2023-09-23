@@ -23,13 +23,14 @@
                 </div>
                 <div class="header-main__buttons">
                     <UiButton
+                        @click="modalRegistration.open"
                         theme="primary-transparent"
                         class="header-main__adding header-main-adding"
                     >
                         <svg-icon name="adding" class="header-main-adding__icon" />
                     </UiButton>
                     <UiButton
-                        @click="openModalsAuthorization"
+                        @click="modalAuthorization.open"
                         theme="primary-transparent"
                         class="header-main__auth header-main-auth"
                     >
@@ -43,11 +44,15 @@
     </header>
 </template>
 <script setup lang="ts">
-import {useModal} from "vue-final-modal";
-import {ModalsAuthorization} from "#components";
+import {useModalList} from "~/composable/useModalList";
 
 const isShowCatalogMenu = ref(false);
 const header = ref();
+
+const {
+    modalAuthorization,
+    modalRegistration,
+} = useModalList()
 const toogleIsShowCatalogMenu = () => {
     const bodyElem = document.querySelector('body');
     isShowCatalogMenu.value = !isShowCatalogMenu.value;
@@ -58,16 +63,6 @@ const toogleIsShowCatalogMenu = () => {
         bodyElem.style.overflow = 'visible';
     }
 }
-
-
-const {open: openModalsAuthorization, close: closeModalsAuthorization} = useModal({
-    component: ModalsAuthorization,
-    attrs: {
-        onClose() {
-            closeModalsAuthorization()
-        },
-    },
-})
 
 const setHeaderHeight = () => {
     document.documentElement.style.setProperty('--header-height', `${unref(header).offsetHeight}px`);

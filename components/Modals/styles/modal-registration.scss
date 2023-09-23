@@ -1,4 +1,4 @@
-.modal-authorization {
+.modal-registration {
   &__content {
     position: relative;
     max-width: 448px;
@@ -39,15 +39,6 @@
     fill: var(--black-100);
   }
 
-  &__alternative {
-    display: flex;
-    margin-top: 16px;
-  }
-
-  &__socials {
-    margin-left: 8px;
-  }
-
   &__text {
     background-color: var(--white);
     color: var(--black-100);
@@ -56,7 +47,7 @@
   }
 }
 
-.modal-authorization-form {
+.modal-registration-form {
   &__row {
     display: flex;
 
@@ -94,7 +85,7 @@
     margin-top: 32px;
   }
 
-  &__registration {
+  &__auth {
     margin-top: 16px;
   }
 
@@ -103,7 +94,7 @@
   }
 }
 
-.modal-authorization-field {
+.modal-registration-field {
   display: flex;
   flex-direction: column;
 
@@ -151,7 +142,7 @@
   }
 }
 
-.modal-authorization-submit {
+.modal-registration-submit {
   border-radius: 8px;
 
   &__text {
@@ -160,34 +151,15 @@
   }
 }
 
-.modal-authorization-link {
+.modal-registration-link {
+  &__question {
+    color: var(--black-50);
+    line-height: 1.5;
+  }
+
   &__text {
+    margin-left: 8px;
     line-height: 1.5;
     color: var(--blue-base);
-  }
-}
-
-.modal-authorization-socials {
-  display: flex;
-
-  &__item {
-    &:nth-child(n + 2) {
-      margin-left: 8px;
-    }
-  }
-
-  &__social {
-    width: 56px;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 24px;
-  }
-
-  &__icon {
-    fill: currentColor;
-    width: 24px;
-    height: 24px;
   }
 }
