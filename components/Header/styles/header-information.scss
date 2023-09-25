@@ -97,5 +97,6 @@
     background: var(--white);
     box-shadow: 0 8px 16px 0 hsla(220, 43%, 11%, 0.1);
     min-width: 180px;
+    z-index: 10;
   }
 }

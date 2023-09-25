@@ -13,7 +13,7 @@
                     <div class="catalog-page-main__settings">
                         <UiButton
                             theme="transparent"
-                            @click="open"
+                            @click="modalCatalogFilters.open()"
                             class="catalog-page-main__filter-open"
                         >
                             <svg-icon name="filter" class="catalog-page-main__filter-svg"/>
@@ -52,7 +52,7 @@
                             </UiChoices>
                             <UiButton
                                 theme="transparent"
-                                @click="openSortModal"
+                                @click="modalCatalogSort.open()"
                                 class="catalog-page-main-sort__open"
                             >
                                 <span class="ui-pagination__text">
@@ -86,11 +86,10 @@
 </template>
 <script setup lang="ts">
 import {ComputedRef} from "vue";
-import { useModal } from 'vue-final-modal'
-import {ModalsCatalogFilters, ModalsCatalogSort} from "#components";
 import {useCategoriesStore} from "~/store/useCategoriesStore";
 import {useProductsStore} from "~/store/useProductsStore";
-import {typesSortInModal} from "~/constants/typesSortInModal";
+import {useModalList} from "~/composable/useModalList";
+import {useModalCatalogSort} from "~/components/Modals/composable/useModalCatalogSort";
 
 const categoriesStore = useCategoriesStore();
 const productsStore = useProductsStore();
@@ -107,7 +106,6 @@ definePageMeta({
 });
 const typeSorting: Ref<string> = ref('price');
 const sortDescending: Ref<boolean> = ref(false);
-const textSortType = ref(typesSortInModal[0].value);
 const sortList = [
     {
         value: 'popular',
@@ -121,29 +119,13 @@ const sortList = [
         value: 'date',
         text: 'по дате добавления',
     },
-]
+];
 
-const {open, close} = useModal({
-    component: ModalsCatalogFilters,
-    attrs: {
-        onClose() {
-            close()
-        },
-    },
-})
-const {open: openSortModal, close: closeSortModal} = useModal({
-    component: ModalsCatalogSort,
-    attrs: {
-        onClose() {
-            closeSortModal()
-        },
-        onUpdateSort(value: string) {
-            toogleTextSortType(value);
-            closeSortModal();
-        },
-
-    },
-})
+const {modalCatalogFilters} = useModalList();
+const {
+    modalCatalogSort,
+    findSelectTypeSorting
+} = useModalCatalogSort();
 const isCompactedView: ComputedRef<boolean> = computed(() => unref(views) === 'tiles');
 const classesSort = (isChecked: boolean) => ({
     'catalog-page-main-sort__wrap--active': isChecked,
@@ -156,18 +138,9 @@ const resetSortDescending = (newValue: string) => {
 const toogleSortDescending = () => {
     sortDescending.value = !sortDescending.value;
 }
-const toogleTextSortType = (newValue: string) => {
-    console.log(123);
-    textSortType.value = newValue;
-}
 const changeViews = (value: string) => {
     views.value = value
 }
-
-const findSelectTypeSorting = computed(() => {
-    console.log(textSortType.value)
-    return typesSortInModal.find(itemSort => itemSort.value === unref(textSortType))?.text
-});
 
 </script>
 
