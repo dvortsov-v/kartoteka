@@ -88,7 +88,7 @@
 import {getCategoryRequest} from "~/api/CategoriesApi";
 import {Category} from "~/definitions/interfaces/Categories";
 import {getProductsRequest} from "~/api/ProductsApi";
-import {useModalList} from "~/composable/useModalList";
+import {useModalList} from "~/components/Modals/composable/useModalList";
 import {useModalCatalogSort} from "~/components/Modals/composable/useModalCatalogSort";
 
 const route = useRoute();

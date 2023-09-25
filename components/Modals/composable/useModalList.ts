@@ -2,7 +2,6 @@ import {useModal} from "vue-final-modal";
 import {
     ModalsAuthorization,
     ModalsCatalogFilters,
-    ModalsCatalogSort,
     ModalsForgotPassword,
     ModalsRegistration
 } from "#components";
@@ -24,6 +23,14 @@ export const useModalList = () => {
             onClose() {
                 modalAuthorization.close();
             },
+            onOpenRegistrationModal() {
+                modalAuthorization.close();
+                modalRegistration.open()
+            },
+            onOpenForgotPasswordModal() {
+                modalAuthorization.close();
+                modalForgotPassword.open()
+            }
         },
     })
 
@@ -32,6 +39,10 @@ export const useModalList = () => {
         attrs: {
             onClose() {
                 modalRegistration.close();
+            },
+            onOpenAuthorizationModal() {
+                modalAuthorization.open();
+                modalRegistration.close()
             },
         },
     })

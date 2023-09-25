@@ -44,7 +44,7 @@
     </header>
 </template>
 <script setup lang="ts">
-import {useModalList} from "~/composable/useModalList";
+import {useModalList} from "~/components/Modals/composable/useModalList";
 
 const isShowCatalogMenu = ref(false);
 const header = ref();

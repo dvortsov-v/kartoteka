@@ -88,7 +88,7 @@
 import {ComputedRef} from "vue";
 import {useCategoriesStore} from "~/store/useCategoriesStore";
 import {useProductsStore} from "~/store/useProductsStore";
-import {useModalList} from "~/composable/useModalList";
+import {useModalList} from "~/components/Modals/composable/useModalList";
 import {useModalCatalogSort} from "~/components/Modals/composable/useModalCatalogSort";
 
 const categoriesStore = useCategoriesStore();

@@ -29,7 +29,7 @@
                                 <span class="modal-registration-submit__text">Зарегистрироваться</span>
                             </UiButton>
                             <div class="modal-registration-form__auth modal-registration-for-auth">
-                                <UiButtonLink @click="modalAuthorization.open" theme="primary" class="modal-registration-for-auth__btn modal-registration-link">
+                                <UiButtonLink @click="emit('openAuthorizationModal')" theme="primary" class="modal-registration-for-auth__btn modal-registration-link">
                                     <span class="modal-registration-link__question">Уже зарегистрированы?</span>
                                     <span class="modal-registration-link__text">Войти</span>
                                 </UiButtonLink>
@@ -44,14 +44,12 @@
 
 <script setup lang="ts">
 import { VueFinalModal } from 'vue-final-modal'
-import {useModalList} from "~/composable/useModalList";
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close', 'openAuthorizationModal'])
 const formAuth = ref({
     mail: '',
     password: '',
     repetitionPassword: '',
 })
-const {modalAuthorization, modalRegistration} = useModalList();
 </script>
 
 <style scoped lang="scss">

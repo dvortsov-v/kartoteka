@@ -35,12 +35,10 @@
 
 <script setup lang="ts">
 import { VueFinalModal } from 'vue-final-modal'
-import {useModalList} from "~/composable/useModalList";
 const emit = defineEmits(['close'])
 const formAuth = ref({
     mail: '',
 })
-const {modalAuthorization, modalRegistration} = useModalList();
 </script>
 
 <style scoped lang="scss">
