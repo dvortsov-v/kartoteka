@@ -3,7 +3,8 @@ import {
     ModalsAuthorization,
     ModalsCatalogFilters,
     ModalsForgotPassword,
-    ModalsRegistration
+    ModalsRegistration,
+    ModalsSuccessRegistration,
 } from "#components";
 
 export const useModalList = () => {
@@ -42,8 +43,13 @@ export const useModalList = () => {
             },
             onOpenAuthorizationModal() {
                 modalAuthorization.open();
-                modalRegistration.close()
+                modalRegistration.close();
             },
+            onOpenSuccessRegistrationModal() {
+                const {open: openModalSuccessModal} = modalSuccessModal('Вы успешно зарегистрировались', 'На email info@mail.ru отправлено письмо для подтверждения регистрации и активации вашего аккаунта');
+                openModalSuccessModal();
+                modalRegistration.close()
+            }
         },
     })
 
@@ -53,13 +59,34 @@ export const useModalList = () => {
             onClose() {
                 modalForgotPassword.close()
             },
+            onOpenForgotPasswordModal() {
+                const {open: openModalSuccessModal} = modalSuccessModal('Письмо  от правлено', 'На email info@mail.ru отправлено письмо восстановления доступа к аккаунту');
+                openModalSuccessModal();
+                modalForgotPassword.close()
+            }
         },
     })
+
+    const modalSuccessModal = (title: string, text: string) => {
+        const modalSuccessModal = useModal({
+            component: ModalsSuccessRegistration,
+            attrs: {
+                title,
+                text,
+                onClose() {
+                    modalSuccessModal.close()
+                },
+            },
+        })
+
+        return modalSuccessModal
+    }
 
     return {
         modalAuthorization,
         modalRegistration,
         modalForgotPassword,
         modalCatalogFilters,
+        modalSuccessModal,
     }
 }

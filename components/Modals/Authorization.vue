@@ -15,7 +15,7 @@
                                 <span class="modal-authorization-field__placeholder">
                                     <span class="modal-authorization-field__text">Адрес эл. почты</span>
                                 </span>
-                                <UiInput v-model="formAuth.mail" class="modal-authorization-field__input" />
+                                <UiInput v-model="formAuth.email" class="modal-authorization-field__input" />
                             </label>
                         </div>
                         <div class="modal-authorization-form__row">
@@ -25,7 +25,7 @@
                             <span class="modal-authorization-link__text">Забыли пароль?</span>
                         </UiButtonLink>
                         <div class="modal-authorization-form__buttons">
-                            <UiButton theme="primary" type="submit" class="modal-authorization-form__submit modal-authorization-submit">
+                            <UiButton theme="primary" @click="auth" class="modal-authorization-form__submit modal-authorization-submit">
                                 <span class="modal-authorization-submit__text">Войти</span>
                             </UiButton>
                             <UiButtonLink @click="emit('openRegistrationModal')" theme="primary" class="modal-authorization-form__registration modal-authorization-link">
@@ -54,13 +54,18 @@
 </template>
 
 <script setup lang="ts">
-import { VueFinalModal } from 'vue-final-modal'
-
+import { VueFinalModal } from 'vue-final-modal';
+import {login} from "~/api/UserApi";
 const emit = defineEmits(['close', 'openRegistrationModal', 'openForgotPasswordModal'])
-const formAuth = ref({
-    mail: '',
+const formAuth: Ref<{email: string, password: string}> = ref({
+    email: '',
     password: '',
 })
+
+const auth = async () => {
+    const response = await login(unref(formAuth).email, unref(formAuth).password)
+    emit('close');
+}
 const socialsAuth = [
     {
         id: 1,
@@ -76,7 +81,6 @@ const socialsAuth = [
         icon: 'ok',
     },
 ]
-
 </script>
 
 <style scoped lang="scss">

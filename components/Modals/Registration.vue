@@ -15,17 +15,17 @@
                                 <span class="modal-registration-field__placeholder">
                                     <span class="modal-registration-field__text">Адрес эл. почты</span>
                                 </span>
-                                <UiInput v-model="formAuth.mail" class="modal-registration-field__input" />
+                                <UiInput v-model="formRegistration.email" class="modal-registration-field__input" />
                             </label>
                         </div>
                         <div class="modal-registration-form__row">
-                            <CommonPassword v-model="formAuth.password" warningText="Не менее 6 символов" class="modal-registration-form__field"/>
+                            <CommonPassword v-model="formRegistration.password" warningText="Не менее 6 символов" class="modal-registration-form__field"/>
                         </div>
                         <div class="modal-registration-form__row">
-                            <CommonPassword v-model="formAuth.repetitionPassword" placeholder="Повторите пароль"  class="modal-registration-form__field"/>
+                            <CommonPassword v-model="formRegistration.repetitionPassword" placeholder="Повторите пароль"  class="modal-registration-form__field"/>
                         </div>
                         <div class="modal-registration-form__buttons">
-                            <UiButton theme="primary" type="submit" class="modal-registration-form__submit modal-registration-submit">
+                            <UiButton @click="registration" theme="primary" class="modal-registration-form__submit modal-registration-submit">
                                 <span class="modal-registration-submit__text">Зарегистрироваться</span>
                             </UiButton>
                             <div class="modal-registration-form__auth modal-registration-for-auth">
@@ -44,12 +44,21 @@
 
 <script setup lang="ts">
 import { VueFinalModal } from 'vue-final-modal'
-const emit = defineEmits(['close', 'openAuthorizationModal'])
-const formAuth = ref({
-    mail: '',
+import {register} from "~/api/UserApi";
+const emit = defineEmits(['close', 'openAuthorizationModal', 'openSuccessRegistrationModal'])
+const formRegistration = ref({
+    email: '',
     password: '',
     repetitionPassword: '',
 })
+const registration = async () => {
+    if(unref(formRegistration).password &&  unref(formRegistration).repetitionPassword && (unref(formRegistration).password ===  unref(formRegistration).repetitionPassword)) {
+        const response = await register(unref(formRegistration).email, unref(formRegistration).password);
+        emit('openSuccessRegistrationModal')
+    } else {
+
+    }
+}
 </script>
 
 <style scoped lang="scss">

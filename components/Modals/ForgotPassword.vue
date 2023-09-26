@@ -22,7 +22,7 @@
                             </label>
                         </div>
                         <div class="modal-forgot-password-form__buttons">
-                            <UiButton theme="primary" type="submit" class="modal-forgot-password-form__submit modal-forgot-password-submit">
+                            <UiButton theme="primary" @click="emit('openForgotPasswordModal')" class="modal-forgot-password-form__submit modal-forgot-password-submit">
                                 <span class="modal-forgot-password-submit__text">Восстановить</span>
                             </UiButton>
                         </div>
@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 import { VueFinalModal } from 'vue-final-modal'
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close', 'openForgotPasswordModal'])
 const formAuth = ref({
     mail: '',
 })
