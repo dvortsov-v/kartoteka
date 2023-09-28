@@ -29,9 +29,52 @@
                     >
                         <svg-icon name="adding" class="header-main-adding__icon" />
                     </UiButton>
+                    <div
+                        v-if="mainStore.isAuthUser"
+                        class="header-main__user header-main-user"
+                    >
+                        <UiButton
+                            @click="toogleIsShowUserMenu"
+                            :theme="themeUserButton"
+                            class="header-main-user__auth header-main-auth header-main-auth--is-user"
+                        >
+                            <span class="header-main-auth__text">Алексей</span>
+                            <svg-icon name="chevron-down" class="header-main-auth__arrow" />
+                        </UiButton>
+                        <div
+                            v-if="isShowUserMenu"
+                            class="header-main-user__wrap"
+                        >
+                            <ul class="header-main-user__menu">
+                                <li
+                                    v-for="route in pagesListOfAuthUser"
+                                    :key="`header-main-user-${route.id}`"
+                                    class="header-main-user__item"
+                                >
+                                    <NuxtLink :to="route.path" class="header-main-user__link header-main-user-link">
+                                        <svg-icon class="header-main-user-link__icon" :name="route.icon" />
+                                        <span class="header-main-user-link__name">{{ route.name }}</span>
+                                        <span v-if="(route.name === 'Предложения') || (route.name === 'Заявки')" class="header-main-user-link__count"> 234</span>
+                                    </NuxtLink>
+                                </li>
+                            </ul>
+                            <div class="header-main-user__bottom">
+                                <button
+                                    @click="logout(userToken)"
+                                    type="button"
+                                    class="header-main-user__logout header-main-user-link"
+                                >
+                                    <svg-icon name="exit" class="header-main-user-link__icon" />
+                                    <span class="header-main-user-link__name">Выход</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                     <UiButton
+                        v-else
                         @click="modalAuthorization.open"
                         theme="primary-transparent"
+                        :class="classesAuthButton"
                         class="header-main__auth header-main-auth"
                     >
                         <svg-icon name="lock" class="header-main-auth__icon" />
@@ -45,14 +88,26 @@
 </template>
 <script setup lang="ts">
 import {useModalList} from "~/components/Modals/composable/useModalList";
+import {useMainStore} from "~/store/useMainStore";
+import {pagesListOfAuthUser} from "~/constants/pagesListOfAuthUser";
+import {logout} from "~/api/UserApi";
 
 const isShowCatalogMenu = ref(false);
+const isShowUserMenu = ref(false);
 const header = ref();
 
 const {
     modalAuthorization,
     modalRegistration,
 } = useModalList()
+
+const mainStore = useMainStore();
+const userToken = useCookie('userToken');
+
+if(!unref(userToken)) {
+    mainStore.isAuthUser = false;
+}
+
 const toogleIsShowCatalogMenu = () => {
     const bodyElem = document.querySelector('body');
     isShowCatalogMenu.value = !isShowCatalogMenu.value;
@@ -62,6 +117,9 @@ const toogleIsShowCatalogMenu = () => {
     } else if (!unref(isShowCatalogMenu) && bodyElem) {
         bodyElem.style.overflow = 'visible';
     }
+}
+const toogleIsShowUserMenu = () => {
+    isShowUserMenu.value = !isShowUserMenu.value;
 }
 
 const setHeaderHeight = () => {
@@ -77,6 +135,10 @@ onMounted(() => {
 onUnmounted(() => {
     window.removeEventListener('resize', setHeaderHeight);
 })
+const classesAuthButton = () => ({
+    'header-main-auth--is-no-auth': mainStore.isAuthUser,
+})
+const themeUserButton = computed(() => unref(isShowUserMenu) ? 'primary-dark' :  'primary-transparent');
 
 const iconCatalogButton = computed(() => unref(isShowCatalogMenu) ? 'cross' : 'menu');
 const classesIconCatalogButton = computed(() =>  ({'header-main-menu__icon--cross': unref(isShowCatalogMenu)}));

@@ -1,7 +1,6 @@
 <template>
     <div class="main-page">
         <UiContainer class="main-page__wrapper">
-            {{ mainStore.isAuthUser }}
             <MainPageCategories class="main-page__categories" />
             <Newsline class="main-page__news" />
             <MainPageBanners class="main-page__banners" />
@@ -11,13 +10,9 @@
     </div>
 </template>
 <script setup lang="ts">
-import {useMainStore} from "~/store/useMainStore";
-
 useHead({
     title: "Kartoteka.ru",
 });
-const mainStore = useMainStore()
-
 </script>
 
 <style scoped lang="scss">

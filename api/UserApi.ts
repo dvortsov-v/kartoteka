@@ -2,7 +2,7 @@ import {Category, ResultRequestCategory} from "~/definitions/interfaces/Categori
 import {useMainStore} from "~/store/useMainStore";
 import {UserLogin} from "~/definitions/interfaces/User";
 
-export const login = async (email: string, password: string): void => {
+export const login = async (email: string, password: string): Promise<void> => {
     const config = useRuntimeConfig();
 
     const { data }: {data: Ref<UserLogin>} = await useFetch(() => `${config.public.baseURL}/auth/login`, {
@@ -14,8 +14,8 @@ export const login = async (email: string, password: string): void => {
     });
 
     if(unref(data)) {
-        const {setIsAuthUser} = useMainStore()
-        document.cookie = `userToken=${unref(data).access_token}; max-age=${unref(data).expires_in}`;
+        const {setIsAuthUser} = useMainStore();
+        document.cookie = `userToken=${unref(data).token_type} ${unref(data).access_token}; max-age=${unref(data).expires_in}`;
         setIsAuthUser(true);
     }
 }
@@ -65,18 +65,22 @@ export const me = async (token: string): Promise<Category | object> => {
 
     return {};
 }
-export const logout = async (token: string): Promise<Category | object> => {
-    const config = useRuntimeConfig()
-    const { data }: {data: Ref<ResultRequestCategory>} = await useFetch(() => `${config.public.baseURL}/auth/logout`, {
-        method: 'POST',
-        headers: {
-            'Authorization': token,
-        }
-    });
+export const logout = async (token: string): Promise<void> => {
+    const config = useRuntimeConfig();
 
-    if(data?.value?.data) {
-        return data.value.data;
+    try {
+        await useFetch(() => `${config.public.baseURL}/auth/logout`, {
+            method: 'POST',
+            headers: {
+                'Authorization': token,
+            }
+        });
+
+        const {setIsAuthUser} = useMainStore();
+        document.cookie = `userToken=''; max-age=0`;
+        setIsAuthUser(false);
+    } catch (e) {
+        console.error('Ошибка разлогинивания');
     }
 
-    return {};
 }

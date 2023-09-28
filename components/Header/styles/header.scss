@@ -141,6 +141,16 @@
 
   &__auth {
     margin-left: 8px;
+    max-width: 135px;
+
+    @media (max-width: 670px) {
+      margin-left: 0;
+    }
+  }
+
+  &__user {
+    margin-left: 8px;
+
     @media (max-width: 670px) {
       margin-left: 0;
     }
@@ -181,7 +191,6 @@
     }
   }
 
-
   @media (max-width: 670px) {
     background-color: transparent;
   }
@@ -205,11 +214,35 @@
 }
 
 .header-main-auth {
-  padding-right: 20px;
+  $self: &;
+  padding-right: 16px;
+
+  &--is-no-auth {
+    padding-right: 20px;
+  }
 
   &__text {
-    margin-left: 12px;
     line-height: 1.5;
+    flex: auto;
+    min-width: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+    @media (max-width: 1024px) {
+      display: none;
+    }
+  }
+
+  &__icon {
+    margin-right: 12px;
+  }
+
+  &__arrow {
+    width: 16px;
+    height: 16px;
+    margin-left: 12px;
+    flex: none;
 
     @media (max-width: 1024px) {
       display: none;
@@ -218,5 +251,83 @@
 
   @media (max-width: 1024px) {
     padding-right: 12px;
+  }
+
+  &--is-user {
+    #{$self}__text {
+      @media (max-width: 1024px) {
+        display: inline;
+        text-overflow: initial;
+      }
+    }
+  }
+}
+
+.header-main-user {
+  position: relative;
+
+  &__wrap {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 10;
+    min-width: 258px;
+    padding-top: 8px;
+  }
+
+  &__menu {
+    border-radius: 24px;
+    border: 1px solid hsla(212, 100%, 38%, 0.1);
+    background-color: var(--blue-transparent);
+    padding: 16px;
+  }
+
+  &__item {
+    &:nth-child(n + 2) {
+      margin-top: 8px;
+    }
+  }
+
+  &__auth {
+    max-width: 135px;
+
+    @media (max-width: 1024px) {
+      max-width: 48px;
+    }
+  }
+
+  &__bottom {
+    border-top: 1px solid var(--white);
+    padding: 16px;
+  }
+
+  &__logout {
+    width: 100%;
+  }
+}
+
+.header-main-user-link {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+    color: var(--black-100);
+  }
+
+  &__name {
+    margin-left: 8px;
+    line-height: 1.5;
+  }
+
+  &__count {
+    margin-left: 8px;
+    border-radius: 99px;
+    background-color: var(--blue-base);
+    color: var(--white);
+    padding: 4px;
+    font-size: 12px;
   }
 }

@@ -63,7 +63,7 @@ const formAuth: Ref<{email: string, password: string}> = ref({
 })
 
 const auth = async () => {
-    const response = await login(unref(formAuth).email, unref(formAuth).password)
+    const response = await login(unref(formAuth).email, unref(formAuth).password);
     emit('close');
 }
 const socialsAuth = [
