@@ -52,9 +52,13 @@ const formRegistration = ref({
     repetitionPassword: '',
 })
 const registration = async () => {
-    if(unref(formRegistration).password &&  unref(formRegistration).repetitionPassword && (unref(formRegistration).password ===  unref(formRegistration).repetitionPassword)) {
-        const response = await register(unref(formRegistration).email, unref(formRegistration).password);
-        emit('openSuccessRegistrationModal')
+    if(unref(formRegistration).password && unref(formRegistration).repetitionPassword && (unref(formRegistration).password === unref(formRegistration).repetitionPassword)) {
+        try {
+            await register(unref(formRegistration).email, unref(formRegistration).password);
+            emit('openSuccessRegistrationModal')
+        } catch (e) {
+            emit('openSuccessRegistrationModal')
+        }
     } else {
 
     }

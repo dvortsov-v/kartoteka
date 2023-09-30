@@ -19,21 +19,26 @@ export const login = async (email: string, password: string): Promise<void> => {
         setIsAuthUser(true);
     }
 }
-export const register = async (email: string, password: string): Promise<Category | object> => {
-    const config = useRuntimeConfig()
-    const { data }: {data: Ref<ResultRequestCategory>} = await useFetch(() => `${config.public.baseURL}/auth/register`, {
-        method: 'POST',
-        body: {
-            email,
-            password,
+export const register = async (email: string, password: string): Promise<void> => {
+    const config = useRuntimeConfig();
+
+    try {
+        const { data }: {data: Ref<UserLogin>} = await useFetch(() => `${config.public.baseURL}/auth/register`, {
+            method: 'POST',
+            body: {
+                email,
+                password,
+            }
+        });
+
+        if(unref(data)) {
+            const {setIsAuthUser} = useMainStore();
+            document.cookie = `userToken=${unref(data).token_type} ${unref(data).access_token}; max-age=${unref(data).expires_in}`;
+            setIsAuthUser(true);
         }
-    });
-
-    if(data?.value?.data) {
-        return data.value.data;
+    } catch (e) {
+        console.error('Ошибка регистрации');
     }
-
-    return {};
 }
 export const refresh = async (token: string): Promise<Category | object> => {
     const config = useRuntimeConfig()
