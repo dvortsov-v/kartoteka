@@ -41,34 +41,10 @@
                             <span class="header-main-auth__text">Алексей</span>
                             <svg-icon name="chevron-down" class="header-main-auth__arrow" />
                         </UiButton>
-                        <div
+                        <CommonOfficeMenu
                             v-if="isShowUserMenu"
                             class="header-main-user__wrap"
-                        >
-                            <ul class="header-main-user__menu">
-                                <li
-                                    v-for="route in pagesListOfAuthUser"
-                                    :key="`header-main-user-${route.id}`"
-                                    class="header-main-user__item"
-                                >
-                                    <NuxtLink :to="route.path" class="header-main-user__link header-main-user-link">
-                                        <svg-icon class="header-main-user-link__icon" :name="route.icon" />
-                                        <span class="header-main-user-link__name">{{ route.name }}</span>
-                                        <span v-if="(route.name === 'Предложения') || (route.name === 'Заявки')" class="header-main-user-link__count"> 234</span>
-                                    </NuxtLink>
-                                </li>
-                            </ul>
-                            <div class="header-main-user__bottom">
-                                <button
-                                    @click="logout(userToken)"
-                                    type="button"
-                                    class="header-main-user__logout header-main-user-link"
-                                >
-                                    <svg-icon name="exit" class="header-main-user-link__icon" />
-                                    <span class="header-main-user-link__name">Выход</span>
-                                </button>
-                            </div>
-                        </div>
+                        />
                     </div>
                     <UiButton
                         v-else
@@ -89,8 +65,6 @@
 <script setup lang="ts">
 import {useModalList} from "~/components/Modals/composable/useModalList";
 import {useMainStore} from "~/store/useMainStore";
-import {pagesListOfAuthUser} from "~/constants/pagesListOfAuthUser";
-import {logout} from "~/api/UserApi";
 
 const isShowCatalogMenu = ref(false);
 const isShowUserMenu = ref(false);

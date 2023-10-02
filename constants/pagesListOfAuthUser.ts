@@ -3,36 +3,36 @@ export const pagesListOfAuthUser = [
         id: 0,
         name: 'Статистика',
         icon: 'statistic',
-        path: '/statistic',
+        path: '/office/statistic',
     },
     {
         id: 1,
         name: 'Заявки',
         icon: 'statistic/task-3',
-        path: '/orders',
+        path: '/office/orders',
     },
     {
         id: 2,
         name: 'Предложения',
         icon: 'folderlist',
-        path: '/offer',
+        path: '/office/offer',
     },
     {
         id: 3,
         name: 'Избранное',
         icon: 'star-line',
-        path: '/favorites',
+        path: '/office/favorites',
     },
     {
         id: 4,
         name: 'Профиль',
         icon: 'user',
-        path: '/profile',
+        path: '/office/profile',
     },
     {
         id: 5,
         name: 'Поддержка',
         icon: 'mail',
-        path: '/support',
+        path: '/office/support',
     }
 ]

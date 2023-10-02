@@ -97,13 +97,13 @@ const productsStore = useProductsStore();
 categoriesStore.getCategories();
 productsStore.getProducts();
 
-const views: Ref<string> = ref('rows');
 useHead({
     title: 'Каталог',
 });
 definePageMeta({
     name: 'Каталог',
 });
+const views: Ref<string> = ref('rows');
 const typeSorting: Ref<string> = ref('price');
 const sortDescending: Ref<boolean> = ref(false);
 const sortList = [

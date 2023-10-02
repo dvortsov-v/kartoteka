@@ -1,0 +1,33 @@
+.office-page-layout {
+  &__header {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &__body {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--black-30);
+    display: flex;
+  }
+
+  &__aside {
+    margin-left: 16px;
+    flex: none;
+    min-width: 256px;
+  }
+
+  &__title {
+    color: var(--black-100);
+  }
+
+  &__count {
+    color: var(--black-50);
+    font-size: 21px;
+    margin-left: 12px;
+
+    @media (max-width: 670px) {
+      display: none;
+    }
+  }
+}
