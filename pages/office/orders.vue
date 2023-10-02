@@ -21,7 +21,28 @@
                 </ul>
                 <CommonViewsSetting class="orders-page__view" @change="changeViews" />
             </div>
-            <CatalogList :listProducts="productsStore.products" :isCompactedView="isCompactedView" class="orders-page__products" />
+            <CatalogList
+                :listProducts="productsStore.products"
+                :isCompactedView="isCompactedView"
+                isProductInOrder
+                class="orders-page__products"
+            />
+            <div class="orders-page__navigation orders-page-navigation">
+                <UiPagination countPage="5" class="orders-page-navigation__pagination" />
+                <UiButton theme="transparent" class="orders-page-navigation__more">
+                    <svg-icon
+                        name="adding"
+                        class="orders-page-navigation__icon"
+                    />
+                    <span class="orders-page-navigation__text">
+                                Показать ещё
+                            </span>
+                </UiButton>
+                <span class="orders-page-navigation__show orders-page-navigation-show">
+                            <span class="orders-page-navigation-show__text">Показано:</span>
+                            <span class="orders-page-navigation-show__count">50 из 120</span>
+                        </span>
+            </div>
         </main>
     </OfficeLayout>
 </template>

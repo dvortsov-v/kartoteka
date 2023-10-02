@@ -4,7 +4,7 @@
         class="catalog-list"
     >
         <li v-for="product in listProducts" class="catalog-list__item">
-            <CommonCardProduct :isCompactedView="isCompactedView" :product="product"/>
+            <CommonCardProduct :isProductInOrder="isProductInOrder" :isCompactedView="isCompactedView" :product="product"/>
         </li>
     </ul>
 </template>
@@ -21,7 +21,11 @@ const props = defineProps({
     listProducts: {
         type: Array as PropType<Product[]>,
         default: () => [],
-    }
+    },
+    isProductInOrder: {
+        type: Boolean,
+        default: false,
+    },
 })
 
 
