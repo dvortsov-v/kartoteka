@@ -2,10 +2,11 @@
     <div class="card-product-actions-buttons">
         <UiButton
             v-if="isCompactedView"
-            theme="gray"
+            @click="addFavorites(product)"
+            :theme="themeFavoriteBtn(product.id)"
             class="card-product-actions-buttons__favorites"
         >
-            <svg-icon name="star-line" class="card-product-actions-buttons__icon" />
+            <svg-icon :name="iconFavoriteBtn(product)" class="card-product-actions-buttons__icon" />
         </UiButton>
         <UiButton
             v-if="!isCompactedView"
@@ -18,10 +19,11 @@
         </UiButton>
         <UiButton
             v-if="!isCompactedView"
-            theme="gray"
+            @click="addFavorites(product)"
+            :theme="themeFavoriteBtn(product.id)"
             class="card-product-actions-buttons__favorites card-product-actions-buttons__favorites--mob"
         >
-            <svg-icon name="star-line" class="card-product-actions-buttons__icon" />
+            <svg-icon :name="iconFavoriteBtn(product.id)" class="card-product-actions-buttons__icon" />
         </UiButton>
         <UiButton class="card-product-actions-buttons__buy card-product-actions-button">
             <span class="card-product-actions-button__text">
@@ -34,6 +36,8 @@
 <script setup lang="ts">
 import {PropType} from "@vue/runtime-core";
 import {Product} from "~/definitions/interfaces/Products";
+import {useFavoritesStore} from "~/store/useFavoritesStore";
+import {useFavorites} from "~/composable/useFavorites";
 
 const props = defineProps({
     isCompactedView: {
@@ -45,6 +49,13 @@ const props = defineProps({
         default: () => {},
     }
 })
+
+const {addFavorites} = useFavoritesStore();
+
+const {
+    themeFavoriteBtn,
+    iconFavoriteBtn,
+} = useFavorites();
 </script>
 
 <style scoped lang="scss">

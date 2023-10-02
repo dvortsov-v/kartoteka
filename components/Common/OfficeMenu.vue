@@ -13,7 +13,12 @@
                 >
                     <svg-icon class="office-menu-link__icon" :name="route.icon" />
                     <span class="office-menu-link__name">{{ route.name }}</span>
-                    <span v-if="(route.name === 'Предложения') || (route.name === 'Заявки')" class="office-menu-link__count"> 234</span>
+                    <span v-if="route.count" class="office-menu-link__count">
+                        <template v-if="route.id === isFavoriteId" >
+                            +
+                        </template>
+                        {{ route.count }}
+                    </span>
                 </NuxtLink>
             </li>
         </ul>
@@ -30,11 +35,11 @@
     </div>
 </template>
 <script setup lang="ts">
-import {pagesListOfAuthUser} from "~/constants/pagesListOfAuthUser";
+import {usePagesListOfAuthUser} from "~/components/Common/composable/usePagesListOfAuthUser";
 import {logout} from "~/api/UserApi";
-
+const pagesListOfAuthUser = usePagesListOfAuthUser()
+const isFavoriteId = 3;
 const userToken = useCookie('userToken');
-
 
 </script>
 

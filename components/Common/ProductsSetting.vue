@@ -49,6 +49,7 @@ import {ComputedRef} from "vue";
 defineProps({
     sortList: Array,
 })
+const emit = defineEmits(['setIsCompactedView'])
 
 const views: Ref<string> = ref('rows');
 const typeSorting: Ref<string> = ref('price');
@@ -72,6 +73,10 @@ const toogleSortDescending = () => {
 const classesSort = (isChecked: boolean) => ({
     'products-setting-sort__wrap--active': isChecked,
     'products-setting-sort__wrap--desc' : unref(sortDescending)
+})
+
+watch(isCompactedView, (isCompactedViewNew) => {
+    emit('setIsCompactedView', isCompactedViewNew);
 })
 </script>
 

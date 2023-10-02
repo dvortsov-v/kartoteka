@@ -12,10 +12,10 @@
             <div class="card-product-actions__box">
                 <UiButton
                     v-if="!isCompactedView && !isProductInOrder"
-                    theme="gray"
+                    :theme="themeFavoriteBtn(product.id)"
                     class="card-product-actions__favorites"
                 >
-                    <svg-icon name="star-line" class="card-product-actions__icon" />
+                    <svg-icon :name="iconFavoriteBtn(product.id)" class="card-product-actions__icon" />
                 </UiButton>
                 <div class="card-product-actions__addition card-product-actions-addition">
                     <span class="card-product-actions-addition__number">№ 124115</span>
@@ -38,6 +38,7 @@
 <script setup lang="ts">
 import {PropType} from "@vue/runtime-core";
 import {Product} from "~/definitions/interfaces/Products";
+import {useFavorites} from "~/composable/useFavorites";
 
 const props = defineProps({
     isCompactedView: {
@@ -59,6 +60,11 @@ const classesCardProduct = computed(() => ({
 const classesCardProductActions = computed(() => ({
     'card-product-actions--is-order': props.isProductInOrder,
 }))
+
+const {
+    themeFavoriteBtn,
+    iconFavoriteBtn,
+} = useFavorites();
 </script>
 
 <style scoped lang="scss">
