@@ -1,27 +1,27 @@
 <template>
-    <OfficeLayout title="Избранное" :countObjects="favoritesStore.favorites.length" class="orders-page">
-        <main class="orders-page__main">
-            <CommonProductsSetting :sortList="sortList" @setIsCompactedView="changeCompactedView" class="orders-page__filters" />
-            <CatalogList
+    <OfficeLayout title="Избранное" :countObjects="favoritesStore.favorites.length" class="favorites-page">
+        <main class="favorites-page__main">
+            <CommonProductsSetting :sortList="sortList" @setIsCompactedView="changeCompactedView" class="favorites-page__filters" />
+            <CommonCardProduct
                 :listProducts="favoritesStore.favorites"
                 :isCompactedView="isCompactedView"
-                class="orders-page__products"
+                class="favorites-page__products"
             />
-            <div class="orders-page__navigation orders-page-navigation">
-                <UiPagination countPage="5" class="orders-page-navigation__pagination" />
-                <UiButton theme="transparent" class="orders-page-navigation__more">
+            <div class="favorites-page__navigation favorites-page-navigation">
+                <UiPagination countPage="5" class="favorites-page-navigation__pagination" />
+                <UiButton theme="transparent" class="favorites-page-navigation__more">
                     <svg-icon
                         name="adding"
-                        class="orders-page-navigation__icon"
+                        class="favorites-page-navigation__icon"
                     />
-                    <span class="orders-page-navigation__text">
+                    <span class="favorites-page-navigation__text">
                                 Показать ещё
                             </span>
                 </UiButton>
-                <span class="orders-page-navigation__show orders-page-navigation-show">
-                            <span class="orders-page-navigation-show__text">Показано:</span>
-                            <span class="orders-page-navigation-show__count">50 из 120</span>
-                        </span>
+                <span class="favorites-page-navigation__show favorites-page-navigation-show">
+                    <span class="favorites-page-navigation-show__text">Показано:</span>
+                    <span class="favorites-page-navigation-show__count">50 из 120</span>
+                </span>
             </div>
         </main>
     </OfficeLayout>
@@ -55,5 +55,5 @@ const changeCompactedView = (val: boolean) => {
 </script>
 
 <style scoped lang="scss">
-@import '@/pages/office/styles/orders-page.scss';
+@import '@/pages/office/styles/favorites-page.scss';
 </style>

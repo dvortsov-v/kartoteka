@@ -1,9 +1,9 @@
 <template>
     <ul
         :class="classesList"
-        class="catalog-list"
+        class="product-list"
     >
-        <li v-for="product in listProducts" class="catalog-list__item">
+        <li v-for="product in listProducts" class="product-list__item">
             <CommonCardProduct :isProductInOrder="isProductInOrder" :isCompactedView="isCompactedView" :product="product"/>
         </li>
     </ul>
@@ -30,10 +30,10 @@ const props = defineProps({
 
 
 const classesList = computed(() => ({
-    'catalog-list--is-compacted-view': props.isCompactedView,
+    'product-list--is-compacted-view': props.isCompactedView,
 }))
 </script>
 
 <style scoped lang="scss">
-@import "@/components/Catalog/styles/catalog-list.scss";
+@import "@/components/Common/styles/product-list.scss";
 </style>

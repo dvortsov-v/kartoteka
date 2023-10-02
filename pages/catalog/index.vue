@@ -62,7 +62,7 @@
                         </div>
                         <CommonViewsSetting @change="changeViews" />
                     </div>
-                    <CatalogList :listProducts="productsStore.products" :isCompactedView="isCompactedView" class="catalog-page-main__list" />
+                    <CommonCardProduct :listProducts="productsStore.products" :isCompactedView="isCompactedView" class="catalog-page-main__list" />
                     <div class="catalog-page-main__navigation catalog-page-main-navigation">
                         <UiPagination countPage="5" class="catalog-page-main-navigation__pagination" />
                         <UiButton theme="transparent" class="catalog-page-main-navigation__more">

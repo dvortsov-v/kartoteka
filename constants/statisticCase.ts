@@ -1,9 +1,5 @@
-interface StatisticCase {
-    id: number,
-    icon: string,
-    number: string,
-    name: string,
-}
+import {StatisticCase} from "~/definitions/interfaces/Statistic";
+
 export const statisticCase: StatisticCase[] = [
     {
         id: 1,

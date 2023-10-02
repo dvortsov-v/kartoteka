@@ -184,7 +184,7 @@
             <div class="product-page__aside">
                 <h3 class="product-page__title">Похожие предложения</h3>
                 <div class="product-page__wrap">
-                    <CatalogList :listProducts="productsStore.products"  class="catalog-page-main__list" />
+                    <CommonCardProduct :listProducts="productsStore.products"  class="catalog-page-main__list" />
                     <div class="product-page__advertising"></div>
                 </div>
             </div>
