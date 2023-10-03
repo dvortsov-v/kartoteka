@@ -21,7 +21,7 @@
                 </ul>
                 <CommonViewsSetting class="orders-page__view" @change="changeViews" />
             </div>
-            <CommonCardProduct
+            <CommonProductList
                 :listProducts="productsStore.products"
                 :isCompactedView="isCompactedView"
                 isProductInOrder

@@ -38,59 +38,94 @@
             <table class="statistic-page__table statistic-page-table">
                 <thead class="statistic-page-table__header">
                     <tr class="statistic-page-table__row">
-                        <th class="statistic-page-table__ceil">
+                        <th class="statistic-page-table__ceil statistic-page-table__ceil--date">
                             <span class="statistic-page-table__name">Дата</span>
                             <svg-icon name="sort-item" class="statistic-page-table__sort" />
                         </th>
-                        <th class="statistic-page-table__ceil">
+                        <th class="statistic-page-table__ceil statistic-page-table__ceil--price">
                             <span class="statistic-page-table__name">Название</span>
                         </th>
-                        <th class="statistic-page-table__ceil">
+                        <th class="statistic-page-table__ceil statistic-page-table__ceil--name">
                             <span class="statistic-page-table__name">Стоимость</span>
                         </th>
-                        <th class="statistic-page-table__ceil">
+                        <th class="statistic-page-table__ceil statistic-page-table__ceil--orders">
                             <span class="statistic-page-table__name">Заявки</span>
                             <svg-icon name="sort-item" class="statistic-page-table__sort" />
                         </th>
-                        <th class="statistic-page-table__ceil">
+                        <th class="statistic-page-table__ceil statistic-page-table__ceil--favorites">
                             <span class="statistic-page-table__name">В избранном</span>
                             <svg-icon name="sort-item" class="statistic-page-table__sort" />
                         </th>
-                        <th class="statistic-page-table__ceil">
+                        <th class="statistic-page-table__ceil statistic-page-table__ceil--views">
                             <span class="statistic-page-table__name">Просмотры</span>
                             <svg-icon name="sort-item" class="statistic-page-table__sort" />
                         </th>
-                        <th class="statistic-page-table__ceil">
+                        <th class="statistic-page-table__ceil statistic-page-table__ceil--status">
                             <span class="statistic-page-table__name">Статус</span>
                         </th>
                     </tr>
                 </thead>
-                <tbody class="statistic-page-table__header">
+                <tbody class="statistic-page-table__body">
                 <tr class="statistic-page-table__row">
-                    <th class="statistic-page-table__ceil">
-                        <span class="statistic-page-table__name">Дата</span>
-                        <svg-icon name="sort-item" class="statistic-page-table__sort" />
+                    <th class="statistic-page-table__ceil statistic-page-table__ceil--date">
+                        <span class="statistic-page-table__name">20.04.2023</span>
                     </th>
-                    <th class="statistic-page-table__ceil">
-                        <span class="statistic-page-table__name">Название</span>
+                    <th class="statistic-page-table__ceil statistic-page-table__ceil--price">
+                        <span class="statistic-page-table__name">CITROEN Berlingo, 2021</span>
                     </th>
-                    <th class="statistic-page-table__ceil">
-                        <span class="statistic-page-table__name">Стоимость</span>
+                    <th class="statistic-page-table__ceil statistic-page-table__ceil--name">
+                        <span class="statistic-page-table__name">606 000 ₽</span>
                     </th>
-                    <th class="statistic-page-table__ceil">
-                        <span class="statistic-page-table__name">Заявки</span>
-                        <svg-icon name="sort-item" class="statistic-page-table__sort" />
+                    <th class="statistic-page-table__ceil statistic-page-table__ceil--orders">
+                        <span class="statistic-page-table__name">165</span>
                     </th>
-                    <th class="statistic-page-table__ceil">
-                        <span class="statistic-page-table__name">В избранном</span>
-                        <svg-icon name="sort-item" class="statistic-page-table__sort" />
+                    <th class="statistic-page-table__ceil statistic-page-table__ceil--favorites">
+                        <span class="statistic-page-table__name">485</span>
                     </th>
-                    <th class="statistic-page-table__ceil">
-                        <span class="statistic-page-table__name">Просмотры</span>
-                        <svg-icon name="sort-item" class="statistic-page-table__sort" />
+                    <th class="statistic-page-table__ceil statistic-page-table__ceil--views">
+                        <span class="statistic-page-table__name">5 896 489</span>
                     </th>
-                    <th class="statistic-page-table__ceil">
-                        <span class="statistic-page-table__name">Статус</span>
+                    <th class="statistic-page-table__ceil statistic-page-table__ceil--status">
+                        <span class="statistic-page-table__status">Выполнено</span>
+                        <div class="statistic-page-table__actions statistic-page-table-actions">
+                            <button
+                                @click="setIsShowAction"
+                                type="button"
+                                class="statistic-page-table-actions__show"
+                            >
+                                <svg-icon name="dots" class="statistic-page-table-actions__icon"/>
+                            </button>
+                            <div
+                                v-if="isShowAction"
+                                class="statistic-page-table-actions__wrap"
+                            >
+                                <div class="statistic-page-table-actions__list">
+                                    <button
+                                        type="button"
+                                        class="statistic-page-table-actions__button"
+                                    >
+                                        Редактировать
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="statistic-page-table-actions__button"
+                                    >
+                                        Снять с продажи
+                                    </button>
+
+                                </div>
+                                <div class="statistic-page-table-actions__bottom">
+                                    <button
+                                        type="button"
+                                        class="statistic-page-table-actions__button"
+                                    >
+                                        Удалить
+
+                                        <svg-icon name="trash" class="statistic-page-table-actions__del" />
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </th>
                 </tr>
                 </tbody>
@@ -142,10 +177,15 @@ const tabs = [
 ];
 
 const views: Ref<string> = ref('rows');
+const isShowAction = ref(false);
 const activeTab: Ref<number> = ref(0);
 
 const changeViews = (value: string) => {
     views.value = value
+}
+
+const setIsShowAction = () => {
+    isShowAction.value = !isShowAction.value
 }
 const classesTabs = (isChecked: boolean) => ({
     'statistic-tabs__wrap--active': isChecked,

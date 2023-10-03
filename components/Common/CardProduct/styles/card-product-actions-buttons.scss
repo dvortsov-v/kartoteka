@@ -1,6 +1,7 @@
 $base: '.card-product';
 
 .card-product-actions-buttons {
+  display: flex;
   &__favorites {
     &--mob {
       display: none;
@@ -11,13 +12,6 @@ $base: '.card-product';
       &--mob {
         display: block;
       }
-    }
-  }
-
-  &__addition {
-    margin-left: 16px;
-    @media (max-width: 670px) {
-      margin-left: 0;
     }
   }
 

@@ -50,6 +50,13 @@ $base: '.card-product';
     margin-left: 16px;
   }
 
+  &__addition {
+    margin-left: 16px;
+    @media (max-width: 670px) {
+      margin-left: 0;
+    }
+  }
+
   &--is-order {
     padding: 0;
     background-color: var(--black-05);
@@ -148,32 +155,3 @@ $base: '.card-product';
     }
   }
 }
-
-.card-product-order-status {
-  display: inline-flex;
-  align-items: center;
-  line-height: 1.5;
-  color: var(--orange-base);
-  background-color: var(--black-05);
-  padding-top: 16px;
-  padding-bottom: 16px;
-  padding-right: 16px;
-
-  &::before {
-    content: '';
-    width: 12px;
-    height: 12px;
-    background-color: var(--orange-dark);
-    border-radius: 50%;
-    margin-right: 8px;
-  }
-
-  &--success {
-    color: var(--green-base);
-
-    &::before {
-      background-color: var(--green-dark);
-    }
-  }
-}
-

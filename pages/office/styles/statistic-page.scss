@@ -220,6 +220,12 @@
     }
   }
 
+  &__body {
+    #{$self}__row {
+      border-top: 1px solid var(--black-20);
+    }
+  }
+
   &__row {
     display: flex;
   }
@@ -230,11 +236,130 @@
     align-items: center;
     justify-content: space-between;
     padding: 20px;
+    min-width: 0;
+    text-align: left;
+
+    &--date {
+      width: 132px;
+    }
+
+    &--price {
+      width: 226px;
+    }
+
+    &--name {
+      width: 128px;
+    }
+
+    &--orders {
+      width: 117px;
+    }
+
+    &--favorites {
+      width: 117px;
+    }
+
+    &--views {
+      width: 131px;
+    }
+
+    &--status {
+      width: 220px;
+    }
+
+  }
+
+  &__name {
+    flex: auto;
+    min-width: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   &__sort {
     width: 16px;
     height: 16px;
     fill: currentColor;
+  }
+
+  &__status {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1.5;
+    color: var(--orange-base);
+
+    &::before {
+      content: '';
+      width: 12px;
+      height: 12px;
+      background-color: var(--orange-dark);
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+    &--success {
+      color: var(--green-base);
+
+      &::before {
+        background-color: var(--green-dark);
+      }
+    }
+  }
+}
+
+.statistic-page-table-actions {
+  $self: &;
+  position: relative;
+
+  &__wrap {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 4px);
+    border-radius: 24px;
+    border: 1px solid var(--black-20);
+    background-color: var(--white);
+    box-shadow: 0 8px 16px 0 hsla(220, 43%, 11%, 0.1);
+    min-width: 180px;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    fill: var(--black-50);
+  }
+
+  &__list {
+    padding: 8px;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 8px;
+    width: 100%;
+
+    &:hover {
+      background-color: var(--black-05);
+      color: var(--blue-base);
+    }
+  }
+
+  &__del {
+    width: 16px;
+    height: 16px;
+  }
+
+  &__bottom {
+    padding: 8px;
+    border-top: 1px solid var(--black-20);
+  }
+
+  &:hover {
+    #{$self}__icon {
+      fill: var(--blue-base);
+    }
   }
 }
