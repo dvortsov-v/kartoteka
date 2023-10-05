@@ -57,6 +57,19 @@ $base: '.card-product';
     }
   }
 
+  &__favorites {
+    @media (max-width: 670px) {
+      display: none;
+    }
+    &--mob {
+      display: none;
+
+      @media (max-width: 670px) {
+        display: block;
+      }
+    }
+  }
+
   &--is-order {
     padding: 0;
     background-color: var(--black-05);

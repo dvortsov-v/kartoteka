@@ -2,14 +2,15 @@ $base: '.card-product';
 
 .card-product-actions-buttons {
   display: flex;
+
   &__favorites {
-    &--mob {
-      display: none;
-    }
     @media (max-width: 670px) {
       display: none;
+    }
+    &--mob {
+      display: none;
 
-      &--mob {
+      @media (max-width: 670px) {
         display: block;
       }
     }
@@ -29,6 +30,12 @@ $base: '.card-product';
     @media (max-width: 670px) {
       flex: auto;
     }
+  }
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+    fill: var(--black-100);
   }
 
   &__consultation {

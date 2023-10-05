@@ -73,7 +73,6 @@
   &__text {
     font-weight: 500;
     line-height: 1.5;
-
     @media (max-width: 670px) {
       display: none;
     }
@@ -82,6 +81,11 @@
   &__icon {
     width: 16px;
     height: 16px;
-    fill: var(--white)
+    fill: var(--white);
+    display: none;
+
+    @media (max-width: 670px) {
+      display: block;
+    }
   }
 }
