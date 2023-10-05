@@ -1,6 +1,6 @@
 <template>
     <div class="card-product-information">
-        <picture class="card-product-information__picture">
+        <picture @click="navigateTo(`/catalog/product/${product.id}`)" class="card-product-information__picture">
             <source
                 srcset="/images/product.webp"
                 type="image/webp"
@@ -17,6 +17,7 @@
             </h3>
             <p
                 v-if="!isCompactedView"
+                @click="navigateTo(`/catalog/product/${product.id}`)"
                 class="card-product-information__text"
             >
                 {{ product.description }}
