@@ -59,7 +59,7 @@
                 </div>
             </UiContainer>
         </div>
-        <ModalsCatalogMenu v-if="isShowCatalogMenu" />
+        <ModalsCatalogMenu @close="toogleIsShowCatalogMenu" v-if="isShowCatalogMenu" />
     </header>
 </template>
 <script setup lang="ts">

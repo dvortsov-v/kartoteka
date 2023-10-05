@@ -1,5 +1,5 @@
 <template>
-    <div class="modal-catalog-menu">
+    <div @click="emit('close')" class="modal-catalog-menu">
         <div class="modal-catalog-menu__wrap">
             <ul class="modal-catalog-menu__list">
                 <li
@@ -66,6 +66,7 @@ import {useCategoriesStore} from "~/store/useCategoriesStore";
 const categoriesStore =  useCategoriesStore()
 
 categoriesStore.getCategories()
+const emit = defineEmits(['close'])
 
 const currentCategory: Ref<Category | null> = ref(null);
 
