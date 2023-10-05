@@ -1,8 +1,8 @@
 <template>
     <div class="header-information">
         <div class="header-information__description header-information-description header-information-description--desktop">
-            <span class="header-information-description__text">Вестник государственной регистрации</span>
-            <NuxtLink to="/" class="header-information-description__link">kartoteka.ru</NuxtLink>
+            <NuxtLink to="https://www.vestnik-gosreg.ru/" class="header-information-description__text">Вестник государственной регистрации</NuxtLink>
+            <NuxtLink to="https://www.kartoteka.ru/" class="header-information-description__link">kartoteka.ru</NuxtLink>
         </div>
         <div class="header-information__phone header-information-phone">
             <svg-icon name="phone" class="header-information-phone__icon"/>
@@ -23,8 +23,8 @@
             >
                 <HeaderNavigation  class="header-information-menu__navigation"/>
                 <div class="header-information-menu__description header-information-description">
-                    <span class="header-information-description__text">Вестник государственной регистрации</span>
-                    <NuxtLink to="/" class="header-information-description__link">kartoteka.ru</NuxtLink>
+                    <NuxtLink to="https://www.vestnik-gosreg.ru/" class="header-information-description__text">Вестник государственной регистрации</NuxtLink>
+                    <NuxtLink to="https://www.kartoteka.ru/" class="header-information-description__link">kartoteka.ru</NuxtLink>
                 </div>
             </div>
 
