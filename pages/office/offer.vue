@@ -1,47 +1,44 @@
 <template>
-    <OfficeLayout title="Заявки" countObjects="25" class="orders-page">
-        <main class="orders-page__main">
-            <div class="orders-page__filters">
-                <ul class="orders-page__tabs orders-page-tabs">
-                    <li v-for="tab in tabs" :key="`orders-page-tabs-${tab.id}`" class="orders-page-tabs__item">
-                        <div class="orders-page-tabs__tab orders-tabs">
-                            <UiChoices v-model:checked="activeTab" @update:checked="handleChoice" :value="tab.id" name="view" class="orders-tabs__choice" inputType="radio">
+    <OfficeLayout title="Заявки" countObjects="25" class="offer-page">
+        <main class="offer-page__main">
+            <div class="offer-page__filters">
+                <ul class="offer-page__tabs offer-page-tabs">
+                    <li v-for="tab in tabs" :key="`offer-page-tabs-${tab.id}`" class="offer-page-tabs__item">
+                        <div class="offer-page-tabs__tab offer-tabs">
+                            <UiChoices v-model:checked="activeTab" @update:checked="handleChoice" :value="tab.id" name="view" class="offer-tabs__choice" inputType="radio">
                                 <template #visibleElement="{isChecked}">
                                     <div
                                         :class="classesTabs(isChecked)"
-                                        class="orders-tabs__wrap"
+                                        class="offer-tabs__wrap"
                                     >
-                                        <span class="orders-tabs__text">{{tab.name}}</span>
-                                        <span class="orders-tabs__count">15</span>
+                                        <span class="offer-tabs__text">{{tab.name}}</span>
+                                        <span class="offer-tabs__count">15</span>
                                     </div>
                                 </template>
                             </UiChoices>
                         </div>
                     </li>
                 </ul>
-                <CommonViewsSetting class="orders-page__view" @change="changeViews" />
+                <CommonViewsSetting class="offer-page__view" @change="changeViews" />
             </div>
-            <CommonProductList
-                :listProducts="productsStore.products"
-                :isCompactedView="isCompactedView"
-                isProductInOrder
-                class="orders-page__products"
+            <OfficeOfferProduct
+                class="offer-page__product"
             />
-            <div class="orders-page__navigation orders-page-navigation">
-                <UiPagination countPage="5" class="orders-page-navigation__pagination" />
-                <UiButton theme="transparent" class="orders-page-navigation__more">
+            <div class="offer-page__navigation offer-page-navigation">
+                <UiPagination countPage="5" class="offer-page-navigation__pagination" />
+                <UiButton theme="transparent" class="offer-page-navigation__more">
                     <svg-icon
                         name="adding"
-                        class="orders-page-navigation__icon"
+                        class="offer-page-navigation__icon"
                     />
-                    <span class="orders-page-navigation__text">
+                    <span class="offer-page-navigation__text">
                                 Показать ещё
                             </span>
                 </UiButton>
-                <span class="orders-page-navigation__show orders-page-navigation-show">
-                            <span class="orders-page-navigation-show__text">Показано:</span>
-                            <span class="orders-page-navigation-show__count">50 из 120</span>
-                        </span>
+                <span class="offer-page-navigation__show offer-page-navigation-show">
+                    <span class="offer-page-navigation-show__text">Показано:</span>
+                    <span class="offer-page-navigation-show__count">50 из 120</span>
+                </span>
             </div>
         </main>
     </OfficeLayout>
@@ -76,7 +73,7 @@ const changeViews = (value: string) => {
     views.value = value
 }
 const classesTabs = (isChecked: boolean) => ({
-    'orders-tabs__wrap--active': isChecked,
+    'offer-tabs__wrap--active': isChecked,
 })
 const handleChoice = (value: number) => {
     activeTab.value = value;
@@ -85,5 +82,5 @@ const isCompactedView: ComputedRef<boolean> = computed(() => unref(views) === 't
 </script>
 
 <style scoped lang="scss">
-@import '@/pages/office/styles/orders-page.scss';
+@import '@/pages/office/styles/offer-page.scss';
 </style>

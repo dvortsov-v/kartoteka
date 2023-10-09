@@ -3,7 +3,7 @@
         <summary @click="handleToogle" class="support-article__head">
             <span class="support-article__number">№ {{ number }}</span>
             <h5 class="support-article__title">{{ title }}</h5>
-            <span class="support-article__status">Активно</span>
+            <CommonStatus theme="green" class="support-article__status">Активно</CommonStatus>
             <svg-icon class="support-article__icon" :name="iconAccordion" />
         </summary>
         <div class="support-article__body">

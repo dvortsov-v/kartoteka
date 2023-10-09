@@ -15,8 +15,8 @@
                         class="favorites-page-navigation__icon"
                     />
                     <span class="favorites-page-navigation__text">
-                                Показать ещё
-                            </span>
+                        Показать ещё
+                    </span>
                 </UiButton>
                 <span class="favorites-page-navigation__show favorites-page-navigation-show">
                     <span class="favorites-page-navigation-show__text">Показано:</span>

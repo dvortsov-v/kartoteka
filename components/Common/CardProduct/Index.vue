@@ -29,9 +29,9 @@
                 :product="product"
                 :isCompactedView="isCompactedView"
             />
-            <CommonCardProductOrderStatus v-else class="card-product-actions__status">
+            <CommonStatus v-else theme="gray" class="card-product-actions__status">
                 В обработке
-            </CommonCardProductOrderStatus>
+            </CommonStatus>
         </div>
     </div>
 </template>

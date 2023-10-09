@@ -282,30 +282,6 @@
     height: 16px;
     fill: currentColor;
   }
-
-  &__status {
-    display: inline-flex;
-    align-items: center;
-    line-height: 1.5;
-    color: var(--orange-base);
-
-    &::before {
-      content: '';
-      width: 12px;
-      height: 12px;
-      background-color: var(--orange-dark);
-      border-radius: 50%;
-      margin-right: 8px;
-    }
-
-    &--success {
-      color: var(--green-base);
-
-      &::before {
-        background-color: var(--green-dark);
-      }
-    }
-  }
 }
 
 .statistic-page-table-actions {

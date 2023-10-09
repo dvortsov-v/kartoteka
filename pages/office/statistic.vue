@@ -86,7 +86,7 @@
                         <span class="statistic-page-table__name">5 896 489</span>
                     </th>
                     <th class="statistic-page-table__ceil statistic-page-table__ceil--status">
-                        <span class="statistic-page-table__status">Выполнено</span>
+                        <CommonStatus theme="green" class="statistic-page-table__status">Выполнено</CommonStatus>
                         <div class="statistic-page-table__actions statistic-page-table-actions">
                             <button
                                 @click="setIsShowAction"

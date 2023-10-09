@@ -1,8 +1,4 @@
-.orders-page {
-  &__products {
-    margin-top: 24px;
-  }
-
+.offer-page {
   &__main {
     flex: auto;
   }
@@ -22,7 +18,7 @@
   }
 }
 
-.orders-page-tabs {
+.offer-page-tabs {
   display: flex;
 
   @media (max-width: 1024px) {
@@ -46,7 +42,7 @@
   }
 }
 
-.orders-tabs {
+.offer-tabs {
   $self: &;
 
   &__wrap {
@@ -79,7 +75,7 @@
   }
 }
 
-.orders-page-navigation {
+.offer-page-navigation {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -112,7 +108,7 @@
   }
 }
 
-.orders-page-navigation-show {
+.offer-page-navigation-show {
   @media (max-width: 1024px) {
     display: none;
   }

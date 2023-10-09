@@ -1,7 +1,7 @@
 <template>
     <div class="catalog-page">
         <UiContainer class="catalog-page__wrapper">
-            <UiBreadcrumbs class="catalog-page__breadcrumbs"/>
+            <UiBreadcrumbs :breadcrumbsList="breadcrumbsList" class="catalog-page__breadcrumbs"/>
             <CatalogHead :namePage="category.name" :count="category.count" class="catalog-page__head" />
             <main class="catalog-page__main catalog-page-main">
                 <aside class="catalog-page-main__aside">
@@ -94,6 +94,25 @@ import {useModalCatalogSort} from "~/components/Modals/composable/useModalCatalo
 const route = useRoute();
 const category: Category | object  = await getCategoryRequest(route.params.id);
 const productsCategory = await getProductsRequest({category_ids: route.params.id})
+const breadcrumbsList = computed(() => {
+    return [
+        {
+            name: 'Каталог',
+            path: '/catalog',
+        },
+        {
+            name: unref(category)?.name,
+            path: `/catalog/${unref(category)?.id}`,
+        },
+    ]
+});
+
+useHead({
+    title: unref(category)?.name || 'Каталог',
+});
+// definePageMeta({
+//     name: 'Каталог',
+// });
 
 const {modalCatalogFilters} = useModalList();
 const {

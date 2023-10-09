@@ -49,30 +49,6 @@
     line-height: 1.5;
   }
 
-  &__status {
-    display: inline-flex;
-    align-items: center;
-    line-height: 1.5;
-    color: var(--green-base);
-
-    &::before {
-      content: '';
-      width: 12px;
-      height: 12px;
-      background-color: var(--green-dark);
-      border-radius: 50%;
-      margin-right: 8px;
-    }
-
-    &--success {
-      color: var(--black-50);
-
-      &::before {
-        background-color: var(--black-50);
-      }
-    }
-  }
-
   &__number {
     overflow: hidden;
     color: var(--black-100);

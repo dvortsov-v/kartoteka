@@ -16,7 +16,7 @@
             >
                 <svg-icon name="chevron-right" class="ui-breadcrumbs__chevron" />
                 <nuxt-link
-                    :to="{name: item.name}"
+                    :to="item.path"
                     exactActiveClass="ui-breadcrumbs__link--active"
                     class="ui-breadcrumbs__link"
                 >
@@ -29,9 +29,13 @@
 <script setup lang="ts">
 import {RouteLocationMatched} from "vue-router";
 
+const props = defineProps({
+    breadcrumbsList: Array,
+})
+
 const route = useRoute();
 
-const breadcrumbs:RouteLocationMatched[] = route.matched.reduce((acc: RouteLocationMatched[], current: RouteLocationMatched) => {
+const breadcrumbs:RouteLocationMatched[] = props.breadcrumbsList ?? route.matched.reduce((acc: RouteLocationMatched[], current: RouteLocationMatched) => {
     if(Array.isArray(current.name)) {
         current.name.forEach(item => {
             acc.push(item)
