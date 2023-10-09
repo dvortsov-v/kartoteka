@@ -1,5 +1,5 @@
 <template>
-    <OfficeLayout title="Заявки" :countObjects="productsStore.products.length" class="offer-page">
+    <OfficeLayout title="Предложения" :countObjects="productsStore.products.length" class="offer-page">
         <main class="offer-page__main">
             <div class="offer-page__filters">
                 <ul class="offer-page__tabs offer-page-tabs">
