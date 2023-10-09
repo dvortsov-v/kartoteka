@@ -1,4 +1,6 @@
 .offer-page {
+  $self: &;
+
   &__main {
     flex: auto;
   }
@@ -14,6 +16,38 @@
     @media (max-width: 670px) {
       flex-wrap: wrap;
       gap: 8px;
+    }
+  }
+
+  &__list {
+    margin-top: 24px;
+
+    &--is-compacted-view {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(256px, 1fr));
+      grid-gap: 16px;
+
+      #{$self}__item {
+        &:nth-child(n + 2) {
+          margin-top: 0;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        grid-template-columns: repeat(3, minmax(200px, 1fr));
+      }
+      @media (max-width: 670px) {
+        grid-template-columns: repeat(2, minmax(150px, 1fr));
+      }
+      @media (max-width: 399px) {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+  }
+
+  &__item {
+    &:nth-child(n + 2) {
+      margin-top: 16px;
     }
   }
 }

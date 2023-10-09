@@ -1,5 +1,5 @@
 <template>
-    <OfficeLayout title="Заявки" countObjects="25" class="offer-page">
+    <OfficeLayout title="Заявки" :countObjects="productsStore.products.length" class="offer-page">
         <main class="offer-page__main">
             <div class="offer-page__filters">
                 <ul class="offer-page__tabs offer-page-tabs">
@@ -21,9 +21,18 @@
                 </ul>
                 <CommonViewsSetting class="offer-page__view" @change="changeViews" />
             </div>
-            <OfficeOfferProduct
-                class="offer-page__product"
-            />
+            <ul
+                :class="classesList"
+                class="offer-page__list"
+            >
+                <li v-for="product in productsStore.products" class="offer-page__item">
+                    <OfficeOfferProduct
+                        :product="product"
+                        :isCompactedView="isCompactedView"
+                        class="offer-page__product"
+                    />
+                </li>
+            </ul>
             <div class="offer-page__navigation offer-page-navigation">
                 <UiPagination countPage="5" class="offer-page-navigation__pagination" />
                 <UiButton theme="transparent" class="offer-page-navigation__more">
@@ -79,6 +88,10 @@ const handleChoice = (value: number) => {
     activeTab.value = value;
 }
 const isCompactedView: ComputedRef<boolean> = computed(() => unref(views) === 'tiles');
+
+const classesList = computed(() => ({
+    'offer-page__list--is-compacted-view': unref(isCompactedView),
+}))
 </script>
 
 <style scoped lang="scss">
