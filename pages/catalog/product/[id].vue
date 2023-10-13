@@ -160,7 +160,10 @@
                         <div class="product-page-salesman__connect">
                             <UiButton theme="transparent" class="product-page-salesman__phone product-page-salesman-phone">
                                 <svg-icon name="phone" class="product-page-salesman-phone__icon"/>
-                                <span class="product-page-salesman-phone__text">+7 <span class="product-page-salesman-phone__text--blue">показать <span class="product-page-salesman-phone__text--desc">телефон</span></span></span>
+                                <span class="product-page-salesman-phone__text">
+                                    +7
+                                    <span v-if="isShowPhone" class="product-page-salesman-phone__number">900-000-00-00</span>
+                                    <ButtonLink v-else @click="toogleIsShowPhone" class="product-page-salesman-phone__text--blue">показать <span class="product-page-salesman-phone__text--desc">телефон</span></ButtonLink></span>
                             </UiButton>
                             <div class="product-page-salesman__contacts">
                                 <NuxtLink class="product-page-salesman__contact">
@@ -199,6 +202,7 @@ import {getProductRequest} from "~/api/ProductsApi";
 import {parcePrice} from "~/composable/parcePrice";
 import {Product} from "~/definitions/interfaces/Products";
 import {useProductsStore} from "~/store/useProductsStore";
+import ButtonLink from "~/components/Ui/ButtonLink.vue";
 
 const sliderOption = {
     loop: true,
@@ -216,12 +220,15 @@ const productsStore = useProductsStore();
 productsStore.getProducts();
 
 const activeTab: Ref<number> = ref(1);
-
+const isShowPhone = ref(false);
 const classesTabs = (isChecked: boolean) => ({
     'product-page-information-characteristics-category__wrap--active': isChecked,
 })
 const handleChoice = (value: number) => {
     activeTab.value = value;
+}
+const toogleIsShowPhone = () => {
+    isShowPhone.value= !isShowPhone.value;
 }
 const route = useRoute();
 
