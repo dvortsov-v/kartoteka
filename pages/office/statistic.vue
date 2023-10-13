@@ -157,10 +157,6 @@ import {statisticCaseOffice} from "~/constants/statisticCaseOffice";
 const productsStore = useProductsStore();
 productsStore.getProducts();
 
-definePageMeta({
-    layout: 'office',
-});
-
 const tabs = [
     {
         id: 0,

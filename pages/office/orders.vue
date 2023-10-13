@@ -52,9 +52,6 @@ import {useProductsStore} from "~/store/useProductsStore";
 const productsStore = useProductsStore();
 productsStore.getProducts();
 
-definePageMeta({
-    layout: 'office',
-})
 const tabs = [
     {
         id: 0,

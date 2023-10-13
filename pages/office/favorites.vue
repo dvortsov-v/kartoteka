@@ -33,9 +33,6 @@ import {useFavoritesStore} from "~/store/useFavoritesStore";
 const productsStore = useProductsStore();
 productsStore.getProducts();
 
-definePageMeta({
-    layout: 'office',
-})
 const favoritesStore = useFavoritesStore();
 
 const sortList = [
