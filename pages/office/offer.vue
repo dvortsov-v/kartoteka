@@ -33,22 +33,7 @@
                     />
                 </li>
             </ul>
-            <div class="offer-page__navigation offer-page-navigation">
-                <UiPagination countPage="5" class="offer-page-navigation__pagination" />
-                <UiButton theme="transparent" class="offer-page-navigation__more">
-                    <svg-icon
-                        name="adding"
-                        class="offer-page-navigation__icon"
-                    />
-                    <span class="offer-page-navigation__text">
-                                Показать ещё
-                            </span>
-                </UiButton>
-                <span class="offer-page-navigation__show offer-page-navigation-show">
-                    <span class="offer-page-navigation-show__text">Показано:</span>
-                    <span class="offer-page-navigation-show__count">50 из 120</span>
-                </span>
-            </div>
+            <UiPagination countPage="5" class="offer-page__navigation" />
         </main>
     </OfficeLayout>
 </template>

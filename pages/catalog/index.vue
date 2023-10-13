@@ -63,22 +63,7 @@
                         <CommonViewsSetting @change="changeViews" />
                     </div>
                     <CommonProductList :listProducts="productsStore.products" :isCompactedView="isCompactedView" class="catalog-page-main__list" />
-                    <div class="catalog-page-main__navigation catalog-page-main-navigation">
-                        <UiPagination countPage="5" class="catalog-page-main-navigation__pagination" />
-                        <UiButton theme="transparent" class="catalog-page-main-navigation__more">
-                            <svg-icon
-                                name="adding"
-                                class="catalog-page-main-navigation__icon"
-                            />
-                            <span class="catalog-page-main-navigation__text">
-                                    Показать ещё
-                                </span>
-                        </UiButton>
-                        <span class="catalog-page-main-navigation__show catalog-page-main-navigation-show">
-                                <span class="catalog-page-main-navigation-show__text">Показано:</span>
-                                <span class="catalog-page-main-navigation-show__count">50 из 120</span>
-                            </span>
-                    </div>
+                    <UiPagination countPage="5" class=" catalog-page-main__navigation" />
                 </section>
             </main>
         </UiContainer>
