@@ -92,8 +92,8 @@ import {useModalList} from "~/components/Modals/composable/useModalList";
 import {useModalCatalogSort} from "~/components/Modals/composable/useModalCatalogSort";
 
 const route = useRoute();
-const category: Category | object  = await getCategoryRequest(route.params.id);
 const productsCategory = await getProductsRequest({category_ids: route.params.id})
+const category: Category | object  = await getCategoryRequest(route.params.id);
 const breadcrumbsList = computed(() => {
     return [
         {
