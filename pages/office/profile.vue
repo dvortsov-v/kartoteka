@@ -22,7 +22,7 @@
                 <CommonViewsSetting class="orders-page__view" @change="changeViews" />
             </div>
             <CommonProductList
-                :listProducts="productsStore.products"
+                :listProducts="products"
                 :isCompactedView="isCompactedView"
                 isProductInOrder
                 class="orders-page__products"
@@ -33,9 +33,9 @@
 </template>
 
 <script setup lang="ts">
-import {useProductsStore} from "~/store/useProductsStore";
-const productsStore = useProductsStore();
-productsStore.getProducts();
+import {getProductsRequest} from "~/api/ProductsApi";
+
+const products = await getProductsRequest();
 
 const tabs = [
     {

@@ -39,10 +39,6 @@
 </template>
 
 <script setup lang="ts">
-import {useProductsStore} from "~/store/useProductsStore";
-const productsStore = useProductsStore();
-productsStore.getProducts();
-
 const tabs = [
     {
         id: 0,

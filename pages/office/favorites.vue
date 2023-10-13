@@ -13,10 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import {useProductsStore} from "~/store/useProductsStore";
 import {useFavoritesStore} from "~/store/useFavoritesStore";
-const productsStore = useProductsStore();
-productsStore.getProducts();
 
 const favoritesStore = useFavoritesStore();
 

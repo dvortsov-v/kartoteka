@@ -137,10 +137,7 @@
 </template>
 
 <script setup lang="ts">
-import {useProductsStore} from "~/store/useProductsStore";
 import {statisticCaseOffice} from "~/constants/statisticCaseOffice";
-const productsStore = useProductsStore();
-productsStore.getProducts();
 
 const tabs = [
     {

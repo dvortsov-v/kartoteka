@@ -1,5 +1,5 @@
 <template>
-    <OfficeLayout title="Предложения" :countObjects="productsStore.products.length" class="offer-page">
+    <OfficeLayout title="Предложения" :countObjects="products.length" class="offer-page">
         <main class="offer-page__main">
             <div class="offer-page__filters">
                 <ul class="offer-page__tabs offer-page-tabs">
@@ -25,7 +25,7 @@
                 :class="classesList"
                 class="offer-page__list"
             >
-                <li v-for="product in productsStore.products" class="offer-page__item">
+                <li v-for="product in products" class="offer-page__item">
                     <OfficeOfferProduct
                         :product="product"
                         :isCompactedView="isCompactedView"
@@ -39,9 +39,8 @@
 </template>
 
 <script setup lang="ts">
-import {useProductsStore} from "~/store/useProductsStore";
-const productsStore = useProductsStore();
-productsStore.getProducts();
+import {getProductsRequest} from "~/api/ProductsApi";
+const products = await getProductsRequest();
 
 const tabs = [
     {

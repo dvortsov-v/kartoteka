@@ -1,14 +1,15 @@
 <template>
     <div class="ui-page-navigation">
         <ul class="ui-page-navigation__pagination ui-pagination">
-            <li v-for="item in maxVisibleCount" class="ui-pagination__item">
+            <li v-for="link in paginationDate.links" class="ui-pagination__item">
                 <UiButton
+                    @click="handleClick(link.label)"
                     theme="transparent"
-                    :class="classesItem(item)"
+                    :class="classesItem(link.active)"
                     class="ui-pagination__button ui-pagination__button--border"
                 >
                 <span class="ui-pagination__text">
-                    {{item}}
+                    {{link.label}}
                 </span>
                 </UiButton>
             </li>
@@ -31,7 +32,7 @@
                 </UiButton>
             </li>
         </ul>
-        <UiButton theme="transparent" class="ui-page-navigation__more">
+        <UiButton v-if="false" theme="transparent" class="ui-page-navigation__more">
             <svg-icon
                 name="adding"
                 class="ui-page-navigation__icon"
@@ -42,19 +43,32 @@
         </UiButton>
         <span class="ui-page-navigation__show ui-page-navigation-show">
             <span class="ui-page-navigation-show__text">Показано:</span>
-            <span class="ui-page-navigation-show__count">50 из 120</span>
+            <span class="ui-page-navigation-show__count">{{ paginationDate.per_page }} из {{ paginationDate.total }}</span>
         </span>
     </div>
 </template>
 
 <script setup lang="ts">
+import {MetaProduct} from "~/definitions/interfaces/Products";
+import {PropType} from "@vue/runtime-core";
+
 const props = defineProps({
     countPage: {type: Number, default: 0},
     currentPage: {type: Number, default: 1},
+    paginationDate: {
+        type: Object as PropType<MetaProduct>,
+        default: () => ({})
+    },
 });
+const filteredPagination = computed(() => {
+    return props.paginationDate?.links.filter(link => link.url);
+})
+const router = useRouter();
 const maxVisibleCount = 4;
-
-const classesItem = (number: number) => ({'ui-pagination__button--active': number === props.currentPage})
+const handleClick = (numberPage: number) => {
+    router.push({query: {page: numberPage}})
+}
+const classesItem = (active: boolean) => ({'ui-pagination__button--active': active})
 </script>
 
 <style scoped lang="scss">
