@@ -23,7 +23,6 @@
                     <Swiper
                         v-if="carImage.length > 0"
                         v-bind="sliderOption"
-                        :modules="sliderModules"
                         class="product-page-information__slider product-page-slider"
                     >
                         <SwiperSlide
@@ -62,8 +61,8 @@
                         </div>
                     </div>
                     <div class="product-page-information__characteristics product-page-information-characteristics">
-                        <ul class="product-page-information-characteristics__tabs">
-                            <li v-for="tab in productCharacteristic" :key="`product-tab-${tab.id}`" class="product-page-information-characteristics__item">
+                        <ul v-if="tabs.length > 1" class="product-page-information-characteristics__tabs">
+                            <li v-for="tab in tabs" :key="`product-tab-${tab.id}`" class="product-page-information-characteristics__item">
                                 <div class="product-page-information-characteristics__tab product-page-information-characteristics-category">
                                     <UiChoices v-model:checked="activeTab" @update:checked="handleChoice" :value="tab.id" name="view" class="product-page-information-characteristics-category__choice" inputType="radio">
                                         <template #visibleElement="{isChecked}">
@@ -71,28 +70,33 @@
                                                 :class="classesTabs(isChecked)"
                                                 class="product-page-information-characteristics-category__wrap"
                                             >
-                                                <span class="product-page-information-characteristics-category__text">{{tab.name}}</span>
+                                                <span class="product-page-information-characteristics-category__text">{{tab.title}}</span>
                                             </div>
                                         </template>
                                     </UiChoices>
                                 </div>
                             </li>
                         </ul>
-                        <div class="product-page-information-characteristics__section">
-                            <div class="product-page-information-characteristics__head">
-                                <h4 class="product-page-information-characteristics__title h4">Анализ цены</h4>
-                                <UiButtonLink class="product-page-information-more">
+                        <div
+                            v-for="activeSection in sectionInformation"
+                            :key="`product-information-${activeSection.id}`"
+                            class="product-page-information-characteristics__section"
+                        >
+                            <div :id="`product-section-${activeSection.id}`" class="product-page-information-characteristics__head">
+                                <h4 class="product-page-information-characteristics__title h4">{{ activeSection.title }}</h4>
+                                <UiButtonLink v-if="activeSection.fullFields" class="product-page-information-more">
                                     <span class="product-page-information-more__text">
                                         Подробнее
                                     </span>
                                     <svg-icon name="arrow-right" class="product-page-information-more__icon" />
                                 </UiButtonLink>
                             </div>
-                            <p class="product-page-information-characteristics__paragraph">
+                            <p v-for="field in activeSection.fields" class="product-page-information-characteristics__paragraph">
                                 <span class="product-page-information-characteristics__name">
-                                    <span class="product-page-information-characteristics__text">Оценочная стоимость</span>
+                                    <span class="product-page-information-characteristics__text">{{ field.name }}</span>
                                 </span>
-                                <span class="product-page-information-characteristics__value">1 255 500 ₽</span>
+                                <span v-if="field.text" class="product-page-information-characteristics__value">{{ field.text }}</span>
+                                <NuxtLink v-if="field.link" :to="field.link.href" class="product-page-information-characteristics__link">{{ field.link.text }}</NuxtLink>
                             </p>
                             <p class="product-page-information-characteristics__paragraph">
                                 <span class="product-page-information-characteristics__name">
@@ -197,12 +201,12 @@
 
 <script lang="ts" setup>
 import {carImage} from "~/constants/carImage";
-import {productCharacteristic} from "~/constants/productCharacteristic";
 import {getProductRequest} from "~/api/ProductsApi";
 import {parcePrice} from "~/composable/parcePrice";
 import {Product} from "~/definitions/interfaces/Products";
 import {useProductsStore} from "~/store/useProductsStore";
 import ButtonLink from "~/components/Ui/ButtonLink.vue";
+import {scrollToElem} from "~/composable/useScrollTo";
 
 const sliderOption = {
     loop: true,
@@ -215,17 +219,169 @@ const sliderOption = {
     observeParents: true,
     spaceBetween: 8,
 }
-const sliderModules = [];
+
 const productsStore = useProductsStore();
 productsStore.getProducts();
+const sectionInformation = [
+    {
+        id: 0,
+        title: 'Информация о торгах',
+        fields: [
+            {
+                name: 'Вид торгов',
+                text: 'Публичное предложение/Открытая форма предложения о цене',
+            },
+            {
+                name: 'Место проведения',
+                link: {
+                    text:'ТП «Фабрикант»',
+                    href: '',
+                },
+            },
+            {
+                name: 'Период торгов',
+                text: '25.10.2022 12:00 — 28.10.2023 12:00',
+            },
+            {
+                name: 'Приём заявок',
+                text: '25.10.2022 12:00 — 28.10.2023 12:00',
+            },
+        ]
+    },
+    {
+        id: 1,
+        title: 'Анализ цены',
+        fields: [
+            {
+                name: 'Оценочная стоимость',
+                text: '6 314 304 ₽ ',
+            },
+            {
+                name: 'Инвентаризированная стоимость',
+                text: 'не указана',
+            },
+            {
+                name: 'Балансовая стоимость',
+                text: 'не указана',
+            },
+            {
+                name: 'Стоимость на 3 торгах',
+                text: '6 314 304 ₽ ',
+            },
+            {
+                name: 'Стоимость на 2 торгах',
+                text: '6 314 304 ₽ ',
+            },
+            {
+                name: 'Стоимость на 1 торгах',
+                text: '6 314 304 ₽ ',
+            },
+        ]
+    },
+    {
+        id: 2,
+        title: 'Характеристики',
+        fields: [
+            {
+                name: 'Сумма деб. задолженности (₽)',
+                text: '6 314 304,83',
+            },
+            {
+                name: 'ИНН дебитора',
+                text: '1650319389',
+            },
+            {
+                name: 'ОГРН дебитора',
+                text: '1151650019289',
+            },
+            {
+                name: 'КПП дебитора',
+                text: '165001001',
+            },
+        ]
+    },
+    {
+        id: 3,
+        title: 'Информация о должнике',
+        fullFields: [
+            {
+                name: '№ дела',
+                text: 'А65-4196/2021',
+            },
+            {
+                name: 'ИНН',
+                text: '1650319389',
+            },
+            {
+                name: 'Должник',
+                text: 'ООО НПЦ «Нефтехимэнергоснаб»',
+            },
+            {
+                name: 'Адрес',
+                text: '423819, республика Татарстан, Набережные Челны, проспект Московский, зд 109а, помещение 1006',
+            },
+            {
+                name: 'Дата регистрации',
+                text: '17.12.1999',
+            },
+            {
+                name: '№ дела',
+                text: 'А65-4196/2021',
+            },
+            {
+                name: 'ИНН',
+                text: '1650319389',
+            },
+            {
+                name: 'Должник',
+                text: 'ООО НПЦ «Нефтехимэнергоснаб»',
+            },
+            {
+                name: 'Адрес',
+                text: '423819, республика Татарстан, Набережные Челны, проспект Московский, зд 109а, помещение 1006',
+            },
+            {
+                name: 'Дата регистрации',
+                text: '17.12.1999',
+            },
+        ],
+        fields: [
+            {
+                name: '№ дела',
+                text: 'А65-4196/2021',
+            },
+            {
+                name: 'ИНН',
+                text: '1650319389',
+            },
+            {
+                name: 'Должник',
+                text: 'ООО НПЦ «Нефтехимэнергоснаб»',
+            },
+            {
+                name: 'Адрес',
+                text: '423819, республика Татарстан, Набережные Челны, проспект Московский, зд 109а, помещение 1006',
+            },
+            {
+                name: 'Дата регистрации',
+                text: '17.12.1999',
+            },
+        ]
+    },
+];
+const tabs = sectionInformation.map(section => {
+    const {id, title} = section;
 
-const activeTab: Ref<number> = ref(1);
+    return {id, title}
+})
+const activeTab: Ref<number> = ref(0);
 const isShowPhone = ref(false);
 const classesTabs = (isChecked: boolean) => ({
     'product-page-information-characteristics-category__wrap--active': isChecked,
 })
 const handleChoice = (value: number) => {
     activeTab.value = value;
+    scrollToElem(`#product-section-${value}`)
 }
 const toogleIsShowPhone = () => {
     isShowPhone.value= !isShowPhone.value;
