@@ -1,11 +1,11 @@
 <template>
-    <div class="catalog-page">
+    <div v-if="categories && products" class="catalog-page">
         <UiContainer class="catalog-page__wrapper">
             <UiBreadcrumbs class="catalog-page__breadcrumbs"/>
             <CatalogHead namePage="Каталог" class="catalog-page__head" />
             <main class="catalog-page__main catalog-page-main">
                 <aside class="catalog-page-main__aside">
-                    <CatalogCategories :categories="categoriesStore.categories" class="catalog-page-main__categories" />
+                    <CatalogCategories :categories="categories" class="catalog-page-main__categories" />
                     <CatalogFilters class="catalog-page-main__filters" />
                 </aside>
                 <section class="catalog-page-main__section">
@@ -71,12 +71,15 @@
 </template>
 <script setup lang="ts">
 import {ComputedRef} from "vue";
-import {useCategoriesStore} from "~/store/useCategoriesStore";
 import {useModalList} from "~/components/Modals/composable/useModalList";
 import {useModalCatalogSort} from "~/components/Modals/composable/useModalCatalogSort";
 import {useProducts} from "~/composable/request/useProducts";
+import {useCategories} from "~/composable/request/useCategories";
 
-const categoriesStore = useCategoriesStore();
+const {
+    categories,
+    getCategories,
+} = useCategories()
 
 const {
     products,
@@ -85,8 +88,7 @@ const {
 } = useProducts()
 
 getProducts()
-
-categoriesStore.getCategories();
+getCategories();
 
 useHead({
     title: 'Каталог',

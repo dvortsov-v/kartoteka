@@ -10,7 +10,7 @@ export const getCategoriesRequest = async (): Promise<Category[]> => {
 
     return [];
 }
-export const getCategoryRequest = async (id: string| string[]): Promise<Category | object> => {
+export const getCategoryRequest = async (id: string| string[]): Promise<Category | never> => {
     const config = useRuntimeConfig()
     const { data }: {data: Ref<ResultRequestCategory>} = await useFetch(() => `${config.public.baseURL}/categories/${id}`);
 

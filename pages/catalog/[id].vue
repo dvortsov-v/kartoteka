@@ -1,5 +1,5 @@
 <template>
-    <div class="catalog-page">
+    <div v-if="category && products" class="catalog-page">
         <UiContainer class="catalog-page__wrapper">
             <UiBreadcrumbs :breadcrumbsList="breadcrumbsList" class="catalog-page__breadcrumbs"/>
             <CatalogHead :namePage="category.name" :count="category.count" class="catalog-page__head" />
@@ -70,11 +70,10 @@
     </div>
 </template>
 <script setup lang="ts">
-import {getCategoryRequest} from "~/api/CategoriesApi";
-import {Category} from "~/definitions/interfaces/Categories";
 import {useModalList} from "~/components/Modals/composable/useModalList";
 import {useModalCatalogSort} from "~/components/Modals/composable/useModalCatalogSort";
 import {useProducts} from "~/composable/request/useProducts";
+import {useCategory} from "~/composable/request/useCategory";
 
 const route = useRoute();
 const {
@@ -83,9 +82,10 @@ const {
     getProducts,
 } = useProducts();
 
+const {category, getCategory} = useCategory()
+getCategory();
 getProducts({category_ids: route.params.id});
 
-const category: Category | object  = await getCategoryRequest(route.params.id);
 
 const breadcrumbsList = computed(() => {
     return [
