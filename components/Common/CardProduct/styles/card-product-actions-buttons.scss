@@ -45,11 +45,6 @@ $base: '.card-product';
   }
 
   #{$base}--is-compacted-view & {
-    flex-direction: column;
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-bottom: 16px;
-
     &__addition {
       margin-left: 0;
     }
