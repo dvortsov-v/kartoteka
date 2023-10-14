@@ -131,7 +131,7 @@
                 </tbody>
 
             </table>
-            <UiPagination countPage="5" class="statistic-page__navigation" />
+            <UiPagination :paginationDate="{}"  class="statistic-page__navigation" />
         </main>
     </OfficeLayout>
 </template>

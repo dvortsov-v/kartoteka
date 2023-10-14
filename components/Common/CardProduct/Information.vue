@@ -1,12 +1,8 @@
 <template>
     <div class="card-product-information">
         <picture @click="navigateTo(`/catalog/product/${product.id}`)" class="card-product-information__picture">
-            <source
-                srcset="/images/product.webp"
-                type="image/webp"
-            >
             <img
-                src="/images/product.jpg"
+                :src="product.image"
                 alt="card-product"
                 class="card-product-information__img"
             >

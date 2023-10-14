@@ -33,15 +33,21 @@
                     />
                 </li>
             </ul>
-            <UiPagination countPage="5" class="offer-page__navigation" />
+            <UiPagination :paginationDate="paginationDate" class="offer-page__navigation" />
         </main>
     </OfficeLayout>
 </template>
 
 <script setup lang="ts">
-import {getProductsRequest} from "~/api/ProductsApi";
-const products = await getProductsRequest();
+import {useProducts} from "~/composable/request/useProducts";
 
+const {
+    products,
+    paginationDate,
+    getProducts,
+} = useProducts()
+
+getProducts()
 const tabs = [
     {
         id: 0,

@@ -63,8 +63,7 @@
                         <CommonViewsSetting @change="changeViews" />
                     </div>
                     <CommonProductList :listProducts="products" :isCompactedView="isCompactedView" class="catalog-page-main__list" />
-                    <pre>{{paginationDate}}</pre>
-                    <UiPagination :paginationDate="paginationDate" countPage="5" class=" catalog-page-main__navigation" />
+                    <UiPagination :paginationDate="paginationDate" class=" catalog-page-main__navigation" />
                 </section>
             </main>
         </UiContainer>
@@ -75,25 +74,17 @@ import {ComputedRef} from "vue";
 import {useCategoriesStore} from "~/store/useCategoriesStore";
 import {useModalList} from "~/components/Modals/composable/useModalList";
 import {useModalCatalogSort} from "~/components/Modals/composable/useModalCatalogSort";
-import {getProductsRequest} from "~/api/ProductsApi";
-import {MetaProduct, Product, ResultRequesProducts} from "~/definitions/interfaces/Products";
+import {useProducts} from "~/composable/request/useProducts";
 
-const route = useRoute();
-const products = ref<Product[]>([]);
-const paginationDate = ref<MetaProduct>();
 const categoriesStore = useCategoriesStore();
 
-const getProducts = async () => {
-    const {data, meta}: ResultRequesProducts | never = await getProductsRequest({page: route?.query?.page});
-    products.value = data;
-    paginationDate.value = meta
-}
+const {
+    products,
+    paginationDate,
+    getProducts,
+} = useProducts()
+
 getProducts()
-watch(() => route.query.page, () => {
-    if(route.query.page) {
-        getProducts()
-    }
-})
 
 categoriesStore.getCategories();
 

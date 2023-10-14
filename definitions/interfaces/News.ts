@@ -1,3 +1,5 @@
+import {Meta} from "~/definitions/interfaces/Meta";
+
 export interface News {
     id: number,
     title: string,
@@ -6,7 +8,8 @@ export interface News {
 }
 
 export interface ResultRequestNewsList {
-    data: News[]
+    data: News[],
+    meta: Meta,
 }
 export interface ResultRequestNews {
     data: News

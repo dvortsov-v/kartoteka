@@ -191,7 +191,7 @@
             <div class="product-page__aside">
                 <h3 class="product-page__title">Похожие предложения</h3>
                 <div class="product-page__wrap">
-                    <CommonCardProduct :listProducts="productsStore.products"  class="catalog-page-main__list" />
+                    <CommonCardProduct :listProducts="products"  class="catalog-page-main__list" />
                     <div class="product-page__advertising"></div>
                 </div>
             </div>
@@ -204,9 +204,9 @@ import {carImage} from "~/constants/carImage";
 import {getProductRequest} from "~/api/ProductsApi";
 import {parcePrice} from "~/composable/parcePrice";
 import {Product} from "~/definitions/interfaces/Products";
-import {useProductsStore} from "~/store/useProductsStore";
 import ButtonLink from "~/components/Ui/ButtonLink.vue";
 import {scrollToElem} from "~/composable/useScrollTo";
+import {useProducts} from "~/composable/request/useProducts";
 
 const sliderOption = {
     loop: true,
@@ -220,8 +220,14 @@ const sliderOption = {
     spaceBetween: 8,
 }
 
-const productsStore = useProductsStore();
-productsStore.getProducts();
+
+const {
+    products,
+    getProducts,
+} = useProducts()
+
+getProducts();
+
 const sectionInformation = [
     {
         id: 0,

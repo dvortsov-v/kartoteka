@@ -7,7 +7,7 @@
                 :isCompactedView="isCompactedView"
                 class="favorites-page__products"
             />
-            <UiPagination countPage="5" class="favorites-page__navigation " />
+            <UiPagination :paginationDate="{}" class="favorites-page__navigation " />
         </main>
     </OfficeLayout>
 </template>

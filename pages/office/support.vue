@@ -33,7 +33,7 @@
                     <OfficeSupportArticle number="2356" title="Мои заявки" class="support-page__article" />
                 </li>
             </ul>
-            <UiPagination countPage="5" class="support-page__navigation" />
+            <UiPagination :paginationDate="{}"  class="support-page__navigation" />
         </main>
     </OfficeLayout>
 </template>

@@ -16,14 +16,10 @@
 </template>
 <script setup lang="ts">
 import {useCategoriesStore} from '~/store/useCategoriesStore';
-import {useProductsStore} from "~/store/useProductsStore";
-
 const categoriesStore =  useCategoriesStore()
 
 categoriesStore.getCategories();
 
-const productsStore = useProductsStore()
-productsStore.getProducts();
 </script>
 
 <style scoped lang="scss">

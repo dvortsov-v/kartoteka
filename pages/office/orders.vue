@@ -27,16 +27,22 @@
                 isProductInOrder
                 class="orders-page__products"
             />
-            <UiPagination countPage="5" class="orders-page__navigation" />
+            <UiPagination :paginationDate="paginationDate" class="orders-page__navigation" />
         </main>
     </OfficeLayout>
 </template>
 
 <script setup lang="ts">
-import {getProductsRequest} from "~/api/ProductsApi";
+import {useProducts} from "~/composable/request/useProducts";
 
-const products = await getProductsRequest();
 
+const {
+    products,
+    paginationDate,
+    getProducts,
+} = useProducts()
+
+getProducts()
 
 const tabs = [
     {

@@ -62,8 +62,8 @@
                         </div>
                         <CommonViewsSetting @change="changeViews" />
                     </div>
-                    <CommonProductList :listProducts="productsCategory" :isCompactedView="isCompactedView" class="catalog-page-main__list" />
-                    <UiPagination countPage="5" class="catalog-page-main__navigation" />
+                    <CommonProductList :listProducts="products" :isCompactedView="isCompactedView" class="catalog-page-main__list" />
+                    <UiPagination :paginationDate="paginationDate" class="catalog-page-main__navigation" />
                 </section>
             </main>
         </UiContainer>
@@ -72,13 +72,21 @@
 <script setup lang="ts">
 import {getCategoryRequest} from "~/api/CategoriesApi";
 import {Category} from "~/definitions/interfaces/Categories";
-import {getProductsRequest} from "~/api/ProductsApi";
 import {useModalList} from "~/components/Modals/composable/useModalList";
 import {useModalCatalogSort} from "~/components/Modals/composable/useModalCatalogSort";
+import {useProducts} from "~/composable/request/useProducts";
 
 const route = useRoute();
-const productsCategory = await getProductsRequest({category_ids: route.params.id})
+const {
+    products,
+    paginationDate,
+    getProducts,
+} = useProducts();
+
+getProducts({category_ids: route.params.id});
+
 const category: Category | object  = await getCategoryRequest(route.params.id);
+
 const breadcrumbsList = computed(() => {
     return [
         {

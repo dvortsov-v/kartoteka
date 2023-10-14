@@ -1,15 +1,18 @@
 import {ResultRequestNews, ResultRequestNewsList, News} from "~/definitions/interfaces/News";
+import {LocationQueryValue} from "vue-router";
 
-export const getNewsListRequest = async (): Promise<News[]> => {
+export const getNewsListRequest = async (query: {page?: LocationQueryValue | LocationQueryValue[]}): Promise<ResultRequestNewsList> => {
     const config = useRuntimeConfig()
 
-    const { data }: {data: Ref<ResultRequestNewsList>} = await useFetch(`${config.public.baseURL}/news`);
+    const { data }: {data: Ref<ResultRequestNewsList>} = await useFetch(`${config.public.baseURL}/news`, {
+        query,
+    });
 
-    if(unref(data)?.data) {
-        return unref(data).data;
+    if(unref(data)) {
+        return unref(data);
     }
 
-    return [];
+    return {};
 }
 export const getNewsListFilterRequest = async (numberTitle: number): Promise<News[]> => {
     const config = useRuntimeConfig()
