@@ -2,7 +2,7 @@
     <div class="main-page-categories">
         <ul class="main-page-categories__list">
             <li
-                v-for="category in categoriesStore.categories"
+                v-for="category in categories"
                 :key="`main-page-category-${category.id}`"
                 class="main-page-categories__item"
             >
@@ -15,10 +15,13 @@
     </div>
 </template>
 <script setup lang="ts">
-import {useCategoriesStore} from '~/store/useCategoriesStore';
-const categoriesStore =  useCategoriesStore()
+import {useCategories} from "~/composable/request/useCategories";
 
-categoriesStore.getCategories();
+const {
+    categories,
+    getCategories,
+} = useCategories()
+getCategories();
 
 </script>
 

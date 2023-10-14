@@ -1,15 +1,14 @@
 import { defineStore } from 'pinia'
 import {Category} from "~/definitions/interfaces/Categories";
-import {getCategoriesRequest} from "~/api/CategoriesApi";
 
 export const useCategoriesStore = defineStore('categoriesStore', () => {
     const categories: Ref<Category[]> = ref([]);
-    const getCategories = async () =>  {
-        categories.value = await getCategoriesRequest();
+    const setCategories = async (value: Category[]) =>  {
+        categories.value = value;
     }
 
     return {
         categories,
-        getCategories,
+        setCategories,
     }
 })

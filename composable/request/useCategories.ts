@@ -1,11 +1,15 @@
 import {Category} from "~/definitions/interfaces/Categories";
 import {getCategoriesRequest} from "~/api/CategoriesApi";
+import {useCategoriesStore} from "~/store/useCategoriesStore";
 
 export const useCategories = () => {
     const categories: Ref<Category[]> = ref([]);
-    console.log(123);
+    const {setCategories} = useCategoriesStore()
+
     const getCategories = async () =>  {
         categories.value = await getCategoriesRequest();
+
+        setCategories(categories.value);
     }
 
     return {
