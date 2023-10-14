@@ -65,11 +65,16 @@
 <script setup lang="ts">
 import {useModalList} from "~/components/Modals/composable/useModalList";
 import {useMainStore} from "~/store/useMainStore";
+import {useCategories} from "~/composable/request/useCategories";
 
 const isShowCatalogMenu = ref(false);
 const isShowUserMenu = ref(false);
 const header = ref();
-
+const {
+    categories,
+    getCategories,
+} = useCategories()
+getCategories()
 const {
     modalAuthorization,
     modalRegistration,

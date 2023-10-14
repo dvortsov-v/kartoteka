@@ -1,5 +1,5 @@
 <template>
-    <div v-if="category && products" class="catalog-page">
+    <div v-if="category && products" :key="`catalog-page-${category.id}`" class="catalog-page">
         <UiContainer class="catalog-page__wrapper">
             <UiBreadcrumbs :breadcrumbsList="breadcrumbsList" class="catalog-page__breadcrumbs"/>
             <CatalogHead :namePage="category.name" :count="category.count" class="catalog-page__head" />
@@ -83,6 +83,7 @@ const {
 } = useProducts();
 
 const {category, getCategory} = useCategory()
+
 getCategory();
 getProducts({category_ids: route.params.id});
 
@@ -103,9 +104,6 @@ const breadcrumbsList = computed(() => {
 useHead({
     title: unref(category)?.name || 'Каталог',
 });
-// definePageMeta({
-//     name: 'Каталог',
-// });
 
 const {modalCatalogFilters} = useModalList();
 const {
@@ -149,9 +147,6 @@ const toogleSortDescending = () => {
 const changeViews = (value: string) => {
     views.value = value
 }
-
-
-
 </script>
 
 <style scoped lang="scss">

@@ -65,7 +65,6 @@ import {topMenu} from '@/constants/top-menu'
 import {useCategoriesStore} from "~/store/useCategoriesStore";
 const categoriesStore =  useCategoriesStore()
 
-categoriesStore.getCategories()
 const emit = defineEmits(['close'])
 
 const currentCategory: Ref<Category | null> = ref(null);
