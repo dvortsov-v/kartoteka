@@ -20,9 +20,11 @@
     "@nuxtjs/svg-sprite": "1.0.2",
     "@pinia/nuxt": "0.4.11",
     "@vuepic/vue-datepicker": "6.0.3",
+    "date-fns": "^2.30.0",
     "nuxt-swiper": "1.2.0",
     "pinia": "2.1.6",
     "vue-final-modal": "4.4.5",
-    "vue-multiselect": "3.0.0-beta.2"
+    "vue-multiselect": "3.0.0-beta.2",
+    "vue-yandex-maps": "^1.1.0"
   }
 }

@@ -15,7 +15,8 @@ export default defineNuxtConfig({
         '@pinia/nuxt',
     ],
     plugins: [
-        '~/plugins/vue-final-modal.ts'
+        '~/plugins/vue-final-modal.ts',
+        { src: '~/plugins/yandex-map.client.ts', mode: 'client' },
     ],
     runtimeConfig: {
         public: {

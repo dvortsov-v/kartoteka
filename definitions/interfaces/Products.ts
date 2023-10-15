@@ -8,21 +8,43 @@ interface Field {
         href: string,
     }
 }
-interface AboutProduct {
+export interface AboutProduct {
     id: number;
     title: string;
     fields: Field[],
     fullFields?: Field[],
 }
+interface ProductSeller {
+    name: string,
+    email: string,
+    phone: string,
+    socials: {
+        facebook: string,
+        telegram: string,
+        vkontakte: string,
+    },
+    created_at: string,
+}
+
 export interface Product {
     id: number,
     name: string,
     category: string,
+    categoryId: number,
     description: string,
     price: string,
-    image: string,
+    images: string,
     address: string,
-    about: AboutProduct,
+    about: AboutProduct[],
+    status: string,
+    lat: string,
+    lng: string,
+    seller: ProductSeller,
+    created_at: string,
+    region: string,
+    is_lot: boolean,
+    bargaining_from: string,
+    bargaining_to: string,
 }
 export interface ResultRequesProducts {
     data: Product[],

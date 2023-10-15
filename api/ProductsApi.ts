@@ -20,7 +20,7 @@ export const getProductsRequest = async (queryParams?: ParamsProduct): Promise<R
 
     return {};
 }
-export const getProductRequest = async (id: string | string[]): Promise<Product | object> => {
+export const getProductRequest = async (id: string | string[]): Promise<Product | never> => {
     const config = useRuntimeConfig()
 
     const { data }: {data: Ref<ResultRequestProduct>} = await useFetch(`${config.public.baseURL}/products/${id}`);

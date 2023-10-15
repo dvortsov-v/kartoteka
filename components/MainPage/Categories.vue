@@ -1,6 +1,6 @@
 <template>
     <div class="main-page-categories">
-        <ul class="main-page-categories__list">
+        <ul v-if="categoriesStore.categories" class="main-page-categories__list">
             <li
                 v-for="category in categoriesStore.categories"
                 :key="`main-page-category-${category.id}`"
