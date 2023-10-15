@@ -1,7 +1,7 @@
 <template>
     <div class="news-page">
         <UiContainer class="news-page__wrapper">
-            <UiBreadcrumbs class="news-page__breadcrumbs" />
+            <UiBreadcrumbs :breadcrumbsList="breadcrumbsList" class="news-page__breadcrumbs" />
             <main class="news-page__main">
                 <h1 v-if="news.title" class="news-page__title h3">{{ news.title }}</h1>
                 <p class="news-page__date">20.03.2022, 12:32</p>
@@ -29,7 +29,7 @@
             <div class="news-page__other news-other">
                 <h3 class="news-other__title">Другие новости</h3>
                 <ul class="news-other__list">
-                    <li v-for="newsItem in filteredNews" class="news-other__item">
+                    <li v-for="newsItem in parsedFilteredNews" class="news-other__item">
                         <NewsItem class="news-other__box" :news="newsItem"/>
                     </li>
                 </ul>
@@ -38,12 +38,29 @@
     </div>
 </template>
 <script setup lang="ts">
-import {getNewsListFilterRequest, getNewsRequest} from "~/api/NewsApi";
+import {getNewsRelatedRequest, getNewsRequest} from "~/api/NewsApi";
 import {News} from "~/definitions/interfaces/News";
 
 const route = useRoute();
 const news: News | object = await getNewsRequest(route.params.id);
-const filteredNews: News | object = await getNewsListFilterRequest(2);
+const filteredNews: News[] = await getNewsRelatedRequest(route.params.id);
+const parsedFilteredNews = computed(() => filteredNews.slice(0, 5));
+
+useHead({
+    title: unref(news)?.title || '',
+});
+const breadcrumbsList = computed(() => {
+    return [
+        {
+            name: 'Новости',
+            path: '/news',
+        },
+        {
+            name: unref(news)?.title,
+            path: `/news/${unref(news)?.id}`,
+        },
+    ]
+});
 </script>
 
 <style scoped lang="scss">

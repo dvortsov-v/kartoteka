@@ -2,7 +2,7 @@
     <div v-if="categoriesStore.categories && products" class="catalog-page">
         <UiContainer class="catalog-page__wrapper">
             <UiBreadcrumbs class="catalog-page__breadcrumbs"/>
-            <CatalogHead namePage="Каталог" class="catalog-page__head" />
+            <CatalogHead namePage="Каталог" :count="paginationDate.total" class="catalog-page__head" />
             <main class="catalog-page__main catalog-page-main">
                 <aside class="catalog-page-main__aside">
                     <CatalogCategories :categories="categoriesStore.categories" class="catalog-page-main__categories" />

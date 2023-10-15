@@ -29,6 +29,17 @@ export const getNewsListFilterRequest = async (numberTitle: number): Promise<New
 
     return [];
 }
+export const getNewsRelatedRequest = async (id: string | string[]): Promise<News[]> => {
+    const config = useRuntimeConfig()
+
+    const { data }: {data: Ref<ResultRequestNewsList>} = await useFetch(`${config.public.baseURL}/news/${id}/related`);
+
+    if(unref(data)?.data) {
+        return unref(data).data;
+    }
+
+    return [];
+}
 export const getNewsRequest = async (id: string | string[]): Promise<News | object> => {
     const config = useRuntimeConfig()
 

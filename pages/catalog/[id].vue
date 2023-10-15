@@ -1,7 +1,7 @@
 <template>
     <div v-if="category && products" :key="`catalog-page-${category.id}`" class="catalog-page">
         <UiContainer class="catalog-page__wrapper">
-            <UiBreadcrumbs :breadcrumbsList="breadcrumbsList" class="catalog-page__breadcrumbs"/>
+            <UiBreadcrumbs :breadcrumbsList="breadcrumbs" class="catalog-page__breadcrumbs"/>
             <CatalogHead :namePage="category.name" :count="category.count" class="catalog-page__head" />
             <main class="catalog-page__main catalog-page-main">
                 <aside class="catalog-page-main__aside">
@@ -82,13 +82,20 @@ const {
     getProducts,
 } = useProducts();
 
-const {category, getCategory} = useCategory()
+const {
+    category,
+    breadcrumbs,
+    getCategory,
+    getBreadcrumbs,
+} = useCategory()
 
 getCategory();
+getBreadcrumbs();
 getProducts({category_ids: route.params.id});
 
 
 const breadcrumbsList = computed(() => {
+
     return [
         {
             name: 'Каталог',
