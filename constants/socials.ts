@@ -7,17 +7,17 @@ export const socials: Social[] = [
     {
         id: 1,
         icon: 'vkontakte',
-        href: 'vkontakte',
+        href: 'https://vk.com',
     },
 
     {
         id: 2,
         icon: 'telegram',
-        href: 'telegram',
+        href: 'https://telegram.com',
     },
     {
         id: 0,
         icon: 'ok',
-        href: 'ok',
+        href: 'https://ok.com',
     },
 ]

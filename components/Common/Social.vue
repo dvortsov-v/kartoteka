@@ -5,9 +5,9 @@
             :key="`footer-social-${social.id}`"
             class="socials__item"
         >
-            <NuxtLink :to="social.href" class="socials__social">
+            <a :href="social.href" class="socials__social">
                 <svg-icon :name="`socials/${social.icon}`" class="socials__icon"/>
-            </NuxtLink>
+            </a>
         </li>
     </ul>
 </template>

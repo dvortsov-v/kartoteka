@@ -54,6 +54,7 @@
                         </p>
                         <client-only>
                             <YandexMap
+                                :markerId="product.id"
                                 :coordinates="[product.lat, product.lng]"
                                 class="product-page-information-location__maps">
                                 <YandexMarker
@@ -80,20 +81,20 @@
                             </li>
                         </ul>
                         <div
-                            v-for="activeSection in sectionInformation"
-                            :key="`product-information-${activeSection.id}`"
+                            v-for="aboutSection in product.about"
+                            :key="`product-information-${aboutSection.id}`"
                             class="product-page-information-characteristics__section"
                         >
-                            <div :id="`product-section-${activeSection.id}`" class="product-page-information-characteristics__head">
-                                <h4 class="product-page-information-characteristics__title h4">{{ activeSection.title }}</h4>
-                                <UiButtonLink v-if="activeSection.fullFields" class="product-page-information-more">
+                            <div :id="`product-section-${aboutSection.id}`" class="product-page-information-characteristics__head">
+                                <h4 class="product-page-information-characteristics__title h4">{{ aboutSection.title }}</h4>
+                                <UiButtonLink v-if="aboutSection.fullFields" class="product-page-information-more">
                                     <span class="product-page-information-more__text">
                                         Подробнее
                                     </span>
                                     <svg-icon name="arrow-right" class="product-page-information-more__icon" />
                                 </UiButtonLink>
                             </div>
-                            <p v-for="field in activeSection.fields" class="product-page-information-characteristics__paragraph">
+                            <p v-for="field in aboutSection.fields" class="product-page-information-characteristics__paragraph">
                                 <span class="product-page-information-characteristics__name">
                                     <span class="product-page-information-characteristics__text">{{ field.name }}</span>
                                 </span>
@@ -167,22 +168,31 @@
                                 <svg-icon name="phone" class="product-page-salesman-phone__icon"/>
                                 <span class="product-page-salesman-phone__text">
                                     +7
-                                    <a :href="`tel:${parcedPhoneHref}`" v-if="isShowPhone" class="product-page-salesman-phone__number">{{ parcedPhone }}</a>
-                                    <ButtonLink v-else @click="toogleIsShowPhone" class="product-page-salesman-phone__text--blue">
+                                    <a
+                                        v-if="isShowPhone"
+                                        :href="`tel:${parcedPhoneHref}`"
+                                        class="product-page-salesman-phone__number">
+                                        {{ parcedPhone }}
+                                    </a>
+                                    <ButtonLink
+                                        @click="toogleIsShowPhone"
+                                        v-else
+                                        class="product-page-salesman-phone__text--blue"
+                                    >
                                         показать
                                         <span class="product-page-salesman-phone__text--desc">телефон</span>
                                     </ButtonLink>
                                 </span>
                             </UiButton>
-                            <div class="product-page-salesman__contacts">
-                                <NuxtLink
+                            <div v-if="parcedSocials.length > 0" class="product-page-salesman__contacts">
+                                <a
                                     v-for="social in parcedSocials"
                                     :key="`product-seller-social-${social.id}`"
-                                    :to="social.href"
+                                    :href="social.href"
                                     class="product-page-salesman__contact"
                                 >
                                     <svg-icon :name="`socials/${social.icon}`" class="product-page-salesman__icon"/>
-                                </NuxtLink>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -215,15 +225,13 @@ import ButtonLink from "~/components/Ui/ButtonLink.vue";
 import {scrollToElem} from "~/composable/useScrollTo";
 import {useModalList} from "~/components/Modals/composable/useModalList";
 import {useFavorites} from "~/composable/useFavorites";
-import {sectionInformation, sliderOption} from "~/pages/catalog/product/constants";
+import {sliderOption} from "~/pages/catalog/product/constants";
 import {format} from 'date-fns'
 import {ru} from 'date-fns/locale'
 import {Social} from "~/constants/socials";
 import {ComputedRef} from "vue";
 
 const route = useRoute();
-
-
 
 const {modalOffer} = useModalList();
 const {
@@ -253,7 +261,7 @@ const breadcrumbsList = computed(() => {
         },
         {
             name: unref(product)?.category,
-            path: `/catalog/${unref(product)?.categoryId}`,
+            path: `/catalog`,
         },
         {
             name: unref(product)?.name,

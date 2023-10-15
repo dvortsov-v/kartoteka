@@ -93,21 +93,6 @@ getCategory();
 getBreadcrumbs();
 getProducts({category_ids: route.params.id});
 
-
-const breadcrumbsList = computed(() => {
-
-    return [
-        {
-            name: 'Каталог',
-            path: '/catalog',
-        },
-        {
-            name: unref(category)?.name,
-            path: `/catalog/${unref(category)?.id}`,
-        },
-    ]
-});
-
 useHead({
     title: unref(category)?.name || 'Каталог',
 });

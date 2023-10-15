@@ -22,18 +22,17 @@ export const useCategory = () => {
 
             acc.push(...item);
         }
-
-        acc.push({
-            name: breadcrumbs.name,
-            path: `/catalog/${breadcrumbs.id}`,
-        });
-
+        if(breadcrumbs) {
+            acc.push({
+                name: breadcrumbs.name,
+                path: `/catalog/${breadcrumbs.id}`,
+            });
+        }
 
         return acc;
     }
     const getBreadcrumbs = async () =>  {
         breadcrumbs.value = breadcrumbs.value.concat(parceBreadcrumbs(await getCategoryBreacrumbsRequest(route.params.id)));
-        console.log(breadcrumbs.value)
     }
 
     return {
