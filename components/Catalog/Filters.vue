@@ -52,7 +52,10 @@
                     </UiChoices>
                 </li>
             </ul>
-            <UiButtonLink class="catalog-filters__more catalog-filters-more">
+            <UiButtonLink
+                v-if="false"
+                class="catalog-filters__more catalog-filters-more"
+            >
                 <svg-icon name="adding" class="catalog-filters-more__icon" />
                 <span class="catalog-filters-more__text">
                     Показать еще
