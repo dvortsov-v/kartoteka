@@ -12,10 +12,10 @@ export const getCategoriesRequest = async (): Promise<Category[]> => {
 }
 export const getCategoryRequest = async (id: string| string[]): Promise<Category | never> => {
     const config = useRuntimeConfig()
-    const { data }: {data: Ref<ResultRequestCategory>} = await useFetch(() => `${config.public.baseURL}/categories/${id}`);
+    const { data }: {data: Ref<ResultRequestCategory>} = await useFetch(`${config.public.baseURL}/categories/${id}`);
 
-    if(data?.value?.data) {
-        return data.value.data;
+    if(unref(data)?.data) {
+        return unref(data).data;
     }
 
     return {};

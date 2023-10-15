@@ -11,7 +11,6 @@ export const useFavoritesStore = defineStore('favoritesStore', () => {
 
     const isFavoriteProduct = (productId: number) => unref(favorites).find((favorite: Product) => favorite.id === productId);
     const deleteFavorites = (product: Product) => {
-        console.log(product);
         // const  unref(favorites)
         // unref(favorites).push(product);
     }

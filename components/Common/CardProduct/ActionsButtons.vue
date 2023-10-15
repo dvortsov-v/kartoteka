@@ -25,7 +25,10 @@
         >
             <svg-icon :name="iconFavoriteBtn(product.id)" class="card-product-actions-buttons__icon" />
         </UiButton>
-        <UiButton class="card-product-actions-buttons__buy card-product-actions-button">
+        <UiButton
+            @click="modalOffer.open"
+            class="card-product-actions-buttons__buy card-product-actions-button"
+        >
             <span class="card-product-actions-button__text">
                 Хочу купить
             </span>
@@ -38,6 +41,7 @@ import {PropType} from "@vue/runtime-core";
 import {Product} from "~/definitions/interfaces/Products";
 import {useFavoritesStore} from "~/store/useFavoritesStore";
 import {useFavorites} from "~/composable/useFavorites";
+import {useModalList} from "~/components/Modals/composable/useModalList";
 
 const props = defineProps({
     isCompactedView: {
@@ -51,6 +55,7 @@ const props = defineProps({
 })
 
 const {addFavorites} = useFavoritesStore();
+const {modalOffer} = useModalList()
 
 const {
     themeFavoriteBtn,

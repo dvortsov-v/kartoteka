@@ -143,7 +143,10 @@
                         </div>
                     </div>
                     <div class="product-page-base__buttons">
-                        <UiButton class="product-page-base__buy product-page-base-button">
+                        <UiButton
+                            @click="modalOffer.open"
+                            class="product-page-base__buy product-page-base-button"
+                        >
                             <span class="product-page-base-button__text">
                                 Хочу купить
                             </span>
@@ -207,6 +210,7 @@ import {Product} from "~/definitions/interfaces/Products";
 import ButtonLink from "~/components/Ui/ButtonLink.vue";
 import {scrollToElem} from "~/composable/useScrollTo";
 import {useProducts} from "~/composable/request/useProducts";
+import {useModalList} from "~/components/Modals/composable/useModalList";
 
 const sliderOption = {
     loop: true,
@@ -395,6 +399,7 @@ const toogleIsShowPhone = () => {
 const route = useRoute();
 
 const product: Product | object =  await getProductRequest(route.params.id);
+const {modalOffer} = useModalList()
 </script>
 
 <style scoped lang="scss">

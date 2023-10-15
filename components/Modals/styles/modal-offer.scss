@@ -1,0 +1,160 @@
+.modal-offer {
+  &__content {
+    position: relative;
+    max-width: 448px;
+    width: 100%;
+
+    @media (max-width: 670px) {
+      border-radius: 0;
+      max-width: 100%;
+      top: 0;
+      height: 100vh;
+      padding: 32px 32px 200px;
+    }
+  }
+
+  &__wrap {
+    background-color: hsl(0, 0%, 100%);
+    border-radius: 24px;
+    width: 100%;
+    padding: 32px;
+  }
+
+  &__head {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__body  {
+    margin-top: 32px;
+  }
+
+  &__form {
+    margin-top: 16px;
+  }
+
+  &__close {
+    padding: 0;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    fill: var(--black-100);
+  }
+
+  &__clue {
+    color: var(--black-50);
+    line-height: 1.5;
+  }
+}
+
+.modal-offer-form {
+  &__row {
+    display: flex;
+
+    &:nth-child(n + 2) {
+      margin-top: 16px;
+
+      @media (max-width: 1024px) {
+        margin-top: 24px;
+      }
+      @media (max-width: 670px) {
+        margin-top: 16px;
+      }
+    }
+
+    @media (max-width: 670px) {
+      flex-direction: column;
+    }
+  }
+
+  &__field {
+    width: 100%;
+  }
+
+  &__submit {
+    border-radius: 24px;
+    padding: 16px;
+    width: 100%;
+  }
+
+  &__buttons {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 32px;
+  }
+
+  &__auth {
+    margin-top: 16px;
+  }
+
+  &__password {
+    margin-top: 8px;
+  }
+}
+
+.modal-offer-field {
+  display: flex;
+  flex-direction: column;
+
+  &__placeholder {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &__text {
+    color: var(--black-100);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+  &__required {
+    fill: hsl(0, 100%, 58%);
+    margin-left: 4px;
+    width: 16px;
+    height: 16px;
+  }
+
+  &__input {
+    margin-top: 8px;
+    border: 1px solid var(--black-30);
+    border-radius: 8px;
+    min-height: 48px;
+    padding: 12px;
+    flex: auto;
+  }
+
+  &__textarea {
+    margin-top: 8px;
+    border: 1px solid var(--black-30);
+    border-radius: 8px;
+    min-height: 120px;
+    padding: 12px;
+
+    &::placeholder {
+      color: var(--black-50);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 670px) {
+      min-height: 152px;
+    }
+  }
+}
+
+.modal-offer-submit {
+  border-radius: 8px;
+}
+
+.modal-offer-form-checkbox {
+  display: flex;
+  align-items: flex-start;
+
+  &__text {
+    margin-left: 8px;
+    color: var(--black-100);
+    line-height: 1.5;
+  }
+}

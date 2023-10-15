@@ -16,7 +16,6 @@ export const getNewsListRequest = async (query: {page?: LocationQueryValue | Loc
 }
 export const getNewsListFilterRequest = async (numberTitle: number): Promise<News[]> => {
     const config = useRuntimeConfig()
-    console.log('numberTitle', numberTitle)
 
     const { data }: {data: Ref<ResultRequestNewsList>} = await useFetch(`${config.public.baseURL}/news`, {
         query: {
