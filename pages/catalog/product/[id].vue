@@ -1,5 +1,6 @@
 <template>
     <div v-if="product" class="product-page">
+        <pre>{{product}}</pre>
         <UiContainer class="product-page__wrapper">
             <UiBreadcrumbs class="product-page__breadcrumbs"/>
             <div class="product-page__block">
@@ -152,10 +153,11 @@
                             </span>
                         </UiButton>
                         <UiButton
-                            theme="gray"
+                            @click="handleFavoritesClick(product)"
+                            :theme="themeFavoriteBtn(product.id)"
                             class="product-page-base__favorites"
                         >
-                            <svg-icon name="star-line" class="product-page-base__icon" />
+                            <svg-icon :name="iconFavoriteBtn(product.id)" class="product-page-base__icon" />
                         </UiButton>
                     </div>
                     <div class="product-page-base__salesman product-page-salesman">
@@ -211,6 +213,7 @@ import ButtonLink from "~/components/Ui/ButtonLink.vue";
 import {scrollToElem} from "~/composable/useScrollTo";
 import {useProducts} from "~/composable/request/useProducts";
 import {useModalList} from "~/components/Modals/composable/useModalList";
+import {useFavorites} from "~/composable/useFavorites";
 
 const sliderOption = {
     loop: true,
@@ -399,7 +402,13 @@ const toogleIsShowPhone = () => {
 const route = useRoute();
 
 const product: Product | object =  await getProductRequest(route.params.id);
-const {modalOffer} = useModalList()
+const {modalOffer} = useModalList();
+
+const {
+    themeFavoriteBtn,
+    iconFavoriteBtn,
+    handleFavoritesClick,
+} = useFavorites();
 </script>
 
 <style scoped lang="scss">

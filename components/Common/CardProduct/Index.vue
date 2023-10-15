@@ -11,6 +11,7 @@
         >
             <div class="card-product-actions__box">
                 <UiButton
+                    @click="handleFavoritesClick(product)"
                     v-if="!isCompactedView && !isProductInOrder"
                     :theme="themeFavoriteBtn(product.id)"
                     class="card-product-actions__favorites"
@@ -64,6 +65,7 @@ const classesCardProductActions = computed(() => ({
 const {
     themeFavoriteBtn,
     iconFavoriteBtn,
+    handleFavoritesClick,
 } = useFavorites();
 </script>
 

@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import {defineStore, skipHydrate} from 'pinia'
 import {Category} from "~/definitions/interfaces/Categories";
 import {useLocalStorage} from "@vueuse/core";
 
@@ -10,7 +10,7 @@ export const useCategoriesStore = defineStore('categoriesStore', () => {
     }
 
     return {
-        categories,
+        categories: skipHydrate(categories),
         setCategories,
     }
 })

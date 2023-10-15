@@ -2,11 +2,11 @@
     <div class="card-product-actions-buttons">
         <UiButton
             v-if="isCompactedView"
-            @click="addFavorites(product)"
+            @click="handleFavoritesClick(product)"
             :theme="themeFavoriteBtn(product.id)"
             class="card-product-actions-buttons__favorites"
         >
-            <svg-icon :name="iconFavoriteBtn(product)" class="card-product-actions-buttons__icon" />
+            <svg-icon :name="iconFavoriteBtn(product.id)" class="card-product-actions-buttons__icon" />
         </UiButton>
         <UiButton
             v-if="!isCompactedView"
@@ -19,7 +19,7 @@
         </UiButton>
         <UiButton
             v-if="!isCompactedView"
-            @click="addFavorites(product)"
+            @click="handleFavoritesClick(product)"
             :theme="themeFavoriteBtn(product.id)"
             class="card-product-actions-buttons__favorites card-product-actions-buttons__favorites--mob"
         >
@@ -39,7 +39,6 @@
 <script setup lang="ts">
 import {PropType} from "@vue/runtime-core";
 import {Product} from "~/definitions/interfaces/Products";
-import {useFavoritesStore} from "~/store/useFavoritesStore";
 import {useFavorites} from "~/composable/useFavorites";
 import {useModalList} from "~/components/Modals/composable/useModalList";
 
@@ -54,12 +53,12 @@ const props = defineProps({
     }
 })
 
-const {addFavorites} = useFavoritesStore();
 const {modalOffer} = useModalList()
 
 const {
     themeFavoriteBtn,
     iconFavoriteBtn,
+    handleFavoritesClick,
 } = useFavorites();
 </script>
 
