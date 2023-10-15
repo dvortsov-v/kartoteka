@@ -1,6 +1,5 @@
 <template>
     <div v-if="product" class="product-page">
-        <pre>{{parcedSocials}}</pre>
         <UiContainer class="product-page__wrapper">
             <UiBreadcrumbs :breadcrumbsList="breadcrumbsList" class="product-page__breadcrumbs"/>
             <div class="product-page__block">
@@ -10,7 +9,7 @@
                     </h1>
                     <div class="product-page-head__additional">
                         <span class="product-page-head__number">№ {{ product.id }}</span>
-                        <span class="product-page-head__date">{{ formatedDate }}</span>
+                        <span class="product-page-head__date">{{ formattedDate }}</span>
                     </div>
                 </div>
                 <div class="product-page__information product-page-information">
@@ -125,17 +124,12 @@
                         <span class="product-page-base__price">{{ parcePrice(product?.price || '') }} ₽</span>
                         <ul class="product-page-base__statuses">
                             <li class="product-page-base__item">
-                                <div class="product-page-base__status product-page-status product-page-status--orange">
-                                    Стоимость ниже оценочной на 20%
-                                </div>
-                            </li>
-                            <li class="product-page-base__item">
                                 <div class="product-page-base__status product-page-status product-page-status--green">
-                                    Идут торги
+                                    {{ product.status }}
                                 </div>
                             </li>
                         </ul>
-                        <div class="product-page-base__incorporate product-page-incorporate">
+                        <div v-if="product.is_lot" class="product-page-base__incorporate product-page-incorporate">
                             <span class="product-page-incorporate__text">
                                 В составе
                                 <span class="product-page-incorporate__text--bold">лота №3</span>
@@ -201,10 +195,10 @@
                     <CommonSocial class="product-page-additional__socials" />
                 </div>
             </div>
-            <div class="product-page__aside">
+            <div  v-if="productRelated.length > 0" class="product-page__aside">
                 <h3 class="product-page__title">Похожие предложения</h3>
                 <div class="product-page__wrap">
-                    <CommonCardProduct :listProducts="products"  class="catalog-page-main__list" />
+                    <CommonProductList :listProducts="productRelated"  class="catalog-page-main__list" />
                     <div class="product-page__advertising"></div>
                 </div>
             </div>
@@ -214,12 +208,11 @@
 
 <script lang="ts" setup>
 import { YandexMap,YandexMarker } from "vue-yandex-maps";
-import {getProductRequest} from "~/api/ProductsApi";
+import {getProductRelatedRequest, getProductRequest} from "~/api/ProductsApi";
 import {parcePrice} from "~/composable/parcePrice";
 import {Product} from "~/definitions/interfaces/Products";
 import ButtonLink from "~/components/Ui/ButtonLink.vue";
 import {scrollToElem} from "~/composable/useScrollTo";
-import {useProducts} from "~/composable/request/useProducts";
 import {useModalList} from "~/components/Modals/composable/useModalList";
 import {useFavorites} from "~/composable/useFavorites";
 import {sectionInformation, sliderOption} from "~/pages/catalog/product/constants";
@@ -229,10 +222,9 @@ import {Social} from "~/constants/socials";
 import {ComputedRef} from "vue";
 
 const route = useRoute();
-const {
-    products,
-    getProducts,
-} = useProducts()
+
+
+
 const {modalOffer} = useModalList();
 const {
     themeFavoriteBtn,
@@ -240,7 +232,10 @@ const {
     handleFavoritesClick,
 } = useFavorites();
 const product: Product =  await getProductRequest(route.params.id);
-
+const productRelated: Product[] =  await getProductRelatedRequest(route.params.id);
+useHead({
+    title: unref(product)?.name || '',
+});
 const activeTab: Ref<number> = ref(0);
 const isShowPhone = ref(false);
 const activeImage = ref(unref(product).images[0]);
@@ -266,7 +261,7 @@ const breadcrumbsList = computed(() => {
         },
     ]
 });
-const formatedDate = computed(() => format(new Date(unref(product).created_at), 'dd.MM.yyyy, HH:mm'))
+const formattedDate = computed(() => format(new Date(unref(product).created_at), 'dd.MM.yyyy, HH:mm'))
 const parcedSocials: ComputedRef<Social[]> = computed(() => Object.entries(unref(product).seller.socials).reduce((acc: Social[], current, index: number) => {
     acc.push({
         id: index,
@@ -295,11 +290,6 @@ const handleChoice = (value: number) => {
 const toogleIsShowPhone = () => {
     isShowPhone.value = !isShowPhone.value;
 }
-
-
-
-getProducts();
-
 </script>
 
 <style scoped lang="scss">

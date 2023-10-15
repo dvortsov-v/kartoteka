@@ -31,4 +31,15 @@ export const getProductRequest = async (id: string | string[]): Promise<Product 
 
     return {};
 }
+export const getProductRelatedRequest = async (id: string | string[]): Promise<Product[]> => {
+    const config = useRuntimeConfig()
+
+    const { data }: {data: Ref<ResultRequesProducts>} = await useFetch(`${config.public.baseURL}/products/${id}/related`);
+
+    if(unref(data)?.data) {
+        return unref(data).data;
+    }
+
+    return [];
+}
 
