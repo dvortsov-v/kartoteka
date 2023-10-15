@@ -9,7 +9,7 @@ export const getCategoriesRequest = async (): Promise<Category[]> => {
     const config = useRuntimeConfig()
     const { data }: {data: Ref<ResultRequesCategories>} = await useFetch(`${config.public.baseURL}/categories`);
 
-    if(unref(data).data) {
+    if(unref(data)?.data) {
         return unref(data).data;
     }
 

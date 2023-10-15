@@ -225,13 +225,23 @@ import ButtonLink from "~/components/Ui/ButtonLink.vue";
 import {scrollToElem} from "~/composable/useScrollTo";
 import {useModalList} from "~/components/Modals/composable/useModalList";
 import {useFavorites} from "~/composable/useFavorites";
-import {sliderOption} from "~/pages/catalog/product/constants";
 import {format} from 'date-fns'
 import {ru} from 'date-fns/locale'
 import {Social} from "~/constants/socials";
 import {ComputedRef} from "vue";
 
 const route = useRoute();
+const sliderOption = {
+    loop: true,
+    autoplay: {
+        delay: 5000,
+        disableOnInteraction: true,
+    },
+    slidesPerView: 9,
+    observer: true,
+    observeParents: true,
+    spaceBetween: 8,
+}
 
 const {modalOffer} = useModalList();
 const {

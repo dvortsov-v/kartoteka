@@ -10,6 +10,7 @@
         </UiButton>
         <UiButton
             v-if="!isCompactedView"
+            @click="modalConsultation.open"
             theme="gray"
             class="card-product-actions-buttons__consultation card-product-actions-button"
         >
@@ -53,7 +54,7 @@ const props = defineProps({
     }
 })
 
-const {modalOffer} = useModalList()
+const {modalOffer, modalConsultation} = useModalList()
 
 const {
     themeFavoriteBtn,
