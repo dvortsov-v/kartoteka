@@ -1,4 +1,5 @@
 import {Meta} from "~/definitions/interfaces/Meta";
+import {Breadcrumbs} from "~/definitions/interfaces/Breadcrumbs";
 
 interface Field {
     name: string,
@@ -29,7 +30,7 @@ interface ProductSeller {
 export interface Product {
     id: number,
     name: string,
-    category: string,
+    category: Breadcrumbs,
     categoryId: number,
     description: string,
     price: string,

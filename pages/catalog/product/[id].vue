@@ -1,7 +1,7 @@
 <template>
     <div v-if="product" class="product-page">
         <UiContainer class="product-page__wrapper">
-            <UiBreadcrumbs :breadcrumbsList="breadcrumbsList" class="product-page__breadcrumbs"/>
+            <UiBreadcrumbs :breadcrumbsList="breadcrumbs" class="product-page__breadcrumbs"/>
             <div class="product-page__block">
                 <div class="product-page__head product-page-head">
                     <h1 class="product-page-head__title h4">
@@ -218,19 +218,13 @@
 
 <script lang="ts" setup>
 import { YandexMap,YandexMarker } from "vue-yandex-maps";
-import {getProductRelatedRequest, getProductRequest} from "~/api/ProductsApi";
 import {parcePrice} from "~/composable/parcePrice";
-import {Product} from "~/definitions/interfaces/Products";
 import ButtonLink from "~/components/Ui/ButtonLink.vue";
 import {scrollToElem} from "~/composable/useScrollTo";
 import {useModalList} from "~/components/Modals/composable/useModalList";
 import {useFavorites} from "~/composable/useFavorites";
-import {format} from 'date-fns'
-import {ru} from 'date-fns/locale'
-import {Social} from "~/constants/socials";
-import {ComputedRef} from "vue";
+import {useProduct} from "~/composable/request/useProduct";
 
-const route = useRoute();
 const sliderOption = {
     loop: true,
     autoplay: {
@@ -249,49 +243,28 @@ const {
     iconFavoriteBtn,
     handleFavoritesClick,
 } = useFavorites();
-const product: Product =  await getProductRequest(route.params.id);
-const productRelated: Product[] =  await getProductRelatedRequest(route.params.id);
+const {
+    product,
+    tabs,
+    formattedDate,
+    parcedSocials,
+    parcedCreateAt,
+    parcedPhone,
+    parcedPhoneHref,
+    breadcrumbs,
+    productRelated,
+    getProduct,
+    getProductRelated,
+} = useProduct();
+await getProduct();
+await getProductRelated();
+
 useHead({
     title: unref(product)?.name || '',
 });
 const activeTab: Ref<number> = ref(0);
 const isShowPhone = ref(false);
 const activeImage = ref(unref(product).images[0]);
-
-const tabs = computed(() => unref(product).about.map(section => {
-    const {id, title} = section;
-
-    return {id, title}
-}))
-const breadcrumbsList = computed(() => {
-    return [
-        {
-            name: 'Каталог',
-            path: '/catalog',
-        },
-        {
-            name: unref(product)?.category,
-            path: `/catalog`,
-        },
-        {
-            name: unref(product)?.name,
-            path: `/catalog/product/${unref(product)?.id}`,
-        },
-    ]
-});
-const formattedDate = computed(() => format(new Date(unref(product).created_at), 'dd.MM.yyyy, HH:mm'))
-const parcedSocials: ComputedRef<Social[]> = computed(() => Object.entries(unref(product).seller.socials).reduce((acc: Social[], current, index: number) => {
-    acc.push({
-        id: index,
-        icon: current[0],
-        href: current[1],
-    })
-    return acc;
-}, []))
-const parcedCreateAt = computed(() => format(new Date(unref(product).seller.created_at), 'MMMM.yyyy', {locale: ru}) )
-const parcedPhone = computed(() => unref(product).seller.phone.replace(/^\+?(\d)/,''))
-const parcedPhoneHref = computed(() => unref(product).seller.phone.replace(' ', ''))
-
 const handleClickSlide = (url: string) => {
     activeImage.value = url;
 }

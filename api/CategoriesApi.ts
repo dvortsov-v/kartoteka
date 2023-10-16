@@ -2,8 +2,9 @@ import {
     ResultRequesCategories,
     ResultRequestCategory,
     Category,
-    ResultRequestCategoryBreacrumbs, CategoryBreacrumbs
+    ResultRequestCategoryBreacrumbs
 } from "~/definitions/interfaces/Categories";
+import {Breadcrumbs} from "~/definitions/interfaces/Breadcrumbs";
 
 export const getCategoriesRequest = async (): Promise<Category[]> => {
     const config = useRuntimeConfig()
@@ -25,7 +26,7 @@ export const getCategoryRequest = async (id: string| string[]): Promise<Category
 
     return {};
 }
-export const getCategoryBreacrumbsRequest = async (id: string| string[]): Promise<CategoryBreacrumbs | never> => {
+export const getCategoryBreacrumbsRequest = async (id: string| string[]): Promise<Breadcrumbs | never> => {
     const config = useRuntimeConfig()
     const { data }: {data: Ref<ResultRequestCategoryBreacrumbs>} = await useFetch(`${config.public.baseURL}/categories/${id}/breadcrumps`);
 
