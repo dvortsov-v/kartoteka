@@ -11,7 +11,6 @@ export const useParceBreadcrumbs = (breadcrumbs: Breadcrumbs): ParceBreadcrumbs[
 
         acc.push(...item);
     }
-    console.log(breadcrumbs)
     if(breadcrumbs) {
         acc.push({
             name: breadcrumbs.name,

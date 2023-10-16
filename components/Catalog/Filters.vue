@@ -75,7 +75,14 @@
         </div>
         <div class="catalog-filters__section">
             <h6 class="catalog-filters__title catalog-filters-title">Регион имущества</h6>
-            <UiMultiSelect v-model="selectRegions" :options="options" multiple placeholder="Все" class="catalog-filters__selector"></UiMultiSelect>
+            <UiMultiSelect
+                v-model="selectRegions"
+                :options="regions"
+                multiple placeholder="Все"
+                track-by="id"
+                label="name"
+                class="catalog-filters__selector"
+            />
         </div>
         <div class="catalog-filters__bottom">
             <UiButton type="submit" class="catalog-filters__more">Показать 1 453 товаров</UiButton>
@@ -85,13 +92,14 @@
 
 </template>
 <script setup lang="ts">
+import {useRegions} from "~/composable/request/useRegions";
 
 const onlyPhoto: Ref<boolean> = ref(false);
 const partOfLot: Ref<boolean> = ref(false);
+const selectRegions: Ref<[] | undefined> = ref();
 const val: Ref<Date | null> = ref(null);
-const options: Ref<[]> = ref(['Все','Брянск','Витебск','Октябрь','Москва']);
-const selectRegions: Ref<[]> = ref();
-
+const {regions, getRegions} = useRegions();
+await getRegions();
 const listStatus: Ref<{id: number, name: string, value: boolean}[]> = ref([
     {
         id: 0,
