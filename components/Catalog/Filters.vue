@@ -1,5 +1,5 @@
 <template>
-    <div class="catalog-filters">
+    <form class="catalog-filters" @change="console.log(123)">
         <div class="catalog-filters__section">
             <h6 class="catalog-filters__title catalog-filters-title">Цена, ₽</h6>
             <div class="catalog-filters__fields catalog-filters-fields">
@@ -13,7 +13,7 @@
             <ul class="catalog-filters__list catalog-filters-list">
                 <li class="catalog-filters-list__item">
                     <UiChoices
-                        v-model:checked="onlyPhoto"
+                        v-model="formData.has_image"
                         class="catalog-filters-checkbox"
                     >
                         <span class="catalog-filters-checkbox__text">
@@ -23,7 +23,7 @@
                 </li>
                 <li class="catalog-filters-list__item">
                     <UiChoices
-                        v-model:checked="partOfLot"
+                        v-model="formData.is_lot"
                         class="catalog-filters-checkbox"
                     >
                         <span class="catalog-filters-checkbox__text">
@@ -43,7 +43,10 @@
                     class="catalog-filters-list__item"
                 >
                     <UiChoices
-                        v-model:checked="status.value"
+                        v-model:checked="formData.status"
+                        name="status"
+                        :value="status.value"
+                        :isChecked="formData.status.includes(status.value)"
                         class="catalog-filters__checkbox catalog-filters-checkbox"
                     >
                         <span class="catalog-filters-checkbox__text">
@@ -66,17 +69,17 @@
             <h6 class="catalog-filters__title catalog-filters-title">Период торгов</h6>
             <div class="catalog-filters__fields catalog-filters-fields">
                 <div class="catalog-filters-fields__field">
-                    <UiDatePicker v-model="val" class="catalog-filters-fields__input"></UiDatePicker>
+                    <UiDatePicker v-model="formData.bargaining_to" class="catalog-filters-fields__input"></UiDatePicker>
                 </div>
                 <div class="catalog-filters-fields__field">
-                    <UiDatePicker class="catalog-filters-fields__input"></UiDatePicker>
+                    <UiDatePicker v-model="formData.bargaining_from" class="catalog-filters-fields__input"></UiDatePicker>
                 </div>
             </div>
         </div>
         <div class="catalog-filters__section">
             <h6 class="catalog-filters__title catalog-filters-title">Регион имущества</h6>
             <UiMultiSelect
-                v-model="selectRegions"
+                v-model="formData.regins_ids"
                 :options="regions"
                 multiple placeholder="Все"
                 track-by="id"
@@ -88,46 +91,50 @@
             <UiButton type="submit" class="catalog-filters__more">Показать 1 453 товаров</UiButton>
             <UiButtonLink type="reset" class="catalog-filters__more">Сбросить</UiButtonLink>
         </div>
-    </div>
-
+    </form>
 </template>
 <script setup lang="ts">
 import {useRegions} from "~/composable/request/useRegions";
-
-const onlyPhoto: Ref<boolean> = ref(false);
-const partOfLot: Ref<boolean> = ref(false);
-const selectRegions: Ref<[] | undefined> = ref();
-const val: Ref<Date | null> = ref(null);
+import {ParamsProduct} from "~/api/ProductsApi";
 const {regions, getRegions} = useRegions();
 await getRegions();
-const listStatus: Ref<{id: number, name: string, value: boolean}[]> = ref([
+
+
+const listStatus = ref<{id: number, name: string, value: string}[]>([
     {
         id: 0,
         name: 'Проведена инвентаризация',
-        value: false,
+        value: 'Проведена инвентаризация',
     },
     {
         id: 1,
         name: 'Проведена оценка',
-        value: false,
+        value: 'Проведена оценка',
     },
     {
         id: 2,
         name: 'Объявлены торги',
-        value: false,
+        value: 'Объявлены торги',
     },
     {
         id: 3,
         name: 'Идут торги',
-        value: false,
+        value: 'Идут торги',
     },
     {
         id: 4,
         name: 'Торги завершены, имущество не продано',
-        value: false,
+        value: 'Торги завершены, имущество не продано',
     },
 ])
-
+const formData = ref<ParamsProduct>({
+    has_image: false,
+    is_lot:  false,
+    regins_ids: '',
+    bargaining_to: '',
+    bargaining_from: '',
+    status: [],
+})
 </script>
 
 <style scoped lang="scss">
