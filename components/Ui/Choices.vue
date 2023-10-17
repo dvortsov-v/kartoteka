@@ -43,10 +43,6 @@ const props = defineProps({
         type: [String, Number, Boolean, Function, Object, Array],
         default: false,
     },
-    isChecked: {
-        type: Boolean,
-        default: false,
-    }
 })
 const emit = defineEmits(['update:checked']);
 
@@ -60,7 +56,13 @@ const modelValue = computed({
 });
 
 const isRadio = computed(() => props.inputType === 'radio')
-const isChecked = computed(() => (unref(isRadio) ? props.value === props.checked : props.checked))
+const isChecked = computed(() => {
+    if(Array.isArray(props.checked)) {
+        return props.checked.includes(props.value);
+    } else {
+        return unref(isRadio) ? props.value === props.checked : props.checked
+    }
+})
 
 const choiceClasses = computed(() => ({
     'ui-choices--disabled': props.disabled,

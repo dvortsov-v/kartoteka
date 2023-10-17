@@ -1,4 +1,9 @@
-import {Product, ResultRequesProducts, ResultRequestProduct} from "~/definitions/interfaces/Products";
+import {
+    Product,
+    ResultRequesProducts,
+    ResultRequestProduct,
+    ResultRequestProductCount
+} from "~/definitions/interfaces/Products";
 import {LocationQueryValue} from "vue-router";
 export interface ParamsProduct {
     name?: string,
@@ -14,7 +19,7 @@ export interface ParamsProduct {
     bargaining_to?: string,
     order_by?: string,
     order_type?: string,
-    regins_ids?: string|string[],
+    region_ids?: string|string[],
 }
 
 export const getProductsRequest = async (queryParams?: ParamsProduct): Promise<ResultRequesProducts | never> => {
@@ -29,6 +34,21 @@ export const getProductsRequest = async (queryParams?: ParamsProduct): Promise<R
     }
 
     return {};
+}
+
+export const getProductsCountRequest = async (queryParams?: ParamsProduct): Promise<number> => {
+    const config = useRuntimeConfig()
+    console.log(queryParams)
+    try {
+        const { data }: {data: Ref<ResultRequestProductCount>} = await useFetch(`${config.public.baseURL}/products/count`,{
+            query: queryParams,
+        });
+
+        return unref(data).count || 0;
+    } catch (e) {
+        return 0;
+    }
+
 }
 export const getProductRequest = async (id: string | string[]): Promise<Product | never> => {
     const config = useRuntimeConfig()

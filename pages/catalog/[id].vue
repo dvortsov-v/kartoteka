@@ -6,7 +6,7 @@
             <main class="catalog-page__main catalog-page-main">
                 <aside class="catalog-page-main__aside">
                     <CatalogCategories :categories="category.sub_categories || category" isCatalogCategory class="catalog-page-main__categories" />
-                    <CatalogFilters class="catalog-page-main__filters" />
+                    <CatalogFilters @submitFilters="submitFilters" class="catalog-page-main__filters" />
                 </aside>
                 <section class="catalog-page-main__section">
                     <div class="catalog-page-main__maps"></div>
@@ -74,6 +74,7 @@ import {useModalList} from "~/components/Modals/composable/useModalList";
 import {useModalCatalogSort} from "~/components/Modals/composable/useModalCatalogSort";
 import {useProducts} from "~/composable/request/useProducts";
 import {useCategory} from "~/composable/request/useCategory";
+import {ParamsProduct} from "~/api/ProductsApi";
 
 const route = useRoute();
 const {
@@ -138,6 +139,10 @@ const toogleSortDescending = () => {
 
 const changeViews = (value: string) => {
     views.value = value
+}
+
+const submitFilters = async (params: ParamsProduct) => {
+    await getProducts({ ...params, category_ids: route.params.id,})
 }
 </script>
 

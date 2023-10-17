@@ -6,7 +6,7 @@
             <main class="catalog-page__main catalog-page-main">
                 <aside class="catalog-page-main__aside">
                     <CatalogCategories :categories="categoriesStore.categories" class="catalog-page-main__categories" />
-                    <CatalogFilters class="catalog-page-main__filters" />
+                    <CatalogFilters @submitFilters="submitFilters" class="catalog-page-main__filters" />
                 </aside>
                 <section class="catalog-page-main__section">
                     <div class="catalog-page-main__maps"></div>
@@ -75,6 +75,7 @@ import {useModalList} from "~/components/Modals/composable/useModalList";
 import {useModalCatalogSort} from "~/components/Modals/composable/useModalCatalogSort";
 import {useProducts} from "~/composable/request/useProducts";
 import {useCategoriesStore} from "~/store/useCategoriesStore";
+import {ParamsProduct} from "~/api/ProductsApi";
 
 const categoriesStore =  useCategoriesStore()
 
@@ -130,6 +131,10 @@ const toogleSortDescending = () => {
 }
 const changeViews = (value: string) => {
     views.value = value
+}
+
+const submitFilters = async (params: ParamsProduct) => {
+    await getProducts({ ...params})
 }
 
 </script>

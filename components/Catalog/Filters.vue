@@ -1,5 +1,5 @@
 <template>
-    <form class="catalog-filters" @change="console.log(123)">
+    <form class="catalog-filters">
         <div class="catalog-filters__section">
             <h6 class="catalog-filters__title catalog-filters-title">Цена, ₽</h6>
             <div class="catalog-filters__fields catalog-filters-fields">
@@ -13,7 +13,7 @@
             <ul class="catalog-filters__list catalog-filters-list">
                 <li class="catalog-filters-list__item">
                     <UiChoices
-                        v-model="formData.has_image"
+                        v-model:checked="formData.has_image"
                         class="catalog-filters-checkbox"
                     >
                         <span class="catalog-filters-checkbox__text">
@@ -23,7 +23,7 @@
                 </li>
                 <li class="catalog-filters-list__item">
                     <UiChoices
-                        v-model="formData.is_lot"
+                        v-model:checked="formData.is_lot"
                         class="catalog-filters-checkbox"
                     >
                         <span class="catalog-filters-checkbox__text">
@@ -46,7 +46,7 @@
                         v-model:checked="formData.status"
                         name="status"
                         :value="status.value"
-                        :isChecked="formData.status.includes(status.value)"
+                        :checked="formData.status.includes(status.name)"
                         class="catalog-filters__checkbox catalog-filters-checkbox"
                     >
                         <span class="catalog-filters-checkbox__text">
@@ -79,26 +79,41 @@
         <div class="catalog-filters__section">
             <h6 class="catalog-filters__title catalog-filters-title">Регион имущества</h6>
             <UiMultiSelect
-                v-model="formData.regins_ids"
+                v-model="formData.region_ids"
                 :options="regions"
                 multiple placeholder="Все"
-                track-by="id"
+                trackBy="id"
                 label="name"
                 class="catalog-filters__selector"
             />
         </div>
         <div class="catalog-filters__bottom">
-            <UiButton type="submit" class="catalog-filters__more">Показать 1 453 товаров</UiButton>
-            <UiButtonLink type="reset" class="catalog-filters__more">Сбросить</UiButtonLink>
+            <UiButton
+                @click.prevent="emit('submitFilters', paramsSubmit)"
+                type="submit"
+                class="catalog-filters__more"
+            >
+                Показать {{ countProduct }} товаров
+            </UiButton>
+            <UiButtonLink
+                @click.prevent="resetForm"
+                type="reset"
+                class="catalog-filters__more"
+            >
+                Сбросить
+            </UiButtonLink>
         </div>
     </form>
 </template>
 <script setup lang="ts">
 import {useRegions} from "~/composable/request/useRegions";
-import {ParamsProduct} from "~/api/ProductsApi";
+import {getProductsCountRequest, ParamsProduct} from "~/api/ProductsApi";
+import {LocationQueryValue} from "vue-router";
+
+const route = useRoute();
+const emit = defineEmits(['submitFilters'])
 const {regions, getRegions} = useRegions();
 await getRegions();
-
 
 const listStatus = ref<{id: number, name: string, value: string}[]>([
     {
@@ -127,14 +142,44 @@ const listStatus = ref<{id: number, name: string, value: string}[]>([
         value: 'Торги завершены, имущество не продано',
     },
 ])
+const countProduct = ref(0);
 const formData = ref<ParamsProduct>({
     has_image: false,
     is_lot:  false,
-    regins_ids: '',
+    region_ids: [],
     bargaining_to: '',
     bargaining_from: '',
     status: [],
+});
+
+const paramsSubmit = computed(() => {
+    return Object.entries(unref(formData)).reduce((acc: {[x: string] : number | boolean | string[] | number[] | LocationQueryValue | LocationQueryValue[]}, current: [string, (number | boolean | string[] | LocationQueryValue | LocationQueryValue[])]) => {
+        if(Array.isArray(current[1]) && (current[1].length > 0) && current[0] === 'region_ids' ) {
+            acc[current[0]] = current[1].map((item) => item.id).join(',');
+        } else if(current[1] && (typeof current[0] === 'string')) {
+            acc[current[0]] = current[1];
+        }
+
+        return acc;
+    }, {})
 })
+const resetForm = () => {
+    formData.value = {
+        has_image: false,
+        is_lot:  false,
+        region_ids: [],
+        bargaining_to: '',
+        bargaining_from: '',
+        status: [],
+    }
+
+    emit('submitFilters', unref(paramsSubmit));
+}
+
+
+watch(paramsSubmit, async (params) => {
+    countProduct.value = await getProductsCountRequest({ ...params, category_ids: route.params.id,});
+}, {immediate: true})
 </script>
 
 <style scoped lang="scss">

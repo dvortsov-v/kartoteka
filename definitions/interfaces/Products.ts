@@ -54,3 +54,6 @@ export interface ResultRequesProducts {
 export interface ResultRequestProduct {
     data: Product
 }
+export interface ResultRequestProductCount {
+    count: number;
+}
