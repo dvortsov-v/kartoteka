@@ -14,7 +14,10 @@
                 :key="`category-${newsItem.id}`"
                 class="newsline__item"
             >
-                <button type="button" class="newsline__elem news">
+                <UiButton type="button"
+                    @click="modalHistory.open"
+                    theme="primary-transparent"
+                    class="newsline__elem news">
                     <picture class="news__picture">
                         <source
                             :srcset="`/images/${newsItem.img}.webp`"
@@ -27,7 +30,7 @@
                         >
                     </picture>
                     <span class="news__name">{{newsItem.name}}</span>
-                </button>
+                </UiButton>
             </SwiperSlide>
         </Swiper>
         <NuxtLink class="newsline__button newsline__button--next">
@@ -36,6 +39,7 @@
     </div>
 </template>
 <script setup lang="ts">
+import {useModalList} from "~/components/Modals/composable/useModalList";
 import {news} from '@/constants/news';
 const sliderOption = {
     observer: true,
@@ -63,6 +67,9 @@ const sliderOption = {
 }
 const sliderModules = [SwiperNavigation];
 
+const {
+    modalHistory,
+} = useModalList()
 
 
 </script>
