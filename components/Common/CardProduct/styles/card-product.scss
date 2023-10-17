@@ -21,6 +21,7 @@ $base: '.card-product';
 
     #{$self}__actions {
       margin-top: 20px;
+      flex-direction: column;
     }
   }
 }
@@ -43,15 +44,18 @@ $base: '.card-product';
   &__icon {
     width: 16px;
     height: 16px;
-    fill: var(--black-100);
   }
 
   &__status {
     margin-left: 16px;
+    padding-top: 16px;
+    padding-right: 16px;
+    padding-bottom: 16px;
   }
 
   &__addition {
     margin-left: 16px;
+
     @media (max-width: 670px) {
       margin-left: 0;
     }
@@ -95,8 +99,26 @@ $base: '.card-product';
         margin-left: 0;
         padding-left: 16px;
       }
+
+      #{$self}__addition {
+        margin-left: 16px;
+
+        @media (max-width: 670px) {
+          margin-left: 0;
+        }
+      }
     }
   }
+
+  #{$base}--is-compacted-view & {
+    #{$self}__addition {
+      margin-left: 0;
+    }
+    #{$self}__buttons {
+      margin-top: 16px;
+    }
+  }
+
 }
 
 .card-product-actions-addition {

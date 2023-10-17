@@ -6,7 +6,7 @@
             </h3>
             <div class="main-page-recommendations__products">
                 <ul class="main-page-recommendations__list">
-                    <li v-for="product in productsStore.products" class="main-page-recommendations__item">
+                    <li v-for="product in products" class="main-page-recommendations__item">
                         <CommonCardProduct :product="product" />
                     </li>
                 </ul>
@@ -30,11 +30,16 @@
     </div>
 </template>
 <script lang="ts" setup>
-import {useProductsStore} from "~/store/useProductsStore";
 import {bannersProduct} from "~/constants/banners";
+import {useProducts} from "~/composable/request/useProducts";
 
-const productsStore = useProductsStore()
-productsStore.getProducts();
+const {
+    products,
+    getProducts,
+} = useProducts()
+
+getProducts();
+
 </script>
 <style scoped lang="scss">
 @import "@/components/MainPage/styles/main-page-recommendations.scss";

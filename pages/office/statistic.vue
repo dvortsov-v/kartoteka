@@ -131,35 +131,13 @@
                 </tbody>
 
             </table>
-            <div class="statistic-page__navigation statistic-page-navigation">
-                <UiPagination countPage="5" class="statistic-page-navigation__pagination" />
-                <UiButton theme="transparent" class="statistic-page-navigation__more">
-                    <svg-icon
-                        name="adding"
-                        class="statistic-page-navigation__icon"
-                    />
-                    <span class="statistic-page-navigation__text">
-                                Показать ещё
-                            </span>
-                </UiButton>
-                <span class="statistic-page-navigation__show statistic-page-navigation-show">
-                            <span class="statistic-page-navigation-show__text">Показано:</span>
-                            <span class="statistic-page-navigation-show__count">50 из 120</span>
-                        </span>
-            </div>
+            <UiPagination :paginationDate="{}"  class="statistic-page__navigation" />
         </main>
     </OfficeLayout>
 </template>
 
 <script setup lang="ts">
-import {useProductsStore} from "~/store/useProductsStore";
 import {statisticCaseOffice} from "~/constants/statisticCaseOffice";
-const productsStore = useProductsStore();
-productsStore.getProducts();
-
-definePageMeta({
-    layout: 'office',
-});
 
 const tabs = [
     {

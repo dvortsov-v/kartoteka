@@ -1,9 +1,27 @@
 import {ResultRequestNews, ResultRequestNewsList, News} from "~/definitions/interfaces/News";
+import {LocationQueryValue} from "vue-router";
 
-export const getNewsListRequest = async (): Promise<News[]> => {
+export const getNewsListRequest = async (query: {page?: LocationQueryValue | LocationQueryValue[]}): Promise<ResultRequestNewsList> => {
     const config = useRuntimeConfig()
 
-    const { data }: {data: Ref<ResultRequestNewsList>} = await useFetch(`${config.public.baseURL}/news`);
+    const { data }: {data: Ref<ResultRequestNewsList>} = await useFetch(`${config.public.baseURL}/news`, {
+        query,
+    });
+
+    if(unref(data)) {
+        return unref(data);
+    }
+
+    return {};
+}
+export const getNewsListFilterRequest = async (numberTitle: number): Promise<News[]> => {
+    const config = useRuntimeConfig()
+
+    const { data }: {data: Ref<ResultRequestNewsList>} = await useFetch(`${config.public.baseURL}/news`, {
+        query: {
+            title: numberTitle,
+        }
+    });
 
     if(unref(data)?.data) {
         return unref(data).data;
@@ -11,15 +29,10 @@ export const getNewsListRequest = async (): Promise<News[]> => {
 
     return [];
 }
-export const getNewsListFilterRequest = async (numberTitle: number): Promise<News[]> => {
+export const getNewsRelatedRequest = async (id: string | string[]): Promise<News[]> => {
     const config = useRuntimeConfig()
-    console.log('numberTitle', numberTitle)
 
-    const { data }: {data: Ref<ResultRequestNewsList>} = await useFetch(`${config.public.baseURL}/news`, {
-        query: {
-            title: numberTitle,
-        }
-    });
+    const { data }: {data: Ref<ResultRequestNewsList>} = await useFetch(`${config.public.baseURL}/news/${id}/related`);
 
     if(unref(data)?.data) {
         return unref(data).data;

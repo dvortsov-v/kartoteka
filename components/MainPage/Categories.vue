@@ -1,6 +1,6 @@
 <template>
     <div class="main-page-categories">
-        <ul class="main-page-categories__list">
+        <ul v-if="categoriesStore.categories" class="main-page-categories__list">
             <li
                 v-for="category in categoriesStore.categories"
                 :key="`main-page-category-${category.id}`"
@@ -15,15 +15,9 @@
     </div>
 </template>
 <script setup lang="ts">
-import {useCategoriesStore} from '~/store/useCategoriesStore';
-import {useProductsStore} from "~/store/useProductsStore";
-
+import {useCategoriesStore} from "~/store/useCategoriesStore";
 const categoriesStore =  useCategoriesStore()
 
-categoriesStore.getCategories();
-
-const productsStore = useProductsStore()
-productsStore.getProducts();
 </script>
 
 <style scoped lang="scss">

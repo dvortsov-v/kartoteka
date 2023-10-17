@@ -1,15 +1,16 @@
-import { defineStore } from 'pinia'
+import {defineStore, skipHydrate} from 'pinia'
 import {Category} from "~/definitions/interfaces/Categories";
-import {getCategoriesRequest} from "~/api/CategoriesApi";
+import {useLocalStorage} from "@vueuse/core";
 
 export const useCategoriesStore = defineStore('categoriesStore', () => {
-    const categories: Ref<Category[]> = ref([]);
-    const getCategories = async () =>  {
-        categories.value = await getCategoriesRequest();
+    const categories: Ref<Category[]> = useLocalStorage('categories', []);
+
+    const setCategories = async (value: Category[]) =>  {
+        categories.value = value;
     }
 
     return {
-        categories,
-        getCategories,
+        categories: skipHydrate(categories),
+        setCategories,
     }
 })

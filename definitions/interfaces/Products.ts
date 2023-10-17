@@ -1,37 +1,55 @@
+import {Meta} from "~/definitions/interfaces/Meta";
+import {Breadcrumbs} from "~/definitions/interfaces/Breadcrumbs";
+
+interface Field {
+    name: string,
+    text?: string,
+    link?: {
+        text: string,
+        href: string,
+    }
+}
+export interface AboutProduct {
+    id: number;
+    title: string;
+    fields: Field[],
+    fullFields?: Field[],
+}
+interface ProductSeller {
+    name: string,
+    email: string,
+    phone: string,
+    socials: {
+        facebook: string,
+        telegram: string,
+        vkontakte: string,
+    },
+    created_at: string,
+}
+
 export interface Product {
     id: number,
     name: string,
-    category: string,
+    category: Breadcrumbs,
+    categoryId: number,
     description: string,
     price: string,
-    image: string,
+    images: string,
     address: string,
-    about: {
-        'Заголовок 1': {
-            подзаголовок1: string,
-            подзаголовок2: string,
-            подзаголовок3: string,
-            подзаголовок4: string,
-            подзаголовок5: string,
-        },
-        'Заголовок 2': {
-            подзаголовок1: string,
-            подзаголовок2: string,
-            подзаголовок3: string,
-            подзаголовок4: string,
-            подзаголовок5: string,
-        },
-        'Заголовок 3': {
-            подзаголовок1: string,
-            подзаголовок2: string,
-            подзаголовок3: string,
-            подзаголовок4: string,
-            подзаголовок5: string,
-        }
-    }
+    about: AboutProduct[],
+    status: string,
+    lat: string,
+    lng: string,
+    seller: ProductSeller,
+    created_at: string,
+    region: string,
+    is_lot: boolean,
+    bargaining_from: string,
+    bargaining_to: string,
 }
 export interface ResultRequesProducts {
-    data: Product[]
+    data: Product[],
+    meta: Meta,
 }
 export interface ResultRequestProduct {
     data: Product

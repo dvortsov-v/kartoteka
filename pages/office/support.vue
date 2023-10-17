@@ -33,34 +33,12 @@
                     <OfficeSupportArticle number="2356" title="Мои заявки" class="support-page__article" />
                 </li>
             </ul>
-            <div class="support-page__navigation support-page-navigation">
-                <UiPagination countPage="5" class="support-page-navigation__pagination" />
-                <UiButton theme="transparent" class="support-page-navigation__more">
-                    <svg-icon
-                        name="adding"
-                        class="support-page-navigation__icon"
-                    />
-                    <span class="support-page-navigation__text">
-                                Показать ещё
-                            </span>
-                </UiButton>
-                <span class="support-page-navigation__show support-page-navigation-show">
-                            <span class="support-page-navigation-show__text">Показано:</span>
-                            <span class="support-page-navigation-show__count">50 из 120</span>
-                        </span>
-            </div>
+            <UiPagination :paginationDate="{}"  class="support-page__navigation" />
         </main>
     </OfficeLayout>
 </template>
 
 <script setup lang="ts">
-import {useProductsStore} from "~/store/useProductsStore";
-const productsStore = useProductsStore();
-productsStore.getProducts();
-
-definePageMeta({
-    layout: 'office',
-})
 const tabs = [
     {
         id: 0,

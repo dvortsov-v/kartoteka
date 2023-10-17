@@ -8,28 +8,14 @@
                     <NewsItem class="news-list-page__box" :news="newsItem" />
                 </li>
             </ul>
-            <div class="news-list-page__navigation news-list-page-navigation">
-                <UiPagination :currentPage="currentPage" :countPage="totalPages" class="news-list-page-navigation__pagination" />
-                <UiButton theme="transparent" class="news-list-page-navigation__more">
-                    <svg-icon
-                        name="adding"
-                        class="news-list-page-navigation__icon"
-                    />
-                    <span class="news-list-page-navigation__text">
-                        Показать ещё
-                    </span>
-                </UiButton>
-                <span class="news-list-page-navigation__show news-list-page-navigation-show">
-                    <span class="news-list-page-navigation-show__text">Показано:</span>
-                    <span class="news-list-page-navigation-show__count">50 из 120</span>
-                </span>
-            </div>
+            <UiPagination :paginationDate="paginationDate" class="news-list-page__navigation" />
         </UiContainer>
     </div>
 </template>
 
 <script setup lang="ts">
-import {getNewsListRequest} from "~/api/NewsApi";
+import {useNewsList} from "~/composable/request/useNewsList";
+
 useHead({
     title: 'Новости',
 });
@@ -37,7 +23,14 @@ definePageMeta({
     name: 'Новости',
 });
 
-const newsList = await getNewsListRequest();
+const {
+    newsList,
+    paginationDate,
+    getNewsList,
+} = useNewsList()
+
+getNewsList();
+
 const currentPage = ref(1);
 const totalPages = ref(10);
 

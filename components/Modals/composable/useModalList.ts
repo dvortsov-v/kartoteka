@@ -6,6 +6,8 @@ import {
     ModalsForgotPassword,
     ModalsRegistration,
     ModalsSuccessRegistration,
+    ModalsOffer,
+    ModalsConsultation,
 } from "#components";
 
 export const useModalList = () => {
@@ -92,12 +94,43 @@ export const useModalList = () => {
         return modalSuccessModal
     }
 
+
+
+    const modalOffer = useModal({
+        component: ModalsOffer,
+        attrs: {
+            onClose() {
+                modalOffer.close()
+            },
+            onOpenSuccessRegistrationModal() {
+                const {open: openModalSuccessModal} = modalSuccessModal('Заявка отправлена', 'На email info@mail. ru отправлено письмо для подтверждения регистрации и активации вашего аккаунта. Наш менеджер свяжется с вами в ближайшее время для подтверждения заявки.');
+                openModalSuccessModal();
+                modalOffer.close()
+            }
+        },
+    })
+    const modalConsultation = useModal({
+        component: ModalsConsultation,
+        attrs: {
+            onClose() {
+                modalConsultation.close()
+            },
+            onOpenSuccessRegistrationModal() {
+                const {open: openModalSuccessModal} = modalSuccessModal('Заявка отправлена', 'На email info@mail. ru отправлено письмо для подтверждения регистрации и активации вашего аккаунта. Наш менеджер свяжется с вами в ближайшее время для подтверждения заявки.');
+                openModalSuccessModal();
+                modalConsultation.close()
+            }
+        },
+    })
+
     return {
         modalAuthorization,
         modalRegistration,
         modalForgotPassword,
         modalCatalogFilters,
         modalHistory,
+        modalOffer,
+        modalConsultation,
         modalSuccessModal,
     }
 }

@@ -22,39 +22,28 @@
                 <CommonViewsSetting class="orders-page__view" @change="changeViews" />
             </div>
             <CommonProductList
-                :listProducts="productsStore.products"
+                :listProducts="products"
                 :isCompactedView="isCompactedView"
                 isProductInOrder
                 class="orders-page__products"
             />
-            <div class="orders-page__navigation orders-page-navigation">
-                <UiPagination countPage="5" class="orders-page-navigation__pagination" />
-                <UiButton theme="transparent" class="orders-page-navigation__more">
-                    <svg-icon
-                        name="adding"
-                        class="orders-page-navigation__icon"
-                    />
-                    <span class="orders-page-navigation__text">
-                                Показать ещё
-                            </span>
-                </UiButton>
-                <span class="orders-page-navigation__show orders-page-navigation-show">
-                            <span class="orders-page-navigation-show__text">Показано:</span>
-                            <span class="orders-page-navigation-show__count">50 из 120</span>
-                        </span>
-            </div>
+            <UiPagination :paginationDate="paginationDate" class="orders-page__navigation" />
         </main>
     </OfficeLayout>
 </template>
 
 <script setup lang="ts">
-import {useProductsStore} from "~/store/useProductsStore";
-const productsStore = useProductsStore();
-productsStore.getProducts();
+import {useProducts} from "~/composable/request/useProducts";
 
-definePageMeta({
-    layout: 'office',
-})
+
+const {
+    products,
+    paginationDate,
+    getProducts,
+} = useProducts()
+
+getProducts()
+
 const tabs = [
     {
         id: 0,

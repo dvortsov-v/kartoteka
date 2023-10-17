@@ -69,7 +69,7 @@ const auth = async () => {
 const socialsAuth = [
     {
         id: 1,
-        icon: 'vk',
+        icon: 'vkontakte',
     },
 
     {

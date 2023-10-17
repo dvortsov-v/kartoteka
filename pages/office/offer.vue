@@ -1,5 +1,5 @@
 <template>
-    <OfficeLayout title="Предложения" :countObjects="productsStore.products.length" class="offer-page">
+    <OfficeLayout title="Предложения" :countObjects="products.length" class="offer-page">
         <main class="offer-page__main">
             <div class="offer-page__filters">
                 <ul class="offer-page__tabs offer-page-tabs">
@@ -25,7 +25,7 @@
                 :class="classesList"
                 class="offer-page__list"
             >
-                <li v-for="product in productsStore.products" class="offer-page__item">
+                <li v-for="product in products" class="offer-page__item">
                     <OfficeOfferProduct
                         :product="product"
                         :isCompactedView="isCompactedView"
@@ -33,34 +33,21 @@
                     />
                 </li>
             </ul>
-            <div class="offer-page__navigation offer-page-navigation">
-                <UiPagination countPage="5" class="offer-page-navigation__pagination" />
-                <UiButton theme="transparent" class="offer-page-navigation__more">
-                    <svg-icon
-                        name="adding"
-                        class="offer-page-navigation__icon"
-                    />
-                    <span class="offer-page-navigation__text">
-                                Показать ещё
-                            </span>
-                </UiButton>
-                <span class="offer-page-navigation__show offer-page-navigation-show">
-                    <span class="offer-page-navigation-show__text">Показано:</span>
-                    <span class="offer-page-navigation-show__count">50 из 120</span>
-                </span>
-            </div>
+            <UiPagination :paginationDate="paginationDate" class="offer-page__navigation" />
         </main>
     </OfficeLayout>
 </template>
 
 <script setup lang="ts">
-import {useProductsStore} from "~/store/useProductsStore";
-const productsStore = useProductsStore();
-productsStore.getProducts();
+import {useProducts} from "~/composable/request/useProducts";
 
-definePageMeta({
-    layout: 'office',
-})
+const {
+    products,
+    paginationDate,
+    getProducts,
+} = useProducts()
+
+getProducts()
 const tabs = [
     {
         id: 0,

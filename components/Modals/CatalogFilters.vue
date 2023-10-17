@@ -16,7 +16,8 @@
 <script setup lang="ts">
 import { VueFinalModal } from 'vue-final-modal'
 import {useCategoriesStore} from "~/store/useCategoriesStore";
-const categoriesStore =  useCategoriesStore()
+const categoriesStore = useCategoriesStore()
+
 const emit = defineEmits(['close'])
 </script>
 

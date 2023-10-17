@@ -1,7 +1,7 @@
 <template>
-    <div class="catalog-page">
+    <div v-if="category && products" :key="`catalog-page-${category.id}`" class="catalog-page">
         <UiContainer class="catalog-page__wrapper">
-            <UiBreadcrumbs :breadcrumbsList="breadcrumbsList" class="catalog-page__breadcrumbs"/>
+            <UiBreadcrumbs :breadcrumbsList="breadcrumbs" class="catalog-page__breadcrumbs"/>
             <CatalogHead :namePage="category.name" :count="category.count" class="catalog-page__head" />
             <main class="catalog-page__main catalog-page-main">
                 <aside class="catalog-page-main__aside">
@@ -62,57 +62,40 @@
                         </div>
                         <CommonViewsSetting @change="changeViews" />
                     </div>
-                    <CommonProductList :listProducts="productsCategory" :isCompactedView="isCompactedView" class="catalog-page-main__list" />
-                    <div class="catalog-page-main__navigation catalog-page-main-navigation">
-                        <UiPagination countPage="5" class="catalog-page-main-navigation__pagination" />
-                        <UiButton theme="transparent" class="catalog-page-main-navigation__more">
-                            <svg-icon
-                                name="adding"
-                                class="catalog-page-main-navigation__icon"
-                            />
-                            <span class="catalog-page-main-navigation__text">
-                                Показать ещё
-                            </span>
-                        </UiButton>
-                        <span class="catalog-page-main-navigation__show catalog-page-main-navigation-show">
-                            <span class="catalog-page-main-navigation-show__text">Показано:</span>
-                            <span class="catalog-page-main-navigation-show__count">50 из 120</span>
-                        </span>
-                    </div>
+                    <CommonProductList :listProducts="products" :isCompactedView="isCompactedView" class="catalog-page-main__list" />
+                    <UiPagination :paginationDate="paginationDate" class="catalog-page-main__navigation" />
                 </section>
             </main>
         </UiContainer>
     </div>
 </template>
 <script setup lang="ts">
-import {getCategoryRequest} from "~/api/CategoriesApi";
-import {Category} from "~/definitions/interfaces/Categories";
-import {getProductsRequest} from "~/api/ProductsApi";
 import {useModalList} from "~/components/Modals/composable/useModalList";
 import {useModalCatalogSort} from "~/components/Modals/composable/useModalCatalogSort";
+import {useProducts} from "~/composable/request/useProducts";
+import {useCategory} from "~/composable/request/useCategory";
 
 const route = useRoute();
-const category: Category | object  = await getCategoryRequest(route.params.id);
-const productsCategory = await getProductsRequest({category_ids: route.params.id})
-const breadcrumbsList = computed(() => {
-    return [
-        {
-            name: 'Каталог',
-            path: '/catalog',
-        },
-        {
-            name: unref(category)?.name,
-            path: `/catalog/${unref(category)?.id}`,
-        },
-    ]
-});
+const {
+    products,
+    paginationDate,
+    getProducts,
+} = useProducts();
+
+const {
+    category,
+    breadcrumbs,
+    getCategory,
+    getBreadcrumbs,
+} = useCategory()
+
+getCategory();
+getBreadcrumbs();
+getProducts({category_ids: route.params.id});
 
 useHead({
     title: unref(category)?.name || 'Каталог',
 });
-// definePageMeta({
-//     name: 'Каталог',
-// });
 
 const {modalCatalogFilters} = useModalList();
 const {
@@ -156,9 +139,6 @@ const toogleSortDescending = () => {
 const changeViews = (value: string) => {
     views.value = value
 }
-
-
-
 </script>
 
 <style scoped lang="scss">

@@ -34,9 +34,8 @@
 
 <script setup lang="ts">
 import { VueFinalModal } from 'vue-final-modal'
-import {useCategoriesStore} from "~/store/useCategoriesStore";
 import {typesSortInModal} from "~/constants/typesSortInModal";
-const categoriesStore =  useCategoriesStore()
+
 const props = defineProps({
     typeSorting: {
         type: String,

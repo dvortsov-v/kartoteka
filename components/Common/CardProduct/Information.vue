@@ -1,12 +1,9 @@
 <template>
     <div class="card-product-information">
+<!--        <pre>{{ product }}</pre>-->
         <picture @click="navigateTo(`/catalog/product/${product.id}`)" class="card-product-information__picture">
-            <source
-                srcset="/images/product.webp"
-                type="image/webp"
-            >
             <img
-                src="/images/product.jpg"
+                :src="product.images[0]"
                 alt="card-product"
                 class="card-product-information__img"
             >
@@ -29,7 +26,7 @@
                 v-if="!isCompactedView"
                 class="card-product-information__status card-product-status card-product-status--orange"
             >
-                Стоимость ниже оценочной на 20%
+                {{ product.status }}
             </div>
             <div
                 v-if="!isCompactedView"

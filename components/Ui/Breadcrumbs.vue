@@ -35,7 +35,7 @@ const props = defineProps({
 
 const route = useRoute();
 
-const breadcrumbs:RouteLocationMatched[] = props.breadcrumbsList ?? route.matched.reduce((acc: RouteLocationMatched[], current: RouteLocationMatched) => {
+const breadcrumbs = computed(() => props.breadcrumbsList ?? route.matched.reduce((acc: RouteLocationMatched[], current: RouteLocationMatched) => {
     if(Array.isArray(current.name)) {
         current.name.forEach(item => {
             acc.push(item)
@@ -44,7 +44,7 @@ const breadcrumbs:RouteLocationMatched[] = props.breadcrumbsList ?? route.matche
         acc.push(current)
     }
     return acc;
-}, []);
+}, []));
 </script>
 
 <style scoped lang="scss">

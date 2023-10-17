@@ -5,7 +5,6 @@
         </template>
         <template #noResult>
             <span class="ui-multiselect__empty">Ничего не найдено</span>
-
         </template>
     </Multiselect>
 </template>
