@@ -8,7 +8,7 @@ export const useProducts = () => {
     const paginationDate = ref<Meta>();
 
     const getProducts = async (params?: ParamsProduct) => {
-        const {data, meta}: ResultRequesProducts | never = await getProductsRequest({page: route?.query?.page, ...params});
+        const {data, meta}: ResultRequesProducts | never = await getProductsRequest({page: route?.query?.page, category_ids: route.params.id, ...params});
         products.value = data;
         paginationDate.value = meta
     }

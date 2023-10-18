@@ -6,7 +6,9 @@
             <main class="catalog-page__main catalog-page-main">
                 <aside class="catalog-page-main__aside">
                     <CatalogCategories :categories="category.sub_categories || category" isCatalogCategory class="catalog-page-main__categories" />
-                    <CatalogFilters @submitFilters="submitFilters" class="catalog-page-main__filters" />
+                    <client-only>
+                        <CatalogFilters @submitFilters="submitFilters" class="catalog-page-main__filters" />
+                    </client-only>
                 </aside>
                 <section class="catalog-page-main__section">
                     <div class="catalog-page-main__maps"></div>
@@ -37,12 +39,12 @@
                                         :class="classesSort(isChecked)"
                                         class="catalog-page-main-sort__wrap"
                                     >
-                                                    <span
-                                                        @click="toogleSortDescending"
-                                                        class="catalog-page-main-sort__text"
-                                                    >
-                                                        {{ sortItem.text }}
-                                                    </span>
+                                        <span
+                                            @click="toogleSortDescending"
+                                            class="catalog-page-main-sort__text"
+                                        >
+                                            {{ sortItem.text }}
+                                        </span>
                                         <svg-icon
                                             v-if="isChecked"
                                             name="select-down" class="catalog-page-main-sort__icon"
@@ -76,7 +78,6 @@ import {useProducts} from "~/composable/request/useProducts";
 import {useCategory} from "~/composable/request/useCategory";
 import {ParamsProduct} from "~/api/ProductsApi";
 
-const route = useRoute();
 const {
     products,
     paginationDate,
@@ -90,19 +91,21 @@ const {
     getBreadcrumbs,
 } = useCategory()
 
-getCategory();
-getBreadcrumbs();
-getProducts({category_ids: route.params.id});
-
-useHead({
-    title: unref(category)?.name || 'Каталог',
-});
-
 const {modalCatalogFilters} = useModalList();
 const {
     modalCatalogSort,
     findSelectTypeSorting
 } = useModalCatalogSort();
+
+getCategory();
+getBreadcrumbs();
+getProducts();
+
+useHead({
+    title: unref(category)?.name || 'Каталог',
+});
+
+
 
 const views: Ref<string> = ref('rows');
 
@@ -121,14 +124,13 @@ const sortList = [
         value: 'date',
         text: 'по дате добавления',
     },
-]
+];
 
 const isCompactedView: ComputedRef<boolean> = computed(() => unref(views) === 'tiles');
 const classesSort = (isChecked: boolean) => ({
     'catalog-page-main-sort__wrap--active': isChecked,
     'catalog-page-main-sort__wrap--desc' : unref(sortDescending)
 })
-
 const resetSortDescending = (newValue: string) => {
     sortDescending.value = false;
     typeSorting.value = newValue
@@ -136,13 +138,11 @@ const resetSortDescending = (newValue: string) => {
 const toogleSortDescending = () => {
     sortDescending.value = !sortDescending.value;
 }
-
 const changeViews = (value: string) => {
     views.value = value
 }
-
 const submitFilters = async (params: ParamsProduct) => {
-    await getProducts({ ...params, category_ids: route.params.id,})
+    await getProducts(params)
 }
 </script>
 

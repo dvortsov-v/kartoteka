@@ -38,7 +38,7 @@ export const getProductsRequest = async (queryParams?: ParamsProduct): Promise<R
 
 export const getProductsCountRequest = async (queryParams?: ParamsProduct): Promise<number> => {
     const config = useRuntimeConfig()
-    console.log(queryParams)
+
     try {
         const { data }: {data: Ref<ResultRequestProductCount>} = await useFetch(`${config.public.baseURL}/products/count`,{
             query: queryParams,

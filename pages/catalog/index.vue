@@ -13,7 +13,7 @@
                     <div class="catalog-page-main__settings">
                         <UiButton
                             theme="transparent"
-                            @click="modalCatalogFilters.open()"
+                            @click="modalCatalogFilters.open"
                             class="catalog-page-main__filter-open"
                         >
                             <svg-icon name="filter" class="catalog-page-main__filter-svg"/>
@@ -37,12 +37,12 @@
                                         :class="classesSort(isChecked)"
                                         class="catalog-page-main-sort__wrap"
                                     >
-                                            <span
-                                                @click="toogleSortDescending"
-                                                class="catalog-page-main-sort__text"
-                                            >
-                                                {{ sortItem.text }}
-                                            </span>
+                                        <span
+                                            @click="toogleSortDescending"
+                                            class="catalog-page-main-sort__text"
+                                        >
+                                            {{ sortItem.text }}
+                                        </span>
                                         <svg-icon
                                             v-if="isChecked"
                                             name="select-down" class="catalog-page-main-sort__icon"
@@ -63,7 +63,7 @@
                         <CommonViewsSetting @change="changeViews" />
                     </div>
                     <CommonProductList :listProducts="products" :isCompactedView="isCompactedView" class="catalog-page-main__list" />
-                    <UiPagination :paginationDate="paginationDate" class=" catalog-page-main__navigation" />
+                    <UiPagination :paginationDate="paginationDate" class="catalog-page-main__navigation" />
                 </section>
             </main>
         </UiContainer>
@@ -83,16 +83,18 @@ const {
     products,
     paginationDate,
     getProducts,
-} = useProducts()
+} = useProducts();
 
+const {modalCatalogFilters} = useModalList();
+const {
+    modalCatalogSort,
+    findSelectTypeSorting
+} = useModalCatalogSort();
 getProducts()
 const countAllProduct = computed(() => unref(paginationDate)?.total || 0);
 
 useHead({
     title: 'Каталог',
-});
-definePageMeta({
-    name: 'Каталог',
 });
 const views: Ref<string> = ref('rows');
 const typeSorting: Ref<string> = ref('price');
@@ -112,11 +114,6 @@ const sortList = [
     },
 ];
 
-const {modalCatalogFilters} = useModalList();
-const {
-    modalCatalogSort,
-    findSelectTypeSorting
-} = useModalCatalogSort();
 const isCompactedView: ComputedRef<boolean> = computed(() => unref(views) === 'tiles');
 const classesSort = (isChecked: boolean) => ({
     'catalog-page-main-sort__wrap--active': isChecked,
@@ -132,11 +129,9 @@ const toogleSortDescending = () => {
 const changeViews = (value: string) => {
     views.value = value
 }
-
 const submitFilters = async (params: ParamsProduct) => {
-    await getProducts({ ...params})
+    await getProducts(params)
 }
-
 </script>
 
 <style scoped lang="scss">

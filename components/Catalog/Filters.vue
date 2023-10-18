@@ -150,6 +150,7 @@ const formData = ref<ParamsProduct>({
     bargaining_to: '',
     bargaining_from: '',
     status: [],
+    category_ids: route.params.id
 });
 
 const paramsSubmit = computed(() => {
@@ -171,14 +172,14 @@ const resetForm = () => {
         bargaining_to: '',
         bargaining_from: '',
         status: [],
+        category_ids: route.params.id
     }
 
     emit('submitFilters', unref(paramsSubmit));
 }
 
-
 watch(paramsSubmit, async (params) => {
-    countProduct.value = await getProductsCountRequest({ ...params, category_ids: route.params.id,});
+    countProduct.value = await getProductsCountRequest(params);
 }, {immediate: true})
 </script>
 
