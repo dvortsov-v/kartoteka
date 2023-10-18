@@ -40,8 +40,8 @@
                                 >
                             </picture>
                         </SwiperSlide>
+                        <div class="modal-history__pagination"></div>
                     </Swiper>
-                    <div class="modal-history__pagination"></div>
                     <div class="history-swiper__info">
                         <h4 class="history-swiper__title">
                             Как найти коммерческую недвижимость
@@ -70,27 +70,51 @@
 </template>
 
 <script setup lang="ts">
-import { VueFinalModal } from 'vue-final-modal';
-import { history } from '@/constants/history';
+    import { VueFinalModal } from 'vue-final-modal';
+    // import { history } from '@/constants/history';
+    import { History } from "~/definitions/interfaces/History";
+    
+    defineProps({
+        history: {
+            type: Object as PropType<History>,
+            default: () => {},
+        }
+    })
 
-const sliderOption = {
-    observer: true,
-    observeParents: true,
-    slidesPerView: 1,
-    spaceBetween: 0,
-    watchOverflow: true,
-    autoHeight: true,
-    navigation: {
-        nextEl: '.modal-history__button--next',
-        prevEl: '.modal-history__button--prev',
-    },
-    pagination: {
-        el: "modal-history__pagination",
-    },
-}
-const sliderModules = [SwiperNavigation];
 
-const emit = defineEmits(['close'])
+    const sliderOption = {
+        observer: true,
+        observeParents: true,
+        slidesPerView: 1,
+        spaceBetween: 0,
+        watchOverflow: true,
+        autoHeight: true,
+        effect: "creative",
+        creativeEffect: {
+            prev: {
+                shadow: true,
+                opacity: .2,
+                translate: ["-10%", 0, -1],
+            },
+            next: {
+                translate: ["100%", 0, 0],
+            },
+        },
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+        },
+        navigation: {
+            nextEl: '.modal-history__button--next',
+            prevEl: '.modal-history__button--prev',
+        },
+        pagination: {
+            el: ".modal-history__pagination",
+        },
+    }
+    const sliderModules = [SwiperNavigation , SwiperEffectCreative , SwiperPagination , SwiperAutoplay];
+
+    const emit = defineEmits(['close']);
 </script>
 
 <style scoped lang="scss">
