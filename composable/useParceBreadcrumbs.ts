@@ -12,7 +12,6 @@ export const useParceBreadcrumbs = (breadcrumbs: Breadcrumbs): ParceBreadcrumbs[
         acc.push(...item);
     }
     if(breadcrumbs.name && breadcrumbs.id) {
-    console.log('breadcrumbs',breadcrumbs)
         acc.push({
             name: breadcrumbs.name,
             path: `/catalog/${breadcrumbs.id}`,

@@ -5,7 +5,7 @@
             <CatalogHead :namePage="namePage" :count="countProductOfCategory" class="catalog-page__head" />
             <main class="catalog-page__main catalog-page-main">
                 <aside class="catalog-page-main__aside">
-                    <CatalogCategories :categories="listCategory" isCatalogCategory class="catalog-page-main__categories" />
+                    <CatalogCategories :categories="listCategory" :isCatalogCategory="Boolean($route.params.id)" class="catalog-page-main__categories" />
                     <CatalogFilters @submitFilters="submitFilters" class="catalog-page-main__filters" />
                 </aside>
                 <section class="catalog-page-main__section">
@@ -77,11 +77,17 @@ import {useCategory} from "~/composable/request/useCategory";
 import {useCategoriesStore} from "~/store/useCategoriesStore";
 import {ParamsProduct} from "~/api/ProductsApi";
 
+const paramsProduct = ref({
+    order_type: 'DESC',
+    order_by: 'price',
+});
+
 const route = useRoute();
 const categoriesStore = useCategoriesStore()
 const {
     products,
     paginationDate,
+    countProductOfCategory,
     getProducts,
 } = useProducts();
 
@@ -100,7 +106,7 @@ const {
 
 getCategory();
 getBreadcrumbs();
-getProducts();
+getProducts(unref(paramsProduct));
 
 const namePage = computed(() => unref(category)?.name || 'Каталог')
 
@@ -111,12 +117,14 @@ useHead({
 definePageMeta({
     name: 'Каталог',
 });
+
 const views: Ref<string> = ref('rows');
+
 const typeSorting: Ref<string> = ref('price');
 const sortDescending: Ref<boolean> = ref(false);
 const sortList = [
     {
-        value: 'popular',
+        value: 'popularity',
         text: 'по популярности',
     },
     {
@@ -124,36 +132,43 @@ const sortList = [
         text: 'по цене',
     },
     {
-        value: 'date',
+        value: 'created_at',
         text: 'по дате добавления',
     },
 ];
 
-const countProductOfCategory = computed(() => unref(paginationDate)?.total || 0);
 const isCompactedView: ComputedRef<boolean> = computed(() => unref(views) === 'tiles');
 const listCategory = computed(() => {
     if(route.params.id) {
         return unref(category)?.sub_categories || [];
     }
     return categoriesStore.categories;
-})
+});
 const classesSort = (isChecked: boolean) => ({
     'catalog-page-main-sort__wrap--active': isChecked,
     'catalog-page-main-sort__wrap--desc' : unref(sortDescending)
 })
-const resetSortDescending = (newValue: string) => {
+const resetSortDescending = async(newValue: string) => {
     sortDescending.value = false;
+    paramsProduct.value.order_by = newValue;
     typeSorting.value = newValue
 }
 const toogleSortDescending = () => {
+    paramsProduct.value.order_type = !unref(sortDescending) ? 'ASC' : 'DESC';
     sortDescending.value = !sortDescending.value;
 }
 const changeViews = (value: string) => {
     views.value = value
 }
 const submitFilters = async (params: ParamsProduct) => {
-    await getProducts(params)
+    paramsProduct.value = {...unref(paramsProduct), ...params};
+
+    await getProducts(unref(paramsProduct));
+
 }
+watch([typeSorting, sortDescending], async () => {
+    await getProducts(unref(paramsProduct))
+})
 </script>
 
 <style scoped lang="scss">
