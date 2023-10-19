@@ -1,11 +1,11 @@
 <template>
-    <div v-if="categoriesStore.categories && products" class="catalog-page">
+    <div v-if="category && products" class="catalog-page">
         <UiContainer class="catalog-page__wrapper">
-            <UiBreadcrumbs class="catalog-page__breadcrumbs"/>
-            <CatalogHead namePage="Каталог" :count="countAllProduct" class="catalog-page__head" />
+            <UiBreadcrumbs :breadcrumbsList="breadcrumbs" class="catalog-page__breadcrumbs"/>
+            <CatalogHead :namePage="namePage" :count="countProductOfCategory" class="catalog-page__head" />
             <main class="catalog-page__main catalog-page-main">
                 <aside class="catalog-page-main__aside">
-                    <CatalogCategories :categories="categoriesStore.categories" class="catalog-page-main__categories" />
+                    <CatalogCategories :categories="listCategory" isCatalogCategory class="catalog-page-main__categories" />
                     <CatalogFilters @submitFilters="submitFilters" class="catalog-page-main__filters" />
                 </aside>
                 <section class="catalog-page-main__section">
@@ -70,31 +70,46 @@
     </div>
 </template>
 <script setup lang="ts">
-import {ComputedRef} from "vue";
 import {useModalList} from "~/components/Modals/composable/useModalList";
 import {useModalCatalogSort} from "~/components/Modals/composable/useModalCatalogSort";
 import {useProducts} from "~/composable/request/useProducts";
+import {useCategory} from "~/composable/request/useCategory";
 import {useCategoriesStore} from "~/store/useCategoriesStore";
 import {ParamsProduct} from "~/api/ProductsApi";
 
-const categoriesStore =  useCategoriesStore()
-
+const route = useRoute();
+const categoriesStore = useCategoriesStore()
 const {
     products,
     paginationDate,
     getProducts,
 } = useProducts();
 
+const {
+    category,
+    breadcrumbs,
+    getCategory,
+    getBreadcrumbs,
+} = useCategory()
+
 const {modalCatalogFilters} = useModalList();
 const {
     modalCatalogSort,
     findSelectTypeSorting
 } = useModalCatalogSort();
-getProducts()
-const countAllProduct = computed(() => unref(paginationDate)?.total || 0);
+
+getCategory();
+getBreadcrumbs();
+getProducts();
+
+const namePage = computed(() => unref(category)?.name || 'Каталог')
 
 useHead({
-    title: 'Каталог',
+    title: unref(namePage),
+});
+
+definePageMeta({
+    name: 'Каталог',
 });
 const views: Ref<string> = ref('rows');
 const typeSorting: Ref<string> = ref('price');
@@ -114,7 +129,14 @@ const sortList = [
     },
 ];
 
+const countProductOfCategory = computed(() => unref(paginationDate)?.total || 0);
 const isCompactedView: ComputedRef<boolean> = computed(() => unref(views) === 'tiles');
+const listCategory = computed(() => {
+    if(route.params.id) {
+        return unref(category)?.sub_categories || [];
+    }
+    return categoriesStore.categories;
+})
 const classesSort = (isChecked: boolean) => ({
     'catalog-page-main-sort__wrap--active': isChecked,
     'catalog-page-main-sort__wrap--desc' : unref(sortDescending)
