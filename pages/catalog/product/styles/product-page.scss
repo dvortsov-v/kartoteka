@@ -307,10 +307,6 @@
     color: var(--black-50);
     line-height: 1.5;
 
-    &__text {
-      flex: none;
-    }
-
     &::after {
       content: '';
       border-bottom: 1px dashed var(--black-50);
@@ -323,6 +319,11 @@
         content: none;
       }
     }
+  }
+
+
+  &__text {
+    flex: none;
   }
 
   &__value,
@@ -410,6 +411,7 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 8px;
+    margin-left: auto;
   }
 
   &__history {

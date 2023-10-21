@@ -199,7 +199,7 @@
                 </div>
             </div>
             <div class="product-page__additional product-page-additional">
-                <UiButtonLink class="product-page-additional__history">История публикаций</UiButtonLink>
+                <UiButtonLink v-if="false" class="product-page-additional__history">История публикаций</UiButtonLink>
                 <div class="product-page-additional__wrap">
                     <span class="product-page-additional__text">Поделиться:</span>
                     <CommonSocial class="product-page-additional__socials" />

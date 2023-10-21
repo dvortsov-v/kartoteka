@@ -20,7 +20,7 @@ useHead({
     title: 'Новости',
 });
 definePageMeta({
-    name: 'Новости',
+    nameRoute: 'Новости',
 });
 
 const {

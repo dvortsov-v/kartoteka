@@ -100,7 +100,7 @@ useHead({
     title: 'Контакты',
 });
 definePageMeta({
-    name: 'Контакты',
+    nameRoute: 'Контакты',
 })
 const formFeedbackDate = ref({
     name: '',

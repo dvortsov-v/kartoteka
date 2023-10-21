@@ -7,8 +7,21 @@ export const useProducts = () => {
     const products = ref<Product[]>([]);
     const paginationDate = ref<Meta>();
 
+    const countProductOfCategory = computed(() => unref(paginationDate)?.total || 0);
+
     const getProducts = async (params?: ParamsProduct) => {
-        const {data, meta}: ResultRequesProducts | never = await getProductsRequest({page: route?.query?.page, ...params});
+        let paramsRequest: ParamsProduct = {};
+
+        if(route?.query?.page) {
+            paramsRequest.page = route?.query?.page;
+        }
+        if(route.params.id) {
+            paramsRequest.category_ids = route.params.id
+        }
+
+        paramsRequest = {...paramsRequest, ...params};
+
+        const {data, meta}: ResultRequesProducts | never = await getProductsRequest(paramsRequest);
         products.value = data;
         paginationDate.value = meta
     }
@@ -22,6 +35,7 @@ export const useProducts = () => {
     return {
         products,
         paginationDate,
+        countProductOfCategory,
         getProducts,
     }
 }

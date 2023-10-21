@@ -13,6 +13,13 @@
 </template>
 
 <script setup lang="ts">
+useHead({
+    title: 'Личный кабинет',
+});
+
+definePageMeta({
+    nameRoute: 'Личный кабинет',
+});
 import {useFavoritesStore} from "~/store/useFavoritesStore";
 
 const favoritesStore = useFavoritesStore();

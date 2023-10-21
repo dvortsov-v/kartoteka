@@ -1,6 +1,6 @@
 import {Category, ResultRequestCategory} from "~/definitions/interfaces/Categories";
 import {useMainStore} from "~/store/useMainStore";
-import {UserLogin} from "~/definitions/interfaces/User";
+import {UserInfo, UserLogin} from "~/definitions/interfaces/User";
 
 export const login = async (email: string, password: string): Promise<void> => {
     const config = useRuntimeConfig();
@@ -55,20 +55,19 @@ export const refresh = async (token: string): Promise<Category | object> => {
 
     return {};
 }
-export const me = async (token: string): Promise<Category | object> => {
+export const me = async (token: string | null | undefined): Promise<UserInfo | undefined> => {
     const config = useRuntimeConfig()
-    const { data }: {data: Ref<ResultRequestCategory>} = await useFetch(() => `${config.public.baseURL}/auth/me`, {
-        method: 'POST',
-        headers: {
-            'Authorization': token,
-        }
-    });
+    if(token) {
+        const {data}: { data: Ref<UserInfo> } = await useFetch(() => `${config.public.baseURL}/auth/me`, {
+            method: 'POST',
+            headers: {
+                'Authorization': token,
+            }
+        });
 
-    if(data?.value?.data) {
-        return data.value.data;
+        return unref(data) ?? undefined;
     }
-
-    return {};
+    return;
 }
 export const logout = async (token: string): Promise<void> => {
     const config = useRuntimeConfig();

@@ -138,7 +138,13 @@
 
 <script setup lang="ts">
 import {statisticCaseOffice} from "~/constants/statisticCaseOffice";
+useHead({
+    title: 'Личный кабинет',
+});
 
+definePageMeta({
+    nameRoute: 'Личный кабинет',
+});
 const tabs = [
     {
         id: 0,

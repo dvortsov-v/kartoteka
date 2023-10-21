@@ -8,7 +8,7 @@
                 </button>
             </div>
             <CatalogCategories :categories="categoriesStore.categories" class="catalog-page-main__categories" />
-            <CatalogFilters class="catalog-page-main__filters" />
+            <CatalogFilters @submitFilters="submitFilters" class="catalog-page-main__filters" />
         </div>
     </VueFinalModal>
 </template>
@@ -16,9 +16,13 @@
 <script setup lang="ts">
 import { VueFinalModal } from 'vue-final-modal'
 import {useCategoriesStore} from "~/store/useCategoriesStore";
+import {ParamsProduct} from "~/api/ProductsApi";
 const categoriesStore = useCategoriesStore()
 
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close', 'submitFilters']);
+const submitFilters = (params: ParamsProduct) => {
+    emit('submitFilters', params)
+}
 </script>
 
 <style scoped lang="scss">

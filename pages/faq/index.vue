@@ -46,7 +46,7 @@ useHead({
     title: 'Помощь',
 });
 definePageMeta({
-    name: 'Помощь',
+    nameRoute: 'Помощь',
 });
 
 const activeTab: Ref<number> = ref(1);
