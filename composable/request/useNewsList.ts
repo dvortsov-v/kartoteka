@@ -7,6 +7,7 @@ export const useNewsList = () => {
     const route = useRoute();
     const newsList = ref<News[]>([]);
     const paginationDate = ref<Meta>();
+    
 
     const getNewsList = async (params?: {page?: LocationQueryValue | LocationQueryValue[]}) => {
         const {data, meta}: ResultRequestNewsList | never = await getNewsListRequest({page: route?.query?.page, ...params});

@@ -1,4 +1,5 @@
 import {useModal} from "vue-final-modal";
+import {History} from "~/definitions/interfaces/History";
 import {
     ModalsAuthorization,
     ModalsCatalogFilters,
@@ -21,14 +22,19 @@ export const useModalList = () => {
         },
     });
 
-    const modalHistory = useModal({
-        component: ModalsHistory,
-        attrs: {
-            onClose() {
-                modalHistory.close()
+    const modalHistory = (history: History) => {
+        const modalHistory = useModal({
+            component: ModalsHistory,
+            attrs: {
+                onClose() {
+                    modalHistory.close()
+                },
+                history,
             },
-        },
-    });
+        });
+
+        return modalHistory
+    }
 
     const modalAuthorization = useModal({
         component: ModalsAuthorization,

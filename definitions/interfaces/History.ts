@@ -4,7 +4,7 @@ export interface History {
     id: number,
     title: string,
     html: string,
-    image: string,
+    images: string[],
 }
 
 export interface ResultRequestHistoryList {

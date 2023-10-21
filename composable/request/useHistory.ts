@@ -14,12 +14,6 @@ export const useHistoryList = () => {
         paginationDate.value = meta
     }
 
-    watch(() => route.query.page, () => {
-        if(route.query.page) {
-            getHistoryList();
-        }
-    }, {immediate: true})
-
     return {
         historyList,
         paginationDate,

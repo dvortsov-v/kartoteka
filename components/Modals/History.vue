@@ -17,25 +17,20 @@
                 </button>
                 <div class="modal-history__wrap">
                     <Swiper
-                        v-if="history.length > 0"
+                        v-if="history"
                         v-bind="sliderOption"
                         :modules="sliderModules"
                         :pagination="sliderOption.pagination"
                         class="modal-history__swiper history-swiper"
                     >
                         <SwiperSlide
-                            v-for="historyItem in history"
-                            :key="`category-${historyItem.id}`"
+                            v-for="img in history.images"
                             class="history-swiper__item"
                         >
                             <picture class="history-swiper__picture">
-                                <source
-                                    :srcset="`/images/${historyItem.img}.webp`"
-                                    type="image/webp"
-                                >
                                 <img
-                                    :src="`/images/${historyItem.img}.jpg`"
-                                    :alt="historyItem.name"
+                                    :src="img"
+                                    :alt="history.title"
                                     class="history-swiper__img"
                                 >
                             </picture>
@@ -44,11 +39,9 @@
                     </Swiper>
                     <div class="history-swiper__info">
                         <h4 class="history-swiper__title">
-                            Как найти коммерческую недвижимость
+                            {{history.title}}
                         </h4>
-                        <p class="history-swiper__text">
-                            Офисные здания, объекты промышленности, гостиницы, магазины и торговые центры, сельскохозяйственные предприятия, склады и гаражи  любой из объектов коммерческой недвижимости можно продавать, покупать, дарить, передавать в наследство и сдавать в аренду.
-                        </p>
+                        <p class="history-swiper__text" v-html="history.html"></p>
                         <UiButton class="history-swiper__btn ">
                             Перейти в каталог
                         </UiButton>
@@ -71,16 +64,14 @@
 
 <script setup lang="ts">
     import { VueFinalModal } from 'vue-final-modal';
-    // import { history } from '@/constants/history';
     import { History } from "~/definitions/interfaces/History";
     
     defineProps({
         history: {
             type: Object as PropType<History>,
-            default: () => {},
+            default: () => ({}),
         }
     })
-
 
     const sliderOption = {
         observer: true,

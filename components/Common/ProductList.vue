@@ -26,8 +26,8 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
-})
 
+})
 
 const classesList = computed(() => ({
     'product-list--is-compacted-view': props.isCompactedView,

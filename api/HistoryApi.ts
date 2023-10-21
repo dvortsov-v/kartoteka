@@ -4,7 +4,7 @@ import {LocationQueryValue} from "vue-router";
 export const getHistoryListRequest = async (query: {page?: LocationQueryValue | LocationQueryValue[]}): Promise<ResultRequestHistoryList> => {
     const config = useRuntimeConfig()
 
-    const { data }: {data: Ref<ResultRequestHistoryList>} = await useFetch(`${config.public.baseURL}/history`, {
+    const { data }: {data: Ref<ResultRequestHistoryList>} = await useFetch(`${config.public.baseURL}/stories`, {
         query,
     });
 
@@ -17,7 +17,7 @@ export const getHistoryListRequest = async (query: {page?: LocationQueryValue | 
 export const getHistoryListFilterRequest = async (numberTitle: number): Promise<History[]> => {
     const config = useRuntimeConfig()
 
-    const { data }: {data: Ref<ResultRequestHistoryList>} = await useFetch(`${config.public.baseURL}/history`, {
+    const { data }: {data: Ref<ResultRequestHistoryList>} = await useFetch(`${config.public.baseURL}/stories`, {
         query: {
             title: numberTitle,
         }
@@ -32,9 +32,10 @@ export const getHistoryListFilterRequest = async (numberTitle: number): Promise<
 export const getHistoryRelatedRequest = async (id: string | string[]): Promise<History[]> => {
     const config = useRuntimeConfig()
 
-    const { data }: {data: Ref<ResultRequestHistoryList>} = await useFetch(`${config.public.baseURL}/history/${id}/related`);
+    const { data }: {data: Ref<ResultRequestHistoryList>} = await useFetch(`${config.public.baseURL}/stories/${id}/related`);
 
     if(unref(data)?.data) {
+        console.log(data.value.data);
         return unref(data).data;
     }
 
@@ -43,7 +44,7 @@ export const getHistoryRelatedRequest = async (id: string | string[]): Promise<H
 export const getHistoryRequest = async (id: string | string[]): Promise<History | object> => {
     const config = useRuntimeConfig()
 
-    const { data }: {data: Ref<ResultRequestHistory>} = await useFetch(`${config.public.baseURL}/history/${id}`);
+    const { data }: {data: Ref<ResultRequestHistory>} = await useFetch(`${config.public.baseURL}/stories/${id}`);
 
     if(unref(data)?.data) {
         return data.value.data;

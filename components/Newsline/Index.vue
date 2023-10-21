@@ -10,26 +10,22 @@
             class="newsline__list"
         >
             <SwiperSlide
-                v-for="newsItem in news"
-                :key="`category-${newsItem.id}`"
+                v-for="history in historyList"
+                :key="`category-${history.id}`"
                 class="newsline__item"
             >
                 <UiButton type="button"
-                    @click="modalHistory.open"
+                    @click="hendleClickNewsLine(history)"
                     theme="primary-transparent"
                     class="newsline__elem news">
                     <picture class="news__picture">
-                        <source
-                            :srcset="`/images/${newsItem.img}.webp`"
-                            type="image/webp"
-                        >
                         <img
-                            :src="`/images/${newsItem.img}.jpg`"
-                            :alt="newsItem.name"
+                            :src="history.images[0]"
+                            :alt="history.title"
                             class="news__img"
                         >
                     </picture>
-                    <span class="news__name">{{newsItem.name}}</span>
+                    <span class="news__name">{{history.title}}</span>
                 </UiButton>
             </SwiperSlide>
         </Swiper>
@@ -41,6 +37,8 @@
 <script setup lang="ts">
 import {useModalList} from "~/components/Modals/composable/useModalList";
 import {news} from '@/constants/news';
+import {useHistoryList} from '~/composable/request/useHistory';
+import {History} from "~/definitions/interfaces/History";
 const sliderOption = {
     observer: true,
     observeParents: true,
@@ -71,6 +69,20 @@ const {
     modalHistory,
 } = useModalList()
 
+const {
+    historyList,
+    getHistoryList,
+} = useHistoryList()
+
+getHistoryList()
+
+const hendleClickNewsLine = (history: History) => {
+    const {
+        open:openModalHistory,
+    } = modalHistory(history)
+
+    openModalHistory()
+};
 
 </script>
 
