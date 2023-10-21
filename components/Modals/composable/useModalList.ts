@@ -1,7 +1,7 @@
 import {useModal} from "vue-final-modal";
 import {
     ModalsAuthorization,
-    ModalsCatalogFilters,
+    ModalsCatalogSelectFilters,
     ModalsHistory,
     ModalsForgotPassword,
     ModalsRegistration,
@@ -12,14 +12,19 @@ import {
 
 export const useModalList = () => {
 
-    const modalCatalogFilters = useModal({
-        component: ModalsCatalogFilters,
-        attrs: {
-            onClose() {
-                modalCatalogFilters.close()
+    const modalCatalogFilters = (additionalAttrs?: any) => {
+        const modalsCatalogSelectFilters = useModal({
+            component: ModalsCatalogSelectFilters,
+            attrs: {
+                onClose() {
+                    modalsCatalogSelectFilters.close()
+                },
+                ...additionalAttrs,
             },
-        },
-    });
+        })
+
+        return modalsCatalogSelectFilters;
+    };
 
     const modalHistory = useModal({
         component: ModalsHistory,
@@ -93,8 +98,6 @@ export const useModalList = () => {
 
         return modalSuccessModal
     }
-
-
 
     const modalOffer = useModal({
         component: ModalsOffer,

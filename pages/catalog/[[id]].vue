@@ -1,19 +1,19 @@
 <template>
-    <div v-if="category && products" class="catalog-page">
+    <div v-if="category" class="catalog-page">
         <UiContainer class="catalog-page__wrapper">
             <UiBreadcrumbs :breadcrumbsList="breadcrumbs" class="catalog-page__breadcrumbs"/>
             <CatalogHead :namePage="namePage" :count="countProductOfCategory" class="catalog-page__head" />
             <main class="catalog-page__main catalog-page-main">
                 <aside class="catalog-page-main__aside">
                     <CatalogCategories :categories="listCategory" :isCatalogCategory="Boolean($route.params.id)" class="catalog-page-main__categories" />
-                    <CatalogFilters @submitFilters="submitFilters" class="catalog-page-main__filters" />
+                    <CatalogFilters @submitFilters="onSubmitFilters" class="catalog-page-main__filters" />
                 </aside>
                 <section class="catalog-page-main__section">
                     <div class="catalog-page-main__maps"></div>
                     <div class="catalog-page-main__settings">
                         <UiButton
                             theme="transparent"
-                            @click="modalCatalogFilters.open"
+                            @click="openModalCatalogFilters"
                             class="catalog-page-main__filter-open"
                         >
                             <svg-icon name="filter" class="catalog-page-main__filter-svg"/>
@@ -62,8 +62,10 @@
                         </div>
                         <CommonViewsSetting @change="changeViews" />
                     </div>
-                    <CommonProductList :listProducts="products" :isCompactedView="isCompactedView" class="catalog-page-main__list" />
-                    <UiPagination :paginationDate="paginationDate" class="catalog-page-main__navigation" />
+                    <template v-if="products">
+                        <CommonProductList :listProducts="products" :isCompactedView="isCompactedView" class="catalog-page-main__list" />
+                        <UiPagination :paginationDate="paginationDate" class="catalog-page-main__navigation" />
+                    </template>
                 </section>
             </main>
         </UiContainer>
@@ -160,12 +162,14 @@ const toogleSortDescending = () => {
 const changeViews = (value: string) => {
     views.value = value
 }
-const submitFilters = async (params: ParamsProduct) => {
+const onSubmitFilters = async (params: ParamsProduct) => {
     paramsProduct.value = {...unref(paramsProduct), ...params};
 
     await getProducts(unref(paramsProduct));
 
 }
+const {open: openModalCatalogFilters} = modalCatalogFilters({onSubmitFilters})
+
 watch([typeSorting, sortDescending], async () => {
     await getProducts(unref(paramsProduct))
 })

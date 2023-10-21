@@ -76,7 +76,7 @@ useHead({
     title: 'Реклама',
 });
 definePageMeta({
-    name: 'Реклама',
+    nameRoute: 'Реклама',
 })
 
 const getTextBtn = (isExtension: boolean) => isExtension ? 'Открыть' : 'Смотреть';

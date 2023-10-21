@@ -40,7 +40,13 @@
 
 <script setup lang="ts">
 import {useProducts} from "~/composable/request/useProducts";
+useHead({
+    title: 'Личный кабинет',
+});
 
+definePageMeta({
+    nameRoute: 'Личный кабинет',
+});
 const {
     products,
     paginationDate,

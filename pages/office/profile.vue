@@ -5,6 +5,12 @@
 </template>
 
 <script setup lang="ts">
+useHead({
+    title: 'Профиль',
+});
+definePageMeta({
+    nameRoute: 'Профиль',
+})
 
 </script>
 

@@ -34,7 +34,9 @@
 
 <script setup lang="ts">
 import {useProducts} from "~/composable/request/useProducts";
-
+useHead({
+    title: 'Личный кабинет',
+});
 
 const {
     products,

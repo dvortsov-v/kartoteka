@@ -20,7 +20,7 @@
                     exactActiveClass="ui-breadcrumbs__link--active"
                     class="ui-breadcrumbs__link"
                 >
-                    {{ item.name }}
+                    {{ getName(item)}}
                 </nuxt-link>
             </li>
         </ul>
@@ -45,6 +45,8 @@ const breadcrumbs = computed(() => props.breadcrumbsList ?? route.matched.reduce
     }
     return acc;
 }, []));
+
+const getName = (item: RouteLocationMatched) => item?.meta?.nameRoute || item.name || '';
 </script>
 
 <style scoped lang="scss">
