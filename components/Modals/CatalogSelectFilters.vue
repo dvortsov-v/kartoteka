@@ -1,6 +1,6 @@
 <template>
-    <VueFinalModal contentClass="modal-catalog-filters">
-        <div class="modal-catalog-filters__content">
+    <VueFinalModal>
+        <div class="modal-catalog-filters">
             <div class="catalog-page-main__filters-top">
                 <span class="catalog-page-main__filters-name">Фильтр</span>
                 <button @click="emit('close')" class="catalog-page-main__filters-close">
@@ -27,13 +27,4 @@ const submitFilters = (params: ParamsProduct) => {
 
 <style scoped lang="scss">
 @import '@/components/Modals/styles/modal-catalog-filters.scss';
-</style>
-<style>
-.modal-forgot-password {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-}
 </style>
