@@ -2,7 +2,7 @@
     <OfficeLayout title="Избранное" :countObjects="favoritesStore.favorites.length" class="favorites-page">
         <main class="favorites-page__main">
             <CommonProductsSetting :sortList="sortList" @setIsCompactedView="changeCompactedView" class="favorites-page__filters" />
-            <CommonCardProduct
+            <CommonProductList
                 :listProducts="favoritesStore.favorites"
                 :isCompactedView="isCompactedView"
                 class="favorites-page__products"
