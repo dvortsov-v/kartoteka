@@ -6,6 +6,9 @@ export interface UserLogin {
     expires_in: number,
 }
 export interface UserInfo {
+    company: string,
+    surname: string,
+
     created_at: string,
 
     email: string,
@@ -15,5 +18,5 @@ export interface UserInfo {
 
     phone: string | null
     socials: Social[] | null
-    updated_at: string,
+    updated_at: string | null,
 }

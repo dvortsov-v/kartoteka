@@ -82,7 +82,8 @@
     flex: none;
   }
 
-  &__valuek {
+  &__value,
+  &__input {
     margin-left: 16px;
     line-height: 1.5;
     color: var(--black-100);
@@ -90,5 +91,16 @@
     @media (max-width: 670px) {
       margin-left: 0;
     }
+  }
+
+  &__value {
+    text-align: right;
+  }
+
+  &__input {
+    width: 50%;
+    border: 1px solid var(--black-30);
+    padding: 12px;
+    border-radius: 8px;
   }
 }

@@ -90,7 +90,7 @@ const mainStore = useMainStore();
 const userToken = useCookie('userToken');
 
 if(!unref(userToken)) {
-    mainStore.isAuthUser = true;
+    mainStore.isAuthUser = false;
 }
 
 const toogleIsShowCatalogMenu = () => {
