@@ -66,6 +66,10 @@
     display: flex;
     justify-content: space-between;
 
+    &:nth-child(n + 2) {
+      margin-top: 16px;
+    }
+
     @media (max-width: 670px) {
       flex-direction: column;
     }
