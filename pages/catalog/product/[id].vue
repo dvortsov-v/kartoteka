@@ -121,78 +121,80 @@
                     </div>
                 </div>
                 <div class="product-page__base product-page-base">
-                    <div class="product-page-base__info">
-                        <span class="product-page-base__price">{{ parcePrice(product?.price || '') }} ₽</span>
-                        <ul class="product-page-base__statuses">
-                            <li class="product-page-base__item">
-                                <div class="product-page-base__status product-page-status product-page-status--green">
-                                    {{ product.status }}
-                                </div>
-                            </li>
-                        </ul>
-                        <div v-if="product.is_lot" class="product-page-base__incorporate product-page-incorporate">
-                            <span class="product-page-incorporate__text">
-                                В составе
-                                <span class="product-page-incorporate__text--bold">лота №3</span>
-                            </span>
-                            <span class="product-page-incorporate__price">
-                                стоимостью 36 314 305 ₽
-                            </span>
+                    <div class="product-page-base__sticky">
+                        <div class="product-page-base__info">
+                            <span class="product-page-base__price">{{ parcePrice(product?.price || '') }} ₽</span>
+                            <ul class="product-page-base__statuses">
+                                <li class="product-page-base__item">
+                                    <div class="product-page-base__status product-page-status product-page-status--green">
+                                        {{ product.status }}
+                                    </div>
+                                </li>
+                            </ul>
+                            <div v-if="product.is_lot" class="product-page-base__incorporate product-page-incorporate">
+                                <span class="product-page-incorporate__text">
+                                    В составе
+                                    <span class="product-page-incorporate__text--bold">лота №3</span>
+                                </span>
+                                <span class="product-page-incorporate__price">
+                                    стоимостью 36 314 305 ₽
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="product-page-base__buttons">
-                        <UiButton
-                            @click="modalOffer.open"
-                            class="product-page-base__buy product-page-base-button"
-                        >
-                            <span class="product-page-base-button__text">
-                                Хочу купить
-                            </span>
-                        </UiButton>
-                        <UiButton
-                            @click="handleFavoritesClick(product)"
-                            :theme="themeFavoriteBtn(product.id)"
-                            class="product-page-base__favorites"
-                        >
-                            <svg-icon :name="iconFavoriteBtn(product.id)" class="product-page-base__icon" />
-                        </UiButton>
-                    </div>
-                    <div v-if="product.seller" class="product-page-base__salesman product-page-salesman">
-                        <div class="product-page-salesman__person">
-                            <span class="product-page-salesman__title">Продавец</span>
-                            <span class="product-page-salesman__name">{{ product.seller.name }}</span>
-                            <span class="product-page-salesman__registration">На сайте с {{ parcedCreateAt }}</span>
-                        </div>
-                        <div class="product-page-salesman__connect">
-                            <UiButton theme="transparent" class="product-page-salesman__phone product-page-salesman-phone">
-                                <svg-icon name="phone" class="product-page-salesman-phone__icon"/>
-                                <span class="product-page-salesman-phone__text">
-                                    +7
-                                    <a
-                                        v-if="isShowPhone"
-                                        :href="`tel:${parcedPhoneHref}`"
-                                        class="product-page-salesman-phone__number">
-                                        {{ parcedPhone }}
-                                    </a>
-                                    <ButtonLink
-                                        @click="toogleIsShowPhone"
-                                        v-else
-                                        class="product-page-salesman-phone__text--blue"
-                                    >
-                                        показать
-                                        <span class="product-page-salesman-phone__text--desc">телефон</span>
-                                    </ButtonLink>
+                        <div class="product-page-base__buttons">
+                            <UiButton
+                                @click="modalOffer.open"
+                                class="product-page-base__buy product-page-base-button"
+                            >
+                                <span class="product-page-base-button__text">
+                                    Хочу купить
                                 </span>
                             </UiButton>
-                            <div v-if="parcedSocials.length > 0" class="product-page-salesman__contacts">
-                                <a
-                                    v-for="social in parcedSocials"
-                                    :key="`product-seller-social-${social.id}`"
-                                    :href="social.href"
-                                    class="product-page-salesman__contact"
-                                >
-                                    <svg-icon :name="`socials/${social.icon}`" class="product-page-salesman__icon"/>
-                                </a>
+                            <UiButton
+                                @click="handleFavoritesClick(product)"
+                                :theme="themeFavoriteBtn(product.id)"
+                                class="product-page-base__favorites"
+                            >
+                                <svg-icon :name="iconFavoriteBtn(product.id)" class="product-page-base__icon" />
+                            </UiButton>
+                        </div>
+                        <div v-if="product.seller" class="product-page-base__salesman product-page-salesman">
+                            <div class="product-page-salesman__person">
+                                <span class="product-page-salesman__title">Продавец</span>
+                                <span class="product-page-salesman__name">{{ product.seller.name }}</span>
+                                <span class="product-page-salesman__registration">На сайте с {{ parcedCreateAt }}</span>
+                            </div>
+                            <div class="product-page-salesman__connect">
+                                <UiButton theme="transparent" class="product-page-salesman__phone product-page-salesman-phone">
+                                    <svg-icon name="phone" class="product-page-salesman-phone__icon"/>
+                                    <span class="product-page-salesman-phone__text">
+                                        +7
+                                        <a
+                                            v-if="isShowPhone"
+                                            :href="`tel:${parcedPhoneHref}`"
+                                            class="product-page-salesman-phone__number">
+                                            {{ parcedPhone }}
+                                        </a>
+                                        <ButtonLink
+                                            @click="toogleIsShowPhone"
+                                            v-else
+                                            class="product-page-salesman-phone__text--blue"
+                                        >
+                                            показать
+                                            <span class="product-page-salesman-phone__text--desc">телефон</span>
+                                        </ButtonLink>
+                                    </span>
+                                </UiButton>
+                                <div v-if="parcedSocials.length > 0" class="product-page-salesman__contacts">
+                                    <a
+                                        v-for="social in parcedSocials"
+                                        :key="`product-seller-social-${social.id}`"
+                                        :href="social.href"
+                                        class="product-page-salesman__contact"
+                                    >
+                                        <svg-icon :name="`socials/${social.icon}`" class="product-page-salesman__icon"/>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -205,13 +207,13 @@
                     <CommonSocial class="product-page-additional__socials" />
                 </div>
             </div>
-            <div  v-if="productRelated.length > 0" class="product-page__aside">
+            <aside  v-if="productRelated.length > 0" class="product-page__aside">
                 <h3 class="product-page__title">Похожие предложения</h3>
                 <div class="product-page__wrap">
                     <CommonProductList :listProducts="productRelated"  class="catalog-page-main__list" />
                     <div class="product-page__advertising"></div>
                 </div>
-            </div>
+            </aside>
         </UiContainer>
     </div>
 </template>

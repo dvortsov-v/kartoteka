@@ -47,7 +47,7 @@ export const useProduct = () => {
         })
         return acc;
     }, []))
-    const parcedCreateAt:ComputedRef<string> = computed(() => format(new Date(unref(product).seller.created_at), 'MMMM.yyyy', {locale: ru}) )
+    const parcedCreateAt:ComputedRef<string> = computed(() => format(new Date(unref(product).seller.created_at), 'MMMM yyyy', {locale: ru}) )
     const parcedPhone:ComputedRef<string> = computed(() => unref(product).seller.phone.replace(/^\+?(\d)/,''))
     const parcedPhoneHref:ComputedRef<string> = computed(() => unref(product).seller.phone.replace(' ', ''))
 

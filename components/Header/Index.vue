@@ -77,9 +77,9 @@ const {
     categories,
     getCategories,
 } = useCategories()
-if(categoriesStore.categories.length === 0) {
-    getCategories()
-}
+
+getCategories()
+
 
 const {
     modalAuthorization,
@@ -90,18 +90,11 @@ const mainStore = useMainStore();
 const userToken = useCookie('userToken');
 
 if(!unref(userToken)) {
-    mainStore.isAuthUser = false;
+    mainStore.isAuthUser = true;
 }
 
 const toogleIsShowCatalogMenu = () => {
-    const bodyElem = document.querySelector('body');
     isShowCatalogMenu.value = !isShowCatalogMenu.value;
-
-    if(unref(isShowCatalogMenu) && bodyElem) {
-        bodyElem.style.overflow = 'hidden';
-    } else if (!unref(isShowCatalogMenu) && bodyElem) {
-        bodyElem.style.overflow = 'visible';
-    }
 }
 const toogleIsShowUserMenu = () => {
     isShowUserMenu.value = !isShowUserMenu.value;
