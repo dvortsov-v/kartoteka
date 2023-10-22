@@ -1,5 +1,5 @@
 <template>
-    <div class="news-page">
+    <div v-if="news" class="news-page">
         <UiContainer class="news-page__wrapper">
             <UiBreadcrumbs :breadcrumbsList="breadcrumbsList" class="news-page__breadcrumbs" />
             <main class="news-page__main">
@@ -38,13 +38,9 @@
     </div>
 </template>
 <script setup lang="ts">
-import {getNewsRelatedRequest, getNewsRequest} from "~/api/NewsApi";
-import {News} from "~/definitions/interfaces/News";
+import {useNews} from "~/composable/request/useNews";
 
-const route = useRoute();
-const news: News | object = await getNewsRequest(route.params.id);
-const filteredNews: News[] = await getNewsRelatedRequest(route.params.id);
-const parsedFilteredNews = computed(() => filteredNews.slice(0, 5));
+const {news, parsedFilteredNews} = useNews()
 
 useHead({
     title: unref(news)?.title || '',
@@ -56,7 +52,7 @@ const breadcrumbsList = computed(() => {
             path: '/news',
         },
         {
-            name: unref(news)?.title,
+            name: unref(news)?.title || '',
             path: `/news/${unref(news)?.id}`,
         },
     ]
