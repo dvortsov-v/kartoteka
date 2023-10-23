@@ -1,6 +1,5 @@
 <template>
     <div class="card-product-information">
-<!--        <pre>{{ product }}</pre>-->
         <picture @click="navigateTo(`/catalog/product/${product.id}`)" class="card-product-information__picture">
             <img
                 :src="product.images[0]"

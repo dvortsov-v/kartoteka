@@ -38,6 +38,9 @@ useHead({
     title: 'Личный кабинет',
 });
 
+definePageMeta({
+    nameRoute: 'Личный кабинет',
+});
 const {
     products,
     paginationDate,

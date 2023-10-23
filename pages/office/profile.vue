@@ -169,10 +169,10 @@ import {ComputedRef} from "vue";
 import {format} from "date-fns";
 
 useHead({
-    title: 'Профиль',
+    title: 'Личный кабинет',
 });
 definePageMeta({
-    nameRoute: 'Профиль',
+    nameRoute: 'Личный кабинет',
 })
 const userToken = useCookie('userToken');
 const userInformation = ref<UserInfo | null>(

@@ -17,7 +17,10 @@ $base: '.card-product';
   }
 
   &--is-compacted-view {
+    display: flex;
+    flex-direction: column;
     padding: 0;
+    height: 100%;
 
     #{$self}__actions {
       margin-top: 20px;
@@ -181,7 +184,7 @@ $base: '.card-product';
     flex-wrap: wrap;
 
     &__city {
-      flex: 1;
+      flex: 1 1 100%;
       margin-left: 0;
 
       &::before {

@@ -4,6 +4,12 @@
   @media (max-width: 670px) {
     display: none;
   }
+
+  &__views {
+    &:nth-child(n + 2) {
+      margin-left: 8px;
+    }
+  }
 }
 
 .views-setting-views {
@@ -18,10 +24,12 @@
     min-width: 48px;
     height: 48px;
     background-color: var(--bg-color-view-icon);
+    border: 1px solid var(--black-30);
 
     &--active {
       --color-view-icon: var(--white);
       --bg-color-view-icon: var(--blue-base);
+      border: none
     }
   }
 

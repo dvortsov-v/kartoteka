@@ -137,10 +137,15 @@ $base: '.card-product';
   #{$base}--is-compacted-view & {
     flex-direction: column;
     padding: 0;
+    flex: auto;
 
     &__picture {
       width: 100%;
-      height: auto;
+      height: 192px;
+
+      @media (max-width: 1024px) {
+        height: 168px
+      }
     }
 
     &__description {
