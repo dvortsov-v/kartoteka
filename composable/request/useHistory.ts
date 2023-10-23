@@ -10,7 +10,7 @@ export const useHistoryList = () => {
 
     const getHistoryList = async (params?: {page?: LocationQueryValue | LocationQueryValue[]}) => {
         const {data, meta}: ResultRequestHistoryList | never = await getHistoryListRequest({page: route?.query?.page, ...params});
-        historyList.value = data;
+        historyList.value = [...data, ...data];
         paginationDate.value = meta
     }
 

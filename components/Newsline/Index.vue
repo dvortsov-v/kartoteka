@@ -14,7 +14,8 @@
                 :key="`category-${history.id}`"
                 class="newsline__item"
             >
-                <UiButton type="button"
+                <UiButton
+                    type="button"
                     @click="hendleClickNewsLine(history)"
                     theme="primary-transparent"
                     class="newsline__elem news">
@@ -64,7 +65,7 @@ const sliderOption = {
     },
 }
 const sliderModules = [SwiperNavigation];
-
+const newslineSwiper = ref()
 const {
     modalHistory,
 } = useModalList()
@@ -75,6 +76,9 @@ const {
 } = useHistoryList()
 
 getHistoryList()
+
+
+// const hiddenClass = computed(() => unref(newslineSwiper).swiper.previousIndex)
 
 const hendleClickNewsLine = (history: History) => {
     const {
