@@ -1,9 +1,11 @@
 <template>
     <details class="support-article">
         <summary @click="handleToogle" class="support-article__head">
-            <span class="support-article__number">№ {{ number }}</span>
-            <h5 class="support-article__title">{{ title }}</h5>
-            <CommonStatus theme="green" class="support-article__status">Активно</CommonStatus>
+            <span class="support-article__wrap">
+                <span class="support-article__number">№ {{ number }}</span>
+                <h5 class="support-article__title">{{ title }}</h5>
+                <CommonStatus theme="green" class="support-article__status">Активно</CommonStatus>
+            </span>
             <svg-icon class="support-article__icon" :name="iconAccordion" />
         </summary>
         <div class="support-article__body">
