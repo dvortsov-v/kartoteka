@@ -3,6 +3,10 @@
 
   &__main {
     flex: auto;
+
+    @media (max-width: 1024px) {
+      width: 100%;
+    }
   }
 
   &__filters {
@@ -21,6 +25,10 @@
 
   &__list {
     margin-top: 24px;
+
+    @media (max-width: 640px) {
+      margin-top: 16px;
+    }
 
     &--is-compacted-view {
       display: grid;
@@ -48,6 +56,12 @@
   &__item {
     &:nth-child(n + 2) {
       margin-top: 16px;
+    }
+  }
+
+  &__view {
+    @media (max-width: 768px) {
+      display: none;
     }
   }
 }
