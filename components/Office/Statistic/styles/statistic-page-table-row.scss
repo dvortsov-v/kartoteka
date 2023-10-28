@@ -1,0 +1,43 @@
+.statistic-page-table-row {
+  display: flex;
+  border-top: 1px solid var(--black-20);
+
+  &__ceil {
+    flex: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    min-width: 0;
+    text-align: left;
+
+    &--date {
+      width: 132px;
+    }
+
+    &--price {
+      width: 226px;
+    }
+
+    &--name {
+      width: 128px;
+    }
+
+    &--orders {
+      width: 117px;
+    }
+
+    &--favorites {
+      width: 117px;
+    }
+
+    &--views {
+      width: 131px;
+    }
+
+    &--status {
+      width: 220px;
+    }
+  }
+}
+

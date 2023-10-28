@@ -1,20 +1,29 @@
 .statistic-page {
   &__products {
     margin-top: 24px;
+
+    @media (max-width: 640px) {
+      margin-top: 16px;
+    }
   }
 
   &__main {
     flex: auto;
-  }
-
-  &__main {
-    flex: auto;
+    @media (max-width: 1024px) {
+      width: 100%;
+    }
   }
 
   &__filters {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: 640px) {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
   }
 
   &__navigation {
@@ -32,7 +41,7 @@
     grid-template-columns: repeat(3, minmax(324px, 1fr));
     grid-gap: 16px;
 
-    @media (max-width: 1024px) {
+    @media (max-width: 1366px) {
       grid-template-columns: repeat(2, 1fr);
     }
 
@@ -43,7 +52,16 @@
   }
 
   &__table {
-    width: 100%
+    width: 100%;
+    margin-top: 24px;
+  }
+
+  &__products {
+    display: none;
+
+    @media (max-width: 1366px) {
+      display: block;
+    }
   }
 }
 
@@ -51,8 +69,6 @@
   display: flex;
 
   @media (max-width: 1024px) {
-    overflow-x: auto;
-    width: calc(100% + 32px);
     padding-right: 32px;
   }
   @media (max-width: 670px) {
@@ -161,131 +177,20 @@
   border-radius: 24px;
   border: 1px solid var(--black-30);
 
+  @media (max-width: 1366px) {
+    display: none;
+  }
+
   &__header {
     color: var(--black-50);
-
-    #{$self}__ceil {
-      padding-top: 24px;
-      padding-bottom: 24px;
-    }
-  }
-
-  &__body {
-    #{$self}__row {
-      border-top: 1px solid var(--black-20);
-    }
-  }
-
-  &__row {
-    display: flex;
-  }
-
-  &__ceil {
-    flex: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px;
-    min-width: 0;
-    text-align: left;
-
-    &--date {
-      width: 132px;
-    }
-
-    &--price {
-      width: 226px;
-    }
-
-    &--name {
-      width: 128px;
-    }
-
-    &--orders {
-      width: 117px;
-    }
-
-    &--favorites {
-      width: 117px;
-    }
-
-    &--views {
-      width: 131px;
-    }
-
-    &--status {
-      width: 220px;
-    }
-
-  }
-
-  &__name {
-    flex: auto;
-    min-width: 0;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-
-  &__sort {
-    width: 16px;
-    height: 16px;
-    fill: currentColor;
   }
 }
 
-.statistic-page-table-actions {
-  $self: &;
-  position: relative;
-
-  &__wrap {
-    position: absolute;
-    right: 0;
-    top: calc(100% + 4px);
-    border-radius: 24px;
-    border: 1px solid var(--black-20);
-    background-color: var(--white);
-    box-shadow: 0 8px 16px 0 hsla(220, 43%, 11%, 0.1);
-    min-width: 180px;
-  }
-
-  &__icon {
-    width: 24px;
-    height: 24px;
-    fill: var(--black-50);
-  }
-
-  &__list {
-    padding: 8px;
-  }
-
-  &__button {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 12px;
-    border-radius: 8px;
-    width: 100%;
-
-    &:hover {
-      background-color: var(--black-05);
-      color: var(--blue-base);
-    }
-  }
-
-  &__del {
-    width: 16px;
-    height: 16px;
-  }
-
-  &__bottom {
-    padding: 8px;
-    border-top: 1px solid var(--black-20);
-  }
-
-  &:hover {
-    #{$self}__icon {
-      fill: var(--blue-base);
+.statistic-page-products {
+  &__item {
+    &:nth-child(n + 2) {
+      margin-top: 16px;
     }
   }
 }
+
