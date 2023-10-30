@@ -31,9 +31,33 @@ const classesViews = (isChecked: boolean) => ({
     'views-setting-views__wrap--active': isChecked,
 })
 const handleChoice = (value: string) => {
-    views.value = value;
+    if(window.innerWidth < 670) {
+        views.value = 'tiles';
+    } else {
+        views.value = value;
+    }
+
     emit('change', value)
 }
+
+const setViews = () => {
+    if(window.innerWidth < 670) {
+        handleChoice('tiles')
+        return
+    }
+    handleChoice(unref(views))
+
+}
+
+onMounted(() => {
+    setViews();
+
+    window.addEventListener('resize', setViews);
+})
+
+onUnmounted(() => {
+    window.removeEventListener('resize', setViews);
+})
 </script>
 
 <style scoped lang="scss">

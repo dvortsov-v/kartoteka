@@ -23,6 +23,7 @@
                     <Swiper
                         v-if="product.images.length > 0"
                         v-bind="sliderOption"
+                        :modules="sliderModules"
                         class="product-page-information__slider product-page-slider"
                     >
                         <SwiperSlide
@@ -40,7 +41,7 @@
                                 >
                             </picture>
                         </SwiperSlide>
-                        <div class="main-page-banners__pagination"></div>
+                        <div class="product-page-slider__pagination"></div>
                     </Swiper>
                     <div class="product-page-information__description product-page-information-description">
                         <p class="product-page-information-description__text">
@@ -237,7 +238,26 @@ const sliderOption = {
     observer: true,
     observeParents: true,
     spaceBetween: 8,
+    pagination: {
+        el: '.product-page-slider__pagination',
+        enabled: false,
+    },
+    breakpoints: {
+        640: {
+            slidesPerView: 9,
+            pagination: {
+                enabled: false,
+            },
+        },
+        0: {
+            slidesPerView: 1,
+            pagination: {
+                enabled: true,
+            },
+        }
+    },
 }
+const sliderModules = [SwiperPagination];
 
 const {modalOffer} = useModalList();
 const {

@@ -41,6 +41,11 @@ $base: '.card-product';
 
   &__description {
     margin-left: 24px;
+    flex: 1;
+    //@media (max-width: 1100px) {
+    //  max-width: 272px;
+    //
+    //}
 
     @media (max-width: 670px) {
       margin-left: 0;
@@ -90,9 +95,11 @@ $base: '.card-product';
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    flex: none;
-
-    @media (max-width: 1024px) {
+    flex: 0 1 auto;
+    @media (max-width: 1344px) {
+      min-width: 33%;
+    }
+    @media (max-width: 768px) {
       margin-left: 28px;
     }
     @media (max-width: 670px) {
