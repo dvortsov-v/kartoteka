@@ -287,10 +287,11 @@
     margin-bottom: -8px;
     padding-bottom: 8px;
     position: sticky;
-    top: 0;
+    top: 16px;
     background-color: var(--white);
     @media (max-width: 1024px) {
       width: calc(100% + 32px);
+      top: 8px;
     }
     @media (max-width: 670px) {
       width: calc(100% + 16px);
