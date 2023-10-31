@@ -35,9 +35,12 @@
     }
     &:nth-child(3) {
       &::after {
-        content: '...';
         display: block;
         color: inherit;
+
+        @media (max-width: 670px) {
+          content: '...';
+        }
       }
 
       #{$self}__chevron {
