@@ -10,6 +10,11 @@
       overflow-x: auto;
       display: flex;
       min-width: 0;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
   }
 

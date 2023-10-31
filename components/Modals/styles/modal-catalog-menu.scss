@@ -17,6 +17,10 @@
     padding: 16px 128px;
     display: flex;
 
+    @media (max-width: 1024px) {
+      padding-left: 32px;
+      padding-right: 32px;
+    }
     @media (max-width: 670px) {
       padding: 0 16px 24px;
       flex-direction: column;
@@ -87,6 +91,7 @@
   cursor: pointer;
   border-radius: 8px;
 
+
   &__name {
     color: var(--black-100);
     line-height: 1.5;
@@ -105,13 +110,19 @@
     height: 16px;
     fill: var(--black-100);
 
-    @media (max-width: 670px) {
+    @media (max-width: 1024px) {
       display: none;
     }
   }
 
   &:hover {
     background-color: var(--blue-transparent);
+
+    #{$self}__arrow {
+      @media (max-width: 1024px) {
+        display: block;
+      }
+    }
   }
 
   &--sub {
@@ -151,9 +162,17 @@
   @media (max-width: 670px) {
     display: none;
   }
+  @media (max-width: 1024px) {
+    max-height: initial;
+    width: 344px;
+  }
 
   &__item {
     width: 50%;
+
+    @media (max-width: 1024px) {
+      width: initial;
+    }
   }
 
   &__head {

@@ -242,6 +242,7 @@
   p {
     line-height: 1.5;
     color: var(--black-100);
+    overflow: hidden;
 
     &:nth-child(n + 2) {
       margin-top: 32px;

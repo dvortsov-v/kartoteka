@@ -51,16 +51,26 @@ const sliderOption = {
         prevEl: '.newsline__button--prev',
     },
     breakpoints: {
-        1025: {
+        1344: {
             slidesPerView: 9,
+        },
+        1025: {
+            slidesPerView: 6,
             spaceBetween: 8,
         },
-        414: {
+        768: {
             slidesPerView: 5.5,
+        },
+        650: {
+            slidesPerView: 4.5,
+        },
+        500: {
+            slidesPerView: 3.5,
+            spaceBetween: 16,
         },
         0: {
             slidesPerView: 2.5,
-            spaceBetween: 16,
+            spaceBetween: 8,
         }
     },
 }
