@@ -1,220 +1,169 @@
 .modal-catalog-filters {
-  position: relative;
-  background-color: hsl(0, 0%, 100%);
-  border-radius: 24px;
-  max-width: 384px;
-  width: 100%;
-  top: 120px;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  height: calc(100vh - 240px);
-  overflow: auto;
-  padding: 32px 32px 180px;
-  margin: 0 auto;
-
-  @media (max-width: 670px) {
-    border-radius: 0;
-    max-width: 100%;
-    top: 0;
-    height: 100vh;
-    padding: 32px 32px 200px;
-  }
-
-  &__wrap {
-    padding: 16px 128px;
+  &__content {
     display: flex;
-
-    @media (max-width: 670px) {
-      padding: 0 16px 24px;
-      flex-direction: column;
-      overflow: auto;
-    }
-  }
-
-  &__list {
-    border-radius: 24px;
-    padding: 16px;
-    background-color: var(--white);
-    width: 392px;
-    overflow: auto;
-    max-height: 464px;
-
-    @media (max-width: 670px) {
-      width: 100%;
-      border-radius: 24px;
-      border: 1px solid var(--black-30);
-      max-height: initial;
-    }
-
-    &--top {
-      display: none;
-
-      @media (max-width: 670px) {
-        display: block;
-        margin-top: 16px;
-      }
-    }
-  }
-
-  &__category {
-    width: 100%;
-  }
-
-  &__subcategory {
-    margin-left: 16px;
-  }
-
-  &__footer {
-    display: none;
     flex-direction: column;
-    align-items: center;
-    margin-top: 24px;
+    position: relative;
+    background-color: hsl(0, 0%, 100%);
+    border-radius: 24px;
+    max-width: 384px;
+    width: 100%;
+    height: calc(100vh - 240px);
+    padding-top: 32px;
 
     @media (max-width: 670px) {
-      display: flex;
+      border-radius: 0;
+      max-width: initial;
+      height: 100%;
+      padding-top: 16px;
     }
   }
 
-  &__address {
+  &__scrollbar {
     margin-top: 32px;
-    text-align: center;
+    overflow-y: auto;
+    flex: auto;
+    padding-left: 32px;
+    padding-right: 32px;
+    @media (max-width: 670px) {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
   }
 
-  &__socials {
-    margin-top: 16px;
-  }
-}
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    flex: none;
+    padding-left: 32px;
+    padding-right: 32px;
 
-.modal-catalog-filters-category {
-  $self: &;
-  padding: 12px 16px;
-  display: inline-flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  border-radius: 8px;
+    @media (max-width: 670px) {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+  }
 
   &__name {
-    color: var(--black-100);
-    line-height: 1.5;
-    font-weight: 500;
-  }
-
-  &__count {
-    margin-left: 8px;
-    color: var(--black-50);
-    font-size: 12px;
-  }
-
-  &__arrow {
-    margin-left: 8px;
-    width: 16px;
-    height: 16px;
-    fill: var(--black-100);
-
-    @media (max-width: 670px) {
-      display: none;
-    }
-  }
-
-  &:hover {
-    background-color: var(--blue-transparent);
-  }
-
-  &--sub {
-    #{$self}__name {
-      font-weight: 400;
-    }
-
-    &:hover {
-      background-color: var(--blue-transparent);
-      border-radius: 8px;
-      background: var(--black-05);
-
-      #{$self}__name {
-        color: var(--blue-base);
-      }
-      #{$self}__arrow {
-        fill: var(--blue-base);
-      }
-    }
-  }
-
-  &--top {
-    #{$self}__name {
-      font-weight: 400;
-    }
-  }
-}
-
-.modal-catalog-filters-subcategory {
-  border-radius: 24px;
-  background-color: var(--white);
-  width: 664px;
-  max-height: 464px;
-  display: flex;
-  flex-direction: column;
-
-  @media (max-width: 670px) {
-    display: none;
-  }
-
-  &__item {
-    width: 50%;
-  }
-
-  &__head {
-    padding: 32px;
-    border-bottom: 1px solid var(--black-30);
-    flex: none;
-  }
-
-  &__title {
-    color: var(--black-100);
-    font-size: 28px;
-    font-weight: 500;
-    line-height: 1.14;
-  }
-
-  &__list {
-    flex: auto;
-    padding: 16px 16px 48px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 0 16px;
-    overflow-x: auto;
-  }
-
-  &__category {
-    width: 100%;
-  }
-}
-
-.catalog-page-main__filters {
-  &-name {
     font-size: 22px;
     font-weight: 500;
     line-height: 24px;
   }
-  &-top {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 0 32px;
-  }
-  &-close {
+
+  &__close {
     width: 24px;
     height: 24px;
   }
+
+  &__section {
+    &:nth-child(n + 2) {
+      margin-top: 32px;
+    }
+  }
+
+  &__fields,
+  &__list,
+  &__more {
+    margin-top: 16px;
+  }
+
+  &__selector {
+    min-height: 48px;
+
+    &::v-deep {
+      &.ui-multiselect .multiselect__content-wrapper {
+        top: auto;
+        bottom: 100%;
+      }
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    width: 100%;
+    bottom: 0;
+    background-color: var(--white);
+    border-top: 1px solid var(--black-10);
+    padding-bottom: 32px;
+  }
 }
 
-.catalog-filters-fields {
-  display: flex;
+.modal-catalog-filters-title {
+  color: var(--black-100);
+  font-weight: 600;
+  line-height: 1.5;
+}
 
-  &__field:last-child {
-    border-top: none;
-    border-left: 1px solid var(--black-30);
-    padding-left: 8px;
+.modal-catalog-filters-fields {
+  padding-left: 12px;
+  padding-right: 12px;
+  border: 1px solid var(--black-30);
+  border-radius: 8px;
+
+  @media (max-width: 1024px) {
+    display: flex;
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+
+  &__field {
+    flex-shrink: 0;
+    padding-top: 12px;
+    padding-bottom: 12px;
+
+    &:nth-child(n + 2) {
+      border-top: 1px solid var(--black-30);
+    }
+
+    @media (max-width: 1024px) {
+      max-width: 50%;
+      width: 50%;
+      padding-left: 6px;
+      padding-right: 6px;
+
+      &:last-child {
+        border-top: none;
+        border-left: 1px solid var(--black-30);
+      }
+    }
+  }
+
+  &__input {
+    max-width: 100%;
+    width: 100%;
+    font-size: 16px;
+  }
+}
+
+.modal-catalog-filters-list {
+  &__item {
+    &:nth-child(n + 2) {
+      margin-top: 16px;
+    }
+  }
+}
+
+.modal-catalog-filters-checkbox {
+  display: flex;
+  align-items: flex-start;
+
+  &__text {
+    margin-left: 8px;
+    color: var(--black-100);
+    line-height: 1.5;
+  }
+}
+
+.modal-catalog-filters-more {
+  &__icon {
+    width: 24px;
+    height: 24px;
+    fill: var(--blue-base)
+  }
+  &__text {
+    margin-left: 8px;
+    color: var(--blue-base);
+    line-height: 1.5;
   }
 }
