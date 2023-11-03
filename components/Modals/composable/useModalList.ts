@@ -27,14 +27,15 @@ export const useModalList = () => {
         return modalsCatalogSelectFilters;
     };
 
-    const modalHistory = (history: History) => {
+    const modalHistory = (historyList: History[], historyId: number) => {
         const modalHistory = useModal({
             component: ModalsHistory,
             attrs: {
                 onClose() {
                     modalHistory.close()
                 },
-                history,
+                historyList,
+                historyId,
             },
         });
 

@@ -14,20 +14,11 @@
                 :key="`category-${history.id}`"
                 class="newsline__item"
             >
-                <UiButton
-                    type="button"
-                    @click="hendleClickNewsLine(history)"
-                    theme="primary-transparent"
-                    class="newsline__elem news">
-                    <picture class="news__picture">
-                        <img
-                            :src="history.images[0]"
-                            :alt="history.title"
-                            class="news__img"
-                        >
-                    </picture>
-                    <span class="news__name">{{history.title}}</span>
-                </UiButton>
+                <NewslineHistory
+                    @click="hendleClickNewsLine(history.id)"
+                    :history="history"
+                    class="newsline__elem news"
+                />
             </SwiperSlide>
         </Swiper>
         <NuxtLink class="newsline__button newsline__button--next">
@@ -39,7 +30,7 @@
 import {useModalList} from "~/components/Modals/composable/useModalList";
 import {news} from '@/constants/news';
 import {useHistoryList} from '~/composable/request/useHistory';
-import {History} from "~/definitions/interfaces/History";
+
 const sliderOption = {
     observer: true,
     observeParents: true,
@@ -75,7 +66,6 @@ const sliderOption = {
     },
 }
 const sliderModules = [SwiperNavigation];
-const newslineSwiper = ref()
 const {
     modalHistory,
 } = useModalList()
@@ -87,13 +77,10 @@ const {
 
 getHistoryList()
 
-
-// const hiddenClass = computed(() => unref(newslineSwiper).swiper.previousIndex)
-
-const hendleClickNewsLine = (history: History) => {
+const hendleClickNewsLine = (historyId: number) => {
     const {
         open:openModalHistory,
-    } = modalHistory(history)
+    } = modalHistory(unref(historyList), historyId)
 
     openModalHistory()
 };
