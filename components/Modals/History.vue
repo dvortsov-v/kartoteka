@@ -1,11 +1,14 @@
 <template>
     <VueFinalModal>
         <div class="modal-catalog-history">
-            <NewslineHistory
-                v-if="previousHistory"
-                :history="previousHistory"
-                class="modal-catalog-history__switch modal-catalog-history__switch--prev"
-            />
+            <transition name="slide-fade">
+                <NewslineHistory
+                    :key="previousHistory.id"
+                    v-if="previousHistory"
+                    :history="previousHistory"
+                    class="modal-catalog-history__switch modal-catalog-history__switch--prev"
+                />
+            </transition>
             <div class="modal-history">
                 <button @click="emit('close')" class="modal-history__close">
                     <svg-icon class="modal-history__close-svg" name="close"/>
@@ -20,6 +23,7 @@
                     <Swiper
                         :key="`slider-history-${selectHistory.id}`"
                         @swiper="onSwiper"
+                        @reachBeginning="nextActiveId"
                         v-if="selectHistory"
                         v-bind="sliderOption"
                         :modules="sliderModules"
@@ -44,7 +48,7 @@
                         <h4 class="history-swiper__title">
                             {{selectHistory.title}}
                         </h4>
-                        <p class="history-swiper__text" v-html="selectHistory.html"></p>
+                        <p v-if="selectHistory.html" class="history-swiper__text" v-html="selectHistory.html"></p>
                         <UiButton class="history-swiper__btn ">
                             Перейти в каталог
                         </UiButton>
@@ -56,11 +60,14 @@
                     <svg-icon name="arrow-right" class="modal-history__button-icon"/>
                 </button>
             </div>
-            <NewslineHistory
-                v-if="nextHistory"
-                :history="nextHistory"
-                class="modal-catalog-history__switch modal-catalog-history__switch--next"
-            />
+            <transition name="slide-fade" :duration="100000">
+                <NewslineHistory
+                    :key="nextHistory.id"
+                    v-if="nextHistory"
+                    :history="nextHistory"
+                    class="modal-catalog-history__switch modal-catalog-history__switch--next"
+                />
+            </transition>
         </div>
     </VueFinalModal>
 </template>
@@ -107,10 +114,6 @@
             delay: 2500,
             disableOnInteraction: false,
         },
-        // navigation: {
-        //     nextEl: '.modal-history__button--next',
-        //     prevEl: '.modal-history__button--prev',
-        // },
         pagination: {
             el: ".modal-history__pagination",
         },
@@ -138,7 +141,13 @@
         if(unref(selectHistory)?.images.length - 1 !== unref(swiperInstance).realIndex) {
             swiperInstance.value.slideNext();
         } else {
-            activeId.value = activeId.value + 1 ;
+            activeId.value = activeId.value + 1;
+        }
+    }
+    const nextActiveId = () => {
+        if(unref(selectHistory)?.images.length - 1 === unref(swiperInstance).realIndex) {
+            activeId.value = activeId.value + 1;
+            return
         }
     }
 </script>
