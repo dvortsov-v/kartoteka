@@ -15,10 +15,12 @@
 <script setup lang="ts">
 useHead({
     title: 'Личный кабинет',
+
 });
 
 definePageMeta({
     nameRoute: 'Личный кабинет',
+    middleware: 'auth',
 });
 import {useFavoritesStore} from "~/store/useFavoritesStore";
 

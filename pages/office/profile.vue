@@ -173,6 +173,7 @@ useHead({
 });
 definePageMeta({
     nameRoute: 'Личный кабинет',
+    middleware: 'auth',
 })
 const userToken = useCookie('userToken');
 const userInformation = ref<UserInfo | null>(

@@ -46,6 +46,7 @@ useHead({
 
 definePageMeta({
     nameRoute: 'Личный кабинет',
+    middleware: 'auth',
 });
 const {
     products,

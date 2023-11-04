@@ -25,6 +25,7 @@ defineProps({
     title: String,
     countObjects: Number,
 })
+
 const getPluralFormObjects = (countGoods: number) => getPluralForm(countGoods, [
     'объект',
     'объекта',
