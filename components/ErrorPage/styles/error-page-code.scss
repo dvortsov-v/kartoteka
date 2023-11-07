@@ -1,0 +1,61 @@
+.error-page-code {
+  &--desktop {
+    display: block;
+
+    @media (max-width: 670px) {
+      display: none;
+    }
+  }
+
+  &--mobile {
+    display: none;
+
+    @media (max-width: 670px) {
+      display: block;
+    }
+  }
+
+  &__top,
+  &__middle,
+  &__bottom {
+    display: flex;
+    overflow: hidden;
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+
+  &__top {
+    height: 34px;
+
+    @media (max-width: 670px) {
+      height: 17px;
+    }
+  }
+  &__middle {
+    height: 80px;
+    transform: translate(-8px);
+    margin-top: -1px;
+
+    @media (max-width: 670px) {
+      height: 40px;
+      transform: translate(-4px);
+    }
+  }
+  &__bottom {
+    height: 108px;
+
+    @media (max-width: 670px) {
+      height: 54px;
+      margin-top: -1px;
+    }
+  }
+
+  &__svg {
+    width: 156px;
+    height: 100%;
+
+    @media (max-width: 670px) {
+      width: 100%;
+    }
+  }
+}
