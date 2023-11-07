@@ -155,7 +155,7 @@
                                     <div class="about-page-information-case__icon">
                                         <svg-icon :name="`information/${itemCase.icon}`" class="about-page-information-case__svg" />
                                     </div>
-                                    <UiButton type="button" theme="gray" class="about-page-information-case__download about-page-information-download">
+                                    <UiButton  @click="navigateTo(`/documents/${itemCase.url}`, {open: {target: '_blank'}})" type="button" theme="gray" class="about-page-information-case__download about-page-information-download">
                                         <div class="about-page-information-download__wrap">
                                             <span class="about-page-information-download__text">{{ getTextBtn(Boolean(itemCase.extension)) }}</span>
                                             <svg-icon name="arrow-right" class="about-page-information-download__svg" />
