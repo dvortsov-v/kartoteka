@@ -1,4 +1,4 @@
-import {Product, ResultRequesProducts} from "~/definitions/interfaces/Products";
+import {Product} from "~/definitions/interfaces/Products";
 import {getProductsRequest, ParamsProduct} from "~/api/ProductsApi";
 import {Meta} from "~/definitions/interfaces/Meta";
 
@@ -21,9 +21,16 @@ export const useProducts = () => {
 
         paramsRequest = {...paramsRequest, ...params};
 
-        const {data, meta}: ResultRequesProducts | never = await getProductsRequest(paramsRequest);
-        products.value = data;
-        paginationDate.value = meta
+        const result = await getProductsRequest(paramsRequest);
+
+        if(result) {
+            products.value = result.data;
+            paginationDate.value = result.meta;
+
+            return result.data
+        }
+
+        return;
     }
 
     watch(() => route.query.page, () => {

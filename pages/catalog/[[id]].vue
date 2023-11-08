@@ -117,7 +117,8 @@ useHead({
 });
 
 definePageMeta({
-    name: 'Каталог',
+    nameRoute: 'Каталог',
+    middleware: 'catalog-page-guard',
 });
 
 const views: Ref<string> = ref('rows');

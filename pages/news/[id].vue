@@ -40,10 +40,17 @@
 <script setup lang="ts">
 import {useNews} from "~/composable/request/useNews";
 
-const {news, parsedFilteredNews} = useNews()
+const route = useRoute();
+const {news, parsedFilteredNews, getNews, getNewsRelated} = useNews();
+
+getNews(route.params.id);
+getNewsRelated();
 
 useHead({
     title: unref(news)?.title || '',
+});
+definePageMeta({
+    middleware: 'news-page-guard',
 });
 const breadcrumbsList = computed(() => {
     return [

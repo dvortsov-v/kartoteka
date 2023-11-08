@@ -35,7 +35,6 @@ export const getHistoryRelatedRequest = async (id: string | string[]): Promise<H
     const { data }: {data: Ref<ResultRequestHistoryList>} = await useFetch(`${config.public.baseURL}/stories/${id}/related`);
 
     if(unref(data)?.data) {
-        console.log(data.value.data);
         return unref(data).data;
     }
 

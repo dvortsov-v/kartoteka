@@ -22,7 +22,7 @@ export interface ParamsProduct {
     region_ids?: string|string[],
 }
 
-export const getProductsRequest = async (queryParams?: ParamsProduct): Promise<ResultRequesProducts | never> => {
+export const getProductsRequest = async (queryParams?: ParamsProduct): Promise<ResultRequesProducts | null> => {
     const config = useRuntimeConfig()
 
     const { data }: {data: Ref<ResultRequesProducts>} = await useFetch(`${config.public.baseURL}/products`,{
@@ -33,7 +33,7 @@ export const getProductsRequest = async (queryParams?: ParamsProduct): Promise<R
         return unref(data);
     }
 
-    return {};
+    return null;
 }
 
 export const getProductsCountRequest = async (queryParams?: ParamsProduct): Promise<number> => {
@@ -49,7 +49,7 @@ export const getProductsCountRequest = async (queryParams?: ParamsProduct): Prom
     }
 
 }
-export const getProductRequest = async (id: string | string[]): Promise<Product | never> => {
+export const getProductRequest = async (id: string | string[]): Promise<Product | null> => {
     const config = useRuntimeConfig()
 
     const { data }: {data: Ref<ResultRequestProduct>} = await useFetch(`${config.public.baseURL}/products/${id}`);
@@ -58,7 +58,7 @@ export const getProductRequest = async (id: string | string[]): Promise<Product 
         return data.value.data;
     }
 
-    return {};
+    return null;
 }
 export const getProductRelatedRequest = async (id: string | string[]): Promise<Product[]> => {
     const config = useRuntimeConfig()

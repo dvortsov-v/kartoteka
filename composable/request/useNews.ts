@@ -7,9 +7,17 @@ export const useNews = () => {
     const filteredNews = ref<News[]>([])
 
 
-    const getNews = async () => {
-        news.value = await getNewsRequest(route.params.id);
-        console.log()
+    const getNews = async (id: string| string[]) => {
+        const result = await getNewsRequest(id);
+        console.log('getNews')
+
+        if(result) {
+            news.value = result
+
+            return result;
+        }
+
+        return null;
     }
 
     const getNewsRelated = async () => {
@@ -19,7 +27,7 @@ export const useNews = () => {
 
     watch(() => route.params.id, () => {
         if(route.params.id) {
-            getNews();
+            getNews(route.params.id);
             getNewsRelated();
         }
     }, {immediate: true})
@@ -27,5 +35,7 @@ export const useNews = () => {
     return {
         news,
         parsedFilteredNews,
+        getNews,
+        getNewsRelated,
     }
 }

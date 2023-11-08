@@ -8,7 +8,7 @@ import {ru} from "date-fns/locale";
 
 export const useProduct = () => {
     const route = useRoute();
-    const product = ref<Product>({});
+    const product = ref<Product>();
     const productRelated = ref<Product[]>([])
     const breadcrumbsDefault: ParceBreadcrumbs[] = [{
         name: 'Каталог',
@@ -16,7 +16,15 @@ export const useProduct = () => {
     }];
 
     const getProduct = async () => {
-        product.value =  await getProductRequest(route.params.id);
+        const result = await getProductRequest(route.params.id);
+
+        if(result) {
+            product.value = result
+
+            return result;
+        }
+
+        return null;
     }
 
     const getProductRelated = async () => {
@@ -24,22 +32,22 @@ export const useProduct = () => {
     }
 
     const breadcrumbs = computed((): ParceBreadcrumbs[] =>  {
-        return unref(product)?.category ? breadcrumbsDefault.concat(useParceBreadcrumbs(unref(product).category), [
+        return unref(product)?.category ? breadcrumbsDefault.concat(useParceBreadcrumbs(unref(product)?.category), [
             {
-                name: unref(product).name,
-                path: `/catalog/product/${unref(product).id}`,
+                name: unref(product)?.name || '',
+                path: `/catalog/product/${unref(product)?.id}`,
             }
         ]) : breadcrumbsDefault;
     })
 
 
-    const tabs = computed(() => unref(product).about.map(section => {
+    const tabs = computed(() => unref(product)?.about.map(section => {
         const {id, title} = section;
 
         return {id, title}
     }))
-    const formattedDate:ComputedRef<string> = computed(() => format(new Date(unref(product).created_at), 'dd.MM.yyyy, HH:mm'))
-    const parcedSocials: ComputedRef<Social[]> = computed(() => Object.entries(unref(product).seller.socials).reduce((acc: Social[], current, index: number) => {
+    const formattedDate:ComputedRef<string> = computed(() => format(new Date(unref(product)?.created_at || '' ), 'dd.MM.yyyy, HH:mm'))
+    const parcedSocials: ComputedRef<Social[]> = computed(() => Object.entries(unref(product)?.seller.socials || '').reduce((acc: Social[], current, index: number) => {
         acc.push({
             id: index,
             icon: current[0],
@@ -47,9 +55,9 @@ export const useProduct = () => {
         })
         return acc;
     }, []))
-    const parcedCreateAt:ComputedRef<string> = computed(() => format(new Date(unref(product).seller.created_at), 'MMMM yyyy', {locale: ru}) )
-    const parcedPhone:ComputedRef<string> = computed(() => unref(product).seller.phone.replace(/^\+?(\d)/,''))
-    const parcedPhoneHref:ComputedRef<string> = computed(() => unref(product).seller.phone.replace(' ', ''))
+    const parcedCreateAt:ComputedRef<string> = computed(() => format(new Date(unref(product)?.seller.created_at || ''), 'MMMM yyyy', {locale: ru}) )
+    const parcedPhone:ComputedRef<string> = computed(() => unref(product)?.seller.phone.replace(/^\+?(\d)/,'') || '');
+    const parcedPhoneHref:ComputedRef<string> = computed(() => unref(product)?.seller.phone.replace(' ', '') || '');
 
     return {
         product,
