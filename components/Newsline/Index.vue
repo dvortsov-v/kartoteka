@@ -4,7 +4,7 @@
             <svg-icon name="arrow-right" class="newsline__icon"/>
         </button>
         <Swiper
-            v-if="news.length > 0"
+            v-if="historyList.length > 0"
             v-bind="sliderOption"
             :modules="sliderModules"
             class="newsline__list"
@@ -28,7 +28,6 @@
 </template>
 <script setup lang="ts">
 import {useModalList} from "~/components/Modals/composable/useModalList";
-import {news} from '@/constants/news';
 import {useHistoryList} from '~/composable/request/useHistory';
 
 const sliderOption = {

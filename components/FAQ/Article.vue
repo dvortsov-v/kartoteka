@@ -5,9 +5,9 @@
             <svg-icon class="faq-article__icon" :name="iconAccordion" />
         </summary>
         <div class="faq-article__body">
-            <p>На маркетплейсе обычно предлагают несколько способов оплаты для удобства покупателей. Некоторые из наиболее распространенных способов оплаты включают:</p>
-            <p><b>Оплата банковской картой:</b> это один из наиболее удобных и популярных способов оплаты. Покупатель может использовать кредитную или дебетовую карту для оплаты покупки. Маркетплейс может принимать различные типы кредитных карт, такие как Visa, Mastercard, American Express и другие.</p>
-            <p><b>Электронные кошельки:</b> некоторые маркетплейсы также предлагают оплату через электронные кошельки, такие как PayPal, Яндекс.Деньги, WebMoney, QIWI и т.д.</p>
+            <p v-for="item in text">
+                {{item }}
+            </p>
         </div>
     </details>
 </template>
@@ -15,7 +15,7 @@
 <script setup lang="ts">
 defineProps({
     title: String,
-    text: String,
+    text: Array as PropType<string[]>,
 })
 const isOpen: Ref<boolean> = ref(false);
 
