@@ -49,9 +49,7 @@ getNewsRelated();
 useHead({
     title: unref(news)?.title || '',
 });
-definePageMeta({
-    middleware: 'news-page-guard',
-});
+
 const breadcrumbsList = computed(() => {
     return [
         {

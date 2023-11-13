@@ -23,6 +23,14 @@ export const useProducts = () => {
 
         const result = await getProductsRequest(paramsRequest);
 
+        if(!result?.data || !result?.data.length) {
+            showError(createError({
+                statusCode: 404,
+                message: `Страницы не существует`,
+                fatal: true,
+            }));
+        }
+
         if(result) {
             products.value = result.data;
             paginationDate.value = result.meta;

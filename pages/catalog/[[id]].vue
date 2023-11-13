@@ -1,5 +1,5 @@
 <template>
-    <div v-if="category" class="catalog-page">
+    <div v-if="category && products.length" class="catalog-page">
         <UiContainer class="catalog-page__wrapper">
             <UiBreadcrumbs :breadcrumbsList="breadcrumbs" class="catalog-page__breadcrumbs"/>
             <CatalogHead :namePage="namePage" :count="countProductOfCategory" class="catalog-page__head" />
@@ -62,10 +62,8 @@
                         </div>
                         <CommonViewsSetting @change="changeViews" />
                     </div>
-                    <template v-if="products">
-                        <CommonProductList :listProducts="products" :isCompactedView="isCompactedView" class="catalog-page-main__list" />
-                        <UiPagination :paginationDate="paginationDate" class="catalog-page-main__navigation" />
-                    </template>
+                    <CommonProductList :listProducts="products" :isCompactedView="isCompactedView" class="catalog-page-main__list" />
+                    <UiPagination :paginationDate="paginationDate" class="catalog-page-main__navigation" />
                 </section>
             </main>
         </UiContainer>
@@ -118,7 +116,6 @@ useHead({
 
 definePageMeta({
     nameRoute: 'Каталог',
-    middleware: 'catalog-page-guard',
 });
 
 const views: Ref<string> = ref('rows');

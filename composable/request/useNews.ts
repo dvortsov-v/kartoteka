@@ -9,15 +9,18 @@ export const useNews = () => {
 
     const getNews = async (id: string| string[]) => {
         const result = await getNewsRequest(id);
-        console.log('getNews')
 
         if(result) {
             news.value = result
 
             return result;
+        } else {
+            showError(createError({
+                statusCode: 404,
+                message: `Страницы не существует`,
+                fatal: true,
+            }))
         }
-
-        return null;
     }
 
     const getNewsRelated = async () => {

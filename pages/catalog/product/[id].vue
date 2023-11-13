@@ -284,9 +284,7 @@ await getProductRelated();
 useHead({
     title: unref(product)?.name || '',
 });
-definePageMeta({
-    middleware: 'product-page-guard',
-});
+
 const activeTab: Ref<number> = ref(0);
 const isShowPhone = ref(false);
 const activeImage = ref(unref(product)?.images[0]);

@@ -22,6 +22,12 @@ export const useProduct = () => {
             product.value = result
 
             return result;
+        } else {
+            showError(createError({
+                statusCode: 404,
+                message: `Страницы не существует`,
+                fatal: true,
+            }))
         }
 
         return null;
