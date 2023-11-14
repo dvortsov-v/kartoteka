@@ -4,10 +4,10 @@
             <h6 class="catalog-filters__title catalog-filters-title">Цена, ₽</h6>
             <div class="catalog-filters__fields catalog-filters-fields">
                 <div class="catalog-filters-fields__field">
-                    <UiInput type="number" placeholder="от" class="catalog-filters-fields__input" />
+                    <UiInput v-model="formData.price_to"  type="number" placeholder="от" class="catalog-filters-fields__input" />
                 </div>
                 <div class="catalog-filters-fields__field">
-                    <UiInput type="number" placeholder="до" class="catalog-filters-fields__input" />
+                    <UiInput v-model="formData.price_from"  type="number" placeholder="до" class="catalog-filters-fields__input" />
                 </div>
             </div>
             <ul class="catalog-filters__list catalog-filters-list">
@@ -89,7 +89,7 @@
         </div>
         <div class="catalog-filters__bottom">
             <UiButton
-                @click.prevent="emit('submitFilters', paramsSubmit)"
+                @click.prevent="updateDataFilter"
                 type="submit"
                 class="catalog-filters__more"
             >
@@ -111,6 +111,8 @@ import {getProductsCountRequest, ParamsProduct} from "~/api/ProductsApi";
 import {LocationQueryValue} from "vue-router";
 
 const route = useRoute();
+const router = useRouter();
+
 const emit = defineEmits(['submitFilters'])
 const {regions, getRegions} = useRegions();
 await getRegions();
@@ -144,20 +146,22 @@ const listStatus = ref<{id: number, name: string, value: string}[]>([
 ])
 const countProduct = ref(0);
 const formData = ref<ParamsProduct>({
-    has_image: false,
-    is_lot:  false,
-    region_ids: [],
-    bargaining_to: '',
-    bargaining_from: '',
-    status: [],
-    category_ids: route.params.id
+    price_to: Number(route?.query?.price_to),
+    price_from: Number(route?.query?.price_from),
+    has_image: route.query?.has_image ? JSON.parse(String(route.query?.has_image)) : false,
+    is_lot: route.query?.is_lot ? JSON.parse(String(route.query?.is_lot)) : false,
+    region_ids: route?.query?.region_ids,
+    bargaining_to: route?.query?.bargaining_to,
+    bargaining_from: route?.query?.bargaining_from,
+    status: route?.query?.status || [],
+    category_ids: route.params.id,
 });
 
 const paramsSubmit = computed(() => {
-    return Object.entries(unref(formData)).reduce((acc: {[x: string] : number | boolean | string[] | number[] | LocationQueryValue | LocationQueryValue[]}, current: [string, (number | boolean | string[] | LocationQueryValue | LocationQueryValue[])]) => {
+    return Object.entries(unref(formData)).reduce((acc: {[x: string] : LocationQueryValue | LocationQueryValue[]}, current: [string, (number | boolean | string[] | LocationQueryValue | LocationQueryValue[])]) => {
         if(Array.isArray(current[1]) && (current[1].length > 0) && current[0] === 'region_ids' ) {
             acc[current[0]] = current[1].map((item) => item.id).join(',');
-        } else if(current[1] && (typeof current[0] === 'string')) {
+        } else if(current[1]) {
             acc[current[0]] = current[1];
         }
 
@@ -165,6 +169,8 @@ const paramsSubmit = computed(() => {
     }, {})
 })
 const resetForm = () => {
+    router.push({query: undefined});
+
     formData.value = {
         has_image: false,
         is_lot:  false,
@@ -175,12 +181,49 @@ const resetForm = () => {
         category_ids: route.params.id
     }
 
-    emit('submitFilters', unref(paramsSubmit));
+    emit('submitFilters');
 }
+
+const updateDataFilter = () => {
+    router.push({
+        query: {
+            has_image: unref(paramsSubmit)?.has_image,
+            is_lot: unref(paramsSubmit)?.is_lot,
+            region_ids: unref(paramsSubmit)?.region_ids,
+            bargaining_to: unref(paramsSubmit)?.bargaining_to,
+            bargaining_from: unref(paramsSubmit).bargaining_from,
+            status: unref(paramsSubmit)?.status,
+            price_to: unref(paramsSubmit)?.price_to,
+            price_from: unref(paramsSubmit)?.price_from,
+        },
+    });
+
+    emit('submitFilters');
+}
+//
+// watch(formData,  (newData) => {
+//     if(newData) {
+//         router.push({
+//             query: {
+//                 has_image: String(newData?.has_image),
+//                 is_lot: String(newData?.is_lot),
+//                 region_ids: newData.region_ids,
+//                 bargaining_to: newData.bargaining_to,
+//                 bargaining_from: newData.bargaining_from,
+//                 status: newData.status,
+//             },
+//         });
+//     }
+//
+// })
+// watch(paramsSubmit, async (params) => {
+//     countProduct.value = await getProductsCountRequest();
+// }, {immediate: true});
 
 watch(paramsSubmit, async (params) => {
     countProduct.value = await getProductsCountRequest(params);
-}, {immediate: true})
+},{immediate: true})
+
 </script>
 
 <style scoped lang="scss">

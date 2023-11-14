@@ -19,7 +19,7 @@ export const useProducts = () => {
             paramsRequest.category_ids = route.params.id
         }
 
-        paramsRequest = {...paramsRequest, ...params};
+        paramsRequest = {...paramsRequest, ...route?.query, ...params};
 
         const result = await getProductsRequest(paramsRequest);
 
@@ -41,10 +41,8 @@ export const useProducts = () => {
         return;
     }
 
-    watch(() => route.query.page, () => {
-        if(route.query.page) {
-            getProducts();
-        }
+    watch(() => route.query, () => {
+        getProducts();
     })
 
     return {

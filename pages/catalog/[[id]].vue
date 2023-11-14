@@ -1,5 +1,5 @@
 <template>
-    <div v-if="category && products.length" class="catalog-page">
+    <div v-if="products.length" class="catalog-page">
         <UiContainer class="catalog-page__wrapper">
             <UiBreadcrumbs :breadcrumbsList="breadcrumbs" class="catalog-page__breadcrumbs"/>
             <CatalogHead :namePage="namePage" :count="countProductOfCategory" class="catalog-page__head" />
@@ -75,7 +75,6 @@ import {useModalCatalogSort} from "~/components/Modals/composable/useModalCatalo
 import {useProducts} from "~/composable/request/useProducts";
 import {useCategory} from "~/composable/request/useCategory";
 import {useCategoriesStore} from "~/store/useCategoriesStore";
-import {ParamsProduct} from "~/api/ProductsApi";
 
 const paramsProduct = ref({
     order_type: 'DESC',
@@ -104,9 +103,12 @@ const {
     findSelectTypeSorting
 } = useModalCatalogSort();
 
-getCategory();
-getBreadcrumbs();
 getProducts(unref(paramsProduct));
+
+if(route.params.id) {
+    getBreadcrumbs();
+    getCategory();
+}
 
 const namePage = computed(() => unref(category)?.name || 'Каталог')
 
@@ -160,9 +162,7 @@ const toogleSortDescending = () => {
 const changeViews = (value: string) => {
     views.value = value
 }
-const onSubmitFilters = async (params: ParamsProduct) => {
-    paramsProduct.value = {...unref(paramsProduct), ...params};
-
+const onSubmitFilters = async () => {
     await getProducts(unref(paramsProduct));
 
 }

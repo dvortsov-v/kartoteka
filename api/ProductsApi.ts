@@ -10,16 +10,16 @@ export interface ParamsProduct {
     category_ids?: string|string[],
     address?: string,
     page?: LocationQueryValue | LocationQueryValue[],
-    price_to?: number,
-    price_from?: number,
-    status?: string | string[],
+    price_to?: number | null,
+    price_from?: number | null,
+    status?: LocationQueryValue | LocationQueryValue[],
     is_lot?: boolean,
     has_image?: boolean,
-    bargaining_from?: string,
-    bargaining_to?: string,
+    bargaining_from?: LocationQueryValue | LocationQueryValue[],
+    bargaining_to?: LocationQueryValue | LocationQueryValue[],
     order_by?: string,
     order_type?: string,
-    region_ids?: string|string[],
+    region_ids?: LocationQueryValue | LocationQueryValue[],
 }
 
 export const getProductsRequest = async (queryParams?: ParamsProduct): Promise<ResultRequesProducts | null> => {

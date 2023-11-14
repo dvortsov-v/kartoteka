@@ -59,7 +59,6 @@ const filteredFaq = computed(() => {
     if(!activeTab.value) {
         return faq;
     }
-    console.log()
 
     return faq.filter(item => item.typeId === activeTab.value)
 })
