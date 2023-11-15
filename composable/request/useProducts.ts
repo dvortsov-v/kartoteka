@@ -5,18 +5,22 @@ import {Meta} from "~/definitions/interfaces/Meta";
 export const useProducts = () => {
     const route = useRoute();
     const products = ref<Product[]>([]);
+    const searchProducts = ref<Product[]>([]);
     const paginationDate = ref<Meta>();
 
     const countProductOfCategory = computed(() => unref(paginationDate)?.total || 0);
 
-    const getProducts = async (params?: ParamsProduct) => {
+    const getProducts = async () => {
         let paramsRequest: ParamsProduct = {};
 
         if(route.params.id) {
             paramsRequest.category_ids = route.params.id
         }
+        const query = route?.query
 
-        paramsRequest = {...paramsRequest, ...route?.query, ...params};
+        delete query.name;
+
+        paramsRequest = {...paramsRequest, ...query};
 
         const result = await getProductsRequest(paramsRequest);
 
@@ -34,18 +38,29 @@ export const useProducts = () => {
 
             return result.data
         }
+    }
 
-        return;
+    const getProductInSearch = async () => {
+        console.log(route?.query)
+        const result = await getProductsRequest(route?.query);
+
+        if(result) {
+            searchProducts.value = result.data;
+        }
     }
 
     watch(() => route.query, () => {
-        getProducts();
+        if(!route.query.name) {
+            getProducts();
+        }
     })
 
     return {
         products,
+        searchProducts,
         paginationDate,
         countProductOfCategory,
         getProducts,
+        getProductInSearch,
     }
 }
