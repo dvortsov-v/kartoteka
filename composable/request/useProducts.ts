@@ -12,9 +12,6 @@ export const useProducts = () => {
     const getProducts = async (params?: ParamsProduct) => {
         let paramsRequest: ParamsProduct = {};
 
-        if(route?.query?.page) {
-            paramsRequest.page = route?.query?.page;
-        }
         if(route.params.id) {
             paramsRequest.category_ids = route.params.id
         }

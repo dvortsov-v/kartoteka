@@ -76,12 +76,8 @@ import {useProducts} from "~/composable/request/useProducts";
 import {useCategory} from "~/composable/request/useCategory";
 import {useCategoriesStore} from "~/store/useCategoriesStore";
 
-const paramsProduct = ref({
-    order_type: 'DESC',
-    order_by: 'price',
-});
-
 const route = useRoute();
+const router = useRouter();
 const categoriesStore = useCategoriesStore()
 const {
     products,
@@ -103,7 +99,7 @@ const {
     findSelectTypeSorting
 } = useModalCatalogSort();
 
-getProducts(unref(paramsProduct));
+getProducts();
 
 if(route.params.id) {
     getBreadcrumbs();
@@ -122,8 +118,8 @@ definePageMeta({
 
 const views: Ref<string> = ref('rows');
 
-const typeSorting: Ref<string> = ref('price');
-const sortDescending: Ref<boolean> = ref(false);
+const typeSorting: Ref<string> = ref(route.query?.order_by ? String(route?.query?.order_by) : 'price');
+const sortDescending: Ref<boolean> = ref(route.query?.order_type === 'DESC' ?? false);
 const sortList = [
     {
         value: 'popularity',
@@ -152,25 +148,31 @@ const classesSort = (isChecked: boolean) => ({
 })
 const resetSortDescending = async(newValue: string) => {
     sortDescending.value = false;
-    paramsProduct.value.order_by = newValue;
+    router.push({
+        query: {
+            order_by: newValue,
+            order_type: 'DESC',
+        }
+    })
     typeSorting.value = newValue
 }
 const toogleSortDescending = () => {
-    paramsProduct.value.order_type = !unref(sortDescending) ? 'ASC' : 'DESC';
+    router.push({
+        query: {
+            order_by: unref(typeSorting),
+            order_type: !unref(sortDescending) ? 'ASC' : 'DESC',
+        }
+    })
     sortDescending.value = !sortDescending.value;
 }
 const changeViews = (value: string) => {
     views.value = value
 }
 const onSubmitFilters = async () => {
-    await getProducts(unref(paramsProduct));
+    await getProducts();
 
 }
 const {open: openModalCatalogFilters} = modalCatalogFilters({onSubmitFilters})
-
-watch([typeSorting, sortDescending], async () => {
-    await getProducts(unref(paramsProduct))
-})
 </script>
 
 <style scoped lang="scss">
