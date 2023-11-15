@@ -99,7 +99,7 @@
                 </div>
                 <div class="modal-catalog-filters__bottom">
                     <UiButton
-                        @click.prevent="submitFilters(paramsSubmit)"
+                        @click.prevent="updateDataFilter"
                         type="submit"
                         class="modal-catalog-filters__more"
                     >
@@ -127,6 +127,7 @@ import {LocationQueryValue} from "vue-router";
 
 const emit = defineEmits(['close', 'submitFilters']);
 const route = useRoute();
+const router = useRouter();
 const categoriesStore = useCategoriesStore()
 const {regions, getRegions} = useRegions();
 await getRegions();
@@ -160,20 +161,22 @@ const listStatus = ref<{id: number, name: string, value: string}[]>([
 ])
 const countProduct = ref(0);
 const formData = ref<ParamsProduct>({
-    has_image: false,
-    is_lot:  false,
-    region_ids: [],
-    bargaining_to: '',
-    bargaining_from: '',
-    status: [],
-    category_ids: route.params.id
+    price_to: Number(route?.query?.price_to),
+    price_from: Number(route?.query?.price_from),
+    has_image: route.query?.has_image ? JSON.parse(String(route.query?.has_image)) : false,
+    is_lot: route.query?.is_lot ? JSON.parse(String(route.query?.is_lot)) : false,
+    region_ids: route?.query?.region_ids,
+    bargaining_to: route?.query?.bargaining_to,
+    bargaining_from: route?.query?.bargaining_from,
+    status: route?.query?.status || [],
+    category_ids: route.params.id,
 });
 
 const paramsSubmit = computed(() => {
-    return Object.entries(unref(formData)).reduce((acc: {[x: string] : number | boolean | string[] | number[] | LocationQueryValue | LocationQueryValue[]}, current: [string, (number | boolean | string[] | LocationQueryValue | LocationQueryValue[])]) => {
+    return Object.entries(unref(formData)).reduce((acc: {[x: string] : LocationQueryValue | LocationQueryValue[]}, current: [string, (number | boolean | string[] | LocationQueryValue | LocationQueryValue[])]) => {
         if(Array.isArray(current[1]) && (current[1].length > 0) && current[0] === 'region_ids' ) {
             acc[current[0]] = current[1].map((item) => item.id).join(',');
-        } else if(current[1] && (typeof current[0] === 'string')) {
+        } else if(current[1]) {
             acc[current[0]] = current[1];
         }
 
@@ -181,6 +184,8 @@ const paramsSubmit = computed(() => {
     }, {})
 })
 const resetForm = () => {
+    router.push({query: undefined});
+
     formData.value = {
         has_image: false,
         is_lot:  false,
@@ -191,8 +196,25 @@ const resetForm = () => {
         category_ids: route.params.id
     }
 
-    emit('submitFilters', unref(paramsSubmit));
+    emit('submitFilters');
 }
+const updateDataFilter = () => {
+    router.push({
+        query: {
+            has_image: unref(paramsSubmit)?.has_image,
+            is_lot: unref(paramsSubmit)?.is_lot,
+            region_ids: unref(paramsSubmit)?.region_ids,
+            bargaining_to: unref(paramsSubmit)?.bargaining_to,
+            bargaining_from: unref(paramsSubmit).bargaining_from,
+            status: unref(paramsSubmit)?.status,
+            price_to: unref(paramsSubmit)?.price_to,
+            price_from: unref(paramsSubmit)?.price_from,
+        },
+    });
+
+    emit('submitFilters');
+}
+
 
 watch(paramsSubmit, async (params) => {
     countProduct.value = await getProductsCountRequest(params);

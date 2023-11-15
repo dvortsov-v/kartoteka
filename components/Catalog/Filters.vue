@@ -200,25 +200,6 @@ const updateDataFilter = () => {
 
     emit('submitFilters');
 }
-//
-// watch(formData,  (newData) => {
-//     if(newData) {
-//         router.push({
-//             query: {
-//                 has_image: String(newData?.has_image),
-//                 is_lot: String(newData?.is_lot),
-//                 region_ids: newData.region_ids,
-//                 bargaining_to: newData.bargaining_to,
-//                 bargaining_from: newData.bargaining_from,
-//                 status: newData.status,
-//             },
-//         });
-//     }
-//
-// })
-// watch(paramsSubmit, async (params) => {
-//     countProduct.value = await getProductsCountRequest();
-// }, {immediate: true});
 
 watch(paramsSubmit, async (params) => {
     countProduct.value = await getProductsCountRequest(params);
