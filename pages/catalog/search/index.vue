@@ -1,14 +1,18 @@
 <template>
-    <div v-if="products.length" class="catalog-page">
+    <div class="catalog-page">
         <UiContainer class="catalog-page__wrapper">
             <UiBreadcrumbs :breadcrumbsList="breadcrumbs" class="catalog-page__breadcrumbs"/>
-            <CatalogHead :namePage="namePage" :count="countProductOfCategory" class="catalog-page__head" />
+            <CatalogHead namePage="Результаты поиска" :count="countProductOfResult" class="catalog-page__head" />
             <main class="catalog-page__main catalog-page-main">
-                <aside class="catalog-page-main__aside">
-                    <CatalogCategories :categories="listCategory" :isCatalogCategory="Boolean($route.params.id)" class="catalog-page-main__categories" />
+                <aside v-if="!isEmptyResult" class="catalog-page-main__aside">
+                    <CatalogCategories :categories="categoriesStore.categories" :isCatalogCategory="Boolean($route.params.id)" class="catalog-page-main__categories" />
                     <CatalogFilters @submitFilters="onSubmitFilters" class="catalog-page-main__filters" />
                 </aside>
-                <section class="catalog-page-main__section">
+                <p v-if="isEmptyResult" class="catalog-page-main__empty h5">По данному запросу нет результатов</p>
+                <section
+                    v-else
+                    class="catalog-page-main__section"
+                >
                     <div class="catalog-page-main__maps"></div>
                     <div class="catalog-page-main__settings">
                         <UiButton
@@ -62,7 +66,7 @@
                         </div>
                         <CommonViewsSetting @change="changeViews" />
                     </div>
-                    <CommonProductList :listProducts="products" :isCompactedView="isCompactedView" class="catalog-page-main__list" />
+                    <CommonProductList :listProducts="searchProducts" :isCompactedView="isCompactedView" class="catalog-page-main__list" />
                     <UiPagination :paginationDate="paginationDate" class="catalog-page-main__navigation" />
                 </section>
             </main>
@@ -72,26 +76,20 @@
 <script setup lang="ts">
 import {useModalList} from "~/components/Modals/composable/useModalList";
 import {useModalCatalogSort} from "~/components/Modals/composable/useModalCatalogSort";
-import {useProducts} from "~/composable/request/useProducts";
-import {useCategory} from "~/composable/request/useCategory";
 import {useCategoriesStore} from "~/store/useCategoriesStore";
+import {useSearchProducts} from "~/composable/request/useSearchProducts";
+import {ParceBreadcrumbs} from "~/composable/useParceBreadcrumbs";
 
 const route = useRoute();
 const router = useRouter();
 const categoriesStore = useCategoriesStore()
-const {
-    products,
-    paginationDate,
-    countProductOfCategory,
-    getProducts,
-} = useProducts();
 
 const {
-    category,
-    breadcrumbs,
-    getCategory,
-    getBreadcrumbs,
-} = useCategory()
+    searchProducts,
+    countProductOfResult,
+    paginationDate,
+    getProductInSearch,
+} = useSearchProducts();
 
 const {modalCatalogFilters} = useModalList();
 const {
@@ -99,22 +97,28 @@ const {
     findSelectTypeSorting
 } = useModalCatalogSort();
 
-getProducts();
-
-if(route.params.id) {
-    getBreadcrumbs();
-    getCategory();
+if(route.query.name && route.query.name.length > 0) {
+    getProductInSearch();
 }
 
-const namePage = computed(() => unref(category)?.name || 'Каталог')
-
 useHead({
-    title: unref(namePage),
+    title: 'Результаты поиска',
 });
 
 definePageMeta({
-    nameRoute: 'Каталог',
+    nameRoute: 'Результаты поиска',
 });
+
+const breadcrumbs: ParceBreadcrumbs[] = [
+    {
+        name: 'Каталог',
+        path: '/catalog',
+    },
+    {
+        name: 'Результаты поиска',
+        path: '/catalog/search',
+    }
+];
 
 const views: Ref<string> = ref('rows');
 
@@ -136,12 +140,7 @@ const sortList = [
 ];
 
 const isCompactedView: ComputedRef<boolean> = computed(() => unref(views) === 'tiles');
-const listCategory = computed(() => {
-    if(route.params.id) {
-        return unref(category)?.sub_categories || [];
-    }
-    return categoriesStore.categories;
-});
+const isEmptyResult = computed(() => !unref(searchProducts).length);
 const classesSort = (isChecked: boolean) => ({
     'catalog-page-main-sort__wrap--active': isChecked,
     'catalog-page-main-sort__wrap--desc' : unref(sortDescending)
@@ -171,9 +170,13 @@ const changeViews = (value: string) => {
     views.value = value
 }
 const onSubmitFilters = async () => {
-    await getProducts();
+    await getProductInSearch();
 }
 const {open: openModalCatalogFilters} = modalCatalogFilters({onSubmitFilters})
+
+watch(() => route.query, () => {
+    getProductInSearch();
+})
 </script>
 
 <style scoped lang="scss">

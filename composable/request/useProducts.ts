@@ -5,7 +5,6 @@ import {Meta} from "~/definitions/interfaces/Meta";
 export const useProducts = () => {
     const route = useRoute();
     const products = ref<Product[]>([]);
-    const searchProducts = ref<Product[]>([]);
     const paginationDate = ref<Meta>();
 
     const countProductOfCategory = computed(() => unref(paginationDate)?.total || 0);
@@ -40,27 +39,18 @@ export const useProducts = () => {
         }
     }
 
-    const getProductInSearch = async () => {
-        console.log(route?.query)
-        const result = await getProductsRequest(route?.query);
-
-        if(result) {
-            searchProducts.value = result.data;
-        }
-    }
-
     watch(() => route.query, () => {
-        if(!route.query.name) {
-            getProducts();
+        if(route.query.name === null || route.query.name === undefined || route.query.name === '' || route.query.name) {
+            return
         }
+
+        getProducts();
     })
 
     return {
         products,
-        searchProducts,
         paginationDate,
         countProductOfCategory,
         getProducts,
-        getProductInSearch,
     }
 }

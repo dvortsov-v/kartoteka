@@ -7,7 +7,6 @@
             :class="classesWrapper"
             class="search-field__wrap"
         >
-<!--                @blur="toogleIsShowResultSearch"-->
             <input
                 v-model="resultSearch"
                 @focus="toogleIsShowResultSearch"
@@ -22,6 +21,7 @@
             </div>
         </div>
         <UiButton
+            @click="goToPageSearch"
             type="submit"
             :class="classesBtn"
             class="search-field__submit"
@@ -31,15 +31,16 @@
         </UiButton>
         <div
             v-if="isShowResultSearch"
+            @click.self="closeSearch"
             class="search-field__result search-field-results"
         >
-            <ul v-if="searchProducts.length" class="search-field-results__list">
+            <ul v-if="isNoEmptyResult" class="search-field-results__list">
                 <li
                     v-for="product in searchProducts"
                     :key="`product-search-${product.id}`"
                     class="search-field-results__item"
                 >
-                    <NuxtLink :to="`/catalog/product/${product.id}`" class="search-field-results__result search-field-result">
+                    <NuxtLink @click="navigateProduct(product.id)" class="search-field-results__result search-field-result">
                         <span class="search-field-result__name">
                             {{ product.name }}
                         </span>
@@ -47,16 +48,21 @@
                     </NuxtLink>
                 </li>
             </ul>
+            <div v-else-if="isEmptyResult" class="search-field-results__list">
+                <p class="search-field-results__empty">По данному запросу нет результатов</p>
+            </div>
         </div>
     </div>
 </template>
 <script setup lang="ts">
-import {useProducts} from "~/composable/request/useProducts";
+import {useSearchProducts} from "~/composable/request/useSearchProducts";
 
 const {
     searchProducts,
     getProductInSearch,
-} = useProducts();
+    resetProductInSearch,
+} = useSearchProducts();
+const route = useRoute();
 const router = useRouter();
 
 const resultSearch = ref('');
@@ -71,30 +77,53 @@ const toogleIsShowResultSearch = () => {
 const classesBtn = computed(() => ({'search-field__submit--focus': unref(isShowResultSearch)}));
 const classesWrapper = computed(() => ({'search-field__wrap--focus': unref(isShowResultSearch)}));
 const classesField = computed(() => ({'search-field--focus': unref(isShowResultSearch)}));
+const isEmptyResult = computed(() => !unref(searchProducts).length && unref(resultSearch).length > 1);
+const isNoEmptyResult = computed(() => unref(searchProducts).length && unref(resultSearch).length > 1);
 
 onUnmounted(() => {
     clearTimeout(timer.value)
 })
 
 const searchDebounce = () => {
-    router.push({
-        query: {
-            name: unref(resultSearch),
-        }
-    })
+    // router.push({
+    //     query: {
+    //         name: unref(resultSearch),
+    //     }
+    // })
 
-    if(isSearch.value || resultSearch === resultSearchOld) {
+    if(isSearch.value || resultSearch.value === resultSearchOld.value) {
         return
     }
 
     isSearch.value = true;
     timer.value = setTimeout(async () => {
-            getProductInSearch();
-
-            resultSearchOld.value = resultSearch.value;
-
+        getProductInSearch();
+        resultSearchOld.value = resultSearch.value;
         isSearch.value = false;
     }, 2000);
+}
+const navigateProduct = (id: number) => {
+    navigateTo({
+        path: `/catalog/product/${id}`,
+        query: undefined,
+    });
+    resultSearch.value = '';
+    resultSearchOld.value = '';
+    resetProductInSearch();
+    toogleIsShowResultSearch();
+}
+const closeSearch = () => {
+    router.push({query: undefined});
+    toogleIsShowResultSearch();
+}
+const goToPageSearch = () => {
+    navigateTo({
+        path: '/catalog/search',
+        query: {
+            name= route.query
+        },
+    }, {open: { target: '_self'}});
+    isShowResultSearch.value = false;
 }
 </script>
 <style scoped lang="scss">

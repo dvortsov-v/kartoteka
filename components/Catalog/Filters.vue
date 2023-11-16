@@ -155,6 +155,7 @@ const formData = ref<ParamsProduct>({
     bargaining_from: route?.query?.bargaining_from,
     status: route?.query?.status || [],
     category_ids: route.params.id,
+    name: route?.query?.name ? String(route?.query?.name) : '',
 });
 
 const paramsSubmit = computed(() => {
@@ -178,7 +179,8 @@ const resetForm = () => {
         bargaining_to: '',
         bargaining_from: '',
         status: [],
-        category_ids: route.params.id
+        category_ids: route.params.id,
+        name: '',
     }
 
     emit('submitFilters');
@@ -187,6 +189,7 @@ const resetForm = () => {
 const updateDataFilter = () => {
     router.push({
         query: {
+            ...route.query,
             has_image: unref(paramsSubmit)?.has_image,
             is_lot: unref(paramsSubmit)?.is_lot,
             region_ids: unref(paramsSubmit)?.region_ids,
@@ -195,6 +198,7 @@ const updateDataFilter = () => {
             status: unref(paramsSubmit)?.status,
             price_to: unref(paramsSubmit)?.price_to,
             price_from: unref(paramsSubmit)?.price_from,
+            name: unref(paramsSubmit)?.name,
         },
     });
 

@@ -47,6 +47,8 @@
 import {PropType} from "@vue/runtime-core";
 import {Meta} from "~/definitions/interfaces/Meta";
 
+const route = useRoute();
+
 const props = defineProps({
     paginationDate: {
         type: Object as PropType<Meta>,
@@ -57,14 +59,15 @@ const props = defineProps({
 const router = useRouter();const maxVisibleCount = 4;
 const handleClick = (numberPage: string) => {
     if(numberPage.indexOf('Next') + 1) {
-        router.push({query: {page: props.paginationDate.current_page + 1}})
+        router.push({query: {...route.query, page: props.paginationDate.current_page + 1}})
         return;
     }
     if(numberPage.indexOf('Previous') + 1) {
-        router.push({query: {page: props.paginationDate.current_page - 1}})
+        router.push({query: {...route.query, page: props.paginationDate.current_page - 1}})
         return;
     }
-    router.push({query: {page: numberPage}})
+
+    router.push({query: {...route.query, page: numberPage}})
 }
 const classesItem = (active: boolean, isLastElem: boolean) => ({
     'ui-pagination__button--active': active,

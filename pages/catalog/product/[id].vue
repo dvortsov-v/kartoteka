@@ -43,12 +43,12 @@
                         </SwiperSlide>
                         <div class="product-page-slider__pagination"></div>
                     </Swiper>
-                    <div class="product-page-information__description product-page-information-description">
+                    <div v-if="product.description" class="product-page-information__description product-page-information-description">
                         <p class="product-page-information-description__text">
                             {{ product.description }}
                         </p>
                     </div>
-                    <div class="product-page-information__location product-page-information-location">
+                    <div v-if="product.address" class="product-page-information__location product-page-information-location">
                         <h4 class="product-page-information-location__title h4">Адрес</h4>
                         <p class="product-page-information-location__text">
                             {{ product.address }}
