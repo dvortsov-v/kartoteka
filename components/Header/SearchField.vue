@@ -85,11 +85,11 @@ onUnmounted(() => {
 })
 
 const searchDebounce = () => {
-    // router.push({
-    //     query: {
-    //         name: unref(resultSearch),
-    //     }
-    // })
+    router.push({
+        query: {
+            name: unref(resultSearch),
+        }
+    })
 
     if(isSearch.value || resultSearch.value === resultSearchOld.value) {
         return
@@ -119,9 +119,7 @@ const closeSearch = () => {
 const goToPageSearch = () => {
     navigateTo({
         path: '/catalog/search',
-        query: {
-            name= route.query
-        },
+        query: route.query,
     }, {open: { target: '_self'}});
     isShowResultSearch.value = false;
 }
