@@ -6,7 +6,7 @@
             <main class="catalog-page__main catalog-page-main">
                 <aside v-if="!isEmptyResult" class="catalog-page-main__aside">
                     <CatalogCategories :categories="categoriesStore.categories" :isCatalogCategory="Boolean($route.params.id)" class="catalog-page-main__categories" />
-                    <CatalogFilters @submitFilters="onSubmitFilters" class="catalog-page-main__filters" />
+                    <CatalogFilters  class="catalog-page-main__filters" />
                 </aside>
                 <p v-if="isEmptyResult" class="catalog-page-main__empty h5">По данному запросу нет результатов</p>
                 <section
@@ -174,8 +174,12 @@ const onSubmitFilters = async () => {
 }
 const {open: openModalCatalogFilters} = modalCatalogFilters({onSubmitFilters})
 
-watch(() => route.query, () => {
-    getProductInSearch();
+onBeforeRouteUpdate((to) => {
+    if(to.query.name === null || to.query.name === undefined || to.query.name === '') {
+        return
+    }
+
+    getProductInSearch(to.query);
 })
 </script>
 
