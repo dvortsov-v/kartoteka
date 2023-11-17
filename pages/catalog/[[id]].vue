@@ -6,7 +6,7 @@
             <main class="catalog-page__main catalog-page-main">
                 <aside class="catalog-page-main__aside">
                     <CatalogCategories :categories="listCategory" :isCatalogCategory="Boolean($route.params.id)" class="catalog-page-main__categories" />
-                    <CatalogFilters @submitFilters="onSubmitFilters" class="catalog-page-main__filters" />
+                    <CatalogFilters class="catalog-page-main__filters" />
                 </aside>
                 <section class="catalog-page-main__section">
                     <div class="catalog-page-main__maps"></div>
@@ -170,10 +170,10 @@ const toogleSortDescending = () => {
 const changeViews = (value: string) => {
     views.value = value
 }
-const onSubmitFilters = async () => {
-    await getProducts();
-}
-const {open: openModalCatalogFilters} = modalCatalogFilters({onSubmitFilters})
+// const onSubmitFilters = async () => {
+//     await getProducts();
+// }
+const {open: openModalCatalogFilters} = modalCatalogFilters()
 </script>
 
 <style scoped lang="scss">

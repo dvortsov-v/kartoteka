@@ -87,6 +87,7 @@ onUnmounted(() => {
 const searchDebounce = () => {
     router.push({
         query: {
+            ...route.query,
             name: unref(resultSearch),
         }
     })
@@ -113,7 +114,10 @@ const navigateProduct = (id: number) => {
     toogleIsShowResultSearch();
 }
 const closeSearch = () => {
-    router.push({query: undefined});
+    router.push({query: {
+        ...route.query,
+        name: undefined,
+    }});
     toogleIsShowResultSearch();
 }
 const goToPageSearch = () => {

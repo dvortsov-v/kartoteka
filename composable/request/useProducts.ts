@@ -9,19 +9,20 @@ export const useProducts = () => {
 
     const countProductOfCategory = computed(() => unref(paginationDate)?.total || 0);
 
-    const getProducts = async () => {
+    const getProducts = async (params?: ParamsProduct) => {
         let paramsRequest: ParamsProduct = {};
 
         if(route.params.id) {
             paramsRequest.category_ids = route.params.id
         }
-        const query = route?.query
+        const query = params || route?.query
 
         delete query.name;
 
         paramsRequest = {...paramsRequest, ...query};
 
         const result = await getProductsRequest(paramsRequest);
+        console.log(result)
 
         if(!result?.data || !result?.data.length) {
             showError(createError({
@@ -39,12 +40,19 @@ export const useProducts = () => {
         }
     }
 
-    watch(() => route.query, () => {
-        if(route.query.name === null || route.query.name === undefined || route.query.name === '' || route.query.name) {
-            return
-        }
+    // watch(() => route.query, () => {
+    //     if(route.query.name === null || route.query.name === undefined || route.query.name === '' || route.query.name) {
+    //         return
+    //     }
+    //
+    //     getProducts();
+    // })
 
-        getProducts();
+
+    onBeforeRouteUpdate((to) => {
+        if(to.query.name === null || to.query.name === undefined || to.query.name === '' || !Boolean(to.query.name)) {
+            getProducts(to.query);
+        }
     })
 
     return {
