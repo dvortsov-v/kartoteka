@@ -1,5 +1,5 @@
 <template>
-    <div v-if="products.length" class="catalog-page">
+    <div v-if="category && products.length" class="catalog-page">
         <UiContainer class="catalog-page__wrapper">
             <UiBreadcrumbs :breadcrumbsList="breadcrumbs" class="catalog-page__breadcrumbs"/>
             <CatalogHead :namePage="namePage" :count="countProductOfCategory" class="catalog-page__head" />
@@ -170,9 +170,6 @@ const toogleSortDescending = () => {
 const changeViews = (value: string) => {
     views.value = value
 }
-// const onSubmitFilters = async () => {
-//     await getProducts();
-// }
 const {open: openModalCatalogFilters} = modalCatalogFilters()
 </script>
 

@@ -22,7 +22,6 @@ export const useProducts = () => {
         paramsRequest = {...paramsRequest, ...query};
 
         const result = await getProductsRequest(paramsRequest);
-        console.log(result)
 
         if(!result?.data || !result?.data.length) {
             showError(createError({
