@@ -169,10 +169,8 @@ const toogleSortDescending = () => {
 const changeViews = (value: string) => {
     views.value = value
 }
-const onSubmitFilters = async () => {
-    await getProductInSearch();
-}
-const {open: openModalCatalogFilters} = modalCatalogFilters({onSubmitFilters})
+
+const {open: openModalCatalogFilters} = modalCatalogFilters()
 
 onBeforeRouteUpdate((to) => {
     if(to.query.name === null || to.query.name === undefined || to.query.name === '') {
