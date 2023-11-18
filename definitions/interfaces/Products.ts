@@ -46,6 +46,7 @@ export interface Product {
     is_lot: boolean,
     bargaining_from: string,
     bargaining_to: string,
+    is_favorite?: boolean,
 }
 export interface ResultRequesProducts {
     data: Product[],

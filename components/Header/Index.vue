@@ -43,6 +43,7 @@
                         </UiButton>
                         <CommonOfficeMenu
                             v-if="isShowUserMenu"
+                            @close="closeUserMenu"
                             class="header-main-user__wrap"
                         />
                     </div>
@@ -100,6 +101,9 @@ const toogleIsShowCatalogMenu = () => {
 }
 const toogleIsShowUserMenu = () => {
     isShowUserMenu.value = !isShowUserMenu.value;
+}
+const closeUserMenu = () => {
+    isShowUserMenu.value = false;
 }
 
 const setHeaderHeight = () => {

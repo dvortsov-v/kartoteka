@@ -152,7 +152,7 @@
                                 </span>
                             </UiButton>
                             <UiButton
-                                @click="handleFavoritesClick(product)"
+                                @click="handleFavoritesClick(product, userToken)"
                                 :theme="themeFavoriteBtn(product.id)"
                                 class="product-page-base__favorites"
                             >
@@ -259,7 +259,9 @@ const sliderOption = {
 }
 const sliderModules = [SwiperPagination];
 
+const userToken = useCookie('userToken');
 const {modalOffer} = useModalList();
+
 const {
     themeFavoriteBtn,
     iconFavoriteBtn,

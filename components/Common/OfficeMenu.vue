@@ -7,6 +7,7 @@
                 class="office-menu__item"
             >
                 <NuxtLink
+                    @click="$emit('close')"
                     :to="route.path"
                     class="office-menu__link office-menu-link"
                     exactActiveClass="office-menu-link--active"
@@ -37,9 +38,10 @@
 <script setup lang="ts">
 import {usePagesListOfAuthUser} from "~/components/Common/composable/usePagesListOfAuthUser";
 import {logout} from "~/api/UserApi";
+defineEmits(['close']);
+const userToken = useCookie('userToken');
 const pagesListOfAuthUser = usePagesListOfAuthUser()
 const isFavoriteId = 3;
-const userToken = useCookie('userToken');
 
 </script>
 

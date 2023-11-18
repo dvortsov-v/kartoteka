@@ -13,6 +13,8 @@
 </template>
 
 <script setup lang="ts">
+import {useFavorites} from "~/composable/useFavorites";
+
 useHead({
     title: 'Личный кабинет',
 
@@ -23,7 +25,12 @@ definePageMeta({
     middleware: 'auth',
 });
 import {useFavoritesStore} from "~/store/useFavoritesStore";
-
+const {getFavorites} = useFavorites()
+const userToken = useCookie('userToken');
+if(unref(userToken)) {
+    console.log(123)
+    getFavorites(unref(userToken));
+}
 const favoritesStore = useFavoritesStore();
 
 const sortList = [

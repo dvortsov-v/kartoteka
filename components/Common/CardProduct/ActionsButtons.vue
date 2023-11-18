@@ -2,7 +2,7 @@
     <div class="card-product-actions-buttons">
         <UiButton
             v-if="isCompactedView"
-            @click="handleFavoritesClick(product)"
+            @click="handleFavoritesClick(product, userToken)"
             :theme="themeFavoriteBtn(product.id)"
             class="card-product-actions-buttons__favorites"
         >
@@ -20,7 +20,7 @@
         </UiButton>
         <UiButton
             v-if="!isCompactedView"
-            @click="handleFavoritesClick(product)"
+            @click="handleFavoritesClick(product, userToken)"
             :theme="themeFavoriteBtn(product.id)"
             class="card-product-actions-buttons__favorites card-product-actions-buttons__favorites--mob"
         >
@@ -53,6 +53,8 @@ const props = defineProps({
         default: () => {},
     }
 })
+const userToken = useCookie('userToken');
+
 
 const {modalOffer, modalConsultation} = useModalList()
 

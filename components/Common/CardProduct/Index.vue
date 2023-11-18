@@ -11,7 +11,7 @@
         >
             <div class="card-product-actions__box">
                 <UiButton
-                    @click="handleFavoritesClick(product)"
+                    @click="handleFavoritesClick(product, userToken)"
                     v-if="!isCompactedView && !isProductInOrder"
                     :theme="themeFavoriteBtn(product.id)"
                     class="card-product-actions__favorites"
@@ -55,6 +55,8 @@ const props = defineProps({
         default: false,
     },
 })
+const userToken = useCookie('userToken');
+
 const classesCardProduct = computed(() => ({
     'card-product--is-compacted-view': props.isCompactedView,
 }))
