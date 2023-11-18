@@ -1,5 +1,5 @@
 <template>
-    <div v-if="category && products.length" class="catalog-page">
+    <div v-if="products.length" class="catalog-page">
         <UiContainer class="catalog-page__wrapper">
             <UiBreadcrumbs :breadcrumbsList="breadcrumbs" class="catalog-page__breadcrumbs"/>
             <CatalogHead :namePage="namePage" :count="countProductOfCategory" class="catalog-page__head" />
