@@ -68,7 +68,7 @@ const formAuth: Ref<{email: string, password: string}> = ref({
 })
 
 const auth = async () => {
-    const response = await login(unref(formAuth).email, unref(formAuth).password);
+    await login(unref(formAuth).email, unref(formAuth).password);
     getUserData(unref(userToken))
     emit('close');
 }

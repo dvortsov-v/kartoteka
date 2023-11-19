@@ -163,8 +163,6 @@
 </template>
 
 <script setup lang="ts">
-import {me} from "~/api/UserApi";
-import {UserInfo} from "~/definitions/interfaces/User";
 import {ComputedRef} from "vue";
 import {format} from "date-fns";
 import {useUserStore} from "~/store/useUserStore";
@@ -177,7 +175,6 @@ definePageMeta({
     nameRoute: 'Личный кабинет',
     middleware: 'auth',
 })
-const userToken = useCookie('userToken');
 const isEditMod = ref<boolean>(false);
 const {userDate} = storeToRefs(useUserStore());
 

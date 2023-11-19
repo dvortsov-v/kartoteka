@@ -37,7 +37,6 @@
 </template>
 <script setup lang="ts">
 import {usePagesListOfAuthUser} from "~/components/Common/composable/usePagesListOfAuthUser";
-import {logout} from "~/api/UserApi";
 import {useUser} from "~/composable/request/useUser";
 defineEmits(['close']);
 const userToken = useCookie('userToken');
