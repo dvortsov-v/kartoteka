@@ -4,6 +4,8 @@ import {useLocalStorage} from "@vueuse/core";
 
 export const useFavoritesStore = defineStore('favoritesStore', () => {
     let favorites: Ref<Product[]> = useLocalStorage('favorites', []);
+    const countFavorites = computed(() => unref(favorites).length || 0);
+
     const addFavorites = (product: Product) => {
         favorites.value.push({...product});
     }
@@ -21,6 +23,7 @@ export const useFavoritesStore = defineStore('favoritesStore', () => {
     }
     return {
         favorites: skipHydrate(favorites),
+        countFavorites,
         addFavorites,
         setFavorites,
         deleteFavorites,

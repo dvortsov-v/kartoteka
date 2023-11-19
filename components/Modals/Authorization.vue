@@ -56,7 +56,12 @@
 <script setup lang="ts">
 import { VueFinalModal } from 'vue-final-modal';
 import {login} from "~/api/UserApi";
+import {useUser} from "~/composable/request/useUser";
+
 const emit = defineEmits(['close', 'openRegistrationModal', 'openForgotPasswordModal'])
+const userToken = useCookie('userToken');
+const {getUserData} = useUser()
+
 const formAuth: Ref<{email: string, password: string}> = ref({
     email: '',
     password: '',
@@ -64,6 +69,7 @@ const formAuth: Ref<{email: string, password: string}> = ref({
 
 const auth = async () => {
     const response = await login(unref(formAuth).email, unref(formAuth).password);
+    getUserData(unref(userToken))
     emit('close');
 }
 const socialsAuth = [

@@ -1,8 +1,10 @@
+import {storeToRefs} from "pinia";
+import {useUserStore} from "~/store/useUserStore";
 import {useFavoritesStore} from "~/store/useFavoritesStore";
 
 export const usePagesListOfAuthUser = () => {
-    const favoritesStore = useFavoritesStore();
-
+    const {countFavorites} = storeToRefs(useFavoritesStore())
+    const {countOrders} = storeToRefs(useUserStore())
 
     return computed(() => {
         return [
@@ -17,7 +19,7 @@ export const usePagesListOfAuthUser = () => {
                 name: 'Заявки',
                 icon: 'statistic/task-3',
                 path: '/office/orders',
-                count: 0,
+                count: unref(countOrders),
             },
             {
                 id: 2,
@@ -31,7 +33,7 @@ export const usePagesListOfAuthUser = () => {
                 name: 'Избранное',
                 icon: 'star-line',
                 path: '/office/favorites',
-                count: favoritesStore.favorites.length,
+                count: unref(countFavorites),
             },
             {
                 id: 4,

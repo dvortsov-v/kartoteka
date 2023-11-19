@@ -25,7 +25,7 @@
         </ul>
         <div class="office-menu__bottom">
             <button
-                @click="logout(userToken)"
+                @click="userLogout(userToken)"
                 type="button"
                 class="office-menu__logout office-menu-link"
             >
@@ -38,11 +38,12 @@
 <script setup lang="ts">
 import {usePagesListOfAuthUser} from "~/components/Common/composable/usePagesListOfAuthUser";
 import {logout} from "~/api/UserApi";
+import {useUser} from "~/composable/request/useUser";
 defineEmits(['close']);
 const userToken = useCookie('userToken');
 const pagesListOfAuthUser = usePagesListOfAuthUser()
+const {userLogout} = useUser()
 const isFavoriteId = 3;
-
 </script>
 
 <style scoped lang="scss">

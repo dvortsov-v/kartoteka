@@ -58,25 +58,47 @@ export const refresh = async (token: string): Promise<Category | object> => {
 export const me = async (token: string | null | undefined): Promise<UserInfo | undefined> => {
     const config = useRuntimeConfig()
     if(token) {
-        const {data}: { data: Ref<UserInfo> } = await useFetch(() => `${config.public.baseURL}/auth/me`, {
+        const {data}: { data: Ref<{data: UserInfo }> } = await useFetch(() => `${config.public.baseURL}/auth/me`, {
             method: 'POST',
             headers: {
                 'Authorization': token,
             }
         });
 
-        return unref(data) ?? undefined;
+        return unref(data).data ?? undefined;
     }
     return;
 }
-export const logout = async (token: string): Promise<void> => {
+export const logout = async (token: string | null | undefined): Promise<void> => {
+    const config = useRuntimeConfig();
+    if(token) {
+        try {
+            await useFetch(() => `${config.public.baseURL}/auth/logout`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': token,
+                }
+            });
+
+            const {setIsAuthUser} = useMainStore();
+            document.cookie = `userToken=''; max-age=0`;
+            setIsAuthUser(false);
+        } catch (e) {
+            console.error('Ошибка разлогинивания');
+        }
+    }
+}
+export const update = async (token: string, updateDate: UserInfo): Promise<void> => {
     const config = useRuntimeConfig();
 
     try {
-        await useFetch(() => `${config.public.baseURL}/auth/logout`, {
+        await useFetch(() => `${config.public.baseURL}/auth/update`, {
             method: 'POST',
             headers: {
                 'Authorization': token,
+            },
+            body: {
+                data: updateDate,
             }
         });
 
@@ -86,5 +108,4 @@ export const logout = async (token: string): Promise<void> => {
     } catch (e) {
         console.error('Ошибка разлогинивания');
     }
-
 }

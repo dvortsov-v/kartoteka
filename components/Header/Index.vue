@@ -38,7 +38,7 @@
                             :theme="themeUserButton"
                             class="header-main-user__auth header-main-auth header-main-auth--is-user"
                         >
-                            <span class="header-main-auth__text">Алексей</span>
+                            <span class="header-main-auth__text">{{ userDate.name }}</span>
                             <svg-icon name="chevron-down" class="header-main-auth__arrow" />
                         </UiButton>
                         <CommonOfficeMenu
@@ -68,6 +68,9 @@ import {useModalList} from "~/components/Modals/composable/useModalList";
 import {useMainStore} from "~/store/useMainStore";
 import {useCategories} from "~/composable/request/useCategories";
 import {useCategoriesStore} from "~/store/useCategoriesStore";
+import {useUser} from "~/composable/request/useUser";
+import {storeToRefs} from "pinia";
+import {useUserStore} from "~/store/useUserStore";
 
 const isShowCatalogMenu = ref(false);
 const isShowUserMenu = ref(false);
@@ -91,9 +94,13 @@ const {
 
 const mainStore = useMainStore();
 const userToken = useCookie('userToken');
+const {getUserData} = useUser()
+const {userDate} = storeToRefs(useUserStore());
 
 if(!unref(userToken)) {
     mainStore.isAuthUser = false;
+} else {
+    getUserData(unref(userToken))
 }
 
 const toogleIsShowCatalogMenu = () => {

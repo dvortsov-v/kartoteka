@@ -1,4 +1,5 @@
 import {Social} from "~/constants/socials";
+import {Product} from "~/definitions/interfaces/Products";
 
 export interface UserLogin {
     access_token: string,
@@ -19,4 +20,6 @@ export interface UserInfo {
     phone: string | null
     socials: Social[] | null
     updated_at: string | null,
+    favorites: Product[],
+    orders: Product[],
 }
