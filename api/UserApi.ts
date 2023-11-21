@@ -16,7 +16,7 @@ export const login = async (email: string, password: string): Promise<string | n
     if(unref(data)) {
         const {setIsAuthUser} = useMainStore();
         document.cookie = `userToken=${unref(data).token_type} ${unref(data).access_token}; max-age=${unref(data).expires_in}`;
-        setIsAuthUser(true);
+        await setIsAuthUser(true);
 
         return `${unref(data).token_type} ${unref(data).access_token}`;
     }
@@ -36,7 +36,7 @@ export const register = async (email: string, password: string): Promise<string 
         if(unref(data)) {
             const {setIsAuthUser} = useMainStore();
             document.cookie = `userToken=${unref(data).token_type} ${unref(data).access_token}; max-age=${unref(data).expires_in}`;
-            setIsAuthUser(true);
+            await setIsAuthUser(true);
 
             return `${unref(data).token_type} ${unref(data).access_token}`;
         }
@@ -86,7 +86,7 @@ export const logout = async (token: string | null | undefined): Promise<void> =>
 
             const {setIsAuthUser} = useMainStore();
             document.cookie = `userToken=''; max-age=0`;
-            setIsAuthUser(false);
+            await setIsAuthUser(false);
         } catch (e) {
             console.error('Ошибка разлогинивания');
         }
@@ -94,7 +94,6 @@ export const logout = async (token: string | null | undefined): Promise<void> =>
 }
 export const update = async (token: string | null | undefined, updateDate: UserInfoUpdate): Promise<UserInfo | undefined> => {
     if(token) {
-        console.log(updateDate);
         const config = useRuntimeConfig();
         try {
             const {data}: { data: Ref<{ data: UserInfo }> } = await useFetch(() => `${config.public.baseURL}/auth/update`, {
@@ -104,10 +103,11 @@ export const update = async (token: string | null | undefined, updateDate: UserI
                 },
                 body: updateDate,
             });
-
+            console.log(unref(data).data);
+            console.log(unref(data));
             return unref(data).data ?? undefined;
         } catch (e) {
-            console.error('Ошибка обновления данных пользователя');
+            console.error('Ошибка обновления данных пользователя', e);
         }
     }
 }
