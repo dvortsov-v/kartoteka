@@ -97,16 +97,7 @@
                                 Эл. почта
                             </span>
                         </span>
-                        <UiInput
-                            v-if="isEditMod"
-                            v-model="initialUserDate.email"
-                            @change="addEditField('email')"
-                            class="profile-info__input"
-                        />
-                        <span
-                            v-else
-                            class="profile-info__value"
-                        >
+                        <span class="profile-info__value">
                             {{ initialUserDate.email}}
                         </span>
                     </div>
