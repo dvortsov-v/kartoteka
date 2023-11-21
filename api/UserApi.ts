@@ -1,8 +1,8 @@
 import {Category, ResultRequestCategory} from "~/definitions/interfaces/Categories";
 import {useMainStore} from "~/store/useMainStore";
-import {UserInfo, UserLogin} from "~/definitions/interfaces/User";
+import {UserInfo, UserInfoUpdate, UserLogin} from "~/definitions/interfaces/User";
 
-export const login = async (email: string, password: string): Promise<void> => {
+export const login = async (email: string, password: string): Promise<string | null | undefined> => {
     const config = useRuntimeConfig();
 
     const { data }: {data: Ref<UserLogin>} = await useFetch(() => `${config.public.baseURL}/auth/login`, {
@@ -17,9 +17,11 @@ export const login = async (email: string, password: string): Promise<void> => {
         const {setIsAuthUser} = useMainStore();
         document.cookie = `userToken=${unref(data).token_type} ${unref(data).access_token}; max-age=${unref(data).expires_in}`;
         setIsAuthUser(true);
+
+        return `${unref(data).token_type} ${unref(data).access_token}`;
     }
 }
-export const register = async (email: string, password: string): Promise<void> => {
+export const register = async (email: string, password: string): Promise<string | null | undefined> => {
     const config = useRuntimeConfig();
 
     try {
@@ -33,8 +35,10 @@ export const register = async (email: string, password: string): Promise<void> =
 
         if(unref(data)) {
             const {setIsAuthUser} = useMainStore();
-            document.cookie = `userToken=${unref(data).token_type} ${unref(data).access_token}; max-age=${unref(data).expires_in}`;
+            document.cookie = `userToken=${unref(data).token_type} ${unref(data).access_token}; max-age=${unref(data).expires_in * 100}`;
             setIsAuthUser(true);
+
+            return `${unref(data).token_type} ${unref(data).access_token}`;
         }
     } catch (e) {
         console.error('Ошибка регистрации');
@@ -88,24 +92,22 @@ export const logout = async (token: string | null | undefined): Promise<void> =>
         }
     }
 }
-export const update = async (token: string, updateDate: UserInfo): Promise<void> => {
-    const config = useRuntimeConfig();
+export const update = async (token: string | null | undefined, updateDate: UserInfoUpdate): Promise<UserInfo | undefined> => {
+    if(token) {
+        console.log(updateDate);
+        const config = useRuntimeConfig();
+        try {
+            const {data}: { data: Ref<{ data: UserInfo }> } = await useFetch(() => `${config.public.baseURL}/auth/update`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': token,
+                },
+                body: updateDate,
+            });
 
-    try {
-        await useFetch(() => `${config.public.baseURL}/auth/update`, {
-            method: 'POST',
-            headers: {
-                'Authorization': token,
-            },
-            body: {
-                data: updateDate,
-            }
-        });
-
-        const {setIsAuthUser} = useMainStore();
-        document.cookie = `userToken=''; max-age=0`;
-        setIsAuthUser(false);
-    } catch (e) {
-        console.error('Ошибка разлогинивания');
+            return unref(data).data ?? undefined;
+        } catch (e) {
+            console.error('Ошибка обновления данных пользователя');
+        }
     }
 }

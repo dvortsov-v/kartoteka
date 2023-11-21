@@ -9,7 +9,7 @@ export const useUserStore = defineStore('userStore', () => {
     const setUserDate = (value: UserInfo) =>  {
         userDate.value = value;
     }
-    const deletUserDate = () =>  {
+    const deleteUserDate = () =>  {
         userDate.value = null;
     }
 
@@ -18,6 +18,6 @@ export const useUserStore = defineStore('userStore', () => {
         countFavorites,
         countOrders,
         setUserDate,
-        deletUserDate,
+        deleteUserDate,
     }
 })

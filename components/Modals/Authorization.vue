@@ -60,7 +60,7 @@ import {useUser} from "~/composable/request/useUser";
 
 const emit = defineEmits(['close', 'openRegistrationModal', 'openForgotPasswordModal'])
 const userToken = useCookie('userToken');
-const {getUserData} = useUser()
+const {getUserData, userLogin} = useUser()
 
 const formAuth: Ref<{email: string, password: string}> = ref({
     email: '',
@@ -68,8 +68,7 @@ const formAuth: Ref<{email: string, password: string}> = ref({
 })
 
 const auth = async () => {
-    await login(unref(formAuth).email, unref(formAuth).password);
-    getUserData(unref(userToken))
+    await userLogin(unref(formAuth).email, unref(formAuth).password);
     emit('close');
 }
 const socialsAuth = [

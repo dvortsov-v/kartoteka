@@ -6,7 +6,7 @@
                 <span class="profile-create__text">Дата регистрации {{ formattedDate }}</span>
             </div>
             <ul class="profile-page__informations">
-                <li v-if="userDate.name" class="profile-page__item">
+                <li v-if="userDate.name || isEditMod" class="profile-page__item">
                     <div class="profile-page__info profile-info">
                         <span class="profile-info__name">
                             <span class="profile-info__text">
@@ -26,7 +26,7 @@
                         </span>
                     </div>
                 </li>
-                <li v-if="userDate.surname" class="profile-page__item">
+                <li v-if="userDate.surname || isEditMod" class="profile-page__item">
                     <div class="profile-page__info profile-info">
                         <span class="profile-info__name">
                             <span class="profile-info__text">
@@ -46,7 +46,7 @@
                         </span>
                     </div>
                 </li>
-                <li v-if="userDate.company" class="profile-page__item">
+                <li v-if="userDate.company || isEditMod" class="profile-page__item">
                     <div class="profile-page__info profile-info">
                         <span class="profile-info__name">
                             <span class="profile-info__text">
@@ -66,7 +66,7 @@
                         </span>
                     </div>
                 </li>
-                <li v-if="userDate.phone" class="profile-page__item">
+                <li v-if="userDate.phone || isEditMod" class="profile-page__item">
                     <div class="profile-page__info profile-info">
                         <span class="profile-info__name">
                             <span class="profile-info__text">
@@ -86,7 +86,7 @@
                         </span>
                     </div>
                 </li>
-                <li v-if="userDate.email" class="profile-page__item">
+                <li v-if="userDate.email || isEditMod" class="profile-page__item">
                     <div class="profile-page__info profile-info">
                         <span class="profile-info__name">
                             <span class="profile-info__text">
@@ -129,7 +129,7 @@
                         </span>
                     </UiButton>
                     <UiButton
-                        @click="toogleIsEditMod"
+                        @click="updateUserDataRequest"
                         theme="primary"
                         class="profile-page__edit profile-page-button"
                     >
@@ -167,6 +167,8 @@ import {ComputedRef} from "vue";
 import {format} from "date-fns";
 import {useUserStore} from "~/store/useUserStore";
 import {storeToRefs} from "pinia";
+import {useUser} from "~/composable/request/useUser";
+import {UserInfo, UserInfoUpdate} from "~/definitions/interfaces/User";
 
 useHead({
     title: 'Личный кабинет',
@@ -177,6 +179,8 @@ definePageMeta({
 })
 const isEditMod = ref<boolean>(false);
 const {userDate} = storeToRefs(useUserStore());
+const {updateUserData} = useUser();
+const userToken = useCookie('userToken');
 
 const formattedDate:ComputedRef<string> = computed(() => {
     if(unref(userDate)) {
@@ -185,8 +189,24 @@ const formattedDate:ComputedRef<string> = computed(() => {
     return ''
 });
 
+// const updatedUserData = computed(()  => {
+//     if(unref(userDate)) {
+//        return Object.entries(unref(userDate)).reduce((res: UserInfoUpdate, [key, value]) => {
+//             if(value) {
+//                 res[key] = value;
+//             }
+//         }, {})
+//     };
+// })
+
 const toogleIsEditMod = () => {
     isEditMod.value = !isEditMod.value
+}
+
+const updateUserDataRequest = () => {
+    // console.log(unref(updatedUserData));
+    // updateUserData(unref(userToken), unref(updatedUserData))
+    toogleIsEditMod()
 }
 
 </script>

@@ -9,8 +9,6 @@ export const getFavoritesRequest = async (token: string| null | undefined): Prom
                 'Authorization': token,
             }
         });
-        console.log(unref(data));
-        console.log(unref(data).data.filter((product) => product.is_favorite))
 
         if(unref(data)) {
             return {

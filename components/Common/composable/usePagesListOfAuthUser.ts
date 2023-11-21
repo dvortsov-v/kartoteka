@@ -1,8 +1,17 @@
 import {storeToRefs} from "pinia";
 import {useUserStore} from "~/store/useUserStore";
 import {useFavoritesStore} from "~/store/useFavoritesStore";
+import {ComputedRef} from "vue";
 
-export const usePagesListOfAuthUser = () => {
+interface OfficePage {
+    id: number;
+    name: string;
+    icon: string;
+    path: string;
+    count?: number,
+}
+
+export const usePagesListOfAuthUser = (): ComputedRef<OfficePage[]> => {
     const {countFavorites} = storeToRefs(useFavoritesStore())
     const {countOrders} = storeToRefs(useUserStore())
 

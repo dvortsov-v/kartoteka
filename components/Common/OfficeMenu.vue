@@ -2,23 +2,23 @@
     <div class="office-menu">
         <ul class="office-menu__list">
             <li
-                v-for="route in pagesListOfAuthUser"
-                :key="`office-menu-${route.id}`"
+                v-for="pages in pagesListOfAuthUser"
+                :key="`office-menu-${pages.id}`"
                 class="office-menu__item"
             >
                 <NuxtLink
                     @click="$emit('close')"
-                    :to="route.path"
+                    :to="pages.path"
                     class="office-menu__link office-menu-link"
                     exactActiveClass="office-menu-link--active"
                 >
-                    <svg-icon class="office-menu-link__icon" :name="route.icon" />
-                    <span class="office-menu-link__name">{{ route.name }}</span>
-                    <span v-if="route.count" class="office-menu-link__count">
-                        <template v-if="route.id === isFavoriteId" >
+                    <svg-icon class="office-menu-link__icon" :name="pages.icon" />
+                    <span class="office-menu-link__name">{{ pages.name }}</span>
+                    <span v-if="pages.count" class="office-menu-link__count">
+                        <template v-if="pages.id === isFavoriteId" >
                             +
                         </template>
-                        {{ route.count }}
+                        {{ pages.count }}
                     </span>
                 </NuxtLink>
             </li>
@@ -38,6 +38,7 @@
 <script setup lang="ts">
 import {usePagesListOfAuthUser} from "~/components/Common/composable/usePagesListOfAuthUser";
 import {useUser} from "~/composable/request/useUser";
+
 defineEmits(['close']);
 const userToken = useCookie('userToken');
 const pagesListOfAuthUser = usePagesListOfAuthUser()

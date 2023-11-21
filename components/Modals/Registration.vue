@@ -44,17 +44,20 @@
 
 <script setup lang="ts">
 import { VueFinalModal } from 'vue-final-modal'
-import {register} from "~/api/UserApi";
+import {useUser} from "~/composable/request/useUser";
 const emit = defineEmits(['close', 'openAuthorizationModal', 'openSuccessRegistrationModal'])
 const formRegistration = ref({
     email: '',
     password: '',
     repetitionPassword: '',
 })
+
+const {userRegistration} = useUser()
+
 const registration = async () => {
     if(unref(formRegistration).password && unref(formRegistration).repetitionPassword && (unref(formRegistration).password === unref(formRegistration).repetitionPassword)) {
         try {
-            await register(unref(formRegistration).email, unref(formRegistration).password);
+            await userRegistration(unref(formRegistration).email, unref(formRegistration).password);
             emit('openSuccessRegistrationModal')
         } catch (e) {
             emit('openSuccessRegistrationModal')
