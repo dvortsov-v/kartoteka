@@ -173,7 +173,6 @@ import {format} from "date-fns";
 import {useUserStore} from "~/store/useUserStore";
 import {storeToRefs} from "pinia";
 import {useUser} from "~/composable/request/useUser";
-import {UserInfo, UserInfoUpdate} from "~/definitions/interfaces/User";
 
 useHead({
     title: 'Личный кабинет',
@@ -198,7 +197,9 @@ const formattedDate:ComputedRef<string> = computed(() => {
 });
 
 const addEditField = (key: string) => {
+    // @ts-ignore
     if (unref(initialUserDate) && unref(userDate) && unref(userDate)[key] && (unref(initialUserDate)[key] !== unref(userDate)[key])) {
+        // @ts-ignore
         updateField.value[key] = unref(initialUserDate)[key];
     }
 }
