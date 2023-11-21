@@ -6,7 +6,7 @@
                 <span class="profile-create__text">Дата регистрации {{ formattedDate }}</span>
             </div>
             <ul class="profile-page__informations">
-                <li v-if="userDate.name || isEditMod" class="profile-page__item">
+                <li v-if="initialUserDate.name || isEditMod" class="profile-page__item">
                     <div class="profile-page__info profile-info">
                         <span class="profile-info__name">
                             <span class="profile-info__text">
@@ -15,18 +15,19 @@
                         </span>
                         <UiInput
                             v-if="isEditMod"
-                            v-model="userDate.name"
+                            v-model="initialUserDate.name"
+                            @change="addEditField('name')"
                             class="profile-info__input"
                         />
                         <span
                             v-else
                             class="profile-info__value"
                         >
-                            {{ userDate.name}}
+                            {{ initialUserDate.name}}
                         </span>
                     </div>
                 </li>
-                <li v-if="userDate.surname || isEditMod" class="profile-page__item">
+                <li v-if="initialUserDate.surname || isEditMod" class="profile-page__item">
                     <div class="profile-page__info profile-info">
                         <span class="profile-info__name">
                             <span class="profile-info__text">
@@ -35,18 +36,19 @@
                         </span>
                         <UiInput
                             v-if="isEditMod"
-                            v-model="userDate.surname"
+                            v-model="initialUserDate.surname"
+                            @change="addEditField('surname')"
                             class="profile-info__input"
                         />
                         <span
                             v-else
                             class="profile-info__value"
                         >
-                            {{ userDate.surname}}
+                            {{ initialUserDate.surname}}
                         </span>
                     </div>
                 </li>
-                <li v-if="userDate.company || isEditMod" class="profile-page__item">
+                <li v-if="initialUserDate.company || isEditMod" class="profile-page__item">
                     <div class="profile-page__info profile-info">
                         <span class="profile-info__name">
                             <span class="profile-info__text">
@@ -55,18 +57,19 @@
                         </span>
                         <UiInput
                             v-if="isEditMod"
-                            v-model="userDate.company"
+                            v-model="initialUserDate.company"
+                            @change="addEditField('company')"
                             class="profile-info__input"
                         />
                         <span
                             v-else
                             class="profile-info__value"
                         >
-                            {{ userDate.company}}
+                            {{ initialUserDate.company}}
                         </span>
                     </div>
                 </li>
-                <li v-if="userDate.phone || isEditMod" class="profile-page__item">
+                <li v-if="initialUserDate.phone || isEditMod" class="profile-page__item">
                     <div class="profile-page__info profile-info">
                         <span class="profile-info__name">
                             <span class="profile-info__text">
@@ -75,18 +78,19 @@
                         </span>
                         <UiInput
                             v-if="isEditMod"
-                            v-model="userDate.phone"
+                            v-model="initialUserDate.phone"
+                            @change="addEditField('phone')"
                             class="profile-info__input"
                         />
                         <span
                             v-else
                             class="profile-info__value"
                         >
-                            {{ userDate.phone}}
+                            {{ initialUserDate.phone}}
                         </span>
                     </div>
                 </li>
-                <li v-if="userDate.email || isEditMod" class="profile-page__item">
+                <li v-if="initialUserDate.email || isEditMod" class="profile-page__item">
                     <div class="profile-page__info profile-info">
                         <span class="profile-info__name">
                             <span class="profile-info__text">
@@ -95,14 +99,15 @@
                         </span>
                         <UiInput
                             v-if="isEditMod"
-                            v-model="userDate.email"
+                            v-model="initialUserDate.email"
+                            @change="addEditField('email')"
                             class="profile-info__input"
                         />
                         <span
                             v-else
                             class="profile-info__value"
                         >
-                            {{ userDate.email}}
+                            {{ initialUserDate.email}}
                         </span>
                     </div>
                 </li>
@@ -181,6 +186,9 @@ const isEditMod = ref<boolean>(false);
 const {userDate} = storeToRefs(useUserStore());
 const {updateUserData} = useUser();
 const userToken = useCookie('userToken');
+const isSetUserDate = ref(false);
+const initialUserDate = ref({...userDate.value});
+const updateField = ref({});
 
 const formattedDate:ComputedRef<string> = computed(() => {
     if(unref(userDate)) {
@@ -189,25 +197,25 @@ const formattedDate:ComputedRef<string> = computed(() => {
     return ''
 });
 
-// const updatedUserData = computed(()  => {
-//     if(unref(userDate)) {
-//        return Object.entries(unref(userDate)).reduce((res: UserInfoUpdate, [key, value]) => {
-//             if(value) {
-//                 res[key] = value;
-//             }
-//         }, {})
-//     };
-// })
+const addEditField = (key: string) => {
+    if (unref(initialUserDate) && unref(userDate) && unref(userDate)[key] && (unref(initialUserDate)[key] !== unref(userDate)[key])) {
+        updateField.value[key] = unref(initialUserDate)[key];
+    }
+}
 
 const toogleIsEditMod = () => {
     isEditMod.value = !isEditMod.value
 }
 
 const updateUserDataRequest = () => {
-    // console.log(unref(updatedUserData));
-    // updateUserData(unref(userToken), unref(updatedUserData))
+    updateUserData(unref(userToken), unref(updateField))
     toogleIsEditMod()
 }
+watch(userDate, (newVal) => {
+    if(!unref(isSetUserDate)) {
+        initialUserDate.value = {...newVal}
+    }
+})
 
 </script>
 
