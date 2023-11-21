@@ -35,7 +35,7 @@ export const register = async (email: string, password: string): Promise<string 
 
         if(unref(data)) {
             const {setIsAuthUser} = useMainStore();
-            document.cookie = `userToken=${unref(data).token_type} ${unref(data).access_token}; max-age=${unref(data).expires_in * 100}`;
+            document.cookie = `userToken=${unref(data).token_type} ${unref(data).access_token}; max-age=${unref(data).expires_in}`;
             setIsAuthUser(true);
 
             return `${unref(data).token_type} ${unref(data).access_token}`;
