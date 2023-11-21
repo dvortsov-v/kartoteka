@@ -1,9 +1,3 @@
-import {
-    Product,
-    ResultRequesProducts,
-    ResultRequestProduct,
-    ResultRequestProductCount
-} from "~/definitions/interfaces/Products";
 import {LocationQueryValue} from "vue-router";
 export interface ParamsProduct {
     name?: string,

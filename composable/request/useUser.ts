@@ -1,6 +1,6 @@
 import {useUserStore} from "~/store/useUserStore";
 import {login, logout, me, register, update} from "~/api/UserApi";
-import {UserInfo, UserInfoUpdate} from "~/definitions/interfaces/User";
+import {UserInfoUpdate} from "~/definitions/interfaces/User";
 
 export const useUser = () => {
     const {setUserDate, deleteUserDate} = useUserStore();

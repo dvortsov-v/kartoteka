@@ -55,12 +55,10 @@
 
 <script setup lang="ts">
 import { VueFinalModal } from 'vue-final-modal';
-import {login} from "~/api/UserApi";
 import {useUser} from "~/composable/request/useUser";
 
 const emit = defineEmits(['close', 'openRegistrationModal', 'openForgotPasswordModal'])
-const userToken = useCookie('userToken');
-const {getUserData, userLogin} = useUser()
+const {userLogin} = useUser()
 
 const formAuth: Ref<{email: string, password: string}> = ref({
     email: '',
