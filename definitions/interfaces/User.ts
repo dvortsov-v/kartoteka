@@ -1,6 +1,5 @@
 import {Social} from "~/constants/socials";
 import {Product} from "~/definitions/interfaces/Products";
-import {ResultRequestCategory} from "~/definitions/interfaces/Categories";
 
 export interface UserLogin {
     access_token: string,

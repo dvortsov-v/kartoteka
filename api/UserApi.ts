@@ -59,7 +59,7 @@ export const refresh = async (token: string): Promise<Category | object> => {
 
     return {};
 }
-export const me = async (token: string | null | undefined): Promise<UserInfo | undefined> => {
+export const me = async (token: string | null | undefined): Promise<UserInfo | null> => {
     if(token) {
         const config = useRuntimeConfig()
         const {data}: { data: Ref<ResultRequestUserMe> } = await useFetch(`${config.public.baseURL}/auth/me`, {
@@ -69,9 +69,9 @@ export const me = async (token: string | null | undefined): Promise<UserInfo | u
             }
         });
 
-        return unref(data).data ?? undefined;
+        return unref(data).data ?? null;
     }
-    return;
+    return null;
 }
 export const logout = async (token: string | null | undefined): Promise<void> => {
     const config = useRuntimeConfig();
