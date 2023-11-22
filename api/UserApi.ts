@@ -1,11 +1,11 @@
 import {Category, ResultRequestCategory} from "~/definitions/interfaces/Categories";
 import {useMainStore} from "~/store/useMainStore";
-import {UserInfo, UserInfoUpdate, UserLogin} from "~/definitions/interfaces/User";
+import {ResultRequestUserMe, UserInfo, UserInfoUpdate, UserLogin} from "~/definitions/interfaces/User";
 
 export const login = async (email: string, password: string): Promise<string | null | undefined> => {
     const config = useRuntimeConfig();
 
-    const { data }: {data: Ref<UserLogin>} = await useFetch(() => `${config.public.baseURL}/auth/login`, {
+    const { data }: {data: Ref<UserLogin>} = await useFetch(`${config.public.baseURL}/auth/login`, {
         method: 'POST',
         body: {
             email,
@@ -25,7 +25,7 @@ export const register = async (email: string, password: string): Promise<string 
     const config = useRuntimeConfig();
 
     try {
-        const { data }: {data: Ref<UserLogin>} = await useFetch(() => `${config.public.baseURL}/auth/register`, {
+        const { data }: {data: Ref<UserLogin>} = await useFetch(`${config.public.baseURL}/auth/register`, {
             method: 'POST',
             body: {
                 email,
@@ -46,7 +46,7 @@ export const register = async (email: string, password: string): Promise<string 
 }
 export const refresh = async (token: string): Promise<Category | object> => {
     const config = useRuntimeConfig()
-    const { data }: {data: Ref<ResultRequestCategory>} = await useFetch(() => `${config.public.baseURL}/auth/refresh`, {
+    const { data }: {data: Ref<ResultRequestCategory>} = await useFetch( `${config.public.baseURL}/auth/refresh`, {
         method: 'POST',
         headers: {
             'Authorization': token,
@@ -60,9 +60,9 @@ export const refresh = async (token: string): Promise<Category | object> => {
     return {};
 }
 export const me = async (token: string | null | undefined): Promise<UserInfo | undefined> => {
-    const config = useRuntimeConfig()
     if(token) {
-        const {data}: { data: Ref<{data: UserInfo }> } = await useFetch(() => `${config.public.baseURL}/auth/me`, {
+        const config = useRuntimeConfig()
+        const {data}: { data: Ref<ResultRequestUserMe> } = await useFetch(`${config.public.baseURL}/auth/me`, {
             method: 'POST',
             headers: {
                 'Authorization': token,
@@ -77,7 +77,7 @@ export const logout = async (token: string | null | undefined): Promise<void> =>
     const config = useRuntimeConfig();
     if(token) {
         try {
-            await useFetch(() => `${config.public.baseURL}/auth/logout`, {
+            await useFetch( `${config.public.baseURL}/auth/logout`, {
                 method: 'POST',
                 headers: {
                     'Authorization': token,
@@ -96,15 +96,14 @@ export const update = async (token: string | null | undefined, updateDate: UserI
     if(token) {
         const config = useRuntimeConfig();
         try {
-            const {data}: { data: Ref<{ data: UserInfo }> } = await useFetch(() => `${config.public.baseURL}/auth/update`, {
+            const {data}: { data: Ref<{ data: UserInfo }> } = await useFetch( `${config.public.baseURL}/auth/update`, {
                 method: 'POST',
                 headers: {
                     'Authorization': token,
                 },
                 body: updateDate,
             });
-            console.log(unref(data).data);
-            console.log(unref(data));
+
             return unref(data).data ?? undefined;
         } catch (e) {
             console.error('Ошибка обновления данных пользователя', e);

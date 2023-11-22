@@ -1,5 +1,6 @@
 import {Social} from "~/constants/socials";
 import {Product} from "~/definitions/interfaces/Products";
+import {ResultRequestCategory} from "~/definitions/interfaces/Categories";
 
 export interface UserLogin {
     access_token: string,
@@ -19,6 +20,9 @@ export interface UserInfo {
     updated_at: string | null,
     favorites: Product[],
     orders: Product[],
+}
+export interface ResultRequestUserMe {
+    data: UserInfo,
 }
 export interface UserInfoUpdate {
     company?: string,

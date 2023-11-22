@@ -95,16 +95,17 @@ const {
 const mainStore = useMainStore();
 const userToken = useCookie('userToken');
 const {getUserData} = useUser()
-const {userDate} = storeToRefs(useUserStore());
-
-
-onBeforeMount(async () => {
-    if(!unref(userToken)) {
-        mainStore.isAuthUser = false;
-    } else {
+const userStore = useUserStore()
+const {userDate} = storeToRefs(userStore);
+const {deleteUserDate} = userStore;
+if(!unref(userToken)) {
+    mainStore.isAuthUser = false;
+    deleteUserDate();
+} else {
+    if(!unref(userDate)?.name){
         await getUserData(unref(userToken))
     }
-})
+}
 
 const toogleIsShowCatalogMenu = () => {
     isShowCatalogMenu.value = !isShowCatalogMenu.value;
