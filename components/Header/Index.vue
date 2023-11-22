@@ -38,7 +38,7 @@
                             :theme="themeUserButton"
                             class="header-main-user__auth header-main-auth header-main-auth--is-user"
                         >
-                            <span class="header-main-auth__text">{{ userDate.name }}</span>
+                            <span class="header-main-auth__text">{{ userName }}</span>
                             <svg-icon name="chevron-down" class="header-main-auth__arrow" />
                         </UiButton>
                         <CommonOfficeMenu
@@ -96,15 +96,13 @@ const mainStore = useMainStore();
 const userToken = useCookie('userToken');
 const {getUserData} = useUser()
 const userStore = useUserStore()
-const {userDate} = storeToRefs(userStore);
-const {deleteUserDate} = userStore;
+const {userName} = storeToRefs(userStore);
+const {setUserName, setCountOrders} = userStore;
+
 if(!unref(userToken)) {
     mainStore.isAuthUser = false;
-    deleteUserDate();
-} else {
-    if(!unref(userDate)?.name){
-        await getUserData(unref(userToken))
-    }
+    setUserName('');
+    setCountOrders(0);
 }
 
 const toogleIsShowCatalogMenu = () => {
@@ -120,6 +118,13 @@ const closeUserMenu = () => {
 const setHeaderHeight = () => {
     document.documentElement.style.setProperty('--header-height', `${unref(header).offsetHeight}px`);
 }
+
+onBeforeMount(async () => {
+    if(unref(userToken) && unref(userName)) {
+        return
+    }
+    await getUserData(unref(userToken))
+})
 
 onMounted(() => {
     setHeaderHeight();

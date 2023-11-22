@@ -3,27 +3,32 @@ import {login, logout, me, register, update} from "~/api/UserApi";
 import {UserInfoUpdate} from "~/definitions/interfaces/User";
 
 export const useUser = () => {
-    const {setUserDate, deleteUserDate} = useUserStore();
+    const {setUserName, setCountOrders} = useUserStore();
 
     const getUserData =  async (userToken: string | null | undefined) => {
         const res = await me(userToken);
 
         if(res) {
-            setUserDate(res)
+            setUserName(res.name);
+            setCountOrders(res.orders.length || 0);
         }
+    }
+    const getProfile =  async (userToken: string | null | undefined) => {
+        const res = await me(userToken);
     }
     const updateUserData =  async (userToken: string | null | undefined, updateDate: UserInfoUpdate) => {
         const res = await update(userToken, updateDate);
 
         if(res) {
-            setUserDate(res)
+            setUserName(res.name);
         }
     }
 
     const userLogout =  async (userToken: string | null | undefined) => {
         if(userToken) {
             await logout(userToken);
-            deleteUserDate();
+            setUserName('');
+            setCountOrders(0);
             location.reload();
         }
     }

@@ -161,9 +161,8 @@
 <script setup lang="ts">
 import {ComputedRef} from "vue";
 import {format} from "date-fns";
-import {useUserStore} from "~/store/useUserStore";
-import {storeToRefs} from "pinia";
 import {useUser} from "~/composable/request/useUser";
+import {me} from "~/api/UserApi";
 
 useHead({
     title: 'Личный кабинет',
@@ -173,23 +172,23 @@ definePageMeta({
     middleware: 'auth',
 })
 const isEditMod = ref<boolean>(false);
-const {userDate} = storeToRefs(useUserStore());
-const {updateUserData} = useUser();
 const userToken = useCookie('userToken');
-const isSetUserDate = ref(false);
-const initialUserDate = ref({...userDate.value});
+const userDate = await me(unref(userToken));
+
+const {updateUserData} = useUser();
+const initialUserDate = ref({...userDate});
 const updateField = ref({});
 
 const formattedDate:ComputedRef<string> = computed(() => {
-    if(unref(userDate)) {
-        return format(new Date(unref(userDate)!.created_at), 'dd.MM.yyy')
+    if(userDate) {
+        return format(new Date(userDate!.created_at), 'dd.MM.yyy')
     }
     return ''
 });
 
 const addEditField = (key: string) => {
     // @ts-ignore
-    if (unref(initialUserDate) && unref(userDate) && unref(userDate)[key] && (unref(initialUserDate)[key] !== unref(userDate)[key])) {
+    if (unref(initialUserDate) && userDate && userDate[key] && (unref(initialUserDate)[key] !== userDate[key])) {
         // @ts-ignore
         updateField.value[key] = unref(initialUserDate)[key];
     }
@@ -203,12 +202,6 @@ const updateUserDataRequest = () => {
     updateUserData(unref(userToken), unref(updateField))
     toogleIsEditMod()
 }
-watch(userDate, (newVal) => {
-    if(!unref(isSetUserDate)) {
-        initialUserDate.value = {...newVal}
-    }
-})
-
 </script>
 
 <style scoped lang="scss">

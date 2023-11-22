@@ -1,23 +1,20 @@
 import { defineStore, skipHydrate } from 'pinia'
 import {useLocalStorage} from '@vueuse/core'
-import {UserInfo} from "~/definitions/interfaces/User";
 
 export const useUserStore = defineStore('userStore', () => {
-    const userDate: Ref<UserInfo | null> = useLocalStorage('userDate', null as UserInfo | null);
-    const countFavorites = computed(() => unref(userDate)?.favorites.length || 0);
-    const countOrders = computed(() => unref(userDate)?.orders.length || 0);
-    const setUserDate = (value: UserInfo) =>  {
-        userDate.value = value;
+    const userName: Ref<string> = useLocalStorage('userName', '');
+    const countOrders: Ref<number> = useLocalStorage('countOrders', 0);
+    const setUserName = (value: string) =>  {
+        userName.value = value;
     }
-    const deleteUserDate = () =>  {
-        userDate.value = null;
+    const setCountOrders = (value: number) =>  {
+        countOrders.value = value;
     }
 
     return {
-        userDate: skipHydrate(userDate),
-        countFavorites,
-        countOrders,
-        setUserDate,
-        deleteUserDate,
+        userName: skipHydrate(userName),
+        countOrders: skipHydrate(countOrders),
+        setUserName,
+        setCountOrders,
     }
 })
