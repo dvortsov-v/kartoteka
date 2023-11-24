@@ -31,7 +31,7 @@
             class="card-product-actions-buttons__buy card-product-actions-button"
         >
             <span class="card-product-actions-button__text">
-                Хочу купить
+                Связаться
             </span>
         </UiButton>
     </div>

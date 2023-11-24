@@ -4,19 +4,41 @@
             <UiBreadcrumbs class="advertisement-page__breadcrumbs"/>
             <h1 class="advertisement-page__title h1">Реклама</h1>
             <main class="advertisement-page__main">
-                <section class="advertisement-page__section advertisement-page-description">
+                <section v-for="section in sectionAdvertising" class="advertisement-page__section advertisement-page-description">
                     <div class="advertisement-page-description__head">
                         <h4 class="advertisement-page-description__title advertisement-page-section-title">
-                            Непременно змечательный и емкий заголовок о пользе проекта для пользователей и бизнеса
+                            {{ section.title }}
                         </h4>
-                        <div class="advertisement-page-description__description">
-                            <p class="advertisement-page-description__text">
-                                Нашей целью является предоставление достоверных сведений об участниках российского бизнеса, а также создание удобных информационных ресурсов и инструментов для размещения заинтересованными лицами данных, подлежащих публичному раскрытию в соответствии с законодательством Российской Федерации.
-                            </p>
-                            <p class="advertisement-page-description__text">
-                                Компания kartoteka.ru представляет собой молодой и сплоченный коллектив профессионалов, постоянно совершенствующих свой уровень и практикующих индивидуальный подход к каждому клиенту.
-                            </p>
-                        </div>
+                        <p
+                            v-if="section.description"
+                           class="advertisement-page-description__description"
+                        >
+                            {{ section.description }}
+                        </p>
+                        <template v-for="point in section.points">
+                            <div class="advertisement-page-description__description">
+                                <p class="advertisement-page-description__name">
+                                    {{ point.name }}
+                                </p>
+                                <p
+                                    v-if="point.value"
+                                   class="advertisement-page-description__value"
+                                >
+                                    {{ point.value }}
+                                </p>
+                            </div>
+                            <picture v-if="point.img" class="advertisement-page-description__picture">
+                                <source
+                                    :srcset="`/images/${point.img}.webp`"
+                                    type="image/webp"
+                                >
+                                <img
+                                    :src="`/images/${point.img}.jpg`"
+                                    :alt="point.name"
+                                    class="advertisement-page-description__img"
+                                >
+                            </picture>
+                        </template>
                     </div>
                 </section>
                 <section class="advertisement-page__section advertisement-page-statistic">
@@ -24,7 +46,7 @@
                         Статистика
                     </h4>
                     <ul class="advertisement-page-statistic__list">
-                        <li v-for="itemCase in statisticCase" :key="`advertisement-page-statistic-${itemCase.id}`" class="advertisement-page-statistic__item">
+                        <li v-for="itemCase in statisticAdvertising" :key="`advertisement-page-statistic-${itemCase.id}`" class="advertisement-page-statistic__item">
                             <div class="advertisement-page-statistic__case advertisement-page-statistic-case">
                                 <div class="advertisement-page-statistic-case__icon">
                                     <svg-icon :name="`statistic/${itemCase.icon}`" class="advertisement-page-statistic-case__svg" />
@@ -37,7 +59,7 @@
                         </li>
                     </ul>
                 </section>
-                <section class="advertisement-page__section advertisement-page-information">
+                <section v-if="false" class="advertisement-page__section advertisement-page-information">
                     <h4 class="advertisement-page-information__title advertisement-page-section-title">
                         Информация
                     </h4>
@@ -69,8 +91,8 @@
 </template>
 
 <script setup lang="ts">
-import {statisticCase} from "~/constants/statisticCase";
 import {informationCase} from "~/constants/informationCase";
+import {statisticAdvertising, sectionAdvertising} from "~/constants/statisticPage";
 
 useHead({
     title: 'Реклама',

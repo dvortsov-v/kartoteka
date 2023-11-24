@@ -148,7 +148,7 @@
                                 class="product-page-base__buy product-page-base-button"
                             >
                                 <span class="product-page-base-button__text">
-                                    Хочу купить
+                                    Связаться
                                 </span>
                             </UiButton>
                             <UiButton
