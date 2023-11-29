@@ -220,7 +220,7 @@
 </template>
 
 <script lang="ts" setup>
-import { YandexMap,YandexMarker } from "vue-yandex-maps";
+import {YandexMap, YandexMapDefaultSchemeLayer, YandexMarker} from "vue-yandex-maps";
 import {parcePrice} from "~/composable/parcePrice";
 import ButtonLink from "~/components/Ui/ButtonLink.vue";
 import {scrollToElem} from "~/composable/useScrollTo";

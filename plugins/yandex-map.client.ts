@@ -3,7 +3,7 @@ import plugin from 'vue-yandex-maps'
 import { defineNuxtPlugin } from 'nuxt/app'
 
 const settings = {
-    apiKey: '', // Индивидуальный ключ API
+    apiKey: '7833c4d0-6bd0-47b0-a626-226706e25080', // Индивидуальный ключ API
     lang: 'ru_RU', // Используемый язык
     coordorder: 'latlong', // Порядок задания географических координат
     debug: false, // Режим отладки
