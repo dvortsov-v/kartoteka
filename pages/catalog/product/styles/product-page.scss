@@ -262,14 +262,14 @@
   }
 
   &__maps {
-    height: 368px;
+    height: 368px !important;
     margin-top: 24px;
 
     @media (max-width: 1024px) {
-      height: 352px;
+      height: 352px !important;
     }
     @media (max-width: 670px) {
-      height: 228px;
+      height: 228px !important;
     }
   }
 }

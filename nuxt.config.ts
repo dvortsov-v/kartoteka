@@ -13,14 +13,18 @@ export default defineNuxtConfig({
         '@nuxtjs/svg-sprite',
         'nuxt-swiper',
         '@pinia/nuxt',
+        'vue-yandex-maps/nuxt',
     ],
     plugins: [
         '~/plugins/vue-final-modal.ts',
-        { src: '~/plugins/yandex-map.client.ts', mode: 'client' },
     ],
     runtimeConfig: {
         public: {
             baseURL: 'https://petr.burov.fvds.ru/api'
         }
-    }
+    },
+    yandexMaps: {
+        apikey: '7833c4d0-6bd0-47b0-a626-226706e25080',
+        lang: 'ru_RU',
+    },
 })

@@ -53,16 +53,17 @@
                         <p class="product-page-information-location__text">
                             {{ product.address }}
                         </p>
-                        <client-only>
-                            <YandexMap
-                                :markerId="product.id"
-                                :coordinates="[product.lat, product.lng]"
-                                class="product-page-information-location__maps">
-                                <YandexMarker
-                                    :coordinates="[product.lat, product.lng]"
-                                ></YandexMarker>
-                            </YandexMap>
-                        </client-only>
+                        <YandexMap
+                            :settings="settingMap"
+                            class="product-page-information-location__maps"
+                        >
+                            <YandexMapDefaultSchemeLayer/>
+                            <YandexMapDefaultFeaturesLayer />
+                            <yandex-map-controls :settings="{ position: 'right' }">
+                                <yandex-map-zoom-control />
+                            </yandex-map-controls>
+                            <YandexMapDefaultMarker :settings="{coordinates: [product.lat, product.lng]}" />
+                        </YandexMap>
                     </div>
                     <div class="product-page-information__characteristics product-page-information-characteristics">
                         <ul v-if="tabs.length > 1" class="product-page-information-characteristics__tabs">
@@ -220,7 +221,14 @@
 </template>
 
 <script lang="ts" setup>
-import {YandexMap, YandexMapDefaultSchemeLayer, YandexMarker} from "vue-yandex-maps";
+import {
+    YandexMap,
+    YandexMapControls,
+    YandexMapDefaultFeaturesLayer,
+    YandexMapDefaultMarker,
+    YandexMapDefaultSchemeLayer,
+    YandexMapZoomControl,
+} from "vue-yandex-maps";
 import {parcePrice} from "~/composable/parcePrice";
 import ButtonLink from "~/components/Ui/ButtonLink.vue";
 import {scrollToElem} from "~/composable/useScrollTo";
@@ -306,6 +314,12 @@ const handleChoice = (value: number) => {
 const toogleIsShowPhone = () => {
     isShowPhone.value = !isShowPhone.value;
 }
+const settingMap = computed(() => ({
+    location: {
+        center: [unref(product)?.lat, unref(product)?.lng],
+        zoom: 9,
+    }
+}));
 </script>
 
 <style scoped lang="scss">
