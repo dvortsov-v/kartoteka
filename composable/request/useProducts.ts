@@ -39,15 +39,6 @@ export const useProducts = () => {
         }
     }
 
-    // watch(() => route.query, () => {
-    //     if(route.query.name === null || route.query.name === undefined || route.query.name === '' || route.query.name) {
-    //         return
-    //     }
-    //
-    //     getProducts();
-    // })
-
-
     onBeforeRouteUpdate((to) => {
         if(to.query.name === null || to.query.name === undefined || to.query.name === '' || !Boolean(to.query.name)) {
             getProducts(to.query);

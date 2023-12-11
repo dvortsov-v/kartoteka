@@ -46,6 +46,7 @@ $base: '.card-product';
 
     @media (max-width: 670px) {
       margin-left: 0;
+      max-width: 100%;
       margin-top: 16px;
       padding-left: 16px;
       padding-right: 16px;
@@ -152,6 +153,7 @@ $base: '.card-product';
       margin-left: 0;
       padding-left: 16px;
       padding-right: 16px;
+      max-width: 100%;
     }
 
     &__title {
