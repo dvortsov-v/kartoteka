@@ -1,10 +1,16 @@
 <template>
     <OfficeLayout title="Профиль" class="profile-page">
         <main v-if="userDate" class="profile-page__main">
-            <div class="profile-page__create profile-create">
-                <svg-icon name="time" class="profile-create__icon" />
-                <span class="profile-create__text">Дата регистрации {{ formattedDate }}</span>
+            <div class="profile-page__head">
+                <div class="profile-page__create profile-create">
+                    <svg-icon name="time" class="profile-create__icon" />
+                    <span class="profile-create__text">Дата регистрации {{ formattedDate }}</span>
+                </div>
+                <UiButton class="profile-page__confirmation">
+                    Подтверждение
+                </UiButton>
             </div>
+            <pre>{{serteficatList}}</pre>
             <ul class="profile-page__informations">
                 <li v-if="initialUserDate.name || isEditMod" class="profile-page__item">
                     <div class="profile-page__info profile-info">
@@ -163,14 +169,18 @@ import {ComputedRef} from "vue";
 import {format} from "date-fns";
 import {useUser} from "~/composable/request/useUser";
 import {me} from "~/api/UserApi";
+import { getUserCertificates, Certificate } from 'crypto-pro';
 
 useHead({
     title: 'Личный кабинет',
 });
+
 definePageMeta({
     nameRoute: 'Личный кабинет',
     middleware: 'auth',
 })
+
+const serteficatList = ref([])
 const isEditMod = ref<boolean>(false);
 const userToken = useCookie('userToken');
 const userDate = await me(unref(userToken));
@@ -202,6 +212,9 @@ const updateUserDataRequest = () => {
     updateUserData(unref(userToken), unref(updateField))
     toogleIsEditMod()
 }
+onMounted(async () => {
+    const serteficatList.value = await getUserCertificates()
+})
 </script>
 
 <style scoped lang="scss">

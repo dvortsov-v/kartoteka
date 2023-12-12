@@ -20,6 +20,7 @@
     "@nuxtjs/svg-sprite": "1.0.2",
     "@pinia/nuxt": "0.4.11",
     "@vuepic/vue-datepicker": "6.0.3",
+    "crypto-pro": "2.5.2",
     "date-fns": "^2.30.0",
     "nuxt-swiper": "1.2.0",
     "pinia": "2.1.6",
