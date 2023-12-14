@@ -7,10 +7,9 @@
                     <span class="profile-create__text">Дата регистрации {{ formattedDate }}</span>
                 </div>
                 <UiButton class="profile-page__confirmation">
-                    Подтверждение
+                    Подтверждение аккаунта
                 </UiButton>
             </div>
-            <pre>{{serteficatList}}</pre>
             <ul class="profile-page__informations">
                 <li v-if="initialUserDate.name || isEditMod" class="profile-page__item">
                     <div class="profile-page__info profile-info">
@@ -180,7 +179,7 @@ definePageMeta({
     middleware: 'auth',
 })
 
-const serteficatList = ref([])
+const serteficatList = ref<Certificate[]>([])
 const isEditMod = ref<boolean>(false);
 const userToken = useCookie('userToken');
 const userDate = await me(unref(userToken));
@@ -213,7 +212,7 @@ const updateUserDataRequest = () => {
     toogleIsEditMod()
 }
 onMounted(async () => {
-    const serteficatList.value = await getUserCertificates()
+    serteficatList.value = await getUserCertificates()
 })
 </script>
 

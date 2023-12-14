@@ -6,7 +6,10 @@
             <main class="catalog-page__main catalog-page-main">
                 <aside class="catalog-page-main__aside">
                     <CatalogCategories :categories="listCategory" :isCatalogCategory="Boolean($route.params.id)" class="catalog-page-main__categories" />
-                    <CatalogFilters class="catalog-page-main__filters" />
+                    <CatalogFilters
+                        :filtersCategory="filtersCategory"
+                        class="catalog-page-main__filters"
+                    />
                 </aside>
                 <section class="catalog-page-main__section">
                     <div class="catalog-page-main__maps"></div>
@@ -107,6 +110,7 @@ if(route.params.id) {
 }
 
 const namePage = computed(() => unref(category)?.name || 'Каталог')
+const filtersCategory = computed(() => unref(category)?.filters || [])
 
 useHead({
     title: unref(namePage),

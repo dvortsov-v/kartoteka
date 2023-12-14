@@ -1,5 +1,5 @@
 import {Product} from "~/definitions/interfaces/Products";
-import {getProductsRequest, ParamsProduct} from "~/api/ProductsApi";
+import {getProductsCountRequest, getProductsRequest, ParamsProduct} from "~/api/ProductsApi";
 import {Meta} from "~/definitions/interfaces/Meta";
 
 export const useProducts = () => {

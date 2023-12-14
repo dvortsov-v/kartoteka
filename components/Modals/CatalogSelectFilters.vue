@@ -8,95 +8,138 @@
                 </button>
             </div>
             <div class="modal-catalog-filters__scrollbar">
-                <CatalogCategories :categories="categoriesStore.categories" />
-                <div class="modal-catalog-filters__section">
-                    <h6 class="modal-catalog-filters__title modal-catalog-filters-title">Цена, ₽</h6>
-                    <div class="modal-catalog-filters__fields modal-catalog-filters-fields">
-                        <div class="modal-catalog-filters-fields__field">
-                            <UiInput type="number" placeholder="от" class="modal-catalog-filters-fields__input" />
-                        </div>
-                        <div class="modal-catalog-filters-fields__field">
-                            <UiInput type="number" placeholder="до" class="modal-catalog-filters-fields__input" />
-                        </div>
-                    </div>
-                    <ul class="modal-catalog-filters__list modal-catalog-filters-list">
-                        <li class="modal-catalog-filters-list__item">
-                            <UiChoices
-                                v-model:checked="formData.has_image"
-                                class="modal-catalog-filters-checkbox"
-                            >
-                        <span class="modal-catalog-filters-checkbox__text">
-                            Только с фото
-                        </span>
-                            </UiChoices>
-                        </li>
-                        <li class="modal-catalog-filters-list__item">
-                            <UiChoices
-                                v-model:checked="formData.is_lot"
-                                class="modal-catalog-filters-checkbox"
-                            >
-                        <span class="modal-catalog-filters-checkbox__text">
-                            В составе лота
-                        </span>
-                                <div class="modal-catalog-filters__hint"></div>
-                            </UiChoices>
-                        </li>
-                    </ul>
-                </div>
-                <div class="modal-catalog-filters__section">
-                    <h6 class="modal-catalog-filters__title modal-catalog-filters-title">Статус объекта</h6>
-                    <ul class="modal-catalog-filters__list modal-catalog-filters-list">
-                        <li
-                            v-for="status in listStatus"
-                            :key="`catalog-page-status-${status.id}`"
-                            class="modal-catalog-filters-list__item"
-                        >
-                            <UiChoices
-                                v-model:checked="formData.status"
-                                name="status"
-                                :value="status.value"
-                                :checked="formData.status.includes(status.name)"
-                                class="modal-catalog-filters__checkbox modal-catalog-filters-checkbox"
-                            >
-                        <span class="modal-catalog-filters-checkbox__text">
-                            {{ status.name }}
-                        </span>
-                            </UiChoices>
-                        </li>
-                    </ul>
-                    <UiButtonLink
-                        v-if="false"
-                        class="modal-catalog-filters__more modal-catalog-filters-more"
+                <CatalogCategories :categories="listCategories" />
+                <template v-if="currentFilters.length > 0">
+                    <div
+                        v-for="filter in currentFilters"
+                        class="catalog-filters__section"
                     >
-                        <svg-icon name="adding" class="modal-catalog-filters-more__icon" />
-                        <span class="modal-catalog-filters-more__text">
-                    Показать еще
-                </span>
-                    </UiButtonLink>
-                </div>
-                <div class="modal-catalog-filters__section">
-                    <h6 class="modal-catalog-filters__title modal-catalog-filters-title">Период торгов</h6>
-                    <div class="modal-catalog-filters__fields modal-catalog-filters-fields">
-                        <div class="modal-catalog-filters-fields__field">
-                            <UiDatePicker v-model="formData.bargaining_to" class="modal-catalog-filters-fields__input"></UiDatePicker>
+                        <h6 class="modal-catalog-filters__title modal-catalog-filters-title">{{ filter.name }}</h6>
+                        <template v-if="filter.type === 'select'">
+                            <UiMultiSelect
+                                v-model="filterForm[`filters[${filter.id}]`]"
+                                :options="filter.options"
+                                placeholder="Все"
+                                trackBy="id"
+                                label="value"
+                                class="modal-catalog-filters__selector"
+                            />
+                        </template>
+                        <template v-else-if="filter.type === 'date'">
+                            <div class="modal-catalog-filters__fields modal-catalog-filters-fields">
+                                <div class="modal-catalog-filters-fields__field">
+                                    <UiDatePicker v-model="filterForm[`filters[${filter.id}]`]" class="modal-catalog-filters-fields__input"></UiDatePicker>
+                                </div>
+                            </div>
+                        </template>
+                        <template v-else>
+                            <div class="modal-catalog-filters__fields modal-catalog-filters-fields">
+                                <div class="modal-catalog-filters-fields__field">
+                                    <UiInput
+                                        v-model="filterForm[`filters[${filter.id}]`]"
+                                        :type="filter.type"
+                                        class="modal-catalog-filters-fields__input"
+                                    />
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+                <template v-else>
+                    <div class="modal-catalog-filters__section">
+                        <h6 class="modal-catalog-filters__title modal-catalog-filters-title">Цена, ₽</h6>
+                        <div class="modal-catalog-filters__fields modal-catalog-filters-fields">
+                            <div class="modal-catalog-filters-fields__field">
+                                <UiInput
+                                    v-model="formData.price_to"
+                                    type="number"
+                                    placeholder="от"
+                                    class="modal-catalog-filters-fields__input"
+                                />
+                            </div>
+                            <div class="modal-catalog-filters-fields__field">
+                                <UiInput v-model="formData.price_from" type="number" placeholder="до" class="modal-catalog-filters-fields__input" />
+                            </div>
                         </div>
-                        <div class="modal-catalog-filters-fields__field">
-                            <UiDatePicker v-model="formData.bargaining_from" class="modal-catalog-filters-fields__input"></UiDatePicker>
+                        <ul class="modal-catalog-filters__list modal-catalog-filters-list">
+                            <li class="modal-catalog-filters-list__item">
+                                <UiChoices
+                                    v-model:checked="formData.has_image"
+                                    class="modal-catalog-filters-checkbox"
+                                >
+                            <span class="modal-catalog-filters-checkbox__text">
+                                Только с фото
+                            </span>
+                                </UiChoices>
+                            </li>
+                            <li class="modal-catalog-filters-list__item">
+                                <UiChoices
+                                    v-model:checked="formData.is_lot"
+                                    class="modal-catalog-filters-checkbox"
+                                >
+                            <span class="modal-catalog-filters-checkbox__text">
+                                В составе лота
+                            </span>
+                                    <div class="modal-catalog-filters__hint"></div>
+                                </UiChoices>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-catalog-filters__section">
+                        <h6 class="modal-catalog-filters__title modal-catalog-filters-title">Статус объекта</h6>
+                        <ul class="modal-catalog-filters__list modal-catalog-filters-list">
+                            <li
+                                v-for="status in listStatus"
+                                :key="`catalog-page-status-${status.id}`"
+                                class="modal-catalog-filters-list__item"
+                            >
+                                <UiChoices
+                                    v-model:checked="formData.status"
+                                    name="status"
+                                    :value="status.value"
+                                    :checked="formData.status.includes(status.name)"
+                                    class="modal-catalog-filters__checkbox modal-catalog-filters-checkbox"
+                                >
+                            <span class="modal-catalog-filters-checkbox__text">
+                                {{ status.name }}
+                            </span>
+                                </UiChoices>
+                            </li>
+                        </ul>
+                        <UiButtonLink
+                            v-if="false"
+                            class="modal-catalog-filters__more modal-catalog-filters-more"
+                        >
+                            <svg-icon name="adding" class="modal-catalog-filters-more__icon" />
+                            <span class="modal-catalog-filters-more__text">
+                        Показать еще
+                    </span>
+                        </UiButtonLink>
+                    </div>
+                    <div class="modal-catalog-filters__section">
+                        <h6 class="modal-catalog-filters__title modal-catalog-filters-title">Период торгов</h6>
+                        <div class="modal-catalog-filters__fields modal-catalog-filters-fields">
+                            <div class="modal-catalog-filters-fields__field">
+                                <UiDatePicker v-model="formData.bargaining_to" class="modal-catalog-filters-fields__input"></UiDatePicker>
+                            </div>
+                            <div class="modal-catalog-filters-fields__field">
+                                <UiDatePicker v-model="formData.bargaining_from" class="modal-catalog-filters-fields__input"></UiDatePicker>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-catalog-filters__section">
-                    <h6 class="modal-catalog-filters__title modal-catalog-filters-title">Регион имущества</h6>
-                    <UiMultiSelect
-                        v-model="formData.region_ids"
-                        :options="regions"
-                        multiple
-                        placeholder="Все"
-                        trackBy="id"
-                        label="name"
-                        class="modal-catalog-filters__selector"
-                    />
-                </div>
+                    <div class="modal-catalog-filters__section">
+                        <h6 class="modal-catalog-filters__title modal-catalog-filters-title">Регион имущества</h6>
+                        <UiMultiSelect
+                            v-model="formData.region_ids"
+                            :options="regions"
+                            multiple
+                            placeholder="Все"
+                            trackBy="id"
+                            label="name"
+                            class="modal-catalog-filters__selector"
+                        />
+                    </div>
+                </template>
                 <div class="modal-catalog-filters__bottom">
                     <UiButton
                         @click.prevent="updateDataFilter"
@@ -124,8 +167,19 @@ import {useCategoriesStore} from "~/store/useCategoriesStore";
 import {useRegions} from "~/composable/request/useRegions";
 import {getProductsCountRequest, ParamsProduct} from "~/api/ProductsApi";
 import {LocationQueryValue} from "vue-router";
+import {useProductsCount} from "~/composable/request/useProductsCount";
+import {PropType} from "@vue/runtime-core";
+import {Category, filtersOfCategory} from "~/definitions/interfaces/Categories";
+import {ComputedRef} from "vue";
 
 const emit = defineEmits(['close', 'submitFilters']);
+defineProps({
+    filtersCategory: {
+        type: Array as PropType<filtersOfCategory[]>,
+        default: () => ([]),
+    }
+})
+
 const route = useRoute();
 const router = useRouter();
 const categoriesStore = useCategoriesStore()
@@ -160,6 +214,25 @@ const listStatus = ref<{id: number, name: string, value: string}[]>([
     },
 ])
 const countProduct = ref(0);
+const currentCategory: ComputedRef<Category | undefined> = computed(() => {
+    if(route.params.id) {
+        return unref(categoriesStore).categories.find(category => category.id.toString() === route.params.id);
+    }
+});
+
+const listCategories = computed(() => {
+    if(route.params.id) {
+        return unref(currentCategory)?.sub_categories ?? unref(categoriesStore).categories;
+    }
+    return unref(categoriesStore).categories
+});
+
+const currentFilters = computed(() => {
+    if(route.params.id) {
+        return unref(currentCategory)?.filters ?? [];
+    }
+    return []
+});
 const formData = ref<ParamsProduct>({
     price_to: Number(route?.query?.price_to),
     price_from: Number(route?.query?.price_from),
@@ -172,11 +245,25 @@ const formData = ref<ParamsProduct>({
     category_ids: route.params.id,
     name: route?.query?.name ? String(route?.query?.name) : '',
 });
+const filterForm = ref({});
 
 const paramsSubmit = computed(() => {
     return Object.entries(unref(formData)).reduce((acc: {[x: string] : LocationQueryValue | LocationQueryValue[]}, current: [string, (number | boolean | string[] | LocationQueryValue | LocationQueryValue[])]) => {
         if(Array.isArray(current[1]) && (current[1].length > 0) && current[0] === 'region_ids' ) {
             acc[current[0]] = current[1].map((item) => item.id).join(',');
+        } else if(current[1]) {
+            acc[current[0]] = current[1];
+        }
+
+        return acc;
+    }, {})
+})
+const parsedFilterCategory = computed(() => {
+    return Object.entries(filterForm.value).reduce((acc: {[x: string]: string | number}, current) => {
+        if(Array.isArray(current[1]) && current[1].length > 0) {
+            acc[current[0]] = current[1].map((item) => item.id).join(',');
+        } else if(current[1].hasOwnProperty('id')) {
+            acc[current[0]] = current[1].id;
         } else if(current[1]) {
             acc[current[0]] = current[1];
         }
@@ -203,6 +290,7 @@ const resetForm = () => {
 const updateDataFilter = () => {
     router.push({
         query: {
+            ...unref(parsedFilterCategory),
             has_image: unref(paramsSubmit)?.has_image,
             is_lot: unref(paramsSubmit)?.is_lot,
             region_ids: unref(paramsSubmit)?.region_ids,
@@ -227,6 +315,10 @@ const submitFilters = (params: ParamsProduct) => {
     emit('submitFilters', {...params, page: null});
     emit('close');
 }
+
+watch(parsedFilterCategory, async (filterParams) => {
+    countProduct.value = await useProductsCount(filterParams);
+},{immediate: true})
 </script>
 
 <style scoped lang="scss">
