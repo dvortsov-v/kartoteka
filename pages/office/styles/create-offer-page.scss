@@ -1,0 +1,149 @@
+.create-offer-page {
+  padding-bottom: 64px;
+
+  @media (max-width: 670px) {
+    padding-bottom: 32px;
+  }
+
+  &__title {
+    margin-top: 32px;
+    color: var(--black-100);
+    text-align: center;
+
+    @media (max-width: 670px) {
+      margin-top: 16px;
+    }
+  }
+
+  &__main {
+    margin-top: 24px;
+    padding-top: 24px;
+
+    @media (max-width: 670px) {
+      margin-top: 16px;
+      padding-top: 16px;
+    }
+  }
+}
+
+.create-offer-page-section {
+  border-radius: 24px;
+  border: 1px solid var(--black-30, #D9DCE0);
+  padding: 32px;
+
+  @media (max-width: 670px) {
+    padding: 16px 20px;
+  }
+
+  &__head {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    fill: var(--black-100);
+    margin-left: 8px;
+
+    @media (max-width: 670px) {
+      width: 16px;
+      height: 16px;
+      margin-left: 16px;
+    }
+  }
+
+  &__body {
+    margin-top: 32px;
+    color: var(--black-60);
+    line-height: 1.5;
+
+    p {
+      &:nth-child(n + 2) {
+        margin-top: 16px;
+      }
+    }
+
+    b {
+      font-weight: 700;
+    }
+  }
+
+  &__title {
+    color: var(--black-100);
+  }
+
+  &__row {
+    display: flex;
+
+    &:nth-child(n + 2) {
+      margin-top: 16px;
+
+      @media (max-width: 1024px) {
+        margin-top: 24px;
+      }
+      @media (max-width: 670px) {
+        margin-top: 16px;
+      }
+    }
+
+    @media (max-width: 670px) {
+      flex-direction: column;
+    }
+  }
+
+  &__field {
+    flex: 1;
+  }
+}
+
+.create-offer-field {
+  display: flex;
+  flex-direction: column;
+
+  &__placeholder {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &__text {
+    color: var(--black-100);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+  &__required {
+    fill: hsl(0, 100%, 58%);
+    margin-left: 4px;
+    width: 16px;
+    height: 16px;
+  }
+
+  &__input {
+    margin-top: 8px;
+    border: 1px solid var(--black-30);
+    border-radius: 8px;
+    min-height: 48px;
+    padding: 12px;
+  }
+
+  &__textarea {
+    margin-top: 8px;
+    border: 1px solid var(--black-30);
+    border-radius: 8px;
+    min-height: 120px;
+    padding: 12px;
+
+    &::placeholder {
+      color: var(--black-50);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 670px) {
+      min-height: 152px;
+    }
+  }
+}
+
