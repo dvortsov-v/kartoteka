@@ -47,11 +47,11 @@ export const useProduct = () => {
     })
 
 
-    const tabs = computed(() => unref(product)?.about.map(section => {
+    const tabs = computed(() =>  unref(product)?.about ? unref(product)?.about.map(section => {
         const {id, title} = section;
 
         return {id, title}
-    }))
+    }) : [])
     const formattedDate:ComputedRef<string> = computed(() => format(new Date(unref(product)?.created_at || '' ), 'dd.MM.yyyy, HH:mm'))
     const parcedSocials: ComputedRef<Social[]> = computed(() => Object.entries(unref(product)?.seller.socials || '').reduce((acc: Social[], current, index: number) => {
         acc.push({
