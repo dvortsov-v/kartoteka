@@ -1,15 +1,15 @@
 .error-page {
-  background: var(--blue-base) url('public/images/error-bg.jpg') center center / cover no-repeat;
+  background: var(--blue-base) url('public/picture/error-bg.jpg') center center / cover no-repeat;
   color: var(--white);
   height: 100%;
   padding-top: 48px;
   padding-bottom: 48px;
 
   @media (max-width: 1024px) {
-    background-image: url('public/images/error-bg-tablet.jpg');
+    background-image: url('public/picture/error-bg-tablet.jpg');
   }
   @media (max-width: 670px) {
-    background-image: url('public/images/error-bg-mobile.jpg');
+    background-image: url('public/picture/error-bg-mobile.jpg');
     padding: 24px 16px;
   }
 

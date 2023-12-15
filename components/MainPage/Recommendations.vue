@@ -15,7 +15,7 @@
                         <li v-for="banner in bannersProduct" class="main-page-recommendations-advertising__item">
                             <picture class="main-page-recommendations-advertising__picture">
                                 <img
-                                    :src="`images/${banner.img}`"
+                                    :src="`picture/${banner.img}`"
                                     class="main-page-recommendations-advertising__img"
                                 >
                             </picture>

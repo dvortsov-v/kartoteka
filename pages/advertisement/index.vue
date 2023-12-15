@@ -29,11 +29,11 @@
                             </div>
                             <picture v-if="point.img" class="advertisement-page-description__picture">
                                 <source
-                                    :srcset="`/images/${point.img}.webp`"
+                                    :srcset="`/picture/${point.img}.webp`"
                                     type="image/webp"
                                 >
                                 <img
-                                    :src="`/images/${point.img}.jpg`"
+                                    :src="`/picture/${point.img}.jpg`"
                                     :alt="point.name"
                                     class="advertisement-page-description__img"
                                 >
