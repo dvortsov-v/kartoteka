@@ -1,5 +1,5 @@
 <template>
-    <OfficeLayout title="Предложения" :countObjects="products.length" class="offer-page">
+    <OfficeLayout title="Предложения" :countObjects="countProductOfCategory" class="offer-page">
         <main class="offer-page__main">
             <div class="offer-page__filters">
                 <ul class="offer-page__tabs offer-page-tabs">
@@ -22,24 +22,31 @@
                 <CommonViewsSetting class="offer-page__view" @change="changeViews" />
             </div>
             <ul
+                v-if="ordersList.length > 0"
                 :class="classesList"
                 class="offer-page__list"
             >
-                <li v-for="product in products" class="offer-page__item">
+                <li v-for="order in ordersList" class="offer-page__item">
                     <OfficeOfferProduct
-                        :product="product"
+                        :product="order"
                         :isCompactedView="isCompactedView"
                         class="offer-page__product"
                     />
                 </li>
             </ul>
-            <UiPagination :paginationDate="paginationDate" class="offer-page__navigation" />
+            <UiPagination
+                v-if="paginationDate"
+                :paginationDate="paginationDate"
+                class="offer-page__navigation"
+            />
         </main>
     </OfficeLayout>
 </template>
 
 <script setup lang="ts">
-import {useProducts} from "~/composable/request/useProducts";
+import {Product} from "~/definitions/interfaces/Products";
+import {Meta} from "~/definitions/interfaces/Meta";
+import {getUserProductsRequest} from "~/api/UserApi";
 useHead({
     title: 'Личный кабинет',
 });
@@ -48,13 +55,18 @@ definePageMeta({
     nameRoute: 'Личный кабинет',
     middleware: 'auth',
 });
-const {
-    products,
-    paginationDate,
-    getProducts,
-} = useProducts()
+const ordersList = ref<Product[]>([]);
+const paginationDate = ref<Meta>();
+const userToken = useCookie('userToken');
+const userProduct = async () => {
+    const res = await getUserProductsRequest(unref(userToken));
+    if(res) {
+        ordersList.value = res?.data;
+        paginationDate.value = res?.meta;
+    }
+}
+userProduct()
 
-getProducts()
 const tabs = [
     {
         id: 0,
@@ -82,6 +94,7 @@ const handleChoice = (value: number) => {
     activeTab.value = value;
 }
 const isCompactedView: ComputedRef<boolean> = computed(() => unref(views) === 'tiles');
+const countProductOfCategory = computed(() => unref(paginationDate)?.total || 0);
 
 const classesList = computed(() => ({
     'offer-page__list--is-compacted-view': unref(isCompactedView),

@@ -1,6 +1,7 @@
 import {Category, ResultRequestCategory} from "~/definitions/interfaces/Categories";
 import {useMainStore} from "~/store/useMainStore";
 import {ResultRequestUserMe, UserInfo, UserInfoUpdate, UserLogin} from "~/definitions/interfaces/User";
+import {Product, ResultRequesProducts} from "~/definitions/interfaces/Products";
 
 export const login = async (email: string, password: string): Promise<string | null | undefined> => {
     const config = useRuntimeConfig();
@@ -109,4 +110,26 @@ export const update = async (token: string | null | undefined, updateDate: UserI
             console.error('Ошибка обновления данных пользователя', e);
         }
     }
+}
+
+export const getUserProductsRequest = async (token: string | null | undefined): Promise<ResultRequesProducts | null> => {
+    const config = useRuntimeConfig()
+    if(token){
+        try{
+            const { data }: {data: Ref<ResultRequesProducts>} = await useFetch(`${config.public.baseURL}/user/products`, {
+                headers: {
+                    'Authorization': token,
+                }
+            });
+
+            if(unref(data)) {
+                return unref(data);
+            }
+        } catch (e) {
+            console.error('Ошибка получения заказов пользователя');
+            return null;
+        }
+    }
+
+    return null;
 }

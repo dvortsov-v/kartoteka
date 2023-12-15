@@ -59,6 +59,10 @@
     }
   }
 
+  &__product {
+    height: 100%;
+  }
+
   &__view {
     @media (max-width: 768px) {
       display: none;

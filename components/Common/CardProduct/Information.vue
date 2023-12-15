@@ -2,6 +2,7 @@
     <div class="card-product-information">
         <picture @click="navigateTo(`/catalog/product/${product.id}`)" class="card-product-information__picture">
             <img
+                v-if="product.images && product.images.length > 0"
                 :src="product.images[0]"
                 alt="card-product"
                 class="card-product-information__img"
@@ -48,7 +49,7 @@ import {PropType} from "@vue/runtime-core";
 import {Product} from "~/definitions/interfaces/Products";
 import {parcePrice} from "~/composable/parcePrice";
 
-const props = defineProps({
+defineProps({
     isCompactedView: {
         type: Boolean,
         default: false,

@@ -7,8 +7,9 @@
             <div class="offer-product__left">
                 <picture @click="navigateTo(`/catalog/product/${product.id}`)" class="offer-product__picture">
                     <img
-                        :src="product.image"
-                        alt="card-product"
+                        v-if="product.images && product.images.length > 0"
+                        :src="product.images[0]"
+                        alt=""
                         class="offer-product__img"
                     >
                 </picture>
