@@ -10,6 +10,7 @@
                     <UiMultiSelect
                         v-model="filterForm[`filters[${filter.id}]`]"
                         :options="filter.options"
+                        :searchable="false"
                         placeholder="Все"
                         trackBy="id"
                         label="value"

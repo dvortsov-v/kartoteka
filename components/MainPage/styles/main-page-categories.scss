@@ -19,7 +19,7 @@
   }
 
   &__item {
-    display: grid;
+    //display: grid;
 
     @media (max-width: 1024px) {
      flex: 1 0 auto;
@@ -74,11 +74,16 @@
   &__name {
     color: var(--black-100);
     line-height: 1.5;
+    flex: auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__count {
     color: var(--black-50);
     line-height: 1.5;
     margin-left: 8px;
+    flex: none;
   }
 }

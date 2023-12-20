@@ -72,3 +72,22 @@ export const getProductRelatedRequest = async (id: string | string[]): Promise<P
     return [];
 }
 
+export const addOffer = async (formData: FormData, token: string | null | undefined) => {
+    const config = useRuntimeConfig();
+    if(token) {
+        try {
+            await useFetch(`${config.public.baseURL}/products`, {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': token,
+                },
+                body: formData,
+            });
+        } catch (e) {
+            console.error('Ошибка создания предложения')
+
+            return e;
+        }
+    }
+}
