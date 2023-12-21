@@ -127,7 +127,7 @@ const setHeaderHeight = () => {
 
 onBeforeMount(async () => {
     if(unref(userToken) && unref(userName)) {
-        await refreshToken(unref(userToken));
+        // await refreshToken(unref(userToken));
         return
     }
     await getUserData(unref(userToken))

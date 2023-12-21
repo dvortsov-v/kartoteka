@@ -168,7 +168,6 @@ import {ComputedRef} from "vue";
 import {format} from "date-fns";
 import {useUser} from "~/composable/request/useUser";
 import {me} from "~/api/UserApi";
-// import { getUserCertificates, Certificate } from 'crypto-pro';
 
 useHead({
     title: 'Личный кабинет',
@@ -179,7 +178,6 @@ definePageMeta({
     middleware: 'auth',
 })
 
-// const serteficatList = ref<Certificate[]>([])
 const isEditMod = ref<boolean>(false);
 const userToken = useCookie('userToken');
 const userDate = await me(unref(userToken));
@@ -211,9 +209,6 @@ const updateUserDataRequest = () => {
     updateUserData(unref(userToken), unref(updateField))
     toogleIsEditMod()
 }
-// onMounted(async () => {
-//     serteficatList.value = await getUserCertificates()
-// })
 </script>
 
 <style scoped lang="scss">
