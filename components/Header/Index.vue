@@ -23,7 +23,7 @@
                 </div>
                 <div class="header-main__buttons">
                     <UiButton
-                        @click="modalRegistration.open"
+                        @click="handleAdditionalBtn"
                         theme="primary-transparent"
                         class="header-main__adding header-main-adding"
                     >
@@ -79,7 +79,6 @@ const header = ref();
 const categoriesStore =  useCategoriesStore()
 
 const {
-    categories,
     getCategories,
 } = useCategories()
 
@@ -94,7 +93,7 @@ const {
 
 const mainStore = useMainStore();
 const userToken = useCookie('userToken');
-const {getUserData} = useUser()
+const {getUserData, refreshToken} = useUser()
 const userStore = useUserStore()
 const {userName} = storeToRefs(userStore);
 const {setUserName, setCountOrders} = userStore;
@@ -115,12 +114,20 @@ const closeUserMenu = () => {
     isShowUserMenu.value = false;
 }
 
+const handleAdditionalBtn = () => {
+    if(mainStore.isAuthUser) {
+        navigateTo('/office/create-offer')
+    } else {
+        modalRegistration.open
+    }
+}
 const setHeaderHeight = () => {
     document.documentElement.style.setProperty('--header-height', `${unref(header).offsetHeight}px`);
 }
 
 onBeforeMount(async () => {
     if(unref(userToken) && unref(userName)) {
+        await refreshToken(unref(userToken));
         return
     }
     await getUserData(unref(userToken))

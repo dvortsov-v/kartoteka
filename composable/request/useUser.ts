@@ -1,5 +1,5 @@
 import {useUserStore} from "~/store/useUserStore";
-import {login, logout, me, register, update} from "~/api/UserApi";
+import {login, logout, me, refresh, register, update} from "~/api/UserApi";
 import {UserInfoUpdate} from "~/definitions/interfaces/User";
 
 export const useUser = () => {
@@ -12,9 +12,6 @@ export const useUser = () => {
             setUserName(res.name);
             setCountOrders(res.orders.length || 0);
         }
-    }
-    const getProfile =  async (userToken: string | null | undefined) => {
-        const res = await me(userToken);
     }
     const updateUserData =  async (userToken: string | null | undefined, updateDate: UserInfoUpdate) => {
         const res = await update(userToken, updateDate);
@@ -43,6 +40,9 @@ export const useUser = () => {
 
         getUserData(userToken);
     }
+    const refreshToken =  async (userToken: string | null | undefined) => {
+        await refresh(userToken);
+    }
 
     return {
         getUserData,
@@ -50,5 +50,6 @@ export const useUser = () => {
         updateUserData,
         userRegistration,
         userLogin,
+        refreshToken,
     }
 }

@@ -45,20 +45,28 @@ export const register = async (email: string, password: string): Promise<string 
         console.error('Ошибка регистрации');
     }
 }
-export const refresh = async (token: string): Promise<Category | object> => {
+export const refresh = async (token: string | null | undefined): Promise<string | null | undefined> => {
     const config = useRuntimeConfig()
-    const { data }: {data: Ref<ResultRequestCategory>} = await useFetch( `${config.public.baseURL}/auth/refresh`, {
-        method: 'POST',
-        headers: {
-            'Authorization': token,
+    if(token) {
+        try {
+            const {data}: { data: Ref<UserLogin> } = await useFetch(`${config.public.baseURL}/auth/refresh`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': token,
+                }
+            });
+
+            if (unref(data)) {
+                const {setIsAuthUser} = useMainStore();
+                document.cookie = `userToken=${unref(data).token_type} ${unref(data).access_token}; max-age=${unref(data).expires_in}`;
+                await setIsAuthUser(true);
+
+                return `${unref(data).token_type} ${unref(data).access_token}`;
+            }
+        } catch (e) {
+            console.error('Ошибка обновления данных');
         }
-    });
-
-    if(data?.value?.data) {
-        return data.value.data;
     }
-
-    return {};
 }
 export const me = async (token: string | null | undefined): Promise<UserInfo | null> => {
     if(token) {
