@@ -236,7 +236,7 @@ const description = ref('');
 const price = ref('');
 const address = ref('');
 const specsList = ref({});
-const formData = new FormData();
+const images = ref<File[]>([]);
 
 const handleToogleBase = () => {
     isOpenBase.value = !isOpenBase.value;
@@ -252,9 +252,8 @@ const selectCategoryId = computed(() => unref(category_id)?.id);
 const selectCategory = computed(() => unref(categoriesStore).categories.find(category => category.id === unref(selectCategoryId)))
 const filtersCategory = computed(() => unref(selectCategory)?.filters || []);
 const saveFiles = (files: File[]) => {
-    files.forEach((file, indexFile: number) => {
-        formData.append(`images[${indexFile}]`, file);
-    })
+    images.value = files;
+
 };
 function onDrop(acceptFiles: File[]) {
     saveFiles(acceptFiles);
@@ -279,11 +278,18 @@ const sendForm = () => {
     if(unref(region_id)?.id) {
         formData.append('region_id', unref(region_id)?.id);
     }
+
+    if(unref(images).length > 0) {
+        unref(images).forEach((file, indexFile: number) => {
+            formData.append(`images[${indexFile}]`, file);
+        })
+    }
+
     formData.append('name', unref(name));
     formData.append('description', unref(description));
     formData.append('price', unref(price));
     formData.append('address', unref(address));
-    // formData.append('specsList', JSON.stringify(unref(specsList)));
+    formData.append('specs', JSON.stringify(unref(specsList)));
 
     addOffer(formData, unref(userToken));
 }
