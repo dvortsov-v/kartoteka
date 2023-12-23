@@ -1,0 +1,15 @@
+.take-certificate {
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    color: var(--black-100);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  &__selector {
+    min-height: 48px;
+    margin-top: 8px;
+  }
+}

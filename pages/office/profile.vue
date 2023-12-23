@@ -6,11 +6,12 @@
                     <svg-icon name="time" class="profile-create__icon" />
                     <span class="profile-create__text">Дата регистрации {{ formattedDate }}</span>
                 </div>
-                <UiButton class="profile-page__confirmation">
-                    Подтверждение аккаунта
-                </UiButton>
             </div>
-            <ul class="profile-page__informations">
+            <OfficeProfileTakeCertificate
+                v-if="isOpenTakeCertificate"
+                class="profile-page__take"
+            />
+            <ul v-else class="profile-page__informations">
                 <li v-if="initialUserDate.name || isEditMod" class="profile-page__item">
                     <div class="profile-page__info profile-info">
                         <span class="profile-info__name">
@@ -119,7 +120,7 @@
                 </li>
             </ul>
             <div class="profile-page__actions">
-                <template v-if="isEditMod">
+                <template v-if="isEditMod && !isOpenTakeCertificate">
                     <UiButton
                         @click="toogleIsEditMod"
                         theme="gray"
@@ -139,7 +140,7 @@
                         </span>
                     </UiButton>
                 </template>
-                <template  v-else>
+                <template  v-else-if="!isEditMod && !isOpenTakeCertificate">
                     <UiButton
                         theme="gray"
                         class="profile-page__password profile-page-button"
@@ -158,6 +159,11 @@
                         </span>
                     </UiButton>
                 </template>
+                <UiButton @click="toogleIsOpenTakeCertificate" class="profile-page__confirmation profile-page-button">
+                       <span class="profile-page-button__text">
+                            {{ textOpenTakeCertificate }}
+                        </span>
+                </UiButton>
             </div>
         </main>
     </OfficeLayout>
@@ -179,6 +185,7 @@ definePageMeta({
 })
 
 const isEditMod = ref<boolean>(false);
+const isOpenTakeCertificate = ref<boolean>(false);
 const userToken = useCookie('userToken');
 const userDate = await me(unref(userToken));
 
@@ -204,6 +211,11 @@ const addEditField = (key: string) => {
 const toogleIsEditMod = () => {
     isEditMod.value = !isEditMod.value
 }
+const toogleIsOpenTakeCertificate = () => {
+    isOpenTakeCertificate.value = !isOpenTakeCertificate.value
+}
+
+const textOpenTakeCertificate = computed(() => unref(isOpenTakeCertificate) ? 'Отмена' : 'Подтверждение аккаунта')
 
 const updateUserDataRequest = () => {
     updateUserData(unref(userToken), unref(updateField))

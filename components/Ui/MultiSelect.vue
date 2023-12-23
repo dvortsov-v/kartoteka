@@ -6,6 +6,9 @@
         <template #noResult>
             <span class="ui-multiselect__empty">Ничего не найдено</span>
         </template>
+        <template #noOptions>
+            <span class="ui-multiselect__empty">Cписок пуст</span>
+        </template>
     </Multiselect>
 </template>
 

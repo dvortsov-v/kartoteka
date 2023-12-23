@@ -18,7 +18,9 @@
     }
   }
 
-  &__informations {
+  &__informations,
+
+  &__take {
     width: 100%;
     margin-top: 32px;
 
@@ -49,7 +51,12 @@
   }
 
   &__confirmation {
-    margin-top: 24px;
+    margin-left: 8px;
+
+    @media (max-width: 670px) {
+      margin-top: 8px;
+      margin-left: 0;
+    }
   }
 }
 
