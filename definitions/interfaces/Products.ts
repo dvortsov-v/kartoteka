@@ -47,6 +47,10 @@ export interface Product {
     bargaining_from: string,
     bargaining_to: string,
     is_favorite?: boolean,
+    show_count: number,
+    favorites_count:  number,
+    orders_count:  number,
+    is_top?: boolean,
 }
 export interface ResultRequesProducts {
     data: Product[],

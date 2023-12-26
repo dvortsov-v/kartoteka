@@ -59,6 +59,7 @@ const userToken = useCookie('userToken');
 
 const classesCardProduct = computed(() => ({
     'card-product--is-compacted-view': props.isCompactedView,
+    'card-product--is-top': props.product.is_top,
 }))
 const classesCardProductActions = computed(() => ({
     'card-product-actions--is-order': props.isProductInOrder,

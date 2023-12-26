@@ -2,6 +2,7 @@ import {Category, ResultRequestCategory} from "~/definitions/interfaces/Categori
 import {useMainStore} from "~/store/useMainStore";
 import {ResultRequestUserMe, UserInfo, UserInfoUpdate, UserLogin} from "~/definitions/interfaces/User";
 import {Product, ResultRequesProducts} from "~/definitions/interfaces/Products";
+import {ParamsProduct} from "~/api/ProductsApi";
 
 export const login = async (email: string, password: string): Promise<string | null | undefined> => {
     const config = useRuntimeConfig();
@@ -45,7 +46,7 @@ export const register = async (email: string, password: string): Promise<string 
         console.error('Ошибка регистрации');
     }
 }
-export const refresh = async (token: string | null | undefined): Promise<string | null | undefined> => {
+export const refresh = async (token: string | null | undefined): Promise<string | null | undefined> =>{
     const config = useRuntimeConfig()
     if(token) {
         try {
@@ -119,8 +120,7 @@ export const update = async (token: string | null | undefined, updateDate: UserI
         }
     }
 }
-
-export const getUserProductsRequest = async (token: string | null | undefined): Promise<ResultRequesProducts | null> => {
+export const getUserProductsRequest = async (token: string | null | undefined, params?: ParamsProduct): Promise<ResultRequesProducts | null> => {
     const config = useRuntimeConfig()
     if(token){
         try{

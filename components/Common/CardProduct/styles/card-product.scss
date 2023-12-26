@@ -27,6 +27,10 @@ $base: '.card-product';
       flex-direction: column;
     }
   }
+
+  &--is-top {
+    background-color: hsla(212, 100%, 50%, 0.3);
+  }
 }
 
 .card-product-actions {

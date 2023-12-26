@@ -19,7 +19,7 @@
                     </li>
                 </ul>
                 <span class="statistic-page__date">
-                    12.07.2024 — 19.07.2024
+                    {{formatteCurrentdDate }} — 19.07.2024
                 </span>
             </div>
             <ul class="statistic-page__list">
@@ -40,7 +40,11 @@
                     <OfficeStatisticRowHeader class="statistic-page-table__row"/>
                 </thead>
                 <tbody class="statistic-page-table__body">
-                    <OfficeStatisticRow class="statistic-page-table__row"/>
+                    <OfficeStatisticRow
+                        v-for="order in ordersList"
+                        :key="`office-static-row-${order.id}`"
+                        :infoStatistic="order"
+                        class="statistic-page-table__row"/>
                 </tbody>
             </table>
             <ul class="statistic-page__products statistic-page-products">
@@ -51,13 +55,18 @@
                     <OfficeStatisticProduct class="statistic-page-products__product"/>
                 </li>
             </ul>
-            <UiPagination :paginationDate="{}"  class="statistic-page__navigation" />
         </main>
     </OfficeLayout>
 </template>
 
 <script setup lang="ts">
 import {statisticCaseOffice} from "~/constants/statisticCaseOffice";
+import {getUserProductsRequest} from "~/api/UserApi";
+import {Product} from "~/definitions/interfaces/Products";
+import {Meta} from "~/definitions/interfaces/Meta";
+import {ParamsProduct} from "~/api/ProductsApi";
+import {ComputedRef} from "vue";
+import {format} from "date-fns";
 useHead({
     title: 'Личный кабинет',
 });
@@ -66,6 +75,7 @@ definePageMeta({
     nameRoute: 'Личный кабинет',
     middleware: 'auth',
 });
+
 const tabs = [
     {
         id: 0,
@@ -82,6 +92,38 @@ const tabs = [
 ];
 
 const activeTab: Ref<number> = ref(0);
+const ordersList = ref<Product[]>([]);
+const userToken = useCookie('userToken');
+const route = useRoute();
+
+const formatteCurrentdDate:ComputedRef<string> = computed(() => format(new Date(), 'dd.MM.yyyy'))
+
+const userProduct = async (params?: ParamsProduct) => {
+    let paramsRequest: ParamsProduct = {};
+
+    if(route.params.id) {
+        paramsRequest.category_ids = route.params.id
+    }
+    const query = params || route?.query
+
+    delete query.name;
+
+    paramsRequest = {...paramsRequest, ...query};
+
+    const res = await getUserProductsRequest(unref(userToken), paramsRequest);
+
+    if(!res?.data || !res?.data.length) {
+        showError(createError({
+            statusCode: 404,
+            message: `Страницы не существует`,
+            fatal: true,
+        }));
+    }
+
+    if(res) {
+        ordersList.value = res?.data;
+    }
+}
 
 const classesTabs = (isChecked: boolean) => ({
     'statistic-tabs__wrap--active': isChecked,
@@ -89,6 +131,14 @@ const classesTabs = (isChecked: boolean) => ({
 const handleChoice = (value: number) => {
     activeTab.value = value;
 }
+
+userProduct()
+
+onBeforeRouteUpdate((to) => {
+    if(to.query.name === null || to.query.name === undefined || to.query.name === '' || !Boolean(to.query.name)) {
+        userProduct(to.query);
+    }
+})
 </script>
 
 <style scoped lang="scss">
