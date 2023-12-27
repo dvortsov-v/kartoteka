@@ -1,6 +1,6 @@
 <template>
     <div class="take-certificate">
-        <h6 class="take-certificate__title">Выберети сертефикат</h6>
+        <h6 class="take-certificate__title">Выберите сертификат</h6>
         <UiMultiSelect
             v-model="selectSertificate"
             :options="sertificateList"

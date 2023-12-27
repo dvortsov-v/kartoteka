@@ -1,4 +1,4 @@
-import {StatisticCase, StatisticPoint} from "~/definitions/interfaces/Statistic";
+import {StatisticCase, StatisticPoints} from "~/definitions/interfaces/Statistic";
 
 export const statisticAdvertising: StatisticCase[] = [
     {
@@ -28,57 +28,104 @@ export const statisticAdvertising: StatisticCase[] = [
     },
 ];
 
-export const sectionAdvertising: StatisticPoint[] = [
+export const sectionAdvertising: StatisticPoints[] = [
     {
-        title: 'Статистика по Маркетплейс за период 01.05.23 по 31.10.23',
-        description: 'Портрет аудитории:',
+        title: 'Пол',
+        img: 'sex',
         points: [
             {
-                name: 'Возраст:',
-                img: 'age',
+                name: 'Мужчины',
+                value: '49%',
             },
             {
-                name:'Пол:',
-                img: 'sex',
+                name: 'Женщины',
+                value: '51%',
             },
-            {
-                name: 'Интересы:',
-                img: 'interests'
-            },
-            {
-                name: 'Образование:',
-                img: 'education'
-            },
-            {
-                name: 'Распределение по платформам:',
-                img: 'platforms'
-            },
-        ]
+        ],
     },
     {
-        title: 'Стоимость размещения баннеров',
+        title: 'Возраст',
+        img: 'age',
         points: [
             {
-                name: 'Баннерное место №1 (Слайдер) размер 1340х400',
-                value: '1500 ₽ за 1000 показов',
-                img: 'banner-1',
+                name: 'от 24 до 34 лет',
+                value: '31%',
             },
             {
-                name:'Баннерное место №2 (Левый верх) размер 240х400',
-                value: '600 ₽ за 1000 показов',
-                img: 'banner-2',
+                name: 'от 35 до 44 лет',
+                value: '20%',
             },
             {
-                name: 'Баннерное место №3 (Левый середина) размер 240х400',
-                value: '500 ₽ за 1000 показов',
-                img: 'banner-3',
+                name: 'от 45 до 54 лет',
+                value: '9%',
             },
             {
-                name: 'Баннерное место №4 (Левый низ) размер 240х400',
-                value: '400 ₽ за 1000 показов',
-                img: 'banner-4',
+                name: 'от 18 до 24 лет',
+                value: '6%',
             },
-        ]
+            {
+                name: 'от 55',
+                value: '5%',
+            },
+        ],
+    },
+    {
+        title: 'Интересы',
+        img: 'interests',
+        points: [
+            {
+                name: 'Развлечение и досуг',
+                value: '24.9%',
+            },
+            {
+                name: 'Финансы',
+                value: '20.1%',
+            },
+            {
+                name: 'Бизнес',
+                value: '19.6%',
+            },
+            {
+                name: 'Строительство и ремонт',
+                value: '18.7%',
+            },
+            {
+                name: 'Отдых и путешествия',
+                value: '16.6%',
+            },
+        ],
+    },
+    {
+        title: 'Платформы',
+        img: 'platforms',
+        points: [
+            {
+                name: 'Смартфоны и планшеты',
+                value: '50%',
+            },
+            {
+                name: 'ПК',
+                value: '50%',
+            },
+        ],
+    },
+]
 
+export const placeAccommodations = [
+    {
+        value: '1500 за 1000 показов',
+        name: 'Баннерное место №1 (Слайдер) Размер 1340х400'
+    },
+    {
+        value: '600 за 1000 показов',
+        name: 'Баннерное место №2 (Левый верх) Размер 240х400'
+    },
+    {
+        value: '500 за 1000 показов',
+        name: 'Баннерное место №3 (Левый середина) Размер 240х400'
+    },
+    {
+        value: '400 за 1000 показов',
+        name: 'Баннерное место №4 (Левый низ) Размер 240х400'
     },
 ]

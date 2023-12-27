@@ -7,13 +7,12 @@ export interface StatisticCase {
 
 export interface StatisticPoint {
     name: string,
-    value?: string,
-    img?: string,
+    value: string,
 }
 
-export interface StatisticPoint {
+export interface StatisticPoints {
     title: string,
-    description?: string,
+    img?: string,
     points: StatisticPoint[],
 }
 
