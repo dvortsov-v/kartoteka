@@ -30,13 +30,13 @@ export const getProductsInMapRequest = async (bound: string): Promise<ResultRequ
             bbox: `bbox=${bound}`
         },
     });
-    console.log(data.value)
+    // console.log(data.value)
 
-    // if(unref(data)) {
-    //     return unref(data);
-    // }
-    //
-    // return null;
+    if(unref(data)) {
+        return unref(data);
+    }
+
+    return null;
 }
 export const getProductRequest = async (id: string | string[]): Promise<Product | null> => {
     const config = useRuntimeConfig()

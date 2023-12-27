@@ -5,7 +5,7 @@
             v-model="selectSertificate"
             :options="sertificateList"
             placeholder="Выберите сертефикат"
-            label="issuerName"
+            label="subjectName"
             class="take-certificate__selector"
         />
     </div>

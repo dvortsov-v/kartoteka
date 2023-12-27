@@ -17,33 +17,35 @@
                     <yandex-map-controls :settings="{ position: 'right' }">
                         <yandex-map-zoom-control />
                     </yandex-map-controls>
-                    <YandexMapClusterer
-                        v-model="clusterer"
-                    >
-<!--                        <YandexMapDefaultMarker-->
-<!--                            v-for="(coordinates) in getPointList"-->
-<!--                            :key="coordinates.join(',')"-->
-<!--                            :settings="{coordinates}"-->
-<!--                        />-->
-<!--                        <template #cluster="{ length }">-->
-<!--                            <div-->
-<!--                                class="cluster"-->
-<!--                                :style="{-->
-<!--                                  display: 'flex',-->
-<!--                                  justifyContent: 'center',-->
-<!--                                  alignItems: 'center',-->
-<!--                                  width: '50px',-->
-<!--                                  aspectRatio: '1/1',-->
-<!--                                  background: 'green',-->
-<!--                                  color: '#fff',-->
-<!--                                  borderRadius: '100%',-->
-<!--                                  cursor: 'pointer',-->
-<!--                                }"-->
-<!--                            >-->
-<!--                                {{ length }}-->
-<!--                            </div>-->
-<!--                        </template>-->
-                    </YandexMapClusterer>
+
+                    <YandexMapDefaultMarker
+                        v-for="point in points.features"
+                        :key="point.geometry.coordinates.join(',')"
+                        :settings="{coordinates: point.geometry.coordinates}"
+                    />
+<!--                    <YandexMapClusterer-->
+<!--                        v-model="clusterer"-->
+<!--                    >-->
+
+<!--&lt;!&ndash;                        <template #cluster="{ length }">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div&ndash;&gt;-->
+<!--&lt;!&ndash;                                class="cluster"&ndash;&gt;-->
+<!--&lt;!&ndash;                                :style="{&ndash;&gt;-->
+<!--&lt;!&ndash;                                  display: 'flex',&ndash;&gt;-->
+<!--&lt;!&ndash;                                  justifyContent: 'center',&ndash;&gt;-->
+<!--&lt;!&ndash;                                  alignItems: 'center',&ndash;&gt;-->
+<!--&lt;!&ndash;                                  width: '50px',&ndash;&gt;-->
+<!--&lt;!&ndash;                                  aspectRatio: '1/1',&ndash;&gt;-->
+<!--&lt;!&ndash;                                  background: 'green',&ndash;&gt;-->
+<!--&lt;!&ndash;                                  color: '#fff',&ndash;&gt;-->
+<!--&lt;!&ndash;                                  borderRadius: '100%',&ndash;&gt;-->
+<!--&lt;!&ndash;                                  cursor: 'pointer',&ndash;&gt;-->
+<!--&lt;!&ndash;                                }"&ndash;&gt;-->
+<!--&lt;!&ndash;                            >&ndash;&gt;-->
+<!--&lt;!&ndash;                                {{ length }}&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </template>&ndash;&gt;-->
+<!--                    </YandexMapClusterer>-->
                 </YandexMap>
                 </client-only>
             </section>
@@ -51,7 +53,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import type { YMap,  YMapLocation } from '@yandex/ymaps3-types';
+import type { YMap,  LngLatBounds } from '@yandex/ymaps3-types';
 import type { YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
 
 import {
@@ -73,14 +75,18 @@ import {getProductsInMapRequest} from "~/api/MapApi";
 
 const map = shallowRef<YMap | undefined>();
 const clusterer = shallowRef<YMapClusterer | null>(null);
+const isfetch = ref(false)
 const setting = {
     location: {
-        center: [37.617644, 55.755819],
+        center: [50.9248,28.1250],
         zoom: 10,
     },
 }
+const points = ref({
+    features: [],
+});
 
-const parceBounds = (bounds: number[][]) => {
+const parceBounds = (bounds: LngLatBounds) => {
     return bounds.reduce((acc: string[], currentValue: number[]) => {
         const bound = currentValue.map(num => num.toFixed(4))
 
@@ -91,14 +97,23 @@ const parceBounds = (bounds: number[][]) => {
 }
 const stateChangedHandler = ({location}) => {
     // console.log('bounds', location.bounds);
-    getProductsInMapRequest(parceBounds(location.bounds).join(','));
+    if(unref(isfetch)) {
+        return
+    }
+    isfetch.value = true
+    setTimeout(async () => {
+        points.value = await getProductsInMapRequest(parceBounds(location.bounds).join(','));
+
+        isfetch.value = false
+    }, 1000)
+
 
 };
 
-watch(map, (nevMap: YMap) => {
-    // getProductsInMapRequest(nevMap!.bounds.join(','))
-    // console.log('watch', );
-})
+// watch(map, async (nevMap: YMap) => {
+//     points.value = await getProductsInMapRequest(parceBounds(nevMap!.bounds).join(','))
+//     // console.log('watch', );
+// })
 </script>
 
 <style scoped lang="scss">
