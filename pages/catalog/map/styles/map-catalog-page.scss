@@ -1,56 +1,10 @@
 .map-catalog-page {
-  padding-bottom: 64px;
 
-  &__head {
-    margin-top: 32px;
-  }
-
-  &__title {
-    color: var(--black-100);
-    font-size: 64px;
-    font-weight: 500;
-    line-height: 1;
-    letter-spacing: -0.64px;
-  }
-
-  &__count {
-    margin-left: 12px;
-    color: var(--black-50);
-    font-feature-settings: 'dlig' on;
-    font-size: 21px;
-  }
-
-  &__main {
-    margin-top: 24px;
-    padding-top: 24px;
-  }
-
-  &__maps {
-    height: 368px;
-    margin-top: 24px;
-
-    @media (max-width: 1024px) {
-      height: 352px;
-    }
-    @media (max-width: 670px) {
-      height: 228px;
-    }
-  }
 }
 
 .map-catalog-page-main {
   display: flex;
 
-  &__empty {
-    text-align: center;
-    flex: auto;
-    margin-left: 32px;
-
-    @media (max-width: 1024px) {
-      margin-left: 0;
-      width: 100%;
-    }
-  }
 
   &__aside {
     flex: none;
@@ -63,10 +17,10 @@
 
   &__section {
     flex: auto;
-    margin-left: 32px;
+    width: 100%;
+    height: 744px;
 
     @media (max-width: 1024px) {
-      margin-left: 0;
       width: 100%;
     }
   }
@@ -120,16 +74,9 @@
     height: 24px;
   }
 
-  &__maps {
-    height: 368px;
-    margin-top: 24px;
-
-    @media (max-width: 1024px) {
-      height: 352px;
-    }
-    @media (max-width: 670px) {
-      height: 228px;
-    }
+  &__frame {
+    width: 100%;
+    height: 744px;
   }
 }
 
