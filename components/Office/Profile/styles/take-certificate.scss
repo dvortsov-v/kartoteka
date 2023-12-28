@@ -2,10 +2,44 @@
   display: flex;
   flex-direction: column;
 
-  &__title {
+  &__field {
+    &:nth-child(n + 2) {
+      margin-top: 16px;
+    }
+  }
+
+  &__submit {
+    margin-top: 24px;
+  }
+}
+
+.take-certificate-field {
+  display: flex;
+  flex-direction: column;
+
+  &__placeholder {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &__text {
     color: var(--black-100);
     font-weight: 500;
     line-height: 1.5;
+  }
+  &__required {
+    fill: hsl(0, 100%, 58%);
+    margin-left: 4px;
+    width: 16px;
+    height: 16px;
+  }
+
+  &__input {
+    margin-top: 8px;
+    border: 1px solid var(--black-30);
+    border-radius: 8px;
+    min-height: 48px;
+    padding: 12px;
   }
 
   &__selector {

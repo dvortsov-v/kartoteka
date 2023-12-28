@@ -11,6 +11,7 @@ export interface UserInfo {
     surname: string,
     created_at: string,
     email: string,
+    confirmed: boolean,
     email_verified_at: null,
     id: number
     name: string

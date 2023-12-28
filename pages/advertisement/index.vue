@@ -29,11 +29,11 @@
                                 <p class="advertisement-page-diagrams__name">{{ diagram.title }}</p>
                                 <picture v-if="diagram.img" class="advertisement-page-diagrams__picture">
                                     <source
-                                        :srcset="`/picture/${diagram.img}1.webp`"
+                                        :srcset="`/picture/${diagram.img}.webp`"
                                         type="image/webp"
                                     >
                                     <img
-                                        :src="`/picture/${diagram.img}1.jpg`"
+                                        :src="`/picture/${diagram.img}.jpg`"
                                         :alt="diagram.title"
                                         class="advertisement-page-diagrams__img"
                                     >

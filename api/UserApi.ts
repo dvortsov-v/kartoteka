@@ -1,7 +1,6 @@
-import {Category, ResultRequestCategory} from "~/definitions/interfaces/Categories";
 import {useMainStore} from "~/store/useMainStore";
 import {ResultRequestUserMe, UserInfo, UserInfoUpdate, UserLogin} from "~/definitions/interfaces/User";
-import {Product, ResultRequesProducts} from "~/definitions/interfaces/Products";
+import {ResultRequesProducts} from "~/definitions/interfaces/Products";
 import {ParamsProduct} from "~/api/ProductsApi";
 
 export const login = async (email: string, password: string): Promise<string | null | undefined> => {
@@ -135,6 +134,30 @@ export const getUserProductsRequest = async (token: string | null | undefined, p
             }
         } catch (e) {
             console.error('Ошибка получения заказов пользователя');
+            return null;
+        }
+    }
+
+    return null;
+}
+export const getConfirmUserRequest = async (token: string | null | undefined, hash: string): Promise<ResultRequesProducts | null> => {
+    const config = useRuntimeConfig()
+    if(token){
+        try{
+            const { data }: {data: Ref<ResultRequesProducts>} = await useFetch(`${config.public.baseURL}/auth/confirm`, {
+                headers: {
+                    'Authorization': token,
+                },
+                body: {
+                    hash
+                }
+            });
+
+            if(unref(data)) {
+                return unref(data);
+            }
+        } catch (e) {
+            console.error('Ошибка подтверждения');
             return null;
         }
     }
