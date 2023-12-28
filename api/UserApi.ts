@@ -153,11 +153,12 @@ export const getConfirmUserRequest = async (token: string | null | undefined, ha
                 }
             });
 
+            console.log(unref(data));
             if(unref(data)) {
                 return unref(data);
             }
         } catch (e) {
-            console.error('Ошибка подтверждения');
+            console.error('Ошибка подтверждения', e);
             return null;
         }
     }

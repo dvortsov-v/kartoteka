@@ -1,17 +1,5 @@
 <template>
     <div class="take-certificate">
-        <label class="take-certificate__field take-certificate-field">
-            <span class="take-certificate-field__placeholder">
-                <span class="take-certificate-field__text">Введите ваш логин</span>
-                <svg-icon name="asterisk" class="take-certificate-field__required"/>
-            </span>
-            <UiInput
-                v-model="login"
-                required
-                placeholder="Ваш логин"
-                class="take-certificate-field__input"
-            />
-        </label>
         <div class="take-certificate__field take-certificate-field">
              <span class="take-certificate-field__placeholder">
                 <span class="take-certificate-field__text">Выберите сертификат</span>
@@ -25,16 +13,29 @@
                 class="take-certificate-field__selector"
             />
         </div>
-        <UiButton class="take-certificate__submit">
-            Отправить
+        <UiButton @click="confirmSerteficate" class="take-certificate__submit">
+            Подтвердить
         </UiButton>
     </div>
 </template>
 <script setup lang="ts">
-import { Certificate, getUserCertificates, } from 'crypto-pro';
+import { Certificate, getUserCertificates, createHash} from 'crypto-pro';
+import {getConfirmUserRequest} from "~/api/UserApi";
+import {storeToRefs} from "pinia";
+import {useUserStore} from "~/store/useUserStore";
+
+const userToken = useCookie('userToken');
 const sertificateList = ref<Certificate[]>([])
 const selectSertificate = ref<Certificate>();
-const login = ref<string>('');
+
+const {userName} = storeToRefs(useUserStore());
+
+const confirmSerteficate = async () => {
+    const hash = await createHash(unref(userName));
+    console.log('hash', hash);
+    const res = await getConfirmUserRequest(unref(userToken), hash)
+    console.log(res);
+}
 
 onMounted(() => nextTick(async ()=> {sertificateList.value = await getUserCertificates()}))
 
