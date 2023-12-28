@@ -140,7 +140,7 @@ export const getUserProductsRequest = async (token: string | null | undefined, p
 
     return null;
 }
-export const getConfirmUserRequest = async (token: string | null | undefined, hash: string): Promise<ResultRequesProducts | null> => {
+export const getConfirmUserRequest = async (token: string | null | undefined, signature: string): Promise<ResultRequesProducts | null> => {
     const config = useRuntimeConfig()
     if(token){
         try{
@@ -149,7 +149,7 @@ export const getConfirmUserRequest = async (token: string | null | undefined, ha
                     'Authorization': token,
                 },
                 body: {
-                    hash
+                    hash: signature
                 }
             });
 

@@ -8,14 +8,14 @@
             <main class="create-offer-page__main">
                 <form action="" class="create-offer-page__form">
                     <div class="create-offer-page__sections">
-                        <details class="create-offer-page__section create-offer-page-section">
+                        <details open class="create-offer-page__section create-offer-page-section">
                             <summary @click="handleToogleBase" class="create-offer-page-section__head">
                                 <h5 class="create-offer-page-section__title h5">Основная информация</h5>
                                 <svg-icon class="create-offer-page-section__icon" :name="iconAccordionBase" />
                             </summary>
                             <div class="create-offer-page-section__body">
                                 <div class="create-offer-page-section__row">
-                                    <label class="create-offer-page-section__field create-offer-field">
+                                    <div class="create-offer-page-section__field create-offer-field">
                                         <span class="create-offer-field__placeholder">
                                             <span class="create-offer-field__text">Категория</span>
                                             <svg-icon name="asterisk" class="create-offer-field__required"/>
@@ -30,7 +30,25 @@
                                             class="create-offer-page-section__selector"
                                             required
                                         />
-                                    </label>
+                                    </div>
+                                </div>
+                                <div v-if="listSubcategory.length > 0" class="create-offer-page-section__row">
+                                    <div class="create-offer-page-section__field create-offer-field">
+                                        <span class="create-offer-field__placeholder">
+                                            <span class="create-offer-field__text">Подкатегория</span>
+                                            <svg-icon name="asterisk" class="create-offer-field__required"/>
+                                        </span>
+                                        <UiMultiSelect
+                                            v-model="subcategory"
+                                            :options="listSubcategory"
+                                            :searchable="false"
+                                            placeholder="Выбрать"
+                                            trackBy="id"
+                                            label="name"
+                                            class="create-offer-page-section__selector"
+                                            required
+                                        />
+                                    </div>
                                 </div>
                                 <div class="create-offer-page-section__row">
                                     <label class="create-offer-page-section__field create-offer-field">
@@ -88,7 +106,7 @@
                                     </label>
                                 </div>
                                 <div class="create-offer-page-section__row">
-                                    <label class="create-offer-page-section__field create-offer-field">
+                                    <div class="create-offer-page-section__field create-offer-field">
                                         <span class="create-offer-field__placeholder">
                                             <span class="create-offer-field__text">Регион продажи</span>
                                             <svg-icon name="asterisk" class="create-offer-field__required"/>
@@ -103,7 +121,7 @@
                                             class="create-offer-page-section__selector"
                                             required
                                         />
-                                    </label>
+                                    </div>
                                 </div>
                                 <div class="create-offer-page-section__row">
                                     <label class="create-offer-page-section__field create-offer-field">
@@ -153,7 +171,7 @@
                                     v-for="filter in filtersCategory"
                                     class="create-offer-page-section__row"
                                 >
-                                    <label class="create-offer-page-section__field create-offer-field">
+                                    <div class="create-offer-page-section__field create-offer-field">
                                         <span class="create-offer-field__placeholder">
                                             <span class="create-offer-field__text">{{ filter.name }}</span>
                                             <svg-icon name="asterisk" class="create-offer-field__required"/>
@@ -162,7 +180,8 @@
                                             <UiMultiSelect
                                                 v-model="specsList[`specs[${filter.id}]`]"
                                                 :options="filter.options"
-                                                :searchable="false"
+                                                searchable
+                                                closeOnSelect
                                                 placeholder="Выбрать"
                                                 trackBy="id"
                                                 label="value"
@@ -179,7 +198,7 @@
                                                 class="create-offer-field__input"
                                             />
                                         </template>
-                                    </label>
+                                    </div>
                                 </div>
                             </div>
                         </details>
@@ -227,9 +246,10 @@ const {regions, getRegions} = useRegions();
 const categoriesStore = useCategoriesStore()
 const userToken = useCookie('userToken');
 
-const isOpenBase: Ref<boolean> = ref(false);
+const isOpenBase: Ref<boolean> = ref(true);
 const isOpenCharacteristics: Ref<boolean> = ref(false);
 const category_id = ref<Category | null>();
+const subcategory = ref<Category | null>();
 const region_id = ref();
 const name = ref('');
 const description = ref('');
@@ -245,11 +265,13 @@ const handleToogleCharacteristics = () => {
     isOpenCharacteristics.value = !isOpenCharacteristics.value;
 }
 
-const iconAccordionBase = computed(() => unref(isOpenBase) ? 'minus' : 'plus');
-const iconAccordionisOpenCharacteristics = computed(() => unref(isOpenCharacteristics) ? 'minus' : 'plus');
+const iconAccordionBase = computed(() => unref(isOpenBase) ? 'plus': 'minus');
+const iconAccordionisOpenCharacteristics = computed(() => unref(isOpenCharacteristics) ? 'plus': 'minus');
 
 const selectCategoryId = computed(() => unref(category_id)?.id);
+const selectSubCategoryId = computed(() => unref(category_id)?.id);
 const selectCategory = computed(() => unref(categoriesStore).categories.find(category => category.id === unref(selectCategoryId)))
+const listSubcategory = computed(() => unref(selectCategory)?.sub_categories || []);
 const filtersCategory = computed(() => unref(selectCategory)?.filters || []);
 const saveFiles = (files: File[]) => {
     images.value = files;
@@ -262,6 +284,7 @@ function onDrop(acceptFiles: File[]) {
 const { getRootProps, getInputProps, open, acceptedFiles } = useDropzone({ onDrop, maxFiles: 50, multiple: true, noClick: true });
 const resetForm = () => {
     category_id.value = null;
+    subcategory.value = null;
     region_id.value = null;
     name.value = '';
     description.value = '';
@@ -272,9 +295,12 @@ const resetForm = () => {
 const sendForm = () => {
     const formData = new FormData();
 
-    if(unref(selectCategoryId)) {
+    if(unref(selectSubCategoryId)) {
+        formData.append('category_id', unref(selectSubCategoryId).toString());
+    } else if(unref(selectCategoryId)) {
         formData.append('category_id', unref(selectCategoryId).toString());
     }
+
     if(unref(region_id)?.id) {
         formData.append('region_id', unref(region_id)?.id);
     }

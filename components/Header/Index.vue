@@ -27,7 +27,14 @@
                         theme="primary-transparent"
                         class="header-main__adding header-main-adding"
                     >
-                        <svg-icon name="adding" class="header-main-adding__icon" />
+                        <span
+                            v-if="mainStore.isAuthUser"
+                            class="header-main-adding__text"
+                        >
+                            Разместить объявление
+                        </span>
+                        <svg-icon v-else name="adding" class="header-main-adding__icon" />
+
                     </UiButton>
                     <div
                         v-if="mainStore.isAuthUser"

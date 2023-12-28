@@ -18,6 +18,9 @@
   &__main {
     margin-top: 24px;
     padding-top: 24px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 
     @media (max-width: 670px) {
       margin-top: 16px;
@@ -34,6 +37,10 @@
   &__buttons {
     display: flex;
     margin-top: 16px;
+
+    @media (max-width: 670px) {
+      flex-direction: column;
+    }
   }
 
   &__button {
@@ -44,6 +51,11 @@
 
     &:nth-child(n + 2) {
       margin-left: 16px;
+
+      @media (max-width: 670px) {
+        margin-left: 0;
+        margin-top: 16px;
+      }
     }
   }
 }
@@ -122,10 +134,19 @@
 
     &:nth-child(n + 2) {
       margin-left: 16px;
+
+      @media (max-width: 670px) {
+        margin-left: 0;
+        margin-top: 16px;
+      }
     }
 
     &--third {
       max-width: 33%;
+
+      @media (max-width: 670px) {
+        max-width: initial;
+      }
     }
   }
 

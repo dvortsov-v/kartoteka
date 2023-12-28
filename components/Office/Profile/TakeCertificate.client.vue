@@ -19,7 +19,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { Certificate, getUserCertificates, createHash} from 'crypto-pro';
+import { Certificate, getUserCertificates, createHash, createDetachedSignature} from 'crypto-pro';
 import {getConfirmUserRequest} from "~/api/UserApi";
 import {storeToRefs} from "pinia";
 import {useUserStore} from "~/store/useUserStore";
@@ -33,7 +33,9 @@ const {userName} = storeToRefs(useUserStore());
 const confirmSerteficate = async () => {
     const hash = await createHash(unref(userName));
     console.log('hash', hash);
-    const res = await getConfirmUserRequest(unref(userToken), hash)
+    const signature = await createDetachedSignature(unref(selectSertificate), hash);
+    console.log('signature', signature);
+    const res = await getConfirmUserRequest(unref(userToken), signature)
     console.log(res);
 }
 
